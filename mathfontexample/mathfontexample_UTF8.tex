@@ -1,0 +1,174 @@
+%# -*- coding:utf-8 -*- 
+\documentclass[12pt,a4paper]{article}
+% 中文支持宏包
+\usepackage{CJKutf8}
+\usepackage{color}
+% 处理数学公式中的黑斜体的宏包
+\usepackage{bm}
+% AMSLaTeX宏包 用来排出更加漂亮的公式
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\begin{document}
+\begin{CJK*}{UTF8}{song}
+
+\newcommand{\aaa}{ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz}
+\newcommand{\bbb}{1234567890}
+
+\section{自动控制专业常用公式}
+bm.sty 宏包提供的数学模式黑斜体 \verb"\bm" 使用方法与 数学模式黑体 \verb"\bf"类似。
+
+\textcolor[rgb]{0.98,0.00,0.00}{请特别注意:} \verb"$\bm{\hat{x}}$" \textcolor[rgb]{0.98,0.00,0.00}{在编译时会导致死机.}
+
+\textcolor[rgb]{0.00,0.00,1.00}{用}\verb"\boldmath$\hat{x}$\unboldmath" \textcolor[rgb]{0.00,0.00,1.00}{可得到正常输出。}
+
+\begin{itemize}
+    \item{\verb"\boldmath" 状态方程(黑斜体) \verb"\unboldmath"}
+\boldmath
+    \[
+\left\{ {\begin{array}{*{20}c}
+   {\dot x = Ax + Bu}  \\
+   {y = Cx + Du}  \\
+\end{array}} \right.
+    \]
+\unboldmath
+    \item{状态方程(正常模式)}
+    \[
+\left\{ {\begin{array}{*{20}c}
+   {\dot x = Ax + Bu}  \\
+   {y = Cx + Du}  \\
+\end{array}} \right.
+    \]
+    \item{\verb"\bf" 状态方程(黑体)}
+    \[
+\left\{ {\begin{array}{*{20}c}
+   {{\bf{\dot x}} = {\bf{Ax}} + {\bf{Bu}}}  \\
+   {{\bf{y}} = {\bf{Cx}} + {\bf{Du}}}  \\
+\end{array}} \right.
+\]
+    \item{传递函数}
+    \[
+G(s) = \frac{{b_0 s^m  + b_1 s^{m - 1}  +  \cdots  + b_{m - 1} s + b_m }}{{a_0 s^n  + a_1 s^{n - 1}  +  \cdots  + a_{n - 1} s + a_n }}
+\]
+\end{itemize}    
+
+\section{数学模式下的字母}
+
+\begin{enumerate}[(1)]
+    \item \verb"\mathnormal" $$\aaa$$ $$\bbb$$
+    \item \verb"\mathbf{}"
+$$\mathbf \aaa$$
+$$\mathbf \bbb$$
+    \item \verb"\mathbb{}"
+$$\mathbb \aaa$$
+$$\mathbb \bbb$$
+    \item \verb"$${\bm{abc}}\mbox{abc}abc$$"
+$${\bm{abc}}\mbox{abc}abc$$
+    \item \verb"\mathit"
+$$\mathit\aaa$$
+$$\bbb$$
+    \item \verb"$$\bm \aaa$$"
+$$\bm \aaa$$
+$$\bm \bbb$$
+    \item \verb"\mathsf{}"
+$$\mathsf \aaa$$
+$$\mathsf \bbb$$
+    \item \verb"\mathrm{}"
+$$\mathrm \aaa$$
+$$\mathrm \bbb$$
+    \item \verb"\mathcal{}"
+$$\mathcal \aaa$$
+$$\mathcal \bbb$$
+\end{enumerate}    
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textcolor[rgb]{1.00,0.00,1.00}{\textmd{附录：以上输出的所有源代码}}
+\begin{verbatim}
+\documentclass[12pt,a4paper]{article}
+% 中文支持宏包
+\usepackage{CJK}
+\usepackage{color}
+% 处理数学公式中的黑斜体的宏包
+\usepackage{bm}
+% AMSLaTeX宏包 用来排出更加漂亮的公式
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\begin{document}
+\begin{CJK*}{GBK}{song}
+
+\newcommand{\aaa}{ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz}
+\newcommand{\bbb}{1234567890}
+
+\section{自动控制专业常用公式}
+bm.sty 宏包提供的数学模式黑斜体 \verb"\bm" 使用方法与 数学模式黑体 \verb"\bf"类似。
+
+\textcolor[rgb]{0.98,0.00,0.00}{请特别注意:} \verb"$\bm{\hat{x}}$" \textcolor[rgb]{0.98,0.00,0.00}{在编译时会导致死机.}
+
+\textcolor[rgb]{0.00,0.00,1.00}{用}\verb"\boldmath$\hat{x}$\unboldmath" \textcolor[rgb]{0.00,0.00,1.00}{可得到正常输出。}
+
+\begin{itemize}
+    \item{\verb"\boldmath" 状态方程(黑斜体) \verb"\unboldmath"}
+\boldmath
+    \[
+\left\{ {\begin{array}{*{20}c}
+   {\dot x = Ax + Bu}  \\
+   {y = Cx + Du}  \\
+\end{array}} \right.
+    \]
+\unboldmath
+    \item{状态方程(正常模式)}
+    \[
+\left\{ {\begin{array}{*{20}c}
+   {\dot x = Ax + Bu}  \\
+   {y = Cx + Du}  \\
+\end{array}} \right.
+    \]
+    \item{\verb"\bf" 状态方程(黑体)}
+    \[
+\left\{ {\begin{array}{*{20}c}
+   {{\bf{\dot x}} = {\bf{Ax}} + {\bf{Bu}}}  \\
+   {{\bf{y}} = {\bf{Cx}} + {\bf{Du}}}  \\
+\end{array}} \right.
+\]
+    \item{传递函数}
+    \[
+G(s) = \frac{{b_0 s^m  + b_1 s^{m - 1}  +  \cdots  + b_{m - 1} s + b_m }}{{a_0 s^n  + a_1 s^{n - 1}  +  \cdots  + a_{n - 1} s + a_n }}
+\]
+\end{itemize}    
+
+\section{数学模式下的字母}
+
+\begin{enumerate}[(1)]
+    \item \verb"\mathnormal" $$\aaa$$ $$\bbb$$
+    \item \verb"\mathbf{}"
+$$\mathbf \aaa$$
+$$\mathbf \bbb$$
+    \item \verb"\mathbb{}"
+$$\mathbb \aaa$$
+$$\mathbb \bbb$$
+    \item \verb"$${\bm{abc}}\mbox{abc}abc$$"
+$${\bm{abc}}\mbox{abc}abc$$
+    \item \verb"\mathit"
+$$\mathit\aaa$$
+$$\bbb$$
+    \item \verb"$$\bm \aaa$$"
+$$\bm \aaa$$
+$$\bm \bbb$$
+    \item \verb"\mathsf{}"
+$$\mathsf \aaa$$
+$$\mathsf \bbb$$
+    \item \verb"\mathrm{}"
+$$\mathrm \aaa$$
+$$\mathrm \bbb$$
+    \item \verb"\mathcal{}"
+$$\mathcal \aaa$$
+$$\mathcal \bbb$$
+\end{enumerate}    
+
+\end{CJK*}
+\end{document} 
+\end{verbatim}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{CJK*}
+\end{document} 

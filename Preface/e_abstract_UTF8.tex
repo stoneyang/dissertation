@@ -1,0 +1,65 @@
+%# -*- coding:utf-8 -*- 
+%=========================================================================%
+%   LaTeX File for phd thesis of Institute of Automation, CAS
+%-------------------------------------------------------------------------%
+%   Revised by J. G. Lou (jglou@nlpr.ia.ac.cn)
+%-------------------------------------------------------------------------%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter*{ \markboth{英文摘要}{英文摘要}}
+
+\vspace*{-1.5cm}
+
+\begin{center} \xiaoerhao \textsf{\textbf{Semantic Interpretation of
+Dynamic Image Sequence}}\\
+\xiaosihao Author: Jianguang Lou \\ Directed by Tieniu Tan\\
+\xiaoerhao Abstract\\
+\end{center}
+
+\fontsize{12pt}{12pt}\selectfont \vspace{0.5cm}
+
+Semantic interpretation of dynamic image sequences tries to make it possible that
+the computer can automatically interpret the motions and behaviors of the tracked
+objects by the analysis of the image sequences captured by cameras from wide-area,
+real-world scenes in natural conditions. Traditional computer vision research mainly
+focused on recovering the geometry of the scene (structure from motion), the camera
+motion (ego-motion), and the motion of the pixels themselves (such as optical flow).
+In recent years, semantic interpretation of image and video has become an active
+topic in computer vision.
+
+In this thesis, we study the semantic interpretation of image sequences from traffic
+scenes which involves a lot of basic problems in computer vision e.g. motion
+detection, target localization, spatial-temporal reasoning, behavior analysis and
+semantic interpretation, etc. The main contributions of this thesis include
+following issues:
+\begin{enumerate}
+    \item We propose a simple but convenient method for camera calibration in
+    traffic scenes, an improved motion detection with less sensitivity to lighting,
+    an efficient and robust vehicle localization algorithm.
+    \item We propose a modified extended Kalman filter incorporated with a precise
+    kinematics model for visual vehicle tracking. By being combined with an additional orthogonality
+    condition, the filter has less sensitivity to the time varying model of system. Experiments
+    show that the filter has a good performance when the tracked car is in a complex motion.
+    \item In this thesis,a framework for semantic interpretation of vehicles and pedestrians'
+    actions is proposed for practical applications in visual traffic surveillance.  We introduce
+    a conceptual space to bridge the gap between low-level processing which is quantitative
+    and high-level processing where information is handled by qualitative means.
+    \item From human's \`mental experiences, there are two aspects of abstraction: ``generality'' and
+    ``complexity". We deal with them in two deferent computational stages named ``conceptual process'' and ``symbolic process'' to
+    simplify the modelling and inference for a computational aim.
+    \item We propose a new interval-based model of action and a temporal analyzer to model and
+    recognize the targets' behaviors in traffic scenes. A single object's behaviors and its
+    interactions with other objects can be handled in the same framework. Finally, some of the recognized
+    actions can be selected and translated into natural language descriptions by some simple grammar
+    rules.
+    \item We develop a demo platform for further research which can work at
+    speed of 17 frames per second on a computer with PIV 1.7G CPU and Windows
+    operating system. Now, the system can give some simple semantic interpretations
+    of vehicle's behaviors.
+\end{enumerate}
+
+In a word, in this thesis, we have made a lot of fruitful attempts and significant
+progresses on our surveillance system.
+
+\noindent \textbf{Key Words:} semantic interpretation of dynamic image sequences,
+visual tracking, behavior analysis and recognition, natural language description

@@ -1,0 +1,59 @@
+%# -*- coding:utf-8 -*- 
+\documentclass[11pt,a4paper,openany]{article}
+% 中文支持宏包
+\usepackage{CJKutf8}
+\usepackage{pinyin}
+\usepackage{color}
+\begin{document}
+\begin{CJK*}{UTF8}{song}
+\renewcommand\labelenumi{\textcircled{\scriptsize \theenumi}}  %带圈的数字
+
+\textcolor[rgb]{0.98,0.00,0.00}{\Dai4 \quan1 \de1 \zi4 \fu2 \shi4 \li4.}
+
+\textcolor[rgb]{0.00,0.00,1.00}{带 圈 的 字 符 示 例}
+
+
+\section{带圈的字符}
+带圈的字符可用命令 \verb"\textcircled{}" 实现
+
+用以下命令
+\begin{verbatim}
+\textcircled{\scriptsize A}%
+\textcircled{\scriptsize b}%
+\textcircled{\scriptsize 中}%
+\textcircled{\scriptsize 国}%
+\end{verbatim}
+
+可得到如下输出
+
+\textcircled{\scriptsize A}
+\textcircled{\scriptsize b}
+\textcircled{\scriptsize 中}
+\textcircled{\scriptsize 国}
+
+\section{带圈的列表环境}
+\begin{enumerate}
+    \item \LaTeX 带圈的数字
+    \item \LaTeX 带圈的数字
+    \item \LaTeX 带圈的数字
+    \item \LaTeX 带圈的数字
+    \item \LaTeX 带圈的数字
+    \item \LaTeX 带圈的数字
+    \item \LaTeX 带圈的数字
+    \item \LaTeX 带圈的数字
+    \item \LaTeX 带圈的数字
+    \item \LaTeX 带圈的数字
+    \item \LaTeX 带圈的数字
+    \item \LaTeX 带圈的数字
+    \item \LaTeX 带圈的数字
+    \item \LaTeX 带圈的数字
+    \item \LaTeX 带圈的数字
+    \item \LaTeX 带圈的数字
+    \item \LaTeX 带圈的数字
+    \item \LaTeX 带圈的数字
+\end{enumerate}
+
+
+
+\end{CJK*}
+\end{document} 

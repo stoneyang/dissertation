@@ -1,0 +1,112 @@
+%# -*- coding:utf-8 -*- 
+%=========================================================================%
+%   LaTeX File for phd thesis of Institute of Automation, CAS
+%-------------------------------------------------------------------------%
+%
+%   revised by Jian Cheng (jian.cheng.1983@gmail.com) at November, 2011
+%
+%   * utf8编码，可以工作在texlive in linux 或者 ctex in windows
+%   * 生成可以拷贝的中文
+%   * 用utf8解决中文书签乱码的问题
+%
+%-------------------------------------------------------------------------%
+%   Revised by Zhaoxiang Zhang (zxzhang@nlpr.ia.ac.cn) at April, 2007
+%
+%   本模板要求满足GPL协议，可以自行修改并发布，但必须公布代码
+%
+%-------------------------------------------------------------------------%
+%   Revised by J. G. Lou (jglou@nlpr.ia.ac.cn) at April, 2003
+%-------------------------------------------------------------------------%
+%   Latex 博士论文模板.
+%   建议使用miktex2.1最大安装编译此模板
+%   本模板使用ctex.org的cjk版本 和aloft 修改后的gb_aloft.cap,
+%   如果安装的是miktex包自带的cjk 请用srcbook 替换 book
+%=========================================================================%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%文件头部定义
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass [12pt,a4paper,twoside] {book}
+%\documentclass [12pt,a4paper,openany,twoside,draft] {book}
+%============================ 引用的宏包 ==================================%
+\input{Setup/Package_UTF8.tex}
+\begin{document}
+\begin{CJK*}{UTF8}{song} 
+
+
+
+\graphicspath{{figures/}}   %定义所有的eps文件在 image 子目录下
+
+%=========================== 文本格式定义 =================================%
+\input{Setup/Format_UTF8.tex}
+
+%============================== 封面 ======================================%
+\renewcommand{\baselinestretch}{1.6}    %\baselineskip 的倍数，两者相乘为行间距。
+\fontsize{14.75pt}{12pt}\selectfont     %\fontsize{size}{skip}skip相当于\baselineskip
+\include{cover/cover_UTF8} %中文封面
+%插入空白页
+\include{cover/black_UTF8}
+\include{cover/e_cover_UTF8} %英文封面
+%插入空白页
+\include{cover/black_UTF8}
+\include{cover/announce_UTF8} %独创性声明
+\renewcommand{\baselinestretch}{1.6}
+\include{cover/black_UTF8}
+%============================= 导言部分 ===================================%
+\frontmatter        %导言部分页码自动为罗马数字
+\sloppy             %放松拆行的限制解决中英文混排的断行问题，会加入间距，但
+                    %不会影响断行
+\fontseries{mex}
+%中文摘要
+\renewcommand{\baselinestretch}{1.2}
+\fontsize{12pt}{12pt}\selectfont
+\include{Preface/c_abstract_UTF8}
+
+%英文摘要
+\include{Preface/e_abstract_UTF8}
+
+%目录
+\renewcommand{\baselinestretch}{1.2}
+\fontsize{12pt}{12pt}\selectfont
+\include{contents/contents_UTF8}
+
+%=============================== 正文部分 ================================%
+\mainmatter %进入正文页码自动变为阿拉伯数字章节计数器启动
+\renewcommand{\baselinestretch}{1.8}
+\fontsize{12pt}{12pt}\selectfont
+\setcounter{page}{1} %正文章节 input不重新起一页,include重起一页
+% 根据最新要求http://www.gucas.ac.cn/site/82?u=58537  奇数页上注明每一章名称，偶数页上注明论文题目
+\fancyhead[CE]{\CJKfamily{fs}基于三维模型的物体识别} %设置偶数页页眉
+\include{Body/chap01_UTF8}
+\include{Body/chap02_UTF8}
+\include{Body/chap03_UTF8}
+\include{Body/chap04_UTF8}
+\include{Body/chap05_UTF8}
+\include{Body/chap06_UTF8}
+\include{Body/chap07_UTF8}
+
+
+% 附录
+%\begin{appendix}
+%    \renewcommand{\chaptername}{附录 \Alph{chapter}}
+%    \input{appendix/chap01a}
+%\end{appendix}
+\backmatter %结束章节自动编号
+
+%参考文献
+\bibliographystyle{unsrt}
+\addcontentsline{toc}{chapter}{参考文献}
+\addtolength{\itemsep}{-2.5 em} % 缩小参考文献间的垂直间距
+\input{Reference/myreference_UTF8}
+\bibliography{Reference/dependent_reference_UTF8}
+
+\frontmatter
+%攻读博士学位期间的研究成果
+\include{Appendix/Publications_UTF8}
+
+% 致谢
+\include{Appendix/Acknowledgements_UTF8}
+
+\clearpage
+\end{CJK*}
+\end{document}
+%%%%%%%%%%%%%%%%%% End of the file  %%%%%%%%%%%%%%%%%%%%%%%%
