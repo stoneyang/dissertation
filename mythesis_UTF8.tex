@@ -3,6 +3,14 @@
 %   LaTeX File for phd thesis of Institute of Automation, CAS
 %-------------------------------------------------------------------------%
 %
+%   revised by Fan Yang (fan.yang@ia.ac.cn) at Jan, 2013
+%
+%   * 修正了参考文献书签定位不准的问题
+%   * 修正了书签的层次结构
+%   * 为中英文封面和摘要生成书签
+%
+%-------------------------------------------------------------------------%
+%
 %   revised by Jian Cheng (jian.cheng.1983@gmail.com) at November, 2011
 %
 %   * utf8编码，可以工作在texlive in linux 或者 ctex in windows
@@ -42,9 +50,16 @@
 %============================== 封面 ======================================%
 \renewcommand{\baselinestretch}{1.6}    %\baselineskip 的倍数，两者相乘为行间距。
 \fontsize{14.75pt}{12pt}\selectfont     %\fontsize{size}{skip}skip相当于\baselineskip
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{part}{经皮介入冠脉导管术仿真系统的关键技术研究}
+\addcontentsline{toc}{chapter}{封面}
 \include{cover/cover_UTF8} %中文封面
 %插入空白页
 \include{cover/blank_UTF8}
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{Cover}
 \include{cover/e_cover_UTF8} %英文封面
 %插入空白页
 \include{cover/blank_UTF8}
@@ -59,14 +74,23 @@
 %中文摘要
 \renewcommand{\baselinestretch}{1.2}
 \fontsize{12pt}{12pt}\selectfont
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{摘要}
 \include{Preface/c_abstract_UTF8}
 
 %英文摘要
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{Abstract}
 \include{Preface/e_abstract_UTF8}
 
 %目录
 \renewcommand{\baselinestretch}{1.2}
 \fontsize{12pt}{12pt}\selectfont
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{目录}
 \include{contents/contents_UTF8}
 
 %=============================== 正文部分 ================================%
@@ -93,6 +117,8 @@
 \backmatter %结束章节自动编号
 
 %参考文献
+\cleardoublepage
+\phantomsection
 \bibliographystyle{unsrt}
 \addcontentsline{toc}{chapter}{参考文献}
 \addtolength{\itemsep}{-2.5 em} % 缩小参考文献间的垂直间距
