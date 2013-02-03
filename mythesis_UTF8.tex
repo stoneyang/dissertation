@@ -53,16 +53,19 @@
 \cleardoublepage
 \phantomsection
 \addcontentsline{toc}{part}{经皮介入冠脉导管术仿真系统的关键技术研究}
-\addcontentsline{toc}{chapter}{封面}
+%\addcontentsline{toc}{chapter}{封面}
 \include{cover/cover_UTF8} %中文封面
 %插入空白页
 \include{cover/blank_UTF8}
 \cleardoublepage
 \phantomsection
-\addcontentsline{toc}{chapter}{Cover}
+%\addcontentsline{toc}{chapter}{Cover}
 \include{cover/e_cover_UTF8} %英文封面
 %插入空白页
 \include{cover/blank_UTF8}
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{独创性声明}
 \include{cover/announce_UTF8} %独创性声明
 \renewcommand{\baselinestretch}{1.6}
 \include{cover/blank_UTF8}
@@ -122,8 +125,10 @@
 \bibliographystyle{unsrt}
 \addcontentsline{toc}{chapter}{参考文献}
 \addtolength{\itemsep}{-2.5 em} % 缩小参考文献间的垂直间距
-\input{Reference/myreference_UTF8}
-\bibliography{Reference/dependent_reference_UTF8}
+%\input{Reference/myreference_UTF8}
+%\include{mythesis_UTF8}
+%\bibliography{Reference/myreference_UTF8}
+\bibliography{mythesis_UTF8}
 
 %\frontmatter
 %攻读博士学位期间的研究成果
