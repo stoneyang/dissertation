@@ -1,4 +1,4 @@
-%# -*- coding:utf-8 -*- 
+%# -*- coding:utf-8 -*-
 %=========================================================================%
 %   LaTeX File for phd thesis of Institute of Automation, CAS
 %-------------------------------------------------------------------------%
@@ -9,10 +9,32 @@
 %-------目录------------------------
 \thispagestyle{empty} %取消当前页眉
 %\setcounter{page}{1}
+
+% overview of the contents
+%\cleardoublepage
+%\phantomsection
+%\addcontentsline{toc}{目录一览}
+%\setcounter{tocdepth}{1}
+
+% contents
 \setcounter{tocdepth}{3}
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{目录}
 \tableofcontents
+
+% contents of figures
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{插图目录}
 \listoffigures %显示所有插图目录
+
+% contents of tables
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{表格目录}
 \listoftables %显示所有表格目录
+
 %显示所有定理类目录
 %\listtheorems{definition}
 %\listtheorems{example}
