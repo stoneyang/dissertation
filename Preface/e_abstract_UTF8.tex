@@ -1,4 +1,4 @@
-%# -*- coding:utf-8 -*- 
+%# -*- coding:utf-8 -*-
 %=========================================================================%
 %   LaTeX File for phd thesis of Institute of Automation, CAS
 %-------------------------------------------------------------------------%
@@ -17,54 +17,44 @@
 
 \fontsize{12pt}{12pt}\selectfont \vspace{0.5cm}
 
-Due to the high pressure and fast pace of modern life, the rate of incidence 
-and mortality of cardiovascular diseases are rising in the past half a century. 
-Cardiovascular diseases had been the evil of human health and well-being. 
-Thanks to the development of modern medicine during the very period, 
-interventional procedures emerged and had become the effective therapies for 
-the diseases. Compared to the traditional procedures, the noval interventional 
-ones have the advantage of smaller incisions, slighter pains, shorter period 
-in hospital, and faster recovery. 
+In this thesis, we research the key technologies for percutaneous coronary 
+intervention simulation. The focus is on the generation of human anatomical 
+structures related to the pervasively adopted percutaneous coronary 
+intervention procedures, especially on the generation of cadiac vasculatures 
+and the heart itself. There are still unavoidable issues in doing the 
+surgery and training the surgery when using the traditional way. During the 
+training process, the trainee have to face the lack of opportunities to 
+practice due to the uncertainty of the incoming patient's illness, the 
+different anatomical structures between human and live animals，and different 
+responses when applied forces when drilling the procedure on animals, and 
+the subjectivity when the seniors evaluating the trainee's quality of 
+training. Our research is aimed to enable the medicine institutes improve 
+the reality of training without the need of real patient or live animals. 
 
-However, in respect to the tradition techniques, the interventional procedures 
-have their limitations. First, the techniques are hard to learn. During the 
-course of the procedure, due to the tool is delivered into the cavity through 
-a small incision, one cannot directly observe the actual location of the tool 
-by his or her naked eyes, thus making the hand-eye coordination difficult. The 
-only way to achieve this is to employ the fluroscopy, which in turn introduces 
-the risk of radiation, for both the clinician and the patient. Due to the small 
-size of the incision, the clinician can only manipulate the tool in its axial 
-direction, only translational or rotational motion can be achieved. The haptic 
-feelings recevied from the tool too weak to judge whether the tool had contact 
-on the vessel wall.
+The focus of this work is on the geometric modeling and physics modeling of 
+the related anatomical structures. In the appropriately parameterized model, 
+one can perform basic manipulations using virtual surgical tools. By adopting 
+this system, we can improve the reality of training, thus the validation of 
+trainee's skills can be judged by standards. 
 
-On the other hand, there are issues related to the training itself. The residency 
-requires several years to acquire the skills required to perform the procedures. 
-Ideally, in the residency course, the students observe and participate enough 
-operations and then they become the competent clinicians. But the high cost of 
-health care spoil this ideal settings by reducing the training period in operation 
-room. In addition, we lack the objective and standardized methods in the 
-evaluation and validation, the whole process is subjectively judged by the senior 
-clinicians. It is not good for the control of quality of the training.
+The image segmentation technologies based on region and level sets are employed 
+to segment the voxels representing the required anatomical structures from CTA. 
+Surface rendering technique is used to extract and visualize the voxels. Then 
+the data in resulting geometric vessel model is optimized, the visualization of 
+the model is improved. Next, we analyze the physical characteristics of the 
+organs, build the physics model, and implement several display effects to 
+miniaturize the surgical manipulations. Finally, we develop the state-machine 
+model of the standard workflow of the percutaneous coronary intervention 
+procedure to provide the log functionality. In the end, we design and implement 
+the percutaneous coronary intervention simulation system -- VitroCathIA.
 
-There is no consensus on the most effective way of training in the medicine 
-academia. To undertake these problems, lots of leading medical institutions in 
-America and Europe had established their dedicated surgical training centers 
-for the training of the complex surgical techniques. The training models can be 
-catagorized into inanimate models and animate models. Unfortunately, the 
-performance of these models are poor for the lack of reality. Moreover, it is 
-still hard to exclude the subjectvity during the evaluation.
-
-The virtual-reality based surgical simulation methods emerged as a revolutionary 
-alternative for the traditional trainining. The simulators let the trainee see, 
-touch, and feel the virtual scene generated by the computer, and perform their 
-tasks with the haptic interface. What's more important, the simulators do have 
-provide the support for the standardization of the evaluation of the training.
-
-In this thesis, we study the key technologies for the surgical simulators for the 
-percutaneous coronary intervention procedures, which involves many disciplines, 
-such as, system engineering, material engineering, robotic engineering, computer 
-science, biomedical engineering, and medicine, etc. The main contributions of 
+Percutaneous coronary intervention simulation training is the promising 
+application of virtual-reality technologies in the field of medical education, 
+especially in the direction of interventional cardiology. In this thesis, we 
+study the key technologies for the surgical simulators for the percutaneous 
+coronary intervention procedures, which involves many disciplines, such as, 
+system engineering, material engineering, robotic engineering, computer 
+science, biomedical engineering, and medicine, etc. The main contributions of
 this thesis include following issues:
 \begin{enumerate}
     \item We propose a simple but convenient method for camera calibration in
@@ -97,5 +87,5 @@ progresses on our simulation system.
 \\
 \\
 \\
-\noindent \textbf{Key Words:} virtual reality, surgical simulation, medical 
+\noindent \textbf{Key Words:} virtual reality, surgical simulation, medical
 visualization, medical imaging, collision detection, deformable models, tissue modeling
