@@ -104,20 +104,21 @@
 \include{Body/chap01_UTF8}
 \include{Body/chap02_UTF8}
 \include{Body/chap03_UTF8}
-\include{Body/chap04_UTF8}
+%\include{Body/chap04_UTF8}
 \include{Body/chap05_UTF8}
 \include{Body/chap06_UTF8}
 \include{Body/chap07_UTF8}
 \include{Body/chap08_UTF8}
-\include{Body/chap09_UTF8}
+%\include{Body/chap09_UTF8}
 \include{Body/chap10_UTF8}
 
 
 % 附录
-%\begin{appendix}
-%    \renewcommand{\chaptername}{附录 \Alph{chapter}}
-%    \input{appendix/chap01a}
-%\end{appendix}
+\begin{appendix}
+    \renewcommand{\chaptername}{附录 \Alph{chapter}}
+    \include{Appendix/chap01a_UTF8}
+    \include{Appendix/chap02a_UTF8}
+\end{appendix}
 \backmatter %结束章节自动编号
 
 %参考文献
@@ -126,7 +127,7 @@
 \bibliographystyle{thubib}
 %\bibliographystyle{unsrt}
 \addcontentsline{toc}{chapter}{参考文献}
-\addtolength{\itemsep}{-2.5 em} % 缩小参考文献间的垂直间距
+%\addtolength{\itemsep}{-2.5 em} % 缩小参考文献间的垂直间距
 \bibliography{Reference/myreference_UTF8}
 
 %\frontmatter
