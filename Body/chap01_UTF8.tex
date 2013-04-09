@@ -200,12 +200,12 @@ one, do one, teach one）\cite{Dawson1998}。见习者通过最真实的实践�
 %  \item 相关技术现状
 %\end{enumerate}
 
-虚拟医学训练的发展已经持续了数十年\cite{Dawson1998}。受经济、文化、公共卫生管理、医学和工程技术等诸多因素的制约，我国在这方面的研究和应用与欧美发达国家相比，尚有不小差距，具体表现在研究水平和应用水平上。本节将分别介绍近几年，国内外科研人员在虚拟医学训练、
-尤其是血管介入术虚拟训练以及相关研究方向上所作的主要工作和重要成果。
-
-在军事和工业领域，基于虚拟现实的仿真技术在训练、以及评估在特定环境下使用者解决问题的反应等方面，已经显示了重大的实际价值\cite{Goodwin1978Simulator}\cite{Rolfe1986Simulators}\cite{Ressler1999Simulators}\cite{Wachtel1985Simulators}。
+虚拟医学训练的发展已经持续了数十年\cite{Dawson1998}。在军事和工业领域，基于虚拟现实的仿真技术在训练、以及评估在特定环境下使用者解决问题的反应等方面，已经显示了重大的实际价值\cite{Goodwin1978Simulator}\cite{Rolfe1986Simulators}\cite{Ressler1999Simulators}\cite{Wachtel1985Simulators}。
 仿真技术在医学、尤其是医学训练领域的应用也已经比较广泛，包括内窥镜\cite{Vining1995Endoscopy}\cite{Preminger1996Endoscopy}、神经医学\cite{Kockro2000Neurosurgery}\cite{Cotin2005EVE}\cite{Ma2007NeuroCath}、麻醉学\cite{Gaba1988Anesthesiology}、支气管镜\cite{Vining1996Bronchoscopy}、腹腔镜\cite{Hon1994Laparoscopy}\cite{Derossis1998Laparoscopy}、以及心血管和外周血管系统的介入手术\cite{Chui1998ICard}\cite{Cotin2000ICTS}\cite{Tan2012NUDT}等。
 2004年，美国食品药品监督管理局（FDA）决定，在血管循环系统中做高风险手术的医生，必须在术前进行技能训练，直到精通为止，且首次对这种技能的初次训练包括使用仿真训练系统\cite{Dawson2006Medicine}。
+
+受经济、文化、公共卫生管理、医学和工程技术等诸多因素的制约，我国在这方面的研究和应用与欧美发达国家相比，尚有不小差距，具体表现在研究水平和应用水平上。本节将分别介绍近几年，国内外科研人员在虚拟医学训练、
+尤其是血管介入术虚拟训练以及相关研究方向上所作的主要工作和重要成果。
 
 \subsection{国外研究现状}
 
@@ -217,7 +217,6 @@ one, do one, teach one）\cite{Dawson1998}。见习者通过最真实的实践�
   \cite{Li2007}\cite{Li2006}
   \cite{Wang2007}
   \cite{Chiang2011}
-  \cite{Volkau2008Vessel}\cite{Volkau2005Vessel}
   \item ETH：\cite{Wang2007}
   \item CIMIT/MedicalSim（ICTS）：
   \item INIRIA（EVE）：\cite{dequidt2007}
@@ -237,11 +236,15 @@ one, do one, teach one）\cite{Dawson1998}。见习者通过最真实的实践�
   \item \cite{Ilic2005}
 \end{itemize}
 
-最早出现的介入放射学仿真系统之一是美国HT Medical公司开发的Dawson-Kaufman介入放射学虚拟系统\cite{Dawson1996DK}\cite{meglan1996DK}\cite{BroNielsen1997DK}。
+最早出现的介入放射学仿真系统之一是美国HT Medical公司开发的Dawson-Kaufman介入放射学虚拟系统\cite{Dawson1996DK}\cite{meglan1996DK}。
+该虚拟系统所提供的解剖环境基于真实病例的影像\cite{BroNielsen1997DK}，并在此基础上重建了血管的静态刚性模型\cite{Higgins1995DK}\cite{BroNielsen1997DK}，再将所得模型渲染成与术中X光影像类似的显示效果。
+同时，还能够专门设计的触觉接口装置为使用者提供“真实”的导丝操作感受\cite{BroNielsen1997DK}。
+通过这些技术，Dawson-Kaufman介入放射学虚拟系统为使用者提供了实践血管成形术和其它疏通阻塞血管的技术的训练平台。
 
 同时出现的还有新加坡国立大学和美国约翰-霍普金斯大学医学院共同研究与实现了用于腹部主动脉介入仿真训练的daVinci系统\cite{Anderson1996daVinci}\cite{Anderson1997daVinci}\cite{Anderson1997adaVinci}。
 该系统利用了美国“可视人计划”的人体数据，通过与X光效果的解剖背景配准的仿真血管模型，向使用者提供实时的平面可视效果以及立体的导管导航\cite{Anderson1998daVinci}。
 血管壁由包围血管壁的内部区域的势能场来表示，这个势能场决定了导管和血管壁之间相互作用的能量\cite{Chui1996daVinci}\cite{Wang1996daVinci}。
+血管模型的重建方法\cite{Cai2003Vessel}\cite{Volkau2008Vessel}\cite{Volkau2005Vessel}。
 导管的建模方法采用有限元方法，把导管抽象为六自由度的梁元。虚拟导管的材料特性是杨氏模量和切变模量，并忽略了导管与血管壁之间的摩擦力\cite{Anderson1998daVinci}。
 开发了一种物理模型和数值算法，用于仿真导管插入动脉系统并推进的过程\cite{Lawton2000daVinci}。
 
