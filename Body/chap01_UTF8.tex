@@ -269,8 +269,9 @@ ICard的软件系统所支持的功能包括X光影像显示、立体影像显�
 NeuroCath用于仿真球囊和支架的安置、动脉瘤弹簧圈栓塞术（Aneurysm Coiling）等脑血管介入手术。
 它继承了前两个系统的许多成熟技术和特性，包括：基于有限元方法的导丝建模以及导丝与血管壁相互作用建模\cite{Wang1996daVinci}\cite{Chui1996daVinci}、基于多模态影像的血管中心线提取\cite{Wang1998ICard}、以及X光效果的显示\cite{Wang1998aICard}\cite{Wang1998ICard}等。
 在此基础上，该系统为使用者提供了尽可能丰富和接近真实的体验。如：注射造影剂后的血管内扩散现象、虚拟病人在虚拟手术过程中的生理表征。
-为获得NeuroCath系统的脑血管模型，Cai等人\cite{Ye2002Vessel}\cite{Cai2003aVessel}\cite{Cai2003Vessel}采用了一种利用扫描和混合操作以生成血管段和分岔的结构性方法；
-Volkau等人\cite{Volkau2005Vessel}\cite{Volkau2008Vessel}提出了基于血管中心线的重建方法。
+为获得NeuroCath系统的脑血管模型，
+Cai等人\cite{Ye2002Vessel}\cite{Cai2003aVessel}\cite{Cai2003Vessel}采用了一种利用扫描和混合操作以生成血管段和分岔的结构性方法，该方法提高了血管分岔处的光滑度；
+Volkau等人\cite{Volkau2005Vessel}\cite{Volkau2008Vessel}在此基础上提出了基于血管中心线的重建方法，该方法首先提高了血管中心线的光滑程度；其次抑制了在分割和骨架化过程中引入的噪声，从而提高了血管半径的精确度。
 NeuroCath的操作风格与ICard类似，也提供了可视界面交互和物理交互装置交互两种方式\cite{Nowinski2001NeuroCath}。
 研究人员为NeuroCath专门设计了物理交互装置 --- TiC（\textbf{\textit{T}}actile and \textbf{\textit{i}}mage \textbf{\textit{C}}ontrol）\cite{Chui1999TiC}\cite{Ma1999TiC}，它由触觉子系统和影像操作子系统等两个主要部分组成。
 前者可以使操作者能够操作导管和导丝进行与真实血管介入手术中类似的运动；后者则通过一台虚拟工作站来操作可视界面中提供的X光影像的视角。
