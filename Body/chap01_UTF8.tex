@@ -266,16 +266,18 @@ ICard系统的应用目的是为医学院学生和医生提供一个能够方便
 前者可以使使用者通过点击图形界面上的按钮来操作虚拟手术器械；后者则通过专门设计的物理装置（导管移动传感装置，\textbf{\textit{C}}atheter \textbf{\textit{M}}ovement \textbf{\textit{S}}ensor device, CMS）来操作\cite{Lim1998ICard}\cite{Lim1997ICard}。
 ICard的软件系统所支持的功能包括X光影像显示、立体影像显示与横切面显示、生物医学信号模拟、球囊与支架的植入、以及诸如造影剂的注射等\cite{Wang1998ICard}。
 
-NeuroCath用于仿真脑血管介入手术。
-它继承了前两个系统的许多成熟技术和特性，包括：基于有限元方法的导丝建模\cite{Wang1996daVinci}\cite{Chui1996daVinci}、基于多模态影像的血管中心线提取、以及X光效果的显示\cite{Wang1998aICard}\cite{Wang1998ICard}等。
-为获得NeuroCath系统的脑血管模型，Cai等人\cite{Cai2003Vessel}采用了一种利用扫描和混合操作以生成血管段和分岔的结构性方法；
-Volkau等人\cite{Volkau2008Vessel}\cite{Volkau2005Vessel}提出了。
+NeuroCath用于仿真球囊和支架的安置、动脉瘤弹簧圈栓塞术（Aneurysm Coiling）等脑血管介入手术。
+它继承了前两个系统的许多成熟技术和特性，包括：基于有限元方法的导丝建模以及导丝与血管壁相互作用建模\cite{Wang1996daVinci}\cite{Chui1996daVinci}、基于多模态影像的血管中心线提取\cite{Wang1998ICard}、以及X光效果的显示\cite{Wang1998aICard}\cite{Wang1998ICard}等。
+在此基础上，该系统为使用者提供了尽可能丰富和接近真实的体验。如：注射造影剂后的血管内扩散现象、虚拟病人在虚拟手术过程中的生理表征。
+为获得NeuroCath系统的脑血管模型，Cai等人\cite{Ye2002Vessel}\cite{Cai2003aVessel}\cite{Cai2003Vessel}采用了一种利用扫描和混合操作以生成血管段和分岔的结构性方法；
+Volkau等人\cite{Volkau2005Vessel}\cite{Volkau2008Vessel}提出了基于血管中心线的重建方法。
 NeuroCath的操作风格与ICard类似，也提供了可视界面交互和物理交互装置交互两种方式\cite{Nowinski2001NeuroCath}。
 研究人员为NeuroCath专门设计了物理交互装置 --- TiC（\textbf{\textit{T}}actile and \textbf{\textit{i}}mage \textbf{\textit{C}}ontrol）\cite{Chui1999TiC}\cite{Ma1999TiC}，它由触觉子系统和影像操作子系统等两个主要部分组成。
+前者可以使操作者能够操作导管和导丝进行与真实血管介入手术中类似的运动；后者则通过一台虚拟工作站来操作可视界面中提供的X光影像的视角。
+此外，NeuroCath还能为使用者提供血管内的视角，该功能用于血管内窥镜导航的仿真\cite{Nowinski2001NeuroCath}。
 NeuroCath最初在约翰-霍普金斯大学医学院进行了验证。随后还获得了包括德国萨尔大学诊断介入神经放射学诊所、中国北京宣武医院、以及德国国立信息技术研究中心等医院和研究机构的许可。并获得了比较满意的反馈\cite{Ma2007NeuroCath}。
 
-前者可以使操作者能够操作导管和导丝进行与真实血管介入手术中类似的运动；后者则通过一台虚拟工作站来操作可视界面中提供的X光影像的视角。
-此外，科研团队还设计并开发了若干CAD软件，它们分别用于导管等血管介入器械，如：CathWorks\cite{Cai1998CathWorks}\cite{Cai2000CathWorks}，和DCSM\cite{Li2001DCSM}等； 以及血管等人体器官的建模的CAD软件工具，如：Vascular Editor\cite{Ma2007NeuroCath}等。
+为了提高工作效率，科研团队还开发了若干CAD软件，它们分别用于导管等血管介入器械，如：CathWorks\cite{Cai1998CathWorks}\cite{Cai2000CathWorks}、DCSM\cite{Li2001DCSM}等； 以及血管等人体器官的建模的CAD软件工具，如：VasWorks\cite{Cai2003Vessel}、Vascular Editor\cite{Ma2007NeuroCath}等。
 
 位于美国麻省的三菱电气实验室（Mitsubishi Electric Research Laboratories，MERL）\cite{merlweb}和美国创新微创疗法中心（Center for Innovative Minimally Invasive Therapy，CIMIT）\cite{cimitweb}联合发起的ICTS项目\cite{Dawson2000ICTS}\cite{Cotin2000ICTS}\cite{Shaffer1999ICTS}。
 ICTS的全称是“Interventional Cardiology Training System”（介入心脏病学训练系统），该系统旨在为学习者提供训练平台，并为引入新的医学器材和手术方法提供展示平台\cite{Cotin2000ICTS}。
