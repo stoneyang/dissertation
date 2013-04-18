@@ -309,6 +309,12 @@ CIMIT的Sim小组\cite{medicalsimweb}和法国INRIA的Shacra团队\cite{shacrawe
 荷兰列文胡克癌症研究所的MIVIS项目\cite{Konings2003NKI}\cite{alderliesten2002NKI}\cite{alderliesten2004NKI}\cite{alderliesten2007NKI}\cite{alderliesten2007aNKI}\cite{Bosman2005NKI}。
 
 德国曼海姆大学、海德堡大学与德国维尔茨堡大学医院联合研究的CathI（\textbf{\textit{Cath}}eter \textbf{\textit{I}}nstruction System）用于血管介入尤其是经皮腔内冠状动脉成形术（\textbf{\textit{P}}ercutaneous \textbf{\textit{T}}ransluminal \textbf{\textit{C}}oronary \textbf{\textit{A}}ngioplasty，PTCA）的仿真\cite{rebholz2004cathi}\cite{Hoefer2002CathI}。
+该系统提供了一系列的功能设施用于实现尽可能真实的血管介入手术仿真训练\cite{rebholz2004cathi}，包括：个人档案、不同型号的血管介入器械（导管、导丝、球囊和支架等）、控制C型臂的脚踏板、控制射线开关和造影剂剂量的设定、限制照射时间和介入手术总时间的设定以及人体生理指标的设定等。
+该系统的数据来自真实病例的术中X光造影，影像中能够观察到真实病例所具有的典型特征；而所选取的影像包含了一个心动周期的关键帧，因而能够提供准确的心脏搏动，这样可以为受训者提供最真实的视觉效果。
+血管被抽象为刚体且横截面为圆\cite{Hoefer2002CathI}。
+导管则被抽象为一列刚性的圆柱体，当导管与血管壁发生交互时，由这个几何模型确定其与血管壁的接触点，在此基础上计算应该发生的弯曲等形变，但未考虑导管与血管壁之间的摩擦\cite{rebholz2004cathi}。
+在操作装置上，系统采用了导管室所使用的原始机构，最大限度地模仿真实的导管术操作工具；而测量导丝进给的功能实现上，则通过反射自附着在导丝上的玻璃纤维的光线的变化来测量导丝的运动，这种方法克服了传统机械方式所具有的摩擦和滑动等不足\cite{Hoefer2002CathI}。
+此外，系统提供的个人档案功能能够记录受训者在仿真训练过程中的一些必要的信息，并且能够导出为Excel文件，但并未实现自动的评价功能\cite{rebholz2004cathi}。
 
 德国达姆施塔特科技大学和德国维尔茨堡大学医院\cite{Rahman2012}。
 
