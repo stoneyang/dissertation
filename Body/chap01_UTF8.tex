@@ -222,7 +222,7 @@ one, do one, teach one）\cite{Dawson1998}。见习者通过最真实的实践�
   \item Western Reserve：
   \item Netherlands：
   \item Lecce（HERMES）：
-  \item CRS4（ViVa）：\cite{abdoulaev1998}\cite{Zorcolo2000}\cite{Gobbetti1998}\cite{Gobbetti2000}\cite{Zorcolo1999}
+  \item CRS4（ViVa）：
   \item Japan
   \item Hong Kong
   \item Siemens（CathI）：
@@ -296,6 +296,8 @@ CIMIT的Sim小组\cite{medicalsimweb}和法国INRIA的Shacra团队\cite{shacrawe
 
 法国INRIA\cite{Dequidt2008INRIA}。
 
+意大利CRS4小组发起的ViVa项目\cite{abdoulaev1998}\cite{Gobbetti1998}\cite{Zorcolo1999}\cite{Gobbetti2000}\cite{Zorcolo2000}。
+
 英国的CRaIVE（\textbf{\textit{C}}ollaborators in \textbf{\textit{R}}adiological \textbf{\textit{I}}nterventional \textbf{\textit{V}}irtual \textbf{\textit{E}}nvironments）\cite{CRaIVEweb}进行了与介入手术的仿真训练相关的研究。
 他们的研究主要集中于血管介入手术中血管系统的分割与重建\cite{Luboz2008aCRaIVE}，
 血管和导管及其相互作用的建模和验证\cite{Luboz2010CRaIVE}\cite{Luboz2009aCRaIVE}\cite{Luboz2008CRaIVE}，
@@ -309,7 +311,16 @@ Seldinger穿刺术的仿真\cite{luboz2009CRaIVE}\cite{John2008CRaIVE}，
 
 法国巴黎大学\cite{Ghembaza2004ParisU}。
 
-荷兰列文胡克癌症研究所的MIVIS项目\cite{Konings2003NKI}\cite{alderliesten2002NKI}\cite{alderliesten2004NKI}\cite{alderliesten2007NKI}\cite{alderliesten2007aNKI}\cite{Bosman2005NKI}。
+由荷兰列文胡克癌症研究所和乌德勒支大学图像科学研究所发起的MIVIS项目（\textbf{\textit{M}}inimally-\textbf{\textit{I}}nvasive \textbf{\textit{V}}ascular \textbf{\textit{I}}ntervention \textbf{\textit{S}}imulation）\cite{alderliesten2002NKI}\cite{Konings2003NKI}\cite{alderliesten2004NKI}\cite{Bosman2005NKI}\cite{alderliesten2007NKI}\cite{alderliesten2007aNKI}
+主要进行了腹主动脉导管介入的仿真，对导管在血管内的运动仿真是该项目的研究重点。
+血管的几何建模采用了Fuzzy Connectedness算法\cite{Udupa1996NKI}\cite{alderliesten2002NKI}\cite{alderliesten2004NKI}；
+而其物理建模则利用胡克定律来模拟血管壁的组织特性\cite{alderliesten2002NKI}\cite{alderliesten2004NKI}；
+导管模型的物理特性则建立在准静态力学（quasi-static mechanics）的基础上\cite{alderliesten2002NKI}\cite{alderliesten2004NKI}；
+并在此基础上进行了实物对比验证\cite{alderliesten2002NKI}\cite{alderliesten2004NKI}。
+Konings等人\cite{Konings2003NKI}提出了一种用于导管在血管内运动仿真的半解析算法，并进行了导管在平面弯道内运动仿真性能的验证分析。
+Bosman等人\cite{Bosman2005NKI}研究了利用一种进化算法以替代面向特定问题的一阶解析估计算法，从而解决仿真过程中的优化问题的优劣，并证明采用前者更有利于系统性能的优化。
+Alderliesten等人\cite{alderliesten2007NKI}又在此基础上进一步拓展了算法性能对比的研究，并证明采用共轭梯度算法或者进化算法能够在仅产生轻度误差的前提下，显著地减少计算时间。
+文献\cite{alderliesten2007aNKI}中报告了该项目中的导丝模型已经能够仿真导丝与血管壁之间的摩擦。
 
 德国曼海姆大学、海德堡大学与德国维尔茨堡大学医院联合研究的CathI（\textbf{\textit{Cath}}eter \textbf{\textit{I}}nstruction System）用于血管介入尤其是经皮腔内冠状动脉成形术（\textbf{\textit{P}}ercutaneous \textbf{\textit{T}}ransluminal \textbf{\textit{C}}oronary \textbf{\textit{A}}ngioplasty，PTCA）的仿真\cite{rebholz2004cathi}\cite{Hoefer2002CathI}。
 该系统提供了一系列的功能设施用于实现尽可能真实的血管介入手术仿真训练\cite{rebholz2004cathi}，包括：个人档案、不同型号的血管介入器械（导管、导丝、球囊和支架等）、控制C型臂的脚踏板、控制射线开关和造影剂剂量的设定、限制照射时间和介入手术总时间的设定以及人体生理指标的设定等。
