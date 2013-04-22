@@ -305,18 +305,6 @@ Seldinger穿刺术的仿真\cite{luboz2009CRaIVE}\cite{John2008CRaIVE}，
 以及穿刺术之前的腹股沟触诊的仿真\cite{Coles2011CRaIVE}\cite{Coles2009CRaIVE}。
 此外，文献\cite{Coles2010CRaIVE}还对若干应用于穿刺仿真中的触觉反馈装置的性能进行了测试和比较。
 
-日本理化学研究所\cite{takashima2009RIKEN}\cite{takashima2007RIKEN}。
-
-日本名古屋大学的研究人员进行了用于分布式血管内遥操作手术的虚拟环境研究\cite{Arai1994Nagoya}\cite{Arai1995Nagoya}\cite{Arai1996Nagoya}。
-该虚拟环境主要为远离手术现场的医生提供直观的视觉和触觉。为此，该虚拟环境提供了三维显示功能和专门设计的操作机构。
-显示功能中的血管和导管的建模都比较简化：导管模型以常数曲率弯曲、血管模型则被抽象为不同半径的圆柱体\cite{Arai1994Nagoya}\cite{Arai1995Nagoya}。
-该分布式遥操作手术系统用于脑血管介入手术，研究人员在东京市（早稻田大学）与名古屋市（名古屋大学）之间（距离350km）进行了实验。
-整个过程中的数据通过异步传输模式的光纤传输\cite{Arai1996Nagoya}。
-
-日本名古屋大学微纳米系统工程系以及藤田保健卫生大学和安城厚生病院的研究人员进行了脑血管介入手术仿真的研究\cite{Ikeda2004Nagoya}\cite{Ikeda2005Nagoya}\cite{Ikeda2005aNagoya}\cite{Ikeda2006Nagoya}\cite{Ikeda2007Nagoya}。
-与其他研究项目的思路不同，该项目的研究人员仍然坚持实物仿真训练，利用硅胶等材料、通过精密的加工工艺以人体头部CTA和MRA影像为依据，制作高精确度（解析度达到亚毫米级别）的人体脑血管的物理模型，为脑血管介入手术的训练提供操作场景\cite{Ikeda2005Nagoya}。
-这种物理模型能够再现血管的物理特性，以及导管与其内壁发生的摩擦。
-
 法国巴黎大学\cite{Ghembaza2004ParisU}。
 
 由荷兰列文胡克癌症研究所和乌德勒支大学图像科学研究所发起的MIVIS项目（\textbf{\textit{M}}inimally-\textbf{\textit{I}}nvasive \textbf{\textit{V}}ascular \textbf{\textit{I}}ntervention \textbf{\textit{S}}imulation）\cite{alderliesten2002NKI}\cite{Konings2003NKI}\cite{alderliesten2004NKI}\cite{Bosman2005NKI}\cite{alderliesten2007NKI}\cite{alderliesten2007aNKI}
@@ -354,6 +342,21 @@ Alderliesten等人\cite{alderliesten2007NKI}又在此基础上进一步拓展了
 此外，该实验室还设计并实现了用于脑血管介入手术仿真的4自由度触觉接口装置\cite{Ilic2005EPFL}\cite{Moix2005EPFL}\cite{Ilic2005aEPFL}。
 通过实验测量了血管介入手术中，血管因球囊膨胀过程中的弹性模量\cite{Ilic2005bEPFL}。
 根据文献\cite{Wang2007EPFL}，接下来的工作将是计算机仿真部分与触觉接口装置的整合。
+
+日本名古屋大学的研究人员进行了用于分布式血管内遥操作手术的虚拟环境研究\cite{Arai1994Nagoya}\cite{Arai1995Nagoya}\cite{Arai1996Nagoya}。
+该虚拟环境主要为远离手术现场的医生提供直观的视觉和触觉。为此，该虚拟环境提供了三维显示功能和专门设计的操作机构。
+显示功能中的血管和导管的建模都比较简化：导管模型以常数曲率弯曲、血管模型则被抽象为不同半径的圆柱体\cite{Arai1994Nagoya}\cite{Arai1995Nagoya}。
+该分布式遥操作手术系统用于脑血管介入手术，研究人员在东京市（早稻田大学）与名古屋市（名古屋大学）之间（距离350km）进行了实验。
+整个过程中的数据通过异步传输模式的光纤传输\cite{Arai1996Nagoya}。
+
+日本名古屋大学微纳米系统工程系以及藤田保健卫生大学和安城厚生病院的研究人员进行了脑血管介入手术仿真的研究\cite{Ikeda2004Nagoya}\cite{Ikeda2005Nagoya}\cite{Ikeda2005aNagoya}\cite{Ikeda2006Nagoya}\cite{Ikeda2007Nagoya}。
+与其他研究项目的思路不同，该项目的研究人员仍然坚持实物仿真训练，利用硅胶等材料、通过精密的加工工艺以人体头部CTA和MRA影像为依据，制作高精确度（解析度达到亚毫米级别）的人体脑血管的物理模型，为脑血管介入手术的训练提供操作场景\cite{Ikeda2005Nagoya}。
+这种物理模型能够再现血管的物理特性，以及导管与其内壁发生的摩擦。
+
+日本理化学研究所等科研机构开展了用于血管介入手术仿真的研究\cite{takashima2009RIKEN}\cite{takashima2007RIKEN}。
+导丝被抽象为若干段粘弹性弹簧（viscoelastic spring），其近端由于受限于导丝模型，故被抽象为刚性管道，而血管则被抽象为横截面为圆的弹性圆柱体\cite{takashima2009RIKEN}。
+血管的几何模型通过“分割血管-提取中心线-根据半径重建血管”的方式获得\cite{takashima2009RIKEN}。
+为了获得准确的、对导丝与血管壁之间相互作用的仿真效果，文献\cite{takashima2007RIKEN}采取了实物试验与计算仿真相互比较的方法对这一场景下的摩擦和接触进行了实验和数值分析，从而得出仿真系统中准确的血管模型参数的重要性。
 
 日本香川大学工学部的郭书祥等人研究并实现了用于脑血管介入手术仿真的系统\cite{Gao2012GUO}\cite{Gao2012aGUO}\cite{Gao2012bGUO}。
 
