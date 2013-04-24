@@ -1,5 +1,4 @@
-mythesis_UTF8.pdf
-readme_UTF8.pdf
+*.pdf
 
 mythesis_UTF8.aux
 mythesis_UTF8.bbl
@@ -14,33 +13,17 @@ mythesis_UTF8.thm
 mythesis_UTF8.toc
 mythesis_UTF8.brf
 
-Appendix/Acknowledgements_UTF8.aux
-Appendix/Publications_UTF8.aux
-Appendix/chap01a_UTF8.aux
-Appendix/chap02a_UTF8.aux
+Appendix/*.aux
 
-Body/chap01_UTF8.aux
-Body/chap02_UTF8.aux
-Body/chap03_UTF8.aux
-Body/chap04_UTF8.aux
-Body/chap05_UTF8.aux
-Body/chap06_UTF8.aux
-Body/chap07_UTF8.aux
-Body/chap08_UTF8.aux
-Body/chap09_UTF8.aux
-Body/chap10_UTF8.aux
+Body/*.aux
 
-contents/contents_UTF8.aux
+contents/*.aux
 
-cover/announce_UTF8.aux
-cover/blank_UTF8.aux
-cover/cover_UTF8.aux
-cover/e_cover_UTF8.aux
+cover/*.aux
 
 Figures/Thumbs.db
 
-Preface/c_abstract_UTF8.aux
-Preface/e_abstract_UTF8.aux
+Preface/*.aux
 
 Reference/myreference_UTF8.aux
 Reference/myreference_UTF8.bib.bak
