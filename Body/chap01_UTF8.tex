@@ -279,11 +279,11 @@ ICTS实现了X光效果的解剖环境、建立了导管的物理模型和血液
 目前，VIST系列的两种仿真平台已经能够仿真的血管介入技术有：冠状动脉造影、心脏节律管理、跨室间隔穿刺、肾动脉介入、髂内动脉介入、膝关节以下血管介入、主动脉内窥修复、颈动脉介入、脑血管介入、子宫动脉栓塞术等\cite{menticeweb}。
 其中已经获得医学验证的技术有：颈动脉介入手术的仿真训练\cite{Dayal2004VIST}\cite{Hsu2004VIST}\cite{Nicholson2006VIST}\cite{Patel2006VIST}\cite{Cates2007VIST}\cite{VanHerzeele2009VIST}，肾动脉介入术\cite{Aggarwal2006}\cite{Glaiberman2008VIST}，髂内动脉介入术\cite{Chaer2006VIST}\cite{Berry2007VIST}\cite{VanHerzeele2008VIST}，冠状动脉介入术\cite{Gallagher2006VIST}等。
 
-CIMIT的Sim小组\cite{medicalsimweb}和法国INRIA的Shacra团队\cite{shacraweb}联合开发的EVE项目\cite{Wu2005EVE}\cite{dequidt2007}是一种用于仿真脑血管介入手术的系统。
-它提供了适用于复杂血管系统内部的具有实时的碰撞检测和碰撞响应性能的导管有限元模型\cite{dequidt2007}\cite{Duriez2006EVE}\cite{Lenoir2006EVE}\cite{Lenoir2005EVE}\cite{Cotin2005EVE}，
-具有X光显示效果的头颈部解剖模型\cite{Wu2011MedicalSim}\cite{Luboz2005EVE}\cite{Muniyandi2003EVE}，
+CIMIT的Sim小组\cite{medicalsimweb}和法国INRIA的Shacra团队\cite{shacraweb}联合开发的EVE项目\cite{Wu2005EVE}是一种用于仿真脑血管介入手术的系统。
+它提供了适用于复杂血管系统内部的具有实时的碰撞检测和碰撞响应性能的导管有限元模型\cite{dequidt2007EVE}\cite{Duriez2006EVE}\cite{Lenoir2006EVE}\cite{Lenoir2005EVE}\cite{Cotin2005EVE}，
+具有X光显示效果的头颈部解剖模型\cite{Wu2011EVE}\cite{Luboz2005EVE}\cite{Muniyandi2003EVE}，
 以及血流动力学模型、虚拟造影剂、心脏搏动和呼吸\cite{Wu2007EVE}等视觉效果。
-文献\cite{Dequidt2008INRIA}介绍了该团队进行动脉栓塞术中弹簧圈的仿真以及验证的情况。
+文献\cite{Dequidt2008EVE}介绍了该团队进行动脉栓塞术中弹簧圈的仿真以及验证的情况。
 操作装置方面，研究人员设计了专用的触觉接口装置ABEL和专用的径向跟踪装置Cain\cite{medicalsimweb}。
 
 此外，Shacra团队在EVE等项目的工作基础上，开发并维护着一个专门用于医学仿真的工具库 --- SOFA（\textbf{\textit{S}}imulation \textbf{\textit{O}}pen \textbf{\textit{F}}ramework \textbf{\textit{A}}rchitecture）\cite{Allard2007SOFA}。
@@ -397,7 +397,11 @@ Alderliesten等人\cite{alderliesten2007NKI}又在此基础上进一步拓展了
 导管形变的模拟则利用了有限元的方法\cite{Li2011CUHK}。
 此后，研究人员还研究了一种快速稳定的多网格求解器，以保证仿真的真实性和实时性\cite{Li2012CUHK}。
 
-中国科学院深圳先进技术研究院的马炘等人\cite{Wu2011}\cite{Ma2010SIAT}。
+中国科学院深圳先进技术研究院的马炘等人\cite{Ma2010SIAT}进行了脑血管介入手术仿真系统的研究。
+该系统的脑血管建模，吴剑煌等人采用了面向三角网格的自适应细分模式\cite{Wu2006SIAT}，所得血管模型的数据量得到了合理地精简，提高了血管模型在使用中的渲染速度和碰撞检测速度。
+导管等医疗器械的建模采用了有限元方法。导管被抽象为由许多节点相连的定长线段，对各个节点赋予物理属性，这样节点与节点就成了机构学上的铰接结构，当受到外力时，节点处可以自由旋转\cite{Ma2010SIAT}。
+对导管与血管壁的相互作用的仿真，该系统的碰撞检测分为初步检测、精确检测、和确定碰撞位置等三个步骤\cite{Ma2010SIAT}。
+该系统还实现了触力反馈，并设计和实现触觉反馈装置\cite{Ma2010SIAT}。
 
 国防科技大学的熊岳山等人对虚拟心脏介入手术的相关方面进行了研究，如：
 几何模型构建技术\cite{han2005master}、
@@ -405,7 +409,7 @@ Alderliesten等人\cite{alderliesten2007NKI}又在此基础上进一步拓展了
 弹簧-振子模型\cite{wang2006master}、
 医疗器械的三维建模\cite{zhu2007master}
 以及碰撞检测技术\cite{kang2007master}等，
-最近已有有成型系统的文献报道\cite{Tan2012NUDT}。
+文献\cite{Tan2012NUDT}报告了该工作的最新进展。
 
 近年来，随着我国社会经济的不断发展，国民生活水平也有了长足的提高，人们一方面享受到了较
 好的物质条件带来的多方面的益处，一方面也由于缺乏端正的健康生活意识而出现了各种由于膳食
