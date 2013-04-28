@@ -166,9 +166,12 @@
 %=== 配合前面的ntheorem宏包产生各种定理结构,重定义一些正文相关标题 ===%
 \theoremstyle{plain}
 \theoremheaderfont{\normalfont\rmfamily\CJKfamily{hei}}
-\theorembodyfont{\normalfont\rm\CJKfamily{song}} \theoremindent0em
-\theoremseparator{\hspace{1em}} \theoremnumbering{arabic}
+\theorembodyfont{\normalfont\rm\CJKfamily{kai}} \theoremindent0em
+%\theorembodyfont{\normalfont\rm\CJKfamily{song}} \theoremindent0em
+\theoremseparator{:} \theoremnumbering{arabic}
+%\theoremseparator{\hspace{1em}} \theoremnumbering{arabic}
 %\theoremsymbol{}          %定理结束时自动添加的标志
+%\newtheorem{definition}{\noindent定义}[chapter]
 \newtheorem{definition}{\hspace{2em}定义}[chapter]
 %\newtheorem{definition}{\hei 定义}[section] %!!!注意当section为中国数字时，[sction]不可用！
 \newtheorem{proposition}{\hspace{2em}命题}[chapter]
@@ -179,7 +182,7 @@
 \newtheorem{axiom}{\hspace{2em}公理}[chapter]
 \newtheorem{corollary}{\hspace{2em}推论}[chapter]
 \newtheorem{exercise}{\hspace{2em}习题}[chapter]
-\theoremsymbol{$\blacksquare$}
+%\theoremsymbol{$\blacksquare$}
 \newtheorem{example}{\hspace{2em}例}[chapter]
 
 \theoremstyle{nonumberplain}
