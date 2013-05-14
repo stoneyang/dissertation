@@ -25,7 +25,8 @@ Figures/Thumbs.db
 
 Preface/*.aux
 
-Reference/myreference_UTF8.aux
-Reference/myreference_UTF8.bib.bak
+Reference/*.aux
+Reference/*.bib.bak
+Reference/.*
 
 Setup/Package_UTF8.log
