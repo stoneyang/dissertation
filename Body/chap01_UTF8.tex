@@ -15,14 +15,14 @@
 人数的30\%，其中超过80\%的死亡人口来自中等收入国家和低收入国家\cite{mho2011}。卫生部
 的相关报告\cite{moh2010annual}\cite{moh2007annual}\cite{moh2004annual}显示，在我国的
 城市和乡村，冠心病的死亡人数正在逐年攀升。在美国，心血管疾病的死亡数字虽然在相当长一
-段时间（1999年～2009年）内呈下降趋势，但是由这种疾病所造成的经济负担依然沉重\cite{Go2013}。
+段时间(1999年～2009年)内呈下降趋势，但是由这种疾病所造成的经济负担依然沉重\cite{Go2013}。
 面对这一现实，提高心血管疾病的诊疗水平成为公共卫生管理者和心血管内科学领域的医学工作
 者的共同目标。使人类远离疾病困扰、享受健康生活的天然使命促使医学界不断提出新的诊疗方
 法和药物配方。其中，以经皮冠状动脉介入术\cite{Baim2005}为代表的微创介入手术疗法是目
 前心血管内科学领域普遍采用的、用于治疗冠心病、动脉狭窄、钙化以及动脉血管瘤等病症的有
 效方法之一，它具有切口小、创伤轻、痛苦少、恢复快等优点，是广大心血管疾病患者的福音。
 
-在经皮冠状动脉介入术中，医师首先将导丝或导管（为了叙述方便，下文中除非特别说明，均以“导管”来代替这里的“导丝或导管”）通过皮肤穿刺送入病人的血管内；
+在经皮冠状动脉介入术中，医师首先将导丝或导管(为了叙述方便，下文中除非特别说明，均以“导管”来代替这里的“导丝或导管”)通过皮肤穿刺送入病人的血管内；
 然后，操作导管沿血管内腔运行，最终将导管送达病灶位置；
 然后，再根据对病灶的病理特征的分析，行球囊扩张术或者球囊支架术；
 最后，将导管等介入器材从血管中逐一撤出，对创口进行处理。
@@ -35,7 +35,7 @@
 \end{itemize}
 
 正因如此，医学界对心血管导管术的训练要求相当严格。
-根据美国医学毕业生资格审查委员会(Accreditation Council for Graduate Medical Education，ACGME)的培训指南，要从事诊断性导管术的人，在3年心血管疾病资格基础培训里，至少有4个月的诊断性导管术实习（100例患者），附加4个月的导管术实习（附加100例患者）\cite{Beller2002CardTraining}。
+根据美国医学毕业生资格审查委员会(Accreditation Council for Graduate Medical Education，ACGME)的培训指南，要从事诊断性导管术的人，在3年心血管疾病资格基础培训里，至少有4个月的诊断性导管术实习(100例患者)，附加4个月的导管术实习(附加100例患者)\cite{Beller2002CardTraining}。
 对心脏介入资格的培训，除了三年的普通心血管疾病培训外，附加12个月专业培训，在此期间至少要操作250例介入手术\cite{Beller2002CardTraining}\cite{Hirshfeld1999CardTraining}。
 随着新的器械和手术方法的不断引进，心导管介入术医师需要不断更新自己的知识，这就必须完成培训计划，并需要连续操作一定量的手术\cite{Baim2005}。
 由此可见，心血管导管术的训练对于这项手术技术的成功应用具有重要意义。
@@ -65,8 +65,8 @@
 器官组织的力学特性分析与建模的基本要求是：
 
 手术仿真的增强性效果的研究目标是实现一系列的视觉特效，以表现仿真训练过程中的一些视觉
-效果（如真实导管术中的C型臂X光投影仪的成像效果）、人体的正常生理反应（如呼吸、心脏搏
-动等），和手术操作效果（如虚拟造影剂）等，从而改善仿真的真实性。
+效果(如真实导管术中的C型臂X光投影仪的成像效果)、人体的正常生理反应(如呼吸、心脏搏
+动等)，和手术操作效果(如虚拟造影剂)等，从而改善仿真的真实性。
 
 手术流程建模的目的是在充分分析经皮冠状动脉介入术的正常完整流程的基础上，利用有限状态
 机原理将整个流程进行状态化的建模。
@@ -97,8 +97,8 @@
 其输出则可能是分割得到的“感兴趣”的目标所对应的图像区域或者该区域的闭合边界\cite{Sonka2008ImageBook}\cite{Wang2008ImageBook}。
 %根据任务目的的不同，图像分割可被划分为全局分割和局部分割。
 %前者的输出是一组互不相邻的区域，它们与输入图像中的物体一一对应。输入图像则通常包含均一背景中、对比较强的物体；全局分割处理独立于所处环境，无需使用与物体相关的模型，无需利用与期望得到的分割结果相关的知识。
-%后者的输出中，所得区域并不直接与输入图像中的物体相对应。输入图像被分成单独的区域，这些区域在选定的属性（如：亮度、色彩、反射性、纹理等）上具有同质性，需要利用较高层次的信息才能完成分割。若输入图像过于复杂，则可能产生同质性区域的相互重叠，这时，还需要先对局部目标进行增强。
-%根据分割时所依据的图像特征的不同，图像分割可被划分为基于全局知识（通常是输入图像的特征的直方图）的分割、基于边缘的分割（分割结果是目标所对应区域的闭合边界）、以及基于区域的分割（分割结果是目标所对应的区域）。
+%后者的输出中，所得区域并不直接与输入图像中的物体相对应。输入图像被分成单独的区域，这些区域在选定的属性(如：亮度、色彩、反射性、纹理等)上具有同质性，需要利用较高层次的信息才能完成分割。若输入图像过于复杂，则可能产生同质性区域的相互重叠，这时，还需要先对局部目标进行增强。
+%根据分割时所依据的图像特征的不同，图像分割可被划分为基于全局知识(通常是输入图像的特征的直方图)的分割、基于边缘的分割(分割结果是目标所对应区域的闭合边界)、以及基于区域的分割(分割结果是目标所对应的区域)。
 \end{definition}
 
 %\textbf{可视化}
@@ -115,7 +115,7 @@
 
 %\textbf{碰撞检测}
 \begin{definition}[碰撞检测]
-计算机图形学中，研究场景中某两个（或多个）物体是否相交的问题。
+计算机图形学中，研究场景中某两个(或多个)物体是否相交的问题。
 具体包括：待检测物体“是否”、“何时”、以及“何处”发生碰撞。
 在具体的实现中，碰撞检测技术利用物理学中的相关知识，并且强调运行效果的实时性。
 在实践过程中，对碰撞检测的设计产生影像的因素主要有：对象的表达方式、查询类型的多样化、对象所处环境的模拟参数、系统的性能和健壮性、系统实现与应用的简易性等\cite{Ericson2005CDBook}。
@@ -123,8 +123,8 @@
 
 %\textbf{形变模型}
 \begin{definition}[形变模型]
-计算机图形学中，为表达一类非刚体物体（如：绳索、布料、橡胶物品等），而利用外力与内力的相互作用等物理学相关知识来描述这类物体的物体建模方法。
-常用方法是通过一张由相互灵活连接（如：弹簧）的节点所组成的空间网络来模拟非刚性物体\cite{Hearn2004CGBook}。
+计算机图形学中，为表达一类非刚体物体(如：绳索、布料、橡胶物品等)，而利用外力与内力的相互作用等物理学相关知识来描述这类物体的物体建模方法。
+常用方法是通过一张由相互灵活连接(如：弹簧)的节点所组成的空间网络来模拟非刚性物体\cite{Hearn2004CGBook}。
 \end{definition}
 
 %\textbf{中心线提取}
@@ -138,9 +138,9 @@
 %\textbf{粒子系统}
 \begin{definition}[粒子系统]
 计算机图形学中，用于描述一个或多个使用非邻接片段的物体的概念。
-典型的粒子系统被定义于场景中的特定空间中，根据为其设置的参数（如：粒子的路径、色彩、性状等）随时间而发生随机变化。
+典型的粒子系统被定义于场景中的特定空间中，根据为其设置的参数(如：粒子的路径、色彩、性状等)随时间而发生随机变化。
 粒子系统主要用于模拟类似流体特性的现象，如：流动、波浪、喷溅、膨胀、压缩、爆炸等。
-具有这类特性的真实现象有：云朵、烟、雾、降雨、降雪、火焰、烟花、瀑布、喷泉、以及大面积水域（江河、湖泊、海洋等）的表面等\cite{Hearn2004CGBook}。
+具有这类特性的真实现象有：云朵、烟、雾、降雨、降雪、火焰、烟花、瀑布、喷泉、以及大面积水域(江河、湖泊、海洋等)的表面等\cite{Hearn2004CGBook}。
 \end{definition}
 
 \section{研究动机}
@@ -153,8 +153,8 @@
 \end{itemize}
 
 传统的外科教学方式可以概括为“师傅-学徒”模型 --- 这与人类其他领域的知识和技艺的传承方
-式并无二致，用西方医学界的习语来比喻，就是“见一个，做一个，教一个”（英文原文是：see
-one, do one, teach one）\cite{Dawson1998}。见习者通过最真实的实践来获得技能。这个过程
+式并无二致，用西方医学界的习语来比喻，就是“见一个，做一个，教一个”(英文原文是：see
+one, do one, teach one)\cite{Dawson1998}。见习者通过最真实的实践来获得技能。这个过程
 需要在动物，遗体，志愿者，以及病人身体上进行。动物的解剖结构与我们人类的不同，遗体不
 能呈现真实的生理反应，而在志愿者或者病人身体上进行实践学习，又会给他们的生命带来风险\cite{liu2003}。
 再者，所有这些实践活动都是在见习单位的既定安排等因素的约束下进行的，实践学习无法重复，
@@ -198,14 +198,14 @@ one, do one, teach one）\cite{Dawson1998}。见习者通过最真实的实践�
 用这个场景中所呈现出的视觉、听觉甚至触觉的反馈，在体外进行预定的“手术活动”，从而达
 到熟悉手术完整流程、理解手术操作细节的目的。在这个过程中，我们不需要向操作者提供活体
 动物或者死者遗体、不需要无菌的实验室环境、更不需要任何辅助设施和材料，并且还能在任何
-时间进行操作，所有看得见的设备就是一台计算机和一套触觉接口（Haptic Interface）。整个
+时间进行操作，所有看得见的设备就是一台计算机和一套触觉接口(Haptic Interface)。整个
 系统的核心与关键是运行在这台计算机上的软件系统，它为操作者提供充分的视觉反馈信息。实
 现“虚拟手术”的设备称为“虚拟手术系统”，该系统是一个多学科交叉结合的产物，它应用了
 系统工程、材料工程、机器人工程、图像处理、计算机图形学、计算机科学、生物医学工程、医
 学等学科。该系统首先从真实病例的CT影像数据中分割出手术途经的血管和病灶，然后基于此数
-据进行渲染获得这些血管的可视化模型（下文中，在不致产生歧义的地方将一律采用“血管模型”
-来代替的关于虚拟血管模型的所有称谓），接着将基本拟合真实力学特性的虚拟导丝/导管模型
-（下文中，在不致产生歧义的地方将一律采用“导丝”来代替此处的“导丝/导管”）引入该模
+据进行渲染获得这些血管的可视化模型(下文中，在不致产生歧义的地方将一律采用“血管模型”
+来代替的关于虚拟血管模型的所有称谓)，接着将基本拟合真实力学特性的虚拟导丝/导管模型
+(下文中，在不致产生歧义的地方将一律采用“导丝”来代替此处的“导丝/导管”)引入该模
 型，由操作者通过触觉接口依据微创介入导管术的规程进行操作；在操作过程中，操作者通过触
 觉接口操纵导丝模型在血管模型中进退和旋转，并能够获得类似于真实手术的触觉感受。与本研
 究方向紧密相关的一个方向是图像引导手术机器人，二者之间最显著的不同之处在于是否具有真
@@ -259,8 +259,8 @@ Fast Marching法是一种基于几何形变模型的医学影像分割方法。�
 向，也就是说，曲线或者曲面只能收缩或者只能扩张。
 
 最后一步是在分割所得的模型像素的基础上，利用不同的绘制方法，在场景中渲染出分割所得到的
-模型。绘制方法属于计算机图形学范畴，主要的绘制方法有两类：面绘制（或面渲染）和体绘制（
-或体渲染）。本课题中的候选方法是Marching Cubes方法和Ray Casting方法。
+模型。绘制方法属于计算机图形学范畴，主要的绘制方法有两类：面绘制(或面渲染)和体绘制(
+或体渲染)。本课题中的候选方法是Marching Cubes方法和Ray Casting方法。
 
 Marching Cubes方法的基本原理是：采用隐式的等值面提取方法从体数据中获取等值的信息。算法
 需要用户提供一个阈值，也就是所希望提取出来的物质的密度，然后根据体数据的信息，就可以把
@@ -284,7 +284,7 @@ Ray Casting方法的基本原理是：从投影平面的每一个像素点发射
 
 在军事和工业领域，基于虚拟现实的仿真技术在训练、以及评估在特定环境下使用者解决问题的反应等方面，已经显示了重大的实际价值\cite{Goodwin1978Simulator}\cite{Rolfe1986Simulators}\cite{Ressler1999Simulators}\cite{Wachtel1985Simulators}\cite{Liu2013Military}。
 经过数十年时间的发展\cite{Dawson1998}，仿真技术在医学、尤其是医学训练领域的应用也已经比较广泛，包括内窥镜\cite{Vining1995Endoscopy}\cite{Preminger1996Endoscopy}、神经医学\cite{Kockro2000Neurosurgery}\cite{Cotin2005EVE}\cite{Ma2007NeuroCath}、麻醉学\cite{Gaba1988Anesthesiology}、支气管镜\cite{Vining1996Bronchoscopy}、腹腔镜\cite{Hon1994Laparoscopy}\cite{Derossis1998Laparoscopy}、以及心血管和外周血管系统的介入手术\cite{Chui1998ICard}\cite{Cotin2000ICTS}\cite{Tan2012NUDT}等。
-2004年，美国食品药品监督管理局（FDA）决定，行颈部血管介入手术等高风险手术的医生，必须在术前进行技能训练，直到精通为止，而且对这种技能的初期训练实践不能在病人身上进行\cite{Dawson2006Medicine}。
+2004年，美国食品药品监督管理局(FDA)决定，行颈部血管介入手术等高风险手术的医生，必须在术前进行技能训练，直到精通为止，而且对这种技能的初期训练实践不能在病人身上进行\cite{Dawson2006Medicine}。
 
 受经济、文化、公共卫生管理、医学和工程技术等诸多因素的制约，我国在这方面的研究和应用与欧美发达国家相比，尚有不小差距，具体表现在研究水平和应用水平等两方面。
 本节将分别介绍国内外科研人员在虚拟医学训练、尤其是血管介入术虚拟训练以及相关研究方向上所作的主要工作和重要成果。
@@ -298,8 +298,8 @@ Ray Casting方法的基本原理是：从投影平面的每一个像素点发射
 同时，该系统还能够通过专门设计的触觉接口装置为使用者提供“真实”的导丝操作感受\cite{BroNielsen1997DK}。
 通过这些技术，Dawson-Kaufman介入放射学虚拟系统为使用者提供了实践血管成形术和其它疏通阻塞血管的技术的训练平台。
 
-同期出现的还有新加坡国立大学和美国约翰·霍普金斯大学医学院共同研究与实现的用于腹部主动脉介入仿真训练的daVinci系统（\textbf{\textit{Vi}}sual \textbf{\textit{n}}avigation of \textbf{\textit{c}}atheter \textbf{\textit{i}}nsertion\cite{Lawton2000daVinci}）\cite{Anderson1996daVinci}\cite{Anderson1996adaVinci}\cite{Anderson1997daVinci}\cite{Anderson1997adaVinci}。
-该系统利用了美国“可视人计划”（\textbf{\textit{V}}isible \textbf{\textit{H}}uman \textbf{\textit{P}}roject, VHP）\cite{vhpweb}的人体数据，通过与X光效果的解剖背景配准的仿真血管模型，向使用者提供实时的平面可视效果以及立体的导管导航\cite{Anderson1998daVinci}（见图\ref{fig1-1}）。
+同期出现的还有新加坡国立大学和美国约翰·霍普金斯大学医学院共同研究与实现的用于腹部主动脉介入仿真训练的daVinci系统(\textbf{\textit{Vi}}sual \textbf{\textit{n}}avigation of \textbf{\textit{c}}atheter \textbf{\textit{i}}nsertion\cite{Lawton2000daVinci})\cite{Anderson1996daVinci}\cite{Anderson1996adaVinci}\cite{Anderson1997daVinci}\cite{Anderson1997adaVinci}。
+该系统利用了美国“可视人计划”(\textbf{\textit{V}}isible \textbf{\textit{H}}uman \textbf{\textit{P}}roject, VHP)\cite{vhpweb}的人体数据，通过与X光效果的解剖背景配准的仿真血管模型，向使用者提供实时的平面可视效果以及立体的导管导航\cite{Anderson1998daVinci}(见图\ref{fig1-1})。
 血管壁由包围血管壁的内部区域的势能场来表示，这个势能场决定了导管和血管壁之间相互作用的能量，
 导管的建模采用有限元方法，把导管抽象为六自由度的梁元\cite{Chui1996daVinci}\cite{Wang1996daVinci}。
 虚拟导管的材料特性通过杨氏模量和切变模量来体现，但忽略了导管与血管壁之间的摩擦力\cite{Anderson1998daVinci}。
@@ -313,30 +313,30 @@ Lawton等人\cite{Lawton2000daVinci}还开发了一种物理模型和数值算�
 %\label{fig1-1}
 %\end{figure}
 
-几乎与此同时，开发daVinci的科研团队在前期工作的基础上，先后实现了用于心血管介入仿真训练的ICard系统（\textbf{\textit{I}}nterventional \textbf{\textit{Card}}iology Simulator）\cite{Wang1997ICard}\cite{Chui1998ICard}\cite{Wang1998ICard}\cite{Cai2004ICard}\cite{Cai2006ICard}，
-以及用于脑血管介入仿真训练的NeuroCath系统（\textbf{\textit{Neuro}}radiology \textbf{\textit{Cath}}erization Simulator）\cite{Ma2000NeuroCath}\cite{Nowinski2000NeuroCath}\cite{Ma2001NeuroCath}\cite{Li2001NeuroCath}\cite{Nowinski2001NeuroCath}\cite{Anderson2001NeuroCath}\cite{Chui2002NeuroCath}\cite{Anderson2002NeuroCath}\cite{Ma2004NeuroCath}\cite{Volkau2005Vessel}\cite{Ma2005NeuroCath}\cite{Ma2006NeuroCath}\cite{Ma2006aNeuroCath}\cite{Ma2007NeuroCath}。
+几乎与此同时，开发daVinci的科研团队在前期工作的基础上，先后实现了用于心血管介入仿真训练的ICard系统(\textbf{\textit{I}}nterventional \textbf{\textit{Card}}iology Simulator)\cite{Wang1997ICard}\cite{Chui1998ICard}\cite{Wang1998ICard}\cite{Cai2004ICard}\cite{Cai2006ICard}，
+以及用于脑血管介入仿真训练的NeuroCath系统(\textbf{\textit{Neuro}}radiology \textbf{\textit{Cath}}erization Simulator)\cite{Ma2000NeuroCath}\cite{Nowinski2000NeuroCath}\cite{Ma2001NeuroCath}\cite{Li2001NeuroCath}\cite{Nowinski2001NeuroCath}\cite{Anderson2001NeuroCath}\cite{Chui2002NeuroCath}\cite{Anderson2002NeuroCath}\cite{Ma2004NeuroCath}\cite{Volkau2005Vessel}\cite{Ma2005NeuroCath}\cite{Ma2006NeuroCath}\cite{Ma2006aNeuroCath}\cite{Ma2007NeuroCath}。
 
 ICard系统的应用目的是为医学院学生和医生提供一个能够方便地温习心血管介入疗法的平台，同时还希望兼顾评价使用者的技能水平。
 该系统的软件部分提供了血管的立体模型和X光效果的显示\cite{Wang1998ICard}\cite{Wang1998aICard}。
 血管的影像数据主要来源于VHP。
 对于手术涉及的主干血管，限于当时计算机的处理能力，研究团队使用Adobe Systems公司的Photoshop从每张横切影像中将感兴趣的区域中的血管影像的围线标出，然后再计算血管的中心线，最后结合中心线上各点的坐标和相应的半径，得到血管的模型\cite{Wang1998ICard}。
 对于病灶涉及的冠状动脉，由于尸体的血管内并没有血液流动以及因此产生的压力，因此这部分较细的血管就会因为其周围肌肉组织的挤压而导致严重变形，这也就造成VHP数据中，冠状动脉的数据几乎全部被破坏\cite{Wang1998ICard}。
-为了解决这个问题，该团队的研究人员利用三次元量床（\textbf{\textit{C}}oordinate \textbf{\textit{M}}easuring \textbf{\textit{M}}achine，CMM）\cite{CMMweb}来扫描冠状动脉的钢质模型\cite{KyotoModelweb}，从而获得包括完整冠状动脉分支的仿真血管网络，再经过后期的细部处理，得到满足系统要求的冠状动脉血管模型\cite{Wang1998ICard}。
+为了解决这个问题，该团队的研究人员利用三次元量床(\textbf{\textit{C}}oordinate \textbf{\textit{M}}easuring \textbf{\textit{M}}achine，CMM)\cite{CMMweb}来扫描冠状动脉的钢质模型\cite{KyotoModelweb}，从而获得包括完整冠状动脉分支的仿真血管网络，再经过后期的细部处理，得到满足系统要求的冠状动脉血管模型\cite{Wang1998ICard}。
 此外，ICard系统还提供了人体的脑血管模型\cite{Serra1997Vessel}\cite{Poston1995Vessel}，而脑部影像数据是一组核磁共振血管影像\cite{Wang1998ICard}。
 然后，他们通过配准将上述的心脑血管模型与VHP中的主干血管模型连接在VHP数据构建的解剖环境中来获得完整的血管模型\cite{Wang1998ICard}。
 至于导管的建模，该系统同样采用了有限元方法\cite{Wang1998ICard}。
 ICard提供了两种不同的交互方式：一种是计算机界面，另一种是物理装置界面\cite{Wang1998ICard}。
-前者通过点击图形界面上的按钮；后者则通过专门设计的物理装置（导管移动传感装置，\textbf{\textit{C}}atheter \textbf{\textit{M}}ovement \textbf{\textit{S}}ensor device, CMS）\cite{Lim1998ICard}\cite{Lim1997ICard}。
+前者通过点击图形界面上的按钮；后者则通过专门设计的物理装置(导管移动传感装置，\textbf{\textit{C}}atheter \textbf{\textit{M}}ovement \textbf{\textit{S}}ensor device, CMS)\cite{Lim1998ICard}\cite{Lim1997ICard}。
 ICard的软件系统所支持的功能包括X光影像显示、立体影像显示与横切面显示、生物医学信号模拟、球囊与支架的植入、以及诸如造影剂的注射等\cite{Wang1998ICard}。
 
-NeuroCath用于仿真球囊和支架的安置、动脉瘤弹簧圈栓塞术（Aneurysm Coiling）等脑血管介入手术。
+NeuroCath用于仿真球囊和支架的安置、动脉瘤弹簧圈栓塞术(Aneurysm Coiling)等脑血管介入手术。
 它继承了前两个系统的许多成熟技术和特性，包括：基于有限元方法的导丝建模以及导丝与血管壁相互作用建模\cite{Wang1996daVinci}\cite{Chui1996daVinci}、基于多模态影像的血管中心线提取\cite{Wang1998ICard}、以及X光效果的显示\cite{Wang1998aICard}\cite{Wang1998ICard}等。
 在此基础上，该系统为使用者提供了尽可能丰富和接近真实的体验。如：造影剂注入后在血管内扩散现象、虚拟病人在虚拟手术过程中的生理表征等。
 为获得NeuroCath系统所需的脑血管模型，
 Cai等人\cite{Ye2002Vessel}\cite{Cai2003aVessel}\cite{Cai2003Vessel}采用了一种利用扫描和混合操作以生成血管段和分岔的结构性方法，该方法提高了血管分岔处的光滑度；
-Volkau等人\cite{Volkau2005Vessel}\cite{Volkau2008Vessel}在此基础上提出了基于血管中心线的重建方法，该方法首先提高了血管中心线的光滑程度；其次抑制了在分割和骨架化过程中引入的噪声，从而提高了（重建血管时所依赖的）血管半径的精确度。
+Volkau等人\cite{Volkau2005Vessel}\cite{Volkau2008Vessel}在此基础上提出了基于血管中心线的重建方法，该方法首先提高了血管中心线的光滑程度；其次抑制了在分割和骨架化过程中引入的噪声，从而提高了(重建血管时所依赖的)血管半径的精确度。
 NeuroCath的操作风格与ICard类似，也提供了可视界面交互和物理交互装置交互两种方式\cite{Nowinski2001NeuroCath}。
-其中，研究人员为NeuroCath专门设计了物理交互装置 --- TiC（\textbf{\textit{T}}actile and \textbf{\textit{i}}mage \textbf{\textit{C}}ontrol）\cite{Chui1999TiC}\cite{Ma1999TiC}，它由触觉子系统和影像操作子系统等两个主要部分组成。
+其中，研究人员为NeuroCath专门设计了物理交互装置 --- TiC(\textbf{\textit{T}}actile and \textbf{\textit{i}}mage \textbf{\textit{C}}ontrol)\cite{Chui1999TiC}\cite{Ma1999TiC}，它由触觉子系统和影像操作子系统等两个主要部分组成。
 前者可以使操作者能够操作导管和导丝进行与真实血管介入手术中类似的运动；后者则通过一台虚拟工作站来操作可视界面中提供的X光影像的视角。
 此外，NeuroCath还能为使用者提供血管内的视角，该功能用于血管内窥镜导航的仿真\cite{Nowinski2001NeuroCath}。
 NeuroCath最初在约翰-霍普金斯大学医学院进行了验证，随后还获得了包括德国萨尔大学诊断介入神经放射学诊所、中国北京宣武医院、以及德国国立信息技术研究中心等医院和研究机构的验证许可，并收到了比较满意的反馈\cite{Ma2007NeuroCath}。
@@ -345,8 +345,8 @@ NeuroCath最初在约翰-霍普金斯大学医学院进行了验证，随后还�
 
 近几年，该团队仍有部分研究人员致力于心血管介入手术仿真的研究，重点是心脏建模\cite{Chiang2011}\cite{Chiang2012}等。
 
-位于美国麻省的三菱电气实验室（Mitsubishi Electric Research Laboratories，MERL）\cite{merlweb}和美国创新微创疗法中心（Center for Innovative Minimally Invasive Therapy，CIMIT）\cite{cimitweb}联合发起了ICTS项目\cite{Dawson2000ICTS}\cite{Cotin2000ICTS}\cite{Shaffer1999ICTS}。
-ICTS的全称是“Interventional Cardiology Training System”（介入心脏病学训练系统），该系统旨在为学习者提供训练平台，并为引入新的医学器材和手术方法提供展示平台\cite{Cotin2000ICTS}。
+位于美国麻省的三菱电气实验室(Mitsubishi Electric Research Laboratories，MERL)\cite{merlweb}和美国创新微创疗法中心(Center for Innovative Minimally Invasive Therapy，CIMIT)\cite{cimitweb}联合发起了ICTS项目\cite{Dawson2000ICTS}\cite{Cotin2000ICTS}\cite{Shaffer1999ICTS}。
+ICTS的全称是“Interventional Cardiology Training System”(介入心脏病学训练系统)，该系统旨在为学习者提供训练平台，并为引入新的医学器材和手术方法提供展示平台\cite{Cotin2000ICTS}。
 ICTS实现了X光效果的解剖环境、建立了导管的物理模型和血液流动模型、并制作了触觉接口装置\cite{Cotin2000ICTS}。
 此外，该系统还实现了一种手术学习机制“Virtual Rounds”\cite{Shaffer1999ICTS}，该学习机制复现了心血管介入手术的基本步骤，为使用者的训练评估提供了基础。
 文献\cite{Dawson2000ICTS}中提到，ICTS系统当时正准备在欧洲投入其首次训练试验。
@@ -362,16 +362,16 @@ CIMIT的Sim小组\cite{medicalsimweb}和法国INRIA的Shacra团队\cite{shacrawe
 文献\cite{Dequidt2008EVE}介绍了该团队进行动脉栓塞术中弹簧圈的仿真以及验证的情况。
 操作装置方面，研究人员设计了专用的触觉接口装置ABEL和专用的径向跟踪装置Cain\cite{medicalsimweb}。
 
-此外，Shacra团队在EVE等项目的工作基础上，开发并维护着一个专门用于医学仿真的工具库 --- SOFA（\textbf{\textit{S}}imulation \textbf{\textit{O}}pen \textbf{\textit{F}}ramework \textbf{\textit{A}}rchitecture）\cite{Allard2007SOFA}。
+此外，Shacra团队在EVE等项目的工作基础上，开发并维护着一个专门用于医学仿真的工具库 --- SOFA(\textbf{\textit{S}}imulation \textbf{\textit{O}}pen \textbf{\textit{F}}ramework \textbf{\textit{A}}rchitecture)\cite{Allard2007SOFA}。
 
-意大利CRS4小组发起了ViVa项目（\textbf{\textit{Vi}}rtual \textbf{\textit{Va}}scular project）\cite{abdoulaev1998}，该项目的研究目标是为现代血流动力学研究者和心脏内科医生提供一系列的工具，帮助他们分析和解释在研究和临床过程中遇到的不断增多的相关信息。
+意大利CRS4小组发起了ViVa项目(\textbf{\textit{Vi}}rtual \textbf{\textit{Va}}scular project)\cite{abdoulaev1998}，该项目的研究目标是为现代血流动力学研究者和心脏内科医生提供一系列的工具，帮助他们分析和解释在研究和临床过程中遇到的不断增多的相关信息。
 这些工具包括：图像处理与分割、实时立体体数据可视化、立体几何重建、立体网格生成、以及血流仿真和可视化等。
 在此基础上，Gobbetti等人\cite{Gobbetti1998}研究并实现了用于仿真血管镜的系统。
 该系统以从标准医学影像模态所获取的数据作为输入，将其当作可供交互的虚拟环境；系统支持立体直接体绘制的实时导航和动态内窥镜的控制，可交互的组织分类，以及为实现形态学特性测量而摘取可交互点等。
 Zorcolo与Gobbetti等人\cite{Zorcolo1999}\cite{Gobbetti2000}\cite{Zorcolo2000}开发了一种实验性的导管插入系统。
 该系统支持头部跟踪的立体视感，该视感通过从不同视角观察体重建而产生，体重建则与直接的立体触觉交互相匹配，这属于增强现实系统的范畴。
 
-英国的CRaIVE（\textbf{\textit{C}}ollaborators in \textbf{\textit{R}}adiological \textbf{\textit{I}}nterventional \textbf{\textit{V}}irtual \textbf{\textit{E}}nvironments）\cite{CRaIVEweb}进行了与介入手术的仿真训练相关的研究。
+英国的CRaIVE(\textbf{\textit{C}}ollaborators in \textbf{\textit{R}}adiological \textbf{\textit{I}}nterventional \textbf{\textit{V}}irtual \textbf{\textit{E}}nvironments)\cite{CRaIVEweb}进行了与介入手术的仿真训练相关的研究。
 他们的研究主要集中于血管介入手术中血管系统的分割与重建\cite{Luboz2008aCRaIVE}，
 血管和导管及其相互作用的建模和验证\cite{Luboz2010CRaIVE}\cite{Luboz2009aCRaIVE}\cite{Luboz2008CRaIVE}，
 Seldinger穿刺术的仿真\cite{luboz2009CRaIVE}\cite{John2008CRaIVE}，
@@ -381,19 +381,19 @@ Seldinger穿刺术的仿真\cite{luboz2009CRaIVE}\cite{John2008CRaIVE}，
 法国巴黎第十二大学计算机工程与自动化实验室进行了基于虚拟现实技术的腹主动脉介入手术仿真系统的研究\cite{Ghembaza2004Paris12U}。
 系统中，腹主动脉和导管的物理模型采用基于位移的有限元方法来建立；为了实现连续的碰撞响应，研究人员采用了基于Cubic Spline的参数估计方法。
 
-由荷兰列文胡克癌症研究所和乌德勒支大学图像科学研究所发起的MIVIS项目（\textbf{\textit{M}}inimally-\textbf{\textit{I}}nvasive \textbf{\textit{V}}ascular \textbf{\textit{I}}ntervention \textbf{\textit{S}}imulation）\cite{alderliesten2002NKI}\cite{Konings2003NKI}\cite{alderliesten2004NKI}\cite{Bosman2005NKI}\cite{alderliesten2007NKI}\cite{alderliesten2007aNKI}
+由荷兰列文胡克癌症研究所和乌德勒支大学图像科学研究所发起的MIVIS项目(\textbf{\textit{M}}inimally-\textbf{\textit{I}}nvasive \textbf{\textit{V}}ascular \textbf{\textit{I}}ntervention \textbf{\textit{S}}imulation)\cite{alderliesten2002NKI}\cite{Konings2003NKI}\cite{alderliesten2004NKI}\cite{Bosman2005NKI}\cite{alderliesten2007NKI}\cite{alderliesten2007aNKI}
 主要进行了腹主动脉导管介入的仿真，对导管在血管内的运动仿真是该项目的研究重点。
 血管的几何建模采用了Fuzzy Connectedness算法\cite{Udupa1996NKI}\cite{alderliesten2002NKI}\cite{alderliesten2004NKI}；
 而其物理建模则利用胡克定律来模拟血管壁的组织特性\cite{alderliesten2002NKI}\cite{alderliesten2004NKI}；
-导管模型的物理特性则建立在准静态力学（quasi-static mechanics）的基础上\cite{alderliesten2002NKI}\cite{alderliesten2004NKI}；
+导管模型的物理特性则建立在准静态力学(quasi-static mechanics)的基础上\cite{alderliesten2002NKI}\cite{alderliesten2004NKI}；
 并在此基础上进行了实物对比验证\cite{alderliesten2002NKI}\cite{alderliesten2004NKI}。
 Konings等人\cite{Konings2003NKI}提出了一种用于导管在血管内运动仿真的半解析算法，并进行了导管在平面弯道内运动仿真性能的验证分析。
 Bosman等人\cite{Bosman2005NKI}研究了利用一种进化算法以替代面向特定问题的一阶解析估计算法，从而解决仿真过程中的优化问题的优劣，并证明采用前者更有利于系统性能的优化。
 Alderliesten等人\cite{alderliesten2007NKI}又在此基础上进一步拓展了算法性能对比的研究，并证明采用共轭梯度算法或者进化算法能够在仅产生轻度误差的前提下，显著地减少计算时间。
 文献\cite{alderliesten2007aNKI}中报告了该项目中的导丝模型已经能够仿真导丝与血管壁之间的摩擦。
 
-德国曼海姆大学、海德堡大学与德国维尔茨堡大学医院联合研究的CathI（\textbf{\textit{Cath}}eter \textbf{\textit{I}}nstruction System）用于血管介入尤其是经皮腔内冠状动脉成形术（\textbf{\textit{P}}ercutaneous \textbf{\textit{T}}ransluminal \textbf{\textit{C}}oronary \textbf{\textit{A}}ngioplasty，PTCA）的仿真\cite{rebholz2004cathi}\cite{Hoefer2002CathI}。
-该系统提供了一系列的功能设施用于实现尽可能真实的血管介入手术仿真训练\cite{rebholz2004cathi}，包括：个人档案、不同型号的血管介入器械（导管、导丝、球囊和支架等）、控制C型臂的脚踏板、控制射线开关和造影剂剂量的设定、限制照射时间和介入手术总时间的设定以及人体生理指标的设定等。
+德国曼海姆大学、海德堡大学与德国维尔茨堡大学医院联合研究的CathI(\textbf{\textit{Cath}}eter \textbf{\textit{I}}nstruction System)用于血管介入尤其是经皮腔内冠状动脉成形术(\textbf{\textit{P}}ercutaneous \textbf{\textit{T}}ransluminal \textbf{\textit{C}}oronary \textbf{\textit{A}}ngioplasty，PTCA)的仿真\cite{rebholz2004cathi}\cite{Hoefer2002CathI}。
+该系统提供了一系列的功能设施用于实现尽可能真实的血管介入手术仿真训练\cite{rebholz2004cathi}，包括：个人档案、不同型号的血管介入器械(导管、导丝、球囊和支架等)、控制C型臂的脚踏板、控制射线开关和造影剂剂量的设定、限制照射时间和介入手术总时间的设定以及人体生理指标的设定等。
 该系统的数据来自真实病例的术中X光造影，影像中能够观察到真实病例所具有的典型特征；而所选取的影像包含了一个心动周期的关键帧，因而能够提供准确的心脏搏动，这样可以为受训者提供最真实的视觉效果。
 血管被抽象为刚体且横截面为圆\cite{Hoefer2002CathI}。
 导管则被抽象为一列刚性的圆柱体，当导管与血管壁发生交互时，由这个几何模型确定其与血管壁的接触点，在此基础上计算应该发生的弯曲等形变，但未考虑导管与血管壁之间的摩擦\cite{rebholz2004cathi}。
@@ -407,7 +407,7 @@ Alderliesten等人\cite{alderliesten2007NKI}又在此基础上进一步拓展了
 文献\cite{Rahman2012Darmstadt}介绍了导管模型的建模方法，各种型号的导管的物理特性通过FEM方法进行建模，其具体工作使用了SOFA\cite{Allard2007SOFA}。
 
 意大利莱切大学创新工程部的研究人员进行了心血管介入支架置入术仿真的研究\cite{aloisio2006HERMES}\cite{aloisio2006aHERMES}\cite{aloisio2005HERMES}\cite{aloisio2004HERMES}。
-其中的部分成果借鉴了由意大利CETMA集团发起的HERMES项目（\textbf{\textit{HE}}matology \textbf{\textit{R}}esearch virtual \textbf{\textit{ME}}dical \textbf{\textit{S}}ystem，用于血液学研究的虚拟医学系统）\cite{aloisio2005HERMES}。
+其中的部分成果借鉴了由意大利CETMA集团发起的HERMES项目(\textbf{\textit{HE}}matology \textbf{\textit{R}}esearch virtual \textbf{\textit{ME}}dical \textbf{\textit{S}}ystem，用于血液学研究的虚拟医学系统)\cite{aloisio2005HERMES}。
 为了获得血管的准确形变，该系统采用有限元方法建立血管系统的模型\cite{aloisio2004HERMES}。
 系统的操作装置能够再现支架置入过程中，手术工具发生的形变\cite{aloisio2005HERMES}。
 不同于其它仿真系统的是，本系统还能够支持病例模型数据的网络检索和获取功能\cite{aloisio2006aHERMES}\cite{aloisio2006HERMES}。
@@ -424,15 +424,15 @@ Alderliesten等人\cite{alderliesten2007NKI}又在此基础上进一步拓展了
 日本名古屋大学的研究人员进行了用于分布式血管内遥操作手术的虚拟环境研究\cite{Arai1994Nagoya}\cite{Arai1995Nagoya}\cite{Arai1996Nagoya}。
 该虚拟环境主要为远离手术现场的医生提供直观的视觉和触觉。为此，该虚拟环境提供了三维显示功能和专门设计的操作机构。
 显示功能中的血管和导管的建模都比较简化：导管模型以常数曲率弯曲、血管模型则被抽象为不同半径的圆柱体\cite{Arai1994Nagoya}\cite{Arai1995Nagoya}。
-该分布式遥操作手术系统用于脑血管介入手术，研究人员在东京市（早稻田大学）与名古屋市（名古屋大学）之间（距离350km）进行了实验。
+该分布式遥操作手术系统用于脑血管介入手术，研究人员在东京市(早稻田大学)与名古屋市(名古屋大学)之间(距离350km)进行了实验。
 整个过程中的数据通过异步传输模式的光纤传输\cite{Arai1996Nagoya}。
 
 日本名古屋大学微纳米系统工程系以及藤田保健卫生大学和安城厚生病院的研究人员进行了脑血管介入手术仿真的研究\cite{Ikeda2004Nagoya}\cite{Ikeda2005Nagoya}\cite{Ikeda2005aNagoya}\cite{Ikeda2006Nagoya}\cite{Ikeda2007Nagoya}。
-与其他研究项目的思路不同，该项目的研究人员仍然坚持实物仿真训练，利用硅胶等材料、通过精密的加工工艺以人体头部CTA和MRA影像为依据，制作高精确度（解析度达到亚毫米级别）的人体脑血管的物理模型，为脑血管介入手术的训练提供操作场景\cite{Ikeda2005Nagoya}。
+与其他研究项目的思路不同，该项目的研究人员仍然坚持实物仿真训练，利用硅胶等材料、通过精密的加工工艺以人体头部CTA和MRA影像为依据，制作高精确度(解析度达到亚毫米级别)的人体脑血管的物理模型，为脑血管介入手术的训练提供操作场景\cite{Ikeda2005Nagoya}。
 这种物理模型能够再现血管的物理特性，以及导管与其内壁发生的摩擦。
 
 日本理化学研究所等科研机构开展了用于血管介入手术仿真的研究\cite{takashima2009RIKEN}\cite{takashima2007RIKEN}。
-导丝被抽象为若干段粘弹性弹簧（viscoelastic spring），其近端由于受限于导丝模型，故被抽象为刚性管道，而血管则被抽象为横截面为圆的弹性圆柱体\cite{takashima2009RIKEN}。
+导丝被抽象为若干段粘弹性弹簧(viscoelastic spring)，其近端由于受限于导丝模型，故被抽象为刚性管道，而血管则被抽象为横截面为圆的弹性圆柱体\cite{takashima2009RIKEN}。
 血管的几何模型通过“分割血管-提取中心线-根据半径重建血管”的方式获得\cite{takashima2009RIKEN}。
 为了获得准确的、对导丝与血管壁之间相互作用的仿真效果，文献\cite{takashima2007RIKEN}采取了实物试验与计算仿真相互比较的方法对这一场景下的摩擦和接触进行了实验和数值分析，从而得出仿真系统中准确的血管模型参数的重要性。
 
@@ -473,8 +473,8 @@ Alderliesten等人\cite{alderliesten2007NKI}又在此基础上进一步拓展了
 滞后，目前，国内虚拟手术训练的研究仍处于初级阶段。
 
 香港中文大学的计算机科学与工程系开展了血管介入手术仿真的研究\cite{guo2007CUHK}\cite{Chui2010CUHK}\cite{Li2011CUHK}\cite{Li2012CUHK}，并成为2009年该校举行50周年校庆时的重大成果之一\cite{cuhkweb}。
-该系统的血管和导管的集合模型的建立，利用了中心线提取、图重建、曲线拟合、以及曲线帧技术；为了给形变模型赋予非线性的生物力学特性，采用了基于物理处理单元（Physics Processing Unit，PPU）的增量式Voigt模型\cite{guo2007CUHK}。
-该系统通过一种非牛顿流的光滑粒子流体动力学（Smoothed Particle Hydrodynamics，SPH）形式来模拟血液在血管内的流变；
+该系统的血管和导管的集合模型的建立，利用了中心线提取、图重建、曲线拟合、以及曲线帧技术；为了给形变模型赋予非线性的生物力学特性，采用了基于物理处理单元(Physics Processing Unit，PPU)的增量式Voigt模型\cite{guo2007CUHK}。
+该系统通过一种非牛顿流的光滑粒子流体动力学(Smoothed Particle Hydrodynamics，SPH)形式来模拟血液在血管内的流变；
 通过流体结构相互作用的一种纯拉格朗日粒子形式来模拟血液与血管的相互作用，其中，血管壁结构被抽象为虚拟粒子；
 并在此基础上，模拟了血栓形成与消溶的过程\cite{Chui2010CUHK}。
 导管与血管之间相互作用的模拟则基于最小总势能的原理，其中的势能是导管弯曲时的弹性势能、血管壁变形时的势能，以及外力所做功的总和；
@@ -542,6 +542,6 @@ Alderliesten等人\cite{alderliesten2007NKI}又在此基础上进一步拓展了
 统和心脏等解剖结构的场景生成和仿真。关于该仿真系统中的手术工具的物理建模与仿真，请参
 考组内同事米韶华的博士学位论文《XXX》以及相关的已发表科技文章。
 
-本文所述工作获得了国家自然科学基金（61225017）和北京市优秀博士学位论文指导教师科技项
+本文所述工作获得了国家自然科学基金(61225017)和北京市优秀博士学位论文指导教师科技项
 目(YB20108000103)资助。在此，笔者谨向国家自然科学基金委员会和北
 京市教育委员会表示由衷的感谢！ 
