@@ -2,7 +2,7 @@
 %=========================================================================%
 %   LaTeX File for phd thesis of Institute of Automation, CAS
 %-------------------------------------------------------------------------%
-%   Revised by Fan Yang (stoneyang0915@gmail.com)                 
+%   Revised by Fan Yang (stoneyang0915@gmail.com)
 %-------------------------------------------------------------------------%
 %   张兆翔将原来的dvipdf改为dvipdfm宏包，可使用latex + dvipdf自动生成索引
 %-------------------------------------------------------------------------%
@@ -139,6 +139,14 @@
 % & = & z + t
 %\end{subeqnarray}
 %\fi
+
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+%改成后面的小标题
+%\renewcommand{\algorithmicrequire}{\textbf{Initialization:}}   
+\renewcommand{\algorithmicensure}{\textbf{Iteration:}}
+%\renewcommand{\algorithmiclastcon}{\textbf{Output:}}
 
 %=============================标题与列表宏包=============================%
 \usepackage[sf]{titlesec}   % 控制标题的宏包,配合命令在后面,
