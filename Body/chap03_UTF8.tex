@@ -1,5 +1,5 @@
 %# -*- coding:utf-8 -*-
-\chapter{基于CTA的血管系统模型的建立}
+\chapter{基于CTA的主动脉的分割与可视化}
 \label{chap3} \fontsize{12pt}{12pt}\selectfont
 
 \section{引言}
@@ -132,7 +132,7 @@ T = \left\{x\notin\bigcup_{i=1}^{n}A_i|N(x)\cap\bigcup_{i=1}^{n}A_i\neq\varnothi
 \STATE Put neighbors of seed points (the initial T \ref{eq3-1}) in the SSL.
 \WHILE {$SSL\neq \varnothing$}
     \STATE Remove first point $y$ from SSL.
-    \STATE Test the neighbors of this point: 
+    \STATE Test the neighbors of this point:
     \IF {all neighbors of $y$ which are already labeled (other than with the boundary label) have the same label}
         \STATE Set $y$ to this label.
         \STATE Update running mean of corresponding region.
