@@ -159,20 +159,20 @@
                             % [scriptsize,footnotesize,centerlast]
 %\usepackage{setspace}      % 图形和表格的标题如果是多行，行距比较大,可以加宏包
 \usepackage{pifont}         % 有很漂亮的带圈的各种数字符号使用
-\usepackage{atbeginend}    % 可选宏包, 能解决许多问题,
+\usepackage{Setup/atbeginend}    % 可选宏包, 能解决许多问题,
                             % 比如itemize, enumerate环境\item之间的控制
 %用法
 \AfterBegin{itemize}{\addtolength{\itemsep}{-0.5\baselineskip}}
 \AfterBegin{enumerate}{\addtolength{\itemsep}{-0.5\baselineskip}}
 
 %=================== 支持LaTexCAD生成的源程序的宏包 =====================%
-\usepackage{TEXcad/lgrind}     % for formated source code
-\usepackage{TEXcad/latexcad}   % latexcad.sty for drawings etc
-\usepackage{TEXcad/epic}       %picture macros
-\usepackage{TEXcad/eepic}      %extended picture macros
-\usepackage{TEXcad/fancybox}   %box macros
-\usepackage{TEXcad/epsf}       %postscript macros
-\usepackage{TEXcad/rotate}     % postscript text rotation macros
+\usepackage{Setup/TEXcad/lgrind}     % for formated source code
+\usepackage{Setup/TEXcad/latexcad}   % latexcad.sty for drawings etc
+\usepackage{Setup/TEXcad/epic}       %picture macros
+\usepackage{Setup/TEXcad/eepic}      %extended picture macros
+\usepackage{Setup/TEXcad/fancybox}   %box macros
+\usepackage{Setup/TEXcad/epsf}       %postscript macros
+\usepackage{Setup/TEXcad/rotate}     % postscript text rotation macros
 
 
 %=========================== 特殊文本元素宏包 ==============================%
