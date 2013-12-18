@@ -399,16 +399,16 @@ The colors marked on the Voronoi diagram and the centerlines denote the diameter
 The same processing was straightly applied to the model surface of the whole abdominal aorta (see Fig. \ref{fig:VoronoiGlobal} and Fig. \ref{fig:OverlayGlobal}).
 One can see from the details of the results that the starting and ending points are not exactly located at the ``entrances" or ``exits".
 The reason of this is the Voronoi diagram on which the points consisting the centerlines exist never intersect with the model surface, i.e., the ending points of the centerlines are approaching the terminals of the surface model as near as possible, but never stick to them.
-%\begin{figure}[t]
-%\centering
-%\subfloat[]{\includegraphics[width=0.7in]{../Figures/surface.eps}%
-%\label{fig:SurfaceModel}}
-%\hfil
-%\subfloat[]{\includegraphics[width=0.9in]{../Figures/centerlines.eps}%
-%\label{fig:CenterlinesModel}}
-%\caption{Visualization models of the aorta: (a) image-based surface model (quantity of consisting polygons: $757,538$); (b) centerlines of the surface model.}%
-%\label{fig:VisualizationModel}
-%\end{figure}
+\begin{figure}[t]
+\centering
+\subfloat{\includegraphics[width=0.7in]{Figures/surface.png}%
+\label{fig:SurfaceModel}}
+\hfil
+\subfloat{\includegraphics[width=0.9in]{Figures/centerlines.png}%
+\label{fig:CenterlinesModel}}
+\caption{Visualization models of the aorta: (a) image-based surface model (quantity of consisting polygons: $757,538$); (b) centerlines of the surface model.}%
+\label{fig:VisualizationModel}
+\end{figure}
 
 \subsection{Discussions}
 
@@ -419,8 +419,8 @@ Due to the centerlines extraction computation is sensitive and expensive, we sub
 After this process, the quantities of the consisting polygonal surfaces were increased because of the refinement of the polygons.
 With this step, the potential perturbation was further reduced, leading to much less errors which may occur during the computation of the centerlines extraction.
 It is noteworthy that the extraction of centerlines for the model surface is an expensive computation both in time and space.
-%The calculation of the whole aorta (see Fig. \ref{fig:VisualizationModel}) cost nearly eight hours on our desktop machine with dedicated modification on the code to fit the bulky data into the relatively limited memory. %
-The calculation of the whole aorta cost nearly eight hours on our desktop machine with dedicated modification on the code to fit the bulky data into the relatively limited memory. %
+The calculation of the whole aorta (see Fig. \ref{fig:VisualizationModel}) cost nearly eight hours on our desktop machine with dedicated modification on the code to fit the bulky data into the relatively limited memory. %
+%The calculation of the whole aorta cost nearly eight hours on our desktop machine with dedicated modification on the code to fit the bulky data into the relatively limited memory. %
 
 \section{Conclusions and Future Work}
 %The conclusion goes here.
