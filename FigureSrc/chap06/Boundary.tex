@@ -1,0 +1,23 @@
+\begin{tikzpicture}[scale=.7,every node/.style={draw,shape=circle,fill=black,minimum size=1pt}]
+% vertices
+\path (0.5,1.5) node (p0) {}
+(0,0) node (p1) {}
+(1.2,0.2) node (p2) {}
+(2,1) node (p3) {}
+(1.8,2) node (p4) {}
+(0.2,2.8) node (p5) {}
+(-0.8,1.6) node (p6) {};
+% edges
+\draw (p0) -- (p1)
+(p0) -- (p2)
+(p0) -- (p3)
+(p0) -- (p4)
+(p0) -- (p5)
+(p0) -- (p6)
+(p1) -- (p2)
+(p2) -- (p3)
+(p3) -- (p4)
+(p4) -- (p5)
+(p5) -- (p6);
+\draw [line width=.1cm] (p1) -- (p0) -- (p6);
+\end{tikzpicture}

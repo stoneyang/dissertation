@@ -162,143 +162,27 @@ For simple vertices, two special cases are further specified as boundary vertice
 \begin{figure}[t]
 \centering
 \subfloat{
-\begin{tikzpicture}[scale=.7,every node/.style={draw,shape=circle,fill=black,minimum size=1pt}]
-% vertices
-\path (0.5,1.5) node (p0) {}
-(0,0) node (p1) {}
-(1.2,0.2) node (p2) {}
-(2,1) node (p3) {}
-(1.8,2) node (p4) {}
-(0.2,2.8) node (p5) {}
-(-0.8,1.6) node (p6) {};
-% edges
-\draw (p0) -- (p1)
-(p0) -- (p2)
-(p0) -- (p3)
-(p0) -- (p4)
-(p0) -- (p5)
-(p0) -- (p6)
-(p1) -- (p2)
-(p2) -- (p3)
-(p3) -- (p4)
-(p4) -- (p5)
-(p5) -- (p6)
-(p6) -- (p1);
-\end{tikzpicture}
+\input{FigureSrc/chap06/GeneralSimple}
 \label{fig:GeneralSimple}
 }
 \hfil
 \subfloat{
-\begin{tikzpicture}[scale=.7,every node/.style={draw,shape=circle,fill=black,minimum size=1pt}]
-\draw [fill=gray,thick] (0.5,1.5) -- (2.5,1.3) -- (2.75,2) -- (0.5,1.5);
-% vertices
-\path (0.5,1.5) node (p0) {}
-(0,0) node (p1) {}
-(1.2,0.2) node (p2) {}
-(2,1) node (p3) {}
-(1.8,2) node (p4) {}
-(0.2,2.8) node (p5) {}
-(-0.8,1.6) node (p6) {}
-(2.5,1.3) node (p7) {}
-(2.75,2) node (p8) {};
-% edges
-\draw (p0) -- (p1)
-(p0) -- (p2)
-(p0) -- (p3)
-(p0) -- (p4)
-(p0) -- (p5)
-(p0) -- (p6)
-(p1) -- (p2)
-(p2) -- (p3)
-(p3) -- (p4)
-(p4) -- (p5)
-(p5) -- (p6)
-(p6) -- (p1);
-\end{tikzpicture}
+\input{FigureSrc/chap06/Complex}
 \label{fig:Complex}
 }
 \hfil
 \subfloat{
-\begin{tikzpicture}[scale=.7,every node/.style={draw,shape=circle,fill=black,minimum size=1pt}]
-% vertices
-\path (0.5,1.5) node (p0) {}
-(0,0) node (p1) {}
-(1.2,0.2) node (p2) {}
-(2,1) node (p3) {}
-(1.8,2) node (p4) {}
-(0.2,2.8) node (p5) {}
-(-0.8,1.6) node (p6) {};
-% edges
-\draw (p0) -- (p1)
-(p0) -- (p2)
-(p0) -- (p3)
-(p0) -- (p4)
-(p0) -- (p5)
-(p0) -- (p6)
-(p1) -- (p2)
-(p2) -- (p3)
-(p3) -- (p4)
-(p4) -- (p5)
-(p5) -- (p6);
-\draw [line width=.1cm] (p1) -- (p0) -- (p6);
-\end{tikzpicture}
+\input{FigureSrc/chap06/Boundary}
 \label{fig:Boundary}
 }
 \hfil
 \subfloat{
-\begin{tikzpicture}[scale=.7,every node/.style={draw,shape=circle,fill=black,minimum size=1pt}]
-% vertices
-\path (0.5,1.5) node (p0) {}
-(0,0) node (p1) {}
-(1.2,0.2) node (p2) {}
-(2,1) node (p3) {}
-(1.8,2) node (p4) {}
-(0.2,2.8) node (p5) {}
-(-0.8,1.6) node (p6) {};
-% edges
-\draw (p0) -- (p1)
-(p0) -- (p2)
-(p0) -- (p3)
-(p0) -- (p4)
-(p0) -- (p5)
-(p0) -- (p6)
-(p1) -- (p2)
-(p2) -- (p3)
-(p3) -- (p4)
-(p4) -- (p5)
-(p5) -- (p6)
-(p6) -- (p1);
-\draw [line width=.1cm] (p1) -- (p0) -- (p4);
-\end{tikzpicture}
+\input{FigureSrc/chap06/InteriorEdge}
 \label{fig:InteriorEdge}
 }
 \hfil
 \subfloat{
-\begin{tikzpicture}[scale=.7,every node/.style={draw,shape=circle,fill=black,minimum size=1pt}]
-% vertices
-\path (0.5,1.5) node (p0) {}
-(0,0) node (p1) {}
-(1.2,0.2) node (p2) {}
-(2,1) node (p3) {}
-(1.8,2) node (p4) {}
-(0.2,2.8) node (p5) {}
-(-0.8,1.6) node (p6) {};
-% edges
-\draw (p0) -- (p1)
-(p0) -- (p2)
-(p0) -- (p3)
-(p0) -- (p4)
-(p0) -- (p5)
-(p0) -- (p6)
-(p1) -- (p2)
-(p2) -- (p3)
-(p3) -- (p4)
-(p4) -- (p5)
-(p5) -- (p6)
-(p6) -- (p1);
-\draw [line width=.1cm] (p1) -- (p0) -- (p4);
-\draw [line width=.1cm] (p0) -- (p5);
-\end{tikzpicture}
+\input{FigureSrc/chap06/Corner}
 \label{fig:Corner}
 }
 \caption{Five classes of the vertex in the surface. (a) General simple case; (b) Complex case; (c) Boundary case; (d) Interior edge case; (e) Corner case. }%
@@ -307,94 +191,12 @@ For simple vertices, two special cases are further specified as boundary vertice
 \begin{figure}[t]
 \centering
 \subfloat{
-\begin{tikzpicture}[scale=.8,every node/.style={draw,shape=circle,fill=black,minimum size=3pt}]
-% vertices
-\path (0.5,1.5) node (p0) {}
-(0,0) node (p1) {}
-(1.2,0.2) node (p2) {}
-(2,1) node (p3) {}
-(1.8,2) node (p4) {}
-(0.2,2.8) node (p5) {}
-(-0.8,1.6) node (p6) {};
-\path %(5.5,1.5) node (p7) {}
-(5,0) node (p8) {}
-(6.2,0.2) node (p9) {}
-(7,1) node (p10) {}
-(6.8,2) node (p11) {}
-(5.2,2.8) node (p12) {}
-(4.2,1.6) node (p13) {};
-% edges
-\draw (p0) -- (p1)
-(p0) -- (p2)
-(p0) -- (p3)
-(p0) -- (p4)
-(p0) -- (p5)
-(p0) -- (p6)
-(p1) -- (p2)
-(p2) -- (p3)
-(p3) -- (p4)
-(p4) -- (p5)
-(p5) -- (p6)
-(p6) -- (p1);
-\draw (p8) -- (p9)
-(p9) -- (p10)
-(p10) -- (p11)
-(p11) -- (p12)
-(p12) -- (p13)
-(p13) -- (p8)
-(p8) -- (p12)
-(p8) -- (p11)
-(p9) -- (p11);
-% draw arrow
-\draw [->,ultra thick] (2.8,1.5) -- (3.3,1.5);
-\end{tikzpicture}
+\input{FigureSrc/chap06/SimpleReduction}
 \label{fig:SimpleReduction}
 }
 \hfil
 \subfloat{
-\begin{tikzpicture}[scale=.8,every node/.style={draw,shape=circle,fill=black,minimum size=3pt}]
-% vertices
-\path (0.5,1.5) node (p0) {}
-(0,0) node (p1) {}
-(1.2,0.2) node (p2) {}
-(2,1) node (p3) {}
-(1.8,2) node (p4) {}
-(0.2,2.8) node (p5) {}
-(-0.8,1.6) node (p6) {};
-\path %(5.5,1.5) node (p7) {}
-(5,0) node (p8) {}
-(6.2,0.2) node (p9) {}
-(7,1) node (p10) {}
-(6.8,2) node (p11) {}
-(5.2,2.8) node (p12) {}
-(4.2,1.6) node (p13) {};
-% edges
-\draw (p0) -- (p1)
-(p0) -- (p2)
-(p0) -- (p3)
-(p0) -- (p4)
-(p0) -- (p5)
-(p0) -- (p6)
-(p1) -- (p2)
-(p2) -- (p3)
-(p3) -- (p4)
-(p4) -- (p5)
-(p5) -- (p6);
-\draw [line width=0.1cm] (-1.1,2.2) -- (0.3,-0.6);
-\draw (p8) -- (p9)
-(p9) -- (p10)
-(p10) -- (p11)
-(p11) -- (p12)
-(p12) -- (p13)
-(p13) -- (p8)
-(p9) -- (p13)
-(p9) -- (p12)
-(p10) -- (p12);
-\draw [line width=0.1cm] (3.9,2.2) -- (5.3,-0.6);
-\draw [line width=0.1cm,red] (p8) -- (p13);
-% draw arrow
-\draw [->,ultra thick] (2.8,1.5) -- (3.3,1.5);
-\end{tikzpicture}
+\input{FigureSrc/chap06/BoundaryReduction}
 \label{fig:BoundaryReduction}
 }
 \caption{Reduction of polygons before and after eliminating the vertex. (a) General simple vertex case: number of polygons before reduction: $6$, number of polygons after reduction: $4$; (b) Boundary vertex case: number of polygons before reduction: $5$, number of polygons after reduction: $4$. Note that the edge in \emph{red} does not belong to the surface before the computation. }%
