@@ -1,0 +1,17 @@
+%# -*- coding:utf-8 -*-
+\section{Conclusions and Future Work}
+\label{sec5_4}
+%The conclusion goes here.
+
+Centerlines are useful in describing the shape of three dimensional objects.
+In implementing the intravascular surgical simulation system, centerlines model of the vasculature will serve as the shape description for the simulation of path planning and navigation of the virtual guidewires/catheters.
+In this paper, an automatic approach is designed and validated to extract the centerlines of the image-based patient-specific vasculature model.
+The shape analysis presented here lays the foundation for our further research in visualizing the vessels that are closely related to the simulation of PCI procedure.
+
+The connectivity of the polygons in the surface model is firstly checked to find out and remove the redundant polygons that are irrelevant to the actual surface.
+Then the resulting surfaces are smoothed at the locations that seems to be uneven in order to prevent these perturbations against the centerlines computation.
+After that, the surfaces are subdivided by applying an improved butterfly scheme with the aim of acquiring a more precise surface model.
+Finally, the Eikonal equation of the time of arrivals of the embedded Voronoi diagram is computed to obtain the centerlines of the model surface.
+Experiments are designed and carried out with the results in demonstrating the effectiveness of the developed approach.
+
+In the future, our research directions are further optimization of the surface model on the one hand, and the visualization of other organs (e.g., heart) and the simulation of the typical phenomena (such as contrast injection, heart beat, etc.) during the procedure on the other. %
