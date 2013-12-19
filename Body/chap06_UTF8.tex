@@ -77,16 +77,16 @@ Typically, artifacts at certain level can be found in the resultant approximatin
 In this work, one of our objectives is the smoothing or fairing of the model surface acquired by applying the iso-intensity extraction techniques on the raw medical images.
 \begin{figure}[t]
 \centering
-\includegraphics[width=3.2in]{Figures/DataFlow4.png}
+\includegraphics[width=3.2in]{Figures/chap06/DataFlow.png}
 \caption{Overview of the work flow.}
 \label{fig:DataFlow}
 \end{figure}
 \begin{figure}[t]
 \centering
-\subfloat{\includegraphics[height=1.0in]{Figures/artifact.png}%
+\subfloat{\includegraphics[height=1.0in]{Figures/chap06/artifact.png}%
 \label{fig:Artifact}}
 \hfil
-\subfloat{\includegraphics[height=1.0in]{Figures/artifact_removed.png}%
+\subfloat{\includegraphics[height=1.0in]{Figures/chap06/artifact_removed.png}%
 \label{fig:ArtifactRemoved}}
 \caption{Smoothing the artifacts due to the approximation in visualization. (a) the artifacts (the horizontal ``steps" on the model surface of the vasculature); (b) the results after the smoothing process.}%
 \label{fig:ArtifactComparison}
@@ -425,7 +425,7 @@ All of our experimental programs ran on a desktop machine equipped with Intel's 
 
 \begin{figure}[t]
 \centering
-\includegraphics[height=2.0in]{Figures/original2.png}
+\includegraphics[height=2.0in]{Figures/chap06/original.png}
 \caption{VOI-extracted surface model consisting of $74307$ polygons.}
 \label{fig:VOI}
 \end{figure}
@@ -472,22 +472,22 @@ With the increase of the number of iterations, the smoothing effect became more 
 At this stage of processing, we chose the parameter set which was used to generated the results depicted in Fig. \ref{fig:Smooth100-01} ($\text{no. of iterations} = 100$, $\text{pass band} = 0.01$). %
 \begin{figure}[t]
 \centering
-\subfloat{\includegraphics[height=2.0in]{Figures/smooth_30_1.png}%
+\subfloat{\includegraphics[height=2.0in]{Figures/chap06/smooth_30_1.png}%
 \label{fig:Smooth30-1}}
 \hfil
-\subfloat{\includegraphics[height=2.0in]{Figures/smooth_60_1.png}%
+\subfloat{\includegraphics[height=2.0in]{Figures/chap06/smooth_60_1.png}%
 \label{fig:Smooth60-1}}
 \hfil
-\subfloat{\includegraphics[height=2.0in]{Figures/smooth_100_1.png}%
+\subfloat{\includegraphics[height=2.0in]{Figures/chap06/smooth_100_1.png}%
 \label{fig:Smooth100-1}}
 \hfil
-\subfloat{\includegraphics[height=2.0in]{Figures/smooth_30_01.png}%
+\subfloat{\includegraphics[height=2.0in]{Figures/chap06/smooth_30_01.png}%
 \label{fig:Smooth30-01}}
 \hfil
-\subfloat{\includegraphics[height=2.0in]{Figures/smooth_60_01.png}%
+\subfloat{\includegraphics[height=2.0in]{Figures/chap06/smooth_60_01.png}%
 \label{fig:Smooth60-01}}
 \hfil
-\subfloat{\includegraphics[height=2.0in]{Figures/smooth_100_01.png}%
+\subfloat{\includegraphics[height=2.0in]{Figures/chap06/smooth_100_01.png}%
 \label{fig:Smooth100-01}}
 \caption{Smoothing effects by applying different parameters: top row illustrate the results with $\text{pass band} = 0.1$, and the numbers of iterations are: $30$, $60$, and $100$, respectively; bottom row illustrate the results with $\text{pass band} = 0.01$, and the numbers of iterations are: $30$, $60$, and $100$, respectively.}%
 \label{fig:Smooth}
@@ -542,22 +542,22 @@ No. of Polygons & $66875$ & $37153$ & $18576$ & $7430$ & $743$ \\
 \end{table}
 \begin{figure}[t]
 \centering
-\subfloat{\includegraphics[height=2.0in]{../Figures/smooth_100_01_d10.png}%
+\subfloat{\includegraphics[height=2.0in]{Figures/chap06/smooth_100_01_d10.png}%
 \label{fig:Decimate10}}
 \hfil
-\subfloat{\includegraphics[height=2.0in]{../Figures/smooth_100_01_d90.png}%
+\subfloat{\includegraphics[height=2.0in]{Figures/chap06/smooth_100_01_d90.png}%
 \label{fig:Decimate90}}
 \hfil
-\subfloat{\includegraphics[height=2.0in]{../Figures/smooth_100_01_d99.png}%
+\subfloat{\includegraphics[height=2.0in]{Figures/chap06/smooth_100_01_d99.png}%
 \label{fig:Decimate99}}
 \hfil
-\subfloat{\includegraphics[height=2.0in]{../Figures/smooth_100_01_d10_w.png}%
+\subfloat{\includegraphics[height=2.0in]{Figures/chap06/smooth_100_01_d10_w.png}%
 \label{fig:Decimate10-w}}
 \hfil
-\subfloat{\includegraphics[height=2.0in]{../Figures/smooth_100_01_d90_w.png}%
+\subfloat{\includegraphics[height=2.0in]{Figures/chap06/smooth_100_01_d90_w.png}%
 \label{fig:Decimate90-w}}
 \hfil
-\subfloat{\includegraphics[height=2.0in]{../Figures/smooth_100_01_d99_w.png}%
+\subfloat{\includegraphics[height=2.0in]{Figures/chap06/smooth_100_01_d99_w.png}%
 \label{fig:Decimate99-w}}
 \caption{Decimation effects by applying different parameters: top row illustrate the results with reduction rates of $10\%$, $90\%$, and $99\%$, respectively; bottom row illustrate the wire frame representation of the corresponding results depicted above.}%
 \label{fig:Decimate}

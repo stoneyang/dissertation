@@ -235,9 +235,9 @@ And the other branch computes the initial level sets of the images. %, including
 After the branches end the computation, their production are fed into the main segmentation module, where the actual interface evolution takes place.
 In the final phase, the output level sets are extracted and then visualized by using a surface rendering technique.
 %The parameters and seeds are provided manually and tuned repeatedly during the processing.
-\begin{figure}[tb]
+\begin{figure}[t]
 \centering
-\includegraphics[width=3.2in]{Figures/DataFlow.png}
+\includegraphics[width=3.2in]{Figures/chap03/DataFlow.png}
 \caption{An overview of the segmentation pipeline.}
 \label{fig:DataFlow}
 \end{figure}
@@ -439,9 +439,9 @@ The input series was obtained by a 128-slice Siemens SOMATOM Definition Flash CT
 And the series contains the patient's entire abdominal aorta.
 For illustrative purposes, a typical slice was selected from the series.
 To reduce the computation time, the region that contains the major branches of the abdominal vasculature in the selected image were cropped (see Fig. \ref{fig_roi}).
-\begin{figure}[tb]
+\begin{figure}[t]
 \centering
-\includegraphics[width=2.5in]{Figures/ROI.png}
+\includegraphics[width=2.5in]{Figures/chap03/ROI.png}
 \caption{A typical ROI extraction of the original slice.}
 \label{fig_roi}
 \end{figure}
@@ -470,36 +470,36 @@ This made the evolution of the level sets driven by (\ref{eqn:Geodesic3}) propag
 \begin{figure*}[t]
 \centering
 %\subfloat[Smoothing with edge preserving (Conductance parameter = 0.9)]{\includegraphics[width=1.2in]{fig/dcm_smoothing.jpg}%
-\subfloat{\includegraphics[width=1.2in]{Figures/dcm_smoothing.jpg}%
+\subfloat[]{\includegraphics[width=1.2in]{Figures/chap03/dcm_smoothing.jpg}%
 \label{fig:Smoothing}}
 \hfil
 %\subfloat[Computation of magnitude of gradient with Gaussian kernel ($\sigma = 0.9$)]{\includegraphics[width=1.2in]{fig/dcm_gradient.jpg}%
-\subfloat{\includegraphics[width=1.2in]{Figures/dcm_gradient.jpg}%
+\subfloat{\includegraphics[width=1.2in]{Figures/chap03/dcm_gradient.jpg}%
 \label{fig:Gradient}}
 \hfil
 %\subfloat[Nonlinear mapping using an S-shaped function ($m = -3$, $n = 20$)]{\includegraphics[width=1.2in]{fig/dcm_sigmoid.jpg}%
-\subfloat{\includegraphics[width=1.2in]{Figures/dcm_sigmoid.jpg}%
+\subfloat{\includegraphics[width=1.2in]{Figures/chap03/dcm_sigmoid.jpg}%
 \label{fig:Sigmoid}}
 \caption{Producing the feature image in three steps: (a) smoothing with edge preserving ($\text{conductance parameter} = 0.9$); (b) computation of magnitude of gradient with Gaussian kernel ($\sigma = 0.9$); (c) nonlinear mapping using an S-shaped function ($m = -3$, $n = 20$).}
 %\caption{Producing the feature image.}
 \label{fig:PotentialImageGeneration}
 \end{figure*}
-\begin{figure*}[htb]
+\begin{figure*}[t]
 \centering
 %\subfloat[Thresholding]{\includegraphics[width=1.2in]{fig/dcm_threshold.jpg}%
-\subfloat{\includegraphics[width=1.2in]{Figures/dcm_threshold.jpg}%
+\subfloat{\includegraphics[width=1.2in]{Figures/chap03/dcm_threshold.jpg}%
 \label{fig:Threholding}}
 \hfil
 %\subfloat[Level set evolution using fast marching method]{\includegraphics[width=1.2in]{fig/dcm_fastMarching.jpg}%
-\subfloat{\includegraphics[width=1.2in]{Figures/dcm_fastMarching.jpg}%
+\subfloat{\includegraphics[width=1.2in]{Figures/chap03/dcm_fastMarching.jpg}%
 \label{fig:FastMarching}}
 \hfil
 %\subfloat[Edge detection using geodesic active contours]{\includegraphics[width=1.2in]{fig/dcm_geodesic.jpg}%
-\subfloat{\includegraphics[width=1.2in]{Figures/dcm_geodesic.jpg}%
+\subfloat{\includegraphics[width=1.2in]{Figures/chap03/dcm_geodesic.jpg}%
 \label{fig:GeodesicActiveContours}}
 \hfil
 %\subfloat[Binary thresholding]{\includegraphics[width=1.2in]{fig/dcm_out.jpg}%
-\subfloat{\includegraphics[width=1.2in]{Figures/dcm_out.jpg}%
+\subfloat{\includegraphics[width=1.2in]{Figures/chap03/dcm_out.jpg}%
 \label{fig:BinaryThresholding}}
 \caption{Level set evolution: (a) thresholding ($\text{lower threshold} = 300\text{HU}$, $\text{higher threshold} = 2000\text{HU}$); (b) initial level set evolution from one seeding point using fast marching method; (c) edge detection using geodesic active contours; (d) binary thresholding to inverse the pixel intensities (intensity of the light area: $255$, intensity of the dark area: $0$).}
 \label{fig:LevelSetEvolution}
@@ -533,9 +533,9 @@ Here the higher threshold value of the binary thresholder was provided as the is
 This ensured that the rendered surface representing the surfaces of the lumen of the aorta.
 The final visualization model is depicted in Fig. \ref{fig:VisualizationModel}.
 %From this figure, we can see that the lumen of the aorta was extracted successfully using the approach described here.
-\begin{figure}[!htb]
+\begin{figure}[t]
 \centering
-\includegraphics[width=1.1in]{Figures/model.png}
+\includegraphics[width=1.1in]{Figures/chap03/model.png}
 \caption{3-D surface model of the lumen of the aorta.}
 \label{fig:VisualizationModel}
 \end{figure}

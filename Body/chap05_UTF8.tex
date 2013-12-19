@@ -82,7 +82,7 @@ The inner working is to extract consisting polygons that share common vertices a
 In the present paper we implement the algorithm to extract the largest connected region from the input surface.
 \begin{figure}[t]
 \centering
-\includegraphics[width=3.2in]{Figures/DataFlow3.png}
+\includegraphics[width=3.2in]{Figures/chap05/DataFlow.png}
 \caption{Overview of the work flow.}
 \label{fig:DataFlow}
 \end{figure}
@@ -196,7 +196,7 @@ Part of the abdominal aorta was chopped off to serve as the sample data in our e
 The approach can be applied straightly to the surface model of the whole abdominal aorta (see Fig. \ref{fig:OverlayGlobal}). %and Fig. \ref{fig:VisualizationModel}).
 \begin{figure}[t]
 \centering
-\includegraphics[height=2.4in]{Figures/VOI.png}
+\includegraphics[height=2.4in]{Figures/chap05/VOI.png}
 \caption{The original model surface (consists of $205,590$ polygons) and the VOI-extracted local part (in red square).}
 \label{fig:VOI}
 \end{figure}
@@ -213,7 +213,7 @@ The former implies that the given (local) model was the largest connected region
 The latter indicates that the largest connected region of the given model surface was fully extracted through the validation.
 \begin{figure}[t]
 \centering
-\includegraphics[width=1.5in]{Figures/connectivity_local.png}
+\includegraphics[width=1.5in]{Figures/chap05/connectivity_local.png}
 \caption{Results of connectivity validation of model surface in local details (quantity of consisting polygons: $70,625$).}
 \label{fig:ConnectivityLocal}
 \end{figure}
@@ -249,16 +249,16 @@ Global & Before validation       & $205,590$ \\
 \end{table}
 \begin{figure}[t]
 \centering
-\subfloat{\includegraphics[width=1.5in]{Figures/smooth_30_1_local.png}%
+\subfloat{\includegraphics[width=1.5in]{Figures/chap05/smooth_30_1_local.png}%
 \label{fig:Smooth30-1Local}}
 \hfil
-\subfloat{\includegraphics[width=1.45in]{Figures/smooth_30_01_local.png}%
+\subfloat{\includegraphics[width=1.45in]{Figures/chap05/smooth_30_01_local.png}%
 \label{fig:Smooth30-01Local}}
 \hfil
-\subfloat{\includegraphics[width=1.5in]{Figures/smooth_100_1_local.png}%
+\subfloat{\includegraphics[width=1.5in]{Figures/chap05/smooth_100_1_local.png}%
 \label{fig:Smooth100-1Local}}
 \hfil
-\subfloat{\includegraphics[width=1.45in]{Figures/smooth_100_01_local.png}%
+\subfloat{\includegraphics[width=1.45in]{Figures/chap05/smooth_100_01_local.png}%
 \label{fig:Smooth100-01Local}}
 \caption{Smoothing effects by applying different parameters: (a) $\text{pass band} = 0.1$, $\text{iterations} = 30$; (b) $\text{pass band} = 0.01$, $\text{iterations} = 30$; (c) $\text{pass band} = 0.1$, $\text{iterations} = 100$; (d) $\text{pass band} = 0.01$, $\text{iterations} = 100$.}%
 \label{fig:SmoothLocal}
@@ -316,7 +316,7 @@ At the same time, the quantities of the consisting polygonal surfaces increased 
 Comparing the quantities of the polygons before and after the subdivision in both cases, the quantities of the resulting polygons are about four times greater than the quantities of the input polygons due to the subdivision scheme employed in this work.
 \begin{figure}[t]
 \centering
-\includegraphics[width=3.0in]{Figures/subdivision.png}
+\includegraphics[width=3.0in]{Figures/chap05/subdivision.png}
 \caption{Subdivision of smoothed surface by using improved butterfly scheme. \emph{Left}: subdivision in local details. \emph{Top right}: polyhedral surface before subdivision. \emph{Bottom right}: polyhedral surface after subdivision.}%
 \label{fig:SubdivisionLocal}
 \end{figure}
@@ -368,10 +368,10 @@ Global & Before validation       & $205,452$  &\\
 
 \begin{figure}[t]
 \centering
-\subfloat{\includegraphics[width=1.5in]{Figures/overlay_100_01_voronoi_local.png}%
+\subfloat{\includegraphics[width=1.5in]{Figures/chap05/overlay_100_01_voronoi_local.png}%
 \label{fig:VoronoiLocal}}
 \hfil
-\subfloat{\includegraphics[width=1.5in]{Figures/overlay_100_01_centerlines_local.png}%
+\subfloat{\includegraphics[width=1.5in]{Figures/chap05/overlay_100_01_centerlines_local.png}%
 \label{fig:OverlayLocal}}
 \caption{Centerlines extraction of the aorta in local details: (a) embedded Voronoi diagram; (b) centerlines inside the vessel.}%
 \label{fig:CenterlinesLocal}
@@ -379,11 +379,11 @@ Global & Before validation       & $205,452$  &\\
 
 \begin{figure}[t]
 \centering
-\subfloat{\includegraphics[height=2.0in]{Figures/overlay_100_01_voronoi.png}
+\subfloat{\includegraphics[height=2.0in]{Figures/chap05/overlay_100_01_voronoi.png}
 %\caption{Voronoi diagrams of the abdominal aorta.}
 \label{fig:VoronoiGlobal}}
 \hfil
-\subfloat{\includegraphics[height=2.0in]{Figures/overlay_100_01_centerlines.png}
+\subfloat{\includegraphics[height=2.0in]{Figures/chap05/overlay_100_01_centerlines.png}
 %\caption{Centerlines of the abdominal aorta.}
 \label{fig:OverlayGlobal}}
 \caption{Centerlines extraction of the aorta in VOI. (a) Voronoi diagrams; (b) Centerlines. }
@@ -401,10 +401,10 @@ One can see from the details of the results that the starting and ending points 
 The reason of this is the Voronoi diagram on which the points consisting the centerlines exist never intersect with the model surface, i.e., the ending points of the centerlines are approaching the terminals of the surface model as near as possible, but never stick to them.
 \begin{figure}[t]
 \centering
-\subfloat{\includegraphics[width=0.7in]{Figures/surface.png}%
+\subfloat{\includegraphics[width=0.7in]{Figures/chap05/surface.png}%
 \label{fig:SurfaceModel}}
 \hfil
-\subfloat{\includegraphics[width=0.9in]{Figures/centerlines.png}%
+\subfloat{\includegraphics[width=0.9in]{Figures/chap05/centerlines.png}%
 \label{fig:CenterlinesModel}}
 \caption{Visualization models of the aorta: (a) image-based surface model (quantity of consisting polygons: $757,538$); (b) centerlines of the surface model.}%
 \label{fig:VisualizationModel}
