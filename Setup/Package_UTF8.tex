@@ -2,12 +2,7 @@
 %=========================================================================%
 %   LaTeX File for phd thesis of Institute of Automation, CAS
 %-------------------------------------------------------------------------%
-%   Revised by Fan Yang (stoneyang0915@gmail.com)
-%-------------------------------------------------------------------------%
-%   张兆翔将原来的dvipdf改为dvipdfm宏包，可使用latex + dvipdf自动生成索引
-%-------------------------------------------------------------------------%
-%   Revised by J. G. Lou (jglou@nlpr.ia.ac.cn)
-%-------------------------------------------------------------------------%
+
 %=========================================================================%
 %                          引用的宏包和相应的定义
 %=========================================================================%
@@ -23,7 +18,7 @@
 % 为了支持pdftex 使用不同的宏包选项
 \ifx\pdfoutput\undefined
 \usepackage[dvips]{graphicx}
-\usepackage[dvipdfm,
+\usepackage[dvips,
             %pagebackref,
             backref,
             unicode=true,
@@ -32,14 +27,14 @@
             % bookmarksopen=false,
             ]{hyperref}
 \else
-\usepackage[dvipdfm,
+\usepackage[pdftex]{graphicx}
+\usepackage[pdftex,
             %pagebackref,
             backref,
             unicode=true,
             % CJKbookmarks=true,
             bookmarksnumbered=true
             ]{hyperref}
-\usepackage[pdftex]{graphicx}
 \fi
 
 
@@ -47,7 +42,7 @@
 
 
 \usepackage{color}      % 支持彩色
-\usepackage{subfigure}  % 支持子图
+\usepackage{subfig}  % 支持子图
 \usepackage{floatflt}   % 图文混排用宏包
 \usepackage{rotating}   % 图形和表格的控制
 \usepackage{flafter}    % 因为图形可浮动到当前页的顶部，所以它可能会出现
