@@ -20,23 +20,3 @@ There are numbers of other methods that are not belong to any category listed ab
 Ferchichi and Wang in \cite{Ferchichi2006} reported a clustering-based algorithm for centerline extraction both for 2D and 3D objects.
 The algorithm was designed based on the idea of computing the maximal disks/balls determining the centerlines, which is achieved by executing the K-means algorithm iteratively on the object-points and their distance transforms. %
 Egger \textit{et al.} \cite{Egger2007} reported a centerline extraction algorithm for the blood vessels using Dijkstra's shortest path algorithm, which was designed for the catheter simulation. %
-\section{Related Work}
-
-Many researches have been done since the earliest work on extracting the centerline was proposed by Blum \cite{Blum1967}.
-According to reference \cite{Ogniewicz1995}, most of these methods fall into four categories: (1) topological thinning; (2) distance transformation; (3) ``prairie fire" approach; (4) Voronoi Diagram methods. %
-
-Topological thinning methods \cite{Ma2002,Sadleir2002} implement the centerline extraction by iteratively remove most of the ``simple points" except the ones that are the end-points of the generated centerline models. %
-By ``simple points", it means that the boundary points consisting the object such that their removals do not destroy the topology of the object.
-
-Distance transformation methods \cite{Niblack1992} find the centerline by searching the local maximum among the minimal distances between the points interior of the shape and the boundary. %
-However, they do not ensure the resulting centerlines are connected with each other.
-
-``Prairie fire" methods \cite{Blum1967,Leymarie1992} compute the centerline by determining the intersection of the propagating interfaces with their sources located on the boundary of the shape. %
-
-Voronoi diagram method \cite{Sherbrooke1996,Antiga2003} treats the centerline to be generated as a subset of the Voronoi diagram.
-These methods are sensitive to the noises and the regularization of the boundary of the shape.
-
-There are numbers of other methods that are not belong to any category listed above.
-Ferchichi and Wang in \cite{Ferchichi2006} reported a clustering-based algorithm for centerline extraction both for 2D and 3D objects.
-The algorithm was designed based on the idea of computing the maximal disks/balls determining the centerlines, which is achieved by executing the K-means algorithm iteratively on the object-points and their distance transforms. %
-Egger \textit{et al.} \cite{Egger2007} reported a centerline extraction algorithm for the blood vessels using Dijkstra's shortest path algorithm, which was designed for the catheter simulation. %
