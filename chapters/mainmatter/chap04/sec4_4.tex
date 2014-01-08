@@ -1,0 +1,20 @@
+
+\section{Conclusions and Future Work}
+\label{sec4_4}
+%The conclusion goes here.
+
+The three dimensional visualization of the blood vessels plays an important role in the construction of the virtual scenario for the robotic surgical simulator.
+Further, the visualization of the coronary arteries is the most critical and difficult work.
+Because of the complex spatial topologies, details can be easily lost in the process of segmentation.
+In this paper, a vasculature segmentation method based on tubular-enhanced CURVES has been developed.
+Then the process of the experiment was presented and the results were demonstrated.
+The experimental results showed that the proposed approach is capable of enhancing the tiny dark vessels and visualizing the geometric details of them.
+
+The tubular feature of coronary arteries was enhanced and the speed images were generated.
+Meanwhile, the initial contours for the CURVES method were computed by a modified version of fast marching method in another process.
+The actual level sets evolution began after the above computation finished and the evolution took a specified number of iterations to detect the coronary arteries.
+At the end of the segmentation, the resulting pixels were all conversed in their intensities.
+Finally the data representing the surface of the arteries was extracted by the marching cubes method.
+
+Our future plans are the further optimization of the blood vessel models for the simulation with virtual tools of the robotic surgical simulator.
+The principle work will be the decimation of the quantity of the triangles consisting the blood vessels and the improvements of the visualization effects of the virtual scenario. 

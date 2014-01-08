@@ -1,32 +1,20 @@
-*.pdf
+mythesis.pdf
 
-mythesis_UTF8.aux
-mythesis_UTF8.bbl
-mythesis_UTF8.blg
-mythesis_UTF8.lof
-mythesis_UTF8.log
-mythesis_UTF8.lot
-mythesis_utf8.out
-mythesis_utf8.out.bak
-mythesis_UTF8.synctex.gz
-mythesis_UTF8.thm
-mythesis_UTF8.toc
-mythesis_UTF8.brf
-
-Appendix/*.aux
-
-Body/*.aux
-
-contents/*.aux
-
-cover/*.aux
+*.aux
+*.bbl
+*.blg
+*.dvi
+*.lof
+*.log
+*.lot
+*.out
+*.out.bak
+*.synctex.gz
+*.thm
+*.toc
+*.brf
 
 Figures/Thumbs.db
 
-Preface/*.aux
-
-Reference/*.aux
 Reference/*.bib.bak
-Reference/.*
 
-Setup/Package_UTF8.log

@@ -1,0 +1,39 @@
+
+\section{Introduction}
+\label{sec5_1}
+% no \PARstart
+Cardiovascular diseases are among the most fatal illnesses worldwide \cite{WHO2013}.
+The diseases occur when the stenosis or even blockages formed due to the build up of fatty substances on the inner wall of the blood vessels.
+Percutaneous coronary intervention (PCI) is the gold standard in fighting the lethal diseases.
+Due to its minimally-invasive nature, this procedure only causes small incision and much less trauma to the patients.
+In addition, the hospitalization after the procedure is in turn dramatically shortened.
+However, due to the very nature of minimally-invasiveness of PCI and the complex anatomic structure of the blood vessels, the learners need thorough and strict training before performing the procedure in action. %
+What's worse, the practitioners in catheterization labs have to expose themselves under the ionizing radiation from the fluoroscope while examining the morphologies of the patients' vasculature. %
+
+The surgical robotic systems for intravascular procedures have greatly changed this situation.
+With the assistance of the robotic systems, cardiology practitioners need not to be worried about the radioactive exposure and the relative risks any more.
+Like their ancestors (i.e., the traditional PCI procedure), the skills of manipulating the robotic system to do the surgery are also not easy for the junior residences and still require strict and sufficient training before applying the procedure on the real patients. %
+
+The traditional ways of training PCI procedure are deeply rooted in the physical fashion, i.e., employing biological models (e.g. human cadavers and living animals) or non-biological models (e.g. phantoms). %
+The former are disposable and ethic-disputed; let alone the tremendous expenditure on the preservation and feeding, and the distinction in anatomy between human and animal volunteer. %
+The latter are stiff and lack of sufficient anatomic details, even though they can be used repeatedly.
+Indeed, it is infeasible to conduct the training on the expensive robotic systems whilst ignoring the real needs in the catheterization labs.
+To streamline the training and the practice of robotic PCI procedure, a well-designed computing simulation system is required.
+
+The aim of our effort is to provide a training tool of convenience and effectiveness for the minimally-invasive intravascular robotic system \cite{Ji2011EMBC}.
+In constructing this training vehicle, the anatomic structures in computing environment especially the vascular system are definitely one of the most substantial components.
+The centerlines is an effective way of describing the shape of the model \cite{Ogniewicz1995}, which will provide accurate shape description for the path planning in interactive simulation.
+In this paper, we developed an automatic approach based on the Voronoi diagram \cite{Antiga2003} to extract the centerlines of the vasculature.
+The input of the proposed approach is the patient-specific image-based surface model of the vasculature, which is reconstructed by applying our previous work \cite{Yang2014ICRA}. %
+Before computing the Voronoi diagram of the tubular surface model, several preprocessing should be performed.
+First, the connectivity of the polygons that consisting the surface is validated thoroughly to include the largest connected polygons that is effective in representing the surface. %
+Second, the bumpy and crusty surfaces are smoothed in order to reduce the effects on the computation of centerlines.
+Third, the surfaces are subdivided to gain a more precise geometric feature.
+Finally, the centerlines of the vessel model by solving the Eikonal equation in the fast marching flavor.
+The capability of our approach in automatically extracting the centerlines of the vessel model is proved by the experimental results.
+
+The rest of this paper is organized as follows.
+Section II introduces the related work of the centerline extraction methods for three dimensional objects.
+Section III outlines the work flow and describes the techniques used in this work.
+Section IV describes the experiments, ending with a brief discussion.
+The final section concludes the whole work. 

@@ -1,0 +1,134 @@
+\documentclass[dvipdfm,notypeinfo]{CASthesis}
+% 可选参数：
+% notypeinfo 取消扉页的LaTeX版本信息
+%
+% 下面三个选一个：
+% dvipdfm 使用 dvipdfm(x) 生成最终的 PDF 文档 (缺省设置）
+% dvips 使用 dvips 生成最终的 PS 文档
+% pdftex 使用 pdfLaTeX 生成最终的 PDF 文档
+
+
+\usepackage{algorithm}
+\usepackage{algorithmic}
+%改成后面的小标题
+%\renewcommand{\algorithmicrequire}{\textbf{Initialization:}}
+\renewcommand{\algorithmicensure}{\textbf{Iteration:}}
+%\renewcommand{\algorithmiclastcon}{\textbf{Output:}}
+
+\usepackage{booktabs}
+
+\usepackage{subfig}
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes}
+
+% 设置图形文件的搜索路径
+\graphicspath{{chapter/}{figures/}}
+
+% 取消链接的颜色（黑白打印时）
+%\hypersetup{colorlinks=false}
+
+% 小节标题靠左对齐
+\CTEXsetup[format+={\flushleft}]{section}
+
+
+\begin{document}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 封面部分
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  % 中文封面内容
+  \confidential{}
+  \title{冠状动脉介入仿真中创建解剖环境的关键技术研究}
+  \author{杨~帆}
+  \advisor{侯增广~研究员}
+  \advisorinstitute{中国科学院自动化研究所}
+  \degree{博士}
+  \majordegree{工学博士}
+  \major{控制理论与控制工程}
+  \submitdate{2014~年~10~月}
+  \institute{中国科学院自动化研究所}
+
+  % 英文封面内容
+  \englishtitle{Visualization of Anatomical Environment\\in Coronary Intervention Simulation}
+  \englishauthor{Fan Yang}
+  \englishadvisor{Prof. Zeng-Guang Hou}
+  \englishinstitute{Institute of Automation\\Chinese Academy of Sciences}
+  \englishdegree{Doctor}
+  \englishmajordegree{Engineering}
+
+
+  % 封面
+  \maketitle
+
+  % 英文封面
+  \makeenglishtitle
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 前言部分
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frontmatter
+
+  % 独创性声明
+  \include{chapters/frontmatter/announcement}
+
+  % 摘要
+  \include{chapters/frontmatter/abstract_CN}
+  \include{chapters/frontmatter/abstract_EN}
+
+  % 目录
+  \tableofcontents
+  % 表格目录
+  \listoftables
+  % 插图目录
+  \listoffigures
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 正文部分
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\mainmatter
+
+  \include{chapters/mainmatter/chap01/chap01}
+  \include{chapters/mainmatter/chap02/chap02}
+  \include{chapters/mainmatter/chap03/chap03}
+  \include{chapters/mainmatter/chap04/chap04}
+  \include{chapters/mainmatter/chap05/chap05}
+  \include{chapters/mainmatter/chap06/chap06}
+  \include{chapters/mainmatter/chap07/chap07}
+  \include{chapters/mainmatter/chap08/chap08}
+  \include{chapters/mainmatter/chap09/chap09}
+  \include{chapters/mainmatter/chap10/chap10}
+
+  % 附录
+  \appendix
+
+  \include{chapters/backmatter/appendix01}
+  \include{chapters/backmatter/appendix02}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 附件部分
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\backmatter
+
+  % 参考文献
+  % 使用 BibTeX
+  \bibliography{bib/ref}
+  % \nocite{*}
+  % 不使用 BibTeX
+  % \include{chapter/backmatter/bib}
+
+  % 发表文章目录
+  \include{chapters/backmatter/pub}
+
+  % 个人简历
+  \include{chapters/backmatter/resume}
+
+  % 致谢
+  \include{chapters/backmatter/thanks}
+
+
+\end{document}
