@@ -1,4 +1,25 @@
 %# -*- coding:utf-8 -*-
+
+Percutaneous transluminal coronary angioplasty (PTCA) has been proved to be a standard solution to most cardiovascular diseases (CVDs).
+The intravascular surgical robots enable the clinicians to perform the procedure with protection from occupational hazards.
+The robotic surgical simulator can provide the trainees a new vehicle to learn this skill much more conveniently and effectively.
+%Vessel models are the most important virtual scenarios required in this simulation training.
+%Vessel segmentation is an important step for the modeling of the vascular system.
+%One of the most critical features of the simulator is the virtual environment that is almost identical to the real anatomic structures.
+%The blood vessel model is an indispensable component of the virtual environment.
+The blood vessel model is the core component of the virtual environment that is almost identical to the real anatomic structures.
+Because of the adherence of the aorta and the bones, the ``clean'' segmentation of the aorta is a challenging task.
+In this paper, a robust and semi-automatic approach to segment the abdominal aorta from the computed tomography angiography (CTA) is developed.
+The proposed approach provides the geodesic active contours implementation with the edge potential maps acquired by applying nonlinear intensity mapping on the gradient images.
+A two-branching pipeline is built to achieve this goal: one branch for the edge potential feature computation, and the other for the generation of the initial level sets.
+In acquiring edge potential maps, the magnitude of gradient is computed pixel-wisely on the smoothed images.
+Meanwhile, the unrelated image contents are stripped carefully before the unidirectional fronts propagation driven by the fast marching algorithm started.
+%For the former branch, the images are smoothed and the magnitude of gradient is computed pixel-wisely and then the potential feature images are produced by applying a nonlinear intensity mapping on the previously acquired gradient maps.
+%For the latter branch, the fast marching algorithm is used to generate the initial level sets after the original images have been appropriately thresholded.
+Then the geodesic active contours method evolves the contours thus the edge of the aorta is met.
+Finally the surface information representing the vessel is extracted by the marching cubes method from the segmentation results.
+This approach has been proved successful for the construction of 3-D surface model of the aorta based on the CTA series.
+
 \section{Introduction}
 \label{sec3_0}
 

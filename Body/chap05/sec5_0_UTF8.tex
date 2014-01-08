@@ -1,4 +1,21 @@
 %# -*- coding:utf-8 -*-
+
+%Cardiovascular diseases are among the most fatal illnesses in the world.
+%Percutaneous coronary intervention is the gold standard in the past decades due to the much less trauma and quick recovery.
+%On the other hand, for the guidance of the fluoroscope required by the procedure, the clinicians have to suffer high risks of tumors and other diseases.
+%Intravascular robotic systems are applied to change this situation.
+%Hence the clinicians need to participate full training projects to ensure the flexible manipulation of the systems.
+The computer-aided surgical simulation aims to provide an economic tool of effectiveness and convenience for the training process.
+In building this simulation system, the construction of the virtual anatomic environment is one of the major tasks.
+It provides the virtual tools with the scenario in which they are manipulated by the trainee.
+In intravascular surgery simulation, the surface model of the blood vessels is the most important part of the virtual environment.
+In order to achieve better performances in the simulation of path planning and navigation, the surface model based on real patient's CTA data needs further process.
+We proposed in this paper an approach to extract the centerlines of each segment of the image-based surface model of the blood vessels.
+The surface model is firstly processed to check the connectivity of the consisting polygons in order to extract the largest connected region within the surface.
+Next, the resulting surface is smoothed by a windowed sinc function kernel with proper parameters.
+After the normal vectors of the smoothed surface are computed, the surface is subdivided and the centerlines of the surface model are computed by using the power crust algorithm. %
+The experimental results show that the approach is capable of extracting the centerlines of the vessel model.
+
 \section{Introduction}
 \label{sec5_0}
 % no \PARstart
@@ -36,4 +53,4 @@ The rest of this paper is organized as follows.
 Section II introduces the related work of the centerline extraction methods for three dimensional objects.
 Section III outlines the work flow and describes the techniques used in this work.
 Section IV describes the experiments, ending with a brief discussion.
-The final section concludes the whole work.
+The final section concludes the whole work. 
