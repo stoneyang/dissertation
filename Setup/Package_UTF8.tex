@@ -18,6 +18,19 @@
 % 为了支持pdftex 使用不同的宏包选项
 \ifx\pdfoutput\undefined
 \usepackage[dvips]{graphicx}
+\graphicspath{
+    {Figures/chap01/}
+    {Figures/chap02/}
+    {Figures/chap03/}
+    {Figures/chap04/}
+    {Figures/chap05/}
+    {Figures/chap06/}
+    {Figures/chap07/}
+    {Figures/chap08/}
+    {Figures/chap09/}
+    {Figures/chap10/}
+    {Figures/misc/}
+}   %定义所有的eps文件在 Figures 子目录下
 \usepackage[dvips,
             %pagebackref,
             backref,
@@ -28,6 +41,19 @@
             ]{hyperref}
 \else
 \usepackage[pdftex]{graphicx}
+\graphicspath{
+    {Figures/chap01/}
+    {Figures/chap02/}
+    {Figures/chap03/}
+    {Figures/chap04/}
+    {Figures/chap05/}
+    {Figures/chap06/}
+    {Figures/chap07/}
+    {Figures/chap08/}
+    {Figures/chap09/}
+    {Figures/chap10/}
+    {Figures/misc/}
+}   %定义所有的eps文件在 Figures 子目录下
 \usepackage[pdftex,
             %pagebackref,
             backref,
@@ -42,7 +68,7 @@
 
 
 \usepackage{color}      % 支持彩色
-\usepackage{subfig}  % 支持子图
+\usepackage{subfig}     % 支持子图
 \usepackage{floatflt}   % 图文混排用宏包
 \usepackage{rotating}   % 图形和表格的控制
 \usepackage{flafter}    % 因为图形可浮动到当前页的顶部，所以它可能会出现
