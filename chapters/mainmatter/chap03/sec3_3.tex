@@ -1,8 +1,8 @@
 
-\section{Experiments and Results}
+\section{实验与结果}
 \label{sec3_3}
 
-\subsection{Experimental Setup}
+\subsection{实验场景与数据}
 Many experiments were carried out using different parameters for the validation of the approach to segment the aorta from CTA.
 In our case, the CTA series in DICOM format had been converted to the form of XML first.
 Then the converted data was fed into the feature image production branch and input level sets generation branch.
@@ -23,7 +23,7 @@ To reduce the computation time, the region that contains the major branches of t
 % Then the segmentation process was split into two branches first and then merged into the main evolution pipeline.
 %This two-branching structure is built due to the two essential requirements of geodesic active contours module: the feature images and initial level sets.
 
-\subsection{Feature Images}
+\subsection{特征图像的计算}
 In the feature image production branch, the following preprocessing tasks were performed sequentially:
 \begin{enumerate}
 \item removing noises without affecting the edges;
@@ -80,7 +80,7 @@ This made the evolution of the level sets driven by (\ref{eqn:Geodesic3}) propag
 \label{fig:LevelSetEvolution}
 \end{figure*}
 
-\subsection{Level Sets Evolution}
+\subsection{水平集演进}
 The initial level set generation branch works for the level sets that required by the geodesic active contours module.
 In this process, the thresholding module was called first to trim off the irrelevant organs with lower intensities, such as lungs, liver, kidneys, bowels, stomach, etc. (see Fig. \ref{fig:Threholding}).
 %In our case, we set the lower and upper threshold values at 300HU (HU is short for Hounsfield Unit) and 2000HU, respectively.
@@ -101,7 +101,7 @@ After that, a binary thresholding step was performed to fill the inner area of t
 This result is illustrated in Fig. \ref{fig:BinaryThresholding}.
 All the parameters chosen manually to make the drive suitable to evolve the contour to the expected results were reused in the three dimensional case.
 
-\subsection{Surface Construction Based on Segmentation Results}
+\subsection{基于分割结果的表面重建}
 Finally, the resulting volume were processed using the marching cubes method \cite{Lorensen1987MC}.
 The isovalue corresponding to the edge of the lumen of abdominal aorta was picked manually.
 Here the higher threshold value of the binary thresholder was provided as the isovalue for the isosurface extraction.

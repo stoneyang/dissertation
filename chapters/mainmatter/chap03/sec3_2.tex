@@ -1,5 +1,5 @@
 
-\section{Methodologies}
+\section{方法}
 \label{sec3_2}
 
 In this section the overall processing pipeline is discussed and the techniques used for the lumen segmentation of the abdominal aorta from CTA are detailed.
@@ -21,13 +21,13 @@ In the final phase, the output level sets are extracted and then visualized by u
 \label{fig:DataFlow3}
 \end{figure}
 
-\subsection{Preprocessing}
+\subsection{预处理}
 
 Before the main processing begins, several necessary pretreatment on the original images should be done.
 By considering the requirements of the methods chosen for this job, the preprocessing should include the production of feature images, and the generation of input level sets.
 The feature images provide the main level set method with the ``maps" about where to stop, while the input level sets give the main functioning module the initial contours from where the actual interface evolution begins.
 
-\subsubsection{Production of Feature Images}
+\subsubsection{特征图像的生成}
 
 %The branch of feature image production is depicted in Fig. \ref{fig:DataFlow}.
 Image smoothing is a necessary job due to the original series acquired from the medical modality are often mixed with some noisy pixels.
@@ -58,7 +58,7 @@ I_{\sigma} = (I_{max} - I_{min}) \cdot \frac{1}{1 + \exp\left(-\frac{I_{grad} - 
 where $I_{\sigma}$ denotes the intensity values of the output image, $I_{max}$ and $I_{min}$ represent the maximum and minimum of the output intensity values, respectively; $m$ is a constant that controls the width of the input intensity range, and $n$ is a constant that gives an intensity around which the range is centered.
 The mapping results may vary due to different choices of the parameters for the individual modules in the pipeline.
 
-\subsubsection{Semi-Automatic Generation of Input Level Sets}
+\subsubsection{初始水平集的半自动生成}
 
 %The initial level set generation branch is parallel to the above one, which is responsible for the computation of the values required by the main evolution as its input level sets (see Fig. \ref{fig:DataFlow}).
 % This branch is a mini level set that takes numbers of seeding points (or seeds) before the computation begins.
@@ -78,7 +78,7 @@ where $F$ denotes the velocity in the normal direction at some point $(x,y)$.
 $\mathcal{C}$ propagates inwards when $F < 0$; it propagates outwards when $F > 0$.
 The results of this computation are the time-crossing map in which contains of a series of curve interfaces at different time of evolution.
 
-\subsection{Geodesic Active Contours Evolution}
+\subsection{测地学活动轮廓方法}
 
 %The module that actually working towards the segmentation is illustrated in Fig. \ref{fig:DataFlow}.
 At this point, the geodesic active contours module has its two inputs available: the feature images and the initial level sets.
@@ -191,7 +191,7 @@ The solution to this object detection problem is equivalent to the zero level-se
 % After the evolution stopped, a binary thresholder is provoked to take a ``snapshot" of this interface.
 % This resulting level set should be the edges of the objects to be detected.
 
-\subsection{Surface Extraction}
+\subsection{等值面的提取}
 
 To visualize the surface model, the surface information should be firstly extracted by the marching cubes method \cite{Lorensen1987MC}.
 As the initial step of surface extraction, arrays of cubes are created from the input with each cube consisting of eight pixels (four from one slice and the other four from the next slice).

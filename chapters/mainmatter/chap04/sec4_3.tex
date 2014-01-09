@@ -1,8 +1,8 @@
 
-\section{Experiments and Results}
+\section{实验与结果}
 \label{sec4_3}
 
-\subsection{Medical Data and Experimental Setup}
+\subsection{医学数据与实验设置}
 
 The original chest CTA series was acquired by a 128-slice Siemens SOMATOM Definition Flash CT.
 The slice thickness was $0.6 \text{mm}$ and the in-slice resolution was $0.4 \times 0.4 \text{mm}^2$.
@@ -16,7 +16,7 @@ The two set of the resulting data from the two computation pipelines were transf
 Finally, the marching cubes method was employed to extract the iso-surface corresponding to the wall of the coronary arteries.
 All the experiments were performed on a machine with Intel's 2.83GHz Core 2 Quad CPU and 4GB RAM.
 
-\subsection{Tubular Enhancement and Its Postprocessing}
+\subsection{管状物体的增强及其后处理}
 
 Before the tubular enhancement started, a global binary thresholding was performed in order to provide the enhancing filter with the focus on the tiny bright tubular objects.
 To achieve this, the thresholder was called to trim the irrelevant contents in the images, e.g., dark lung regions with negative intensity values, bright bone regions with large positive intensity values, etc. %
@@ -53,7 +53,7 @@ Comparing the result of the two candidates, the binary threshold filter was sele
 \label{fig:Preprocessing}
 \end{figure}
 
-\subsection{Feature Images Computation}
+\subsection{特征图像的计算}
 
 To generate the feature images for the CURVES system, two steps were performed:
 (1) calculating the gradient magnitude at each pixel; and
@@ -69,7 +69,7 @@ To reverse the lightness of the objects (in low intensities in the gradient magn
 The minus sign of $m$ means the reverse operation on the pixels.
 The neighborhood of the boundaries of the objects were in almost zero intensity, which made the evolution driven by (\ref{eqn:Application}) faster in the ``plateau" (with uniformly high intensities), whilst much slower (in a speed of about zero) in the ``ridges" (with rapid decreasing intensities). %
 
-\subsection{Wave Fronts Propagation}
+\subsection{波面的传播}
 
 The initial level sets were evolved by the colliding fronts module.
 Two seeds were located interior of the regions corresponding to the coronary arteries and the interfaces surrounding each seeds evolved towards each other.
@@ -107,7 +107,7 @@ The evolution terminated when the contours evolved against the wall of the coron
 And the resulting evolution extracted the coronary arteries as shown in Fig. \ref{fig:CURVES}.
 Next a binary thresholding step was provoked to label the inner area of the coronary arteries with high intensity value whilst the outer area with zero intensity value.
 
-\subsection{Visualization of Segmentation Results}
+\subsection{分割结果的可视化}
 
 By manually picked the isovalue corresponding to the wall of the coronary arteries, the resulting volume were processed using the marching cubes method \cite{Lorensen1987MC}.
 The visualization models of the coronary arteries respectively based on the CURVES regions without and with tubular enhancement demonstrated their capabilities of displaying the complicated geometrical details (see Fig. \ref{fig:VisualizationModelCURVES} and \ref{fig:VisualizationModelTECURVES}). %

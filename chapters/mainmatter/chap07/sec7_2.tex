@@ -2,7 +2,7 @@
 \section{方法}
 \label{sec7-2}
 
-\subsection{Work Flow at A Glance}
+\subsection{工作流程一览}
 \label{sec:overview}
 
 Figure \ref{fig:DataFlow7} illustrates the main steps taken in segmenting the heart from the CT information.
@@ -18,10 +18,10 @@ Finally, the resultant information is organized and rendered into a surface mode
 \label{fig:DataFlow7}
 \end{figure}
 
-\subsection{Preprocessing}
+\subsection{预处理}
 \label{sec:preprocessing}
 
-\subsubsection{Smoothing with Edge Preservation}
+\subsubsection{具有边缘保护作用的图像平滑处理}
 
 The pepper noises introduced in the stage of image acquisition will considerably affect the following segmentation.
 Thus the smoothing must be taken before any other processing steps.
@@ -33,7 +33,7 @@ The smoothing algorithm based on the following \emph{modified curvature diffusio
 \end{equation}
 where $I(\cdot)$ represents the input image, $c$ is the conductance function given by $c(|\nabla I|) = k^2/(k^2 + |\nabla I|^2)$ with a free parameter $k$, determining the contrast of edges. %
 
-\subsubsection{Binary Thresholding}
+\subsubsection{二值阈值滤波}
 
 The thresholding is introduced to convert the images into the ``well-featured" ones, in which most of the uninterested contents will be excluded by assigning them a zero intensity value, while the contents of interest in a bright and uniform intensity (see Fig. \ref{fig:BinaryThresholdFunc}): %
 \begin{equation}
@@ -51,7 +51,7 @@ I_{\text{output}} =
 %\label{fig:BinaryThresholdFunc}
 %\end{figure}
 
-\subsubsection{Gradients Calculation}
+\subsubsection{梯度幅值的计算}
 
 The gradient magnitude of the images need to be calculated to generate the so-called edge potential map, which can provide guidance to the evolution of the contours.
 The calculation can be performed by
@@ -76,7 +76,7 @@ where $I_{\sigma}$ denotes the output image, $I_{max}$ and $I_{min}$ represent t
 \label{fig:BinaryThresholdFunc}
 \end{figure}
 
-\subsubsection{Initial Contours Generation}
+\subsubsection{初始轮廓的生成}
 
 The initial contours will be generated using the fast marching method \cite{Sethian1999}, a numerical method used for the tracking of the propagating interface.
 The evolution begins from the appropriately selected seeding points.
@@ -96,7 +96,7 @@ The interface propagates inwards when $F < 0$; and propagates outwards when $F >
 If the speed function $F$ only depends the position of the point, then (\ref{eqn:Eikonal}) reduces to the Eikonal equation.
 The resultant images are the time-crossing map in which the time-of-arrival at every point are computed.
 
-\subsection{Geodesic ``Snakes" Evolution}
+\subsection{测地学活动轮廓的演进}
 
 The geodesic ``snakes" method \cite{Caselles1997}, based on the classical ``snakes" model \cite{Kass1988}, is aimed to implement the detection of the boundaries of multiple objects simultaneously without additional routines. %
 The idea of the classical model is to evolve a contour $\mathcal{C}$ such that the edge of the object can be detected, where the contour cannot deal with the change of its topology so that detecting more than one object in the image is impossible \cite{Caselles1997}. %.
@@ -157,15 +157,15 @@ equation (\ref{eqn:GeodesicDriver}) can be transformed to the following evolutio
 \end{equation}
 The solution to this problem is equivalent to the zero level-set of the steady state (i.e., $u_t = 0$) of (\ref{eqn:GeodesicDriver}).
 
-%\subsection{Iso-Surface Extraction}
-%
-%To visualize the surface model, the surface information should be firstly extracted by the marching cubes method \cite{Lorensen1987MC}.
-%As the initial step of surface extraction, arrays of cubes are created from the input with each cube consisting of eight pixels (four from one slice and the other four from the next slice).
-%Then the index for each cube is calculated by comparing the eight intensity values to the specified isovalue corresponding to the surfaces of the objects.
-%By referring to the triangulated cases with the indexes, the intersection patterns of the objects and the cubes can be roughly determined.
-%Then the precise edge intersections are computed using linear interpolation with the intensity values at each vertex of the cubes.
-%After that, the unit normals to the surface at each vertex of these cubes are computed via central differences.
-%The resulting triangles are then sent to the graphics systems and displayed by standard rendering techniques.
+\subsection{等值面的提取}
+
+To visualize the surface model, the surface information should be firstly extracted by the marching cubes method \cite{Lorensen1987MC}.
+As the initial step of surface extraction, arrays of cubes are created from the input with each cube consisting of eight pixels (four from one slice and the other four from the next slice). %
+Then the index for each cube is calculated by comparing the eight intensity values to the specified isovalue corresponding to the surfaces of the objects.
+By referring to the triangulated cases with the indexes, the intersection patterns of the objects and the cubes can be roughly determined.
+Then the precise edge intersections are computed using linear interpolation with the intensity values at each vertex of the cubes.
+After that, the unit normals to the surface at each vertex of these cubes are computed via central differences.
+The resulting triangles are then sent to the graphics systems and displayed by standard rendering techniques.
 % The isovalue representing the edge of the segmented target is selected.
 % Then the 3-D model of the target can be reconstructed.
 % That is the 3-D surface model of the lumen of the aorta. 

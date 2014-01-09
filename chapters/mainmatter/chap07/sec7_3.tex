@@ -2,7 +2,7 @@
 \section{实验与结果}
 \label{sec7-3}
 
-\subsection{Original Data and Experimental Setup}
+\subsection{原始数据与实验设置}
 
 Considering our aim and the requirements on the computation resources, the volume containing the whole heart was extracted from the original one that include the whole body trunk of an anonymous patient. %
 The dataset, in resolution of $0.4\text{mm} \times 0.4\text{mm} \times 0.6\text{mm}$, was acquired on a 128-slice CT modality (Siemens SOMATOM Definition Flash).
@@ -26,7 +26,7 @@ Numbers of experimental trials were carried out on the image dataset, applying d
 %Finally, the marching cubes method is used to visualize the segmented data.
 The experiments were executed on a desktop machine armed with Intel's 2.83GHz Core 2 Quad CPU and 4GB RAM.
 
-\subsection{Preprocessing}
+\subsection{预处理}
 
 As mentioned in Sec. \ref{sec:overview}, series of preprocessing were conducted before the evolution of the ``snakes":
 (i) the image smoothing preserving the edges;
@@ -66,7 +66,7 @@ The results provided the geodesic computation the \emph{time-crossing} map so th
 In this step, the only human intervention was the selection of the input seeding points, from which the computation would begin.
 The location of the seeds should be located interior of the targets, and the sign of the speed function $F$ in (\ref{eqn:Eikonal}) should be positive to ensure outwards propagation of the contours. %
 
-\subsection{Level Set Computation of Geodesic ``Snakes"}
+\subsection{测地学活动轮廓的水平集演进}
 
 The evolution of the geodesic ``snakes" started from the seeding points fed in previous step for the generation of the initial contours.
 The ``snakes" utilized the resultant initial contours as the map in which all the pixels were marked with the time when the fronts ever crossed them.

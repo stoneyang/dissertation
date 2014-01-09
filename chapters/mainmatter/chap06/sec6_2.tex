@@ -1,8 +1,8 @@
 
-\section{Methodologies}
+\section{方法}
 \label{sec6_2}
 
-\subsection{Overview}
+\subsection{概观}
 
 This section discusses the layout of the main methods used in processing and optimization of the meshes consisting the model surface.
 The surface model of the vasculature used in this work was generated from the CTA information which was acquired from some real patient.
@@ -14,13 +14,13 @@ First of all, the validation of the connectivity among the vertices in the image
 Secondly, the smoothing step is introduced in order to depress the bulges and sunken areas in the connected surface.
 Finally, the polygonal elements in the surface model are selected and part of them are deleted; the ``holes" left are patched and the geometry of the model is preserved as complete as possible. %
 
-\subsection{Connectivity Validation}
+\subsection{表面顶点的连接性检验}
 
 Before any processing steps, one routine must be done to ensure that the surface model considered is well-shaped that no extra polygons exist in defining the same piece of surface.
 This routine is designed to extract the polygons based on the geometric connectivity.
 Concretely, it can extract the cells (i.e., polygons and/or triangles) that share the common points (i.e., vertices).
 
-\subsection{Surface Smoothing}
+\subsection{表面的平滑处理}
 
 In the field of computer graphics and imaging, the visualization of curves and surfaces (both will be referred to as \emph{shapes}) both in two- or three-dimensional space are common, especially for the volumetric data from medical field. %
 The computation is in fact the proper approximation of the original shapes by the polygonal curves or polyhedral surfaces.
@@ -102,7 +102,7 @@ w_n = 0.54 + 0.46 \cos (n \pi / (N + 1) ).
 
 After smoothing the surface, the normal vectors (\emph{normals} in short) are computed for each polygonal mesh.
 
-\subsection{Polygons Decimation}
+\subsection{多边形面片的精简}
 \label{subsec:decimation}
 
 To eliminate the total number of polygons that consisting the model surface, an algorithm for the decimation of triangle meshes is employed in our approach \cite{Schroeder1992}.

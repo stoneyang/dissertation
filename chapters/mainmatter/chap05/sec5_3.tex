@@ -1,5 +1,5 @@
 
-\section{Methodologies}
+\section{方法}
 \label{sec5_3}
 
 This section discusses the design of the processing pipeline and details the principles of the consisting modules.
@@ -13,7 +13,7 @@ After that, the consisting polygons need to be subdivided under a specified crit
 
 %\subsection{Processing on Image-Based Surface Model}
 
-\subsection{Connectivity Validation and Largest Region Extraction}
+\subsection{连接性的检验与最大连接区域的提取}
 
 In this paper, the vasculature surface model is generated from the original medical volumetric data set by applying the approaches reported in our previous work \cite{Yang2014ICRA}. %
 In order to find the largest region spanning the surface of the vasculature, the connectivity among the vertices in the image-based surface model needs to be thoroughly validated at the beginning of the processing. %
@@ -26,7 +26,7 @@ In the present paper we implement the algorithm to extract the largest connected
 \label{fig:DataFlow5}
 \end{figure}
 
-\subsection{Surface Smoothing and Normals Computing}
+\subsection{表面的平滑处理与表面的法线的计算}
 
 There are plenty of methods used for the surfaces smoothing in visualization.
 To overcome the ``facets" by-produced during this approximation, an optimal surface smoothing algorithm treating this problem as low-pass filtering by extending Fourier analysis is adopted \cite{Taubin1996}. %
@@ -79,7 +79,7 @@ w_n = 0.54 + 0.46 \cos (n \pi / (N + 1) ).
 
 The normal vectors to the surfaces are computed after the surfaces are smoothed.
 
-\subsection{Surface Subdivision}
+\subsection{表面细分}
 
 A modified butterfly scheme for surface subdivision is used in order to refine the smoothed surface model \cite{Zorin1996}.
 This scheme is designed in the flavor of interpolating and has been proved to be useful in the circumstances of subdivision for the complex especially irregular surfaces.
@@ -102,7 +102,7 @@ The new scalar value for the midpoint on each edge of the triangulation is calcu
 %\end{itemize}
 Among the above cases, only the first one belongs to the regular case, whilst the rest belong to the extraordinary case.
 
-\subsection{Centerlines Extraction}
+\subsection{中心线提取}
 
 Centerlines, or medial axis, can be generally defined as the loci of the centers of the maximal inscribed disks (in 2D space) or spheres (in 3D space) inside an object.
 Conversely, the envelop of all maximal inscribed disks/spheres is the boundary/surface of the object that contains these disks/spheres \cite{Amenta2001}.

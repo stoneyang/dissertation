@@ -1,5 +1,5 @@
 
-\section{Methodologies}
+\section{方法}
 \label{sec4_1}
 
 This section discusses the design of the segmentation pipeline and details the principles of the consisting modules.
@@ -19,7 +19,7 @@ Finally the output contours are extracted and then visualized in the surface ren
 \label{fig:DataFlow4}
 \end{figure}
 
-\subsection{Tubular Objects Enhancement}
+\subsection{管状物体的增强}
 
 The tubular enhancement is a sort of multi-scale line filtering, whose scheme can be summarized as the ``tube-like" objects in the image are highlighted whilst the rest are attenuated. %
 To achieve this, the three dimensional multi-scale algorithm proposed by Sato \textit{et al.} \cite{Sato1998} is introduced.
@@ -56,9 +56,9 @@ In (\ref{eqn:LineMeasure}), the additional parameters $\gamma_{12}$, $\gamma_{23
 
 Additionally, different choices of the eigenvalues can equip the line filter with the abilities in detecting different shapes of the objects as shown in Table. \ref{tbl:Eigenvalues}. %
 
-\subsection{Preprocessing for Level Set Evolution}
+\subsection{水平集演进之前的预处理}
 
-\subsubsection{Speed Images Calculation}
+\subsubsection{特征图像的计算}
 
 Level set algorithms evolves the contours in the gradient field with ``sharp" variations in intensity values from the inner or outer area to the boundaries.
 The aim of the speed images is to provide this gradient field in the form of nicely shaped gradient images.
@@ -88,7 +88,7 @@ Dark spheres   & $\lambda_1 \approx \lambda_2 \approx \lambda_3 \gg 0$ \\
 \end{tabular}
 \end{table}
 
-\subsubsection{Initial Contours Evolution Using Colliding Fronts}
+\subsubsection{一种改进的Fast Marching方法}
 
 The aim of the colliding fronts module is to evolve the contours for the CURVES system from the user-defined seeding points.
 The colliding fronts method is implemented based on the principles of the fast marching algorithm \cite{Sethian1999}.
@@ -97,7 +97,7 @@ The output of this module is the dot production of the gradient field of arrival
 The level set initialization for the prolonged objects greatly benefit from this feature of the method.
 On the other hand, the method also shortens the computation time.
 
-\subsection{CURVES Evolution Model}
+\subsection{CURVES演进模型}
 
 The CURVES method \cite{Lorigo2001} is chosen as the functioning segmentation method because of the complex nature of the coronary arteries.
 It is highly effective in the segmentation of the complicated curvilinear structures in the volumetric medical images.
@@ -138,7 +138,7 @@ By incorporating the speed images $I_{\sigma}$ to the evolution equation (\ref{e
 \frac{\partial \mathcal{C}}{\partial t} = k \mathcal{N} - \frac{g'(I_{\sigma})}{g(I_{\sigma})} \varPi \left( \mathcal{H} \frac{\nabla I_{\sigma}}{ \left| \nabla I_{\sigma} \right| } \right).%
 \end{equation}
 
-\subsection{Surface Rendering}
+\subsection{等值面渲染}
 
 The surface information is extracted for the visualization by the marching cubes method \cite{Lorensen1987MC}.
 Cubes are created based on the input information and are organized into an array structure.
