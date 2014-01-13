@@ -98,7 +98,8 @@
                linkcolor=blue,%
                citecolor=blue,%
               plainpages=false,%
-            pdfstartview=FitH}
+            pdfstartview=Fit,%
+            pdfpagemode=UseNone}
 \AtEndOfPackage{\makeatletter\input{CASthesis.cfg}\makeatother}
 \oddsidemargin 1.5 true cm
 \if@twoside
