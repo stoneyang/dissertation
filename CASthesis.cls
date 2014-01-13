@@ -215,14 +215,14 @@
   \thispagestyle{empty}
   \begin{center}
     \vspace*{20pt}
-      \sf\zihao{-1} \CAST@value@englishtitle
+      \bf\zihao{-2} \CAST@value@englishtitle
     \vskip \stretch{3}
-      \normalfont\normalsize By  \\
-      \bf\zihao{4} \CAST@value@englishauthor
+      \normalfont\normalsize\bf By  \\
+      \bf\zihao{3} \CAST@value@englishauthor
     \vskip \stretch{2}
-      \normalfont\normalsize \CAST@label@englishstatement
+      \normalfont\normalsize\bf \baselineskip=1.56\baselineskip \CAST@label@englishstatement
     \vskip \stretch{2}
-      \normalfont\normalsize \CAST@value@englishinstitute
+      \normalfont\normalsize\bf \CAST@value@englishinstitute
     \vskip 20pt
       \normalfont\normalsize \CAST@value@englishdate
   \end{center}
