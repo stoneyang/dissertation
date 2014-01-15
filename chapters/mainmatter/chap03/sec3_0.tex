@@ -1,20 +1,15 @@
 
-Percutaneous transluminal coronary angioplasty (PTCA) has been proved to be a standard solution to most cardiovascular diseases (CVDs).
-The intravascular surgical robots enable the clinicians to perform the procedure with protection from occupational hazards.
-The robotic surgical simulator can provide the trainees a new vehicle to learn this skill much more conveniently and effectively.
-%Vessel models are the most important virtual scenarios required in this simulation training.
-%Vessel segmentation is an important step for the modeling of the vascular system.
-%One of the most critical features of the simulator is the virtual environment that is almost identical to the real anatomic structures.
-%The blood vessel model is an indispensable component of the virtual environment.
-The blood vessel model is the core component of the virtual environment that is almost identical to the real anatomic structures.
-Because of the adherence of the aorta and the bones, the ``clean'' segmentation of the aorta is a challenging task.
-In this paper, a robust and semi-automatic approach to segment the abdominal aorta from the computed tomography angiography (CTA) is developed.
-The proposed approach provides the geodesic active contours implementation with the edge potential maps acquired by applying nonlinear intensity mapping on the gradient images.
-A two-branching pipeline is built to achieve this goal: one branch for the edge potential feature computation, and the other for the generation of the initial level sets.
-In acquiring edge potential maps, the magnitude of gradient is computed pixel-wisely on the smoothed images.
-Meanwhile, the unrelated image contents are stripped carefully before the unidirectional fronts propagation driven by the fast marching algorithm started.
-%For the former branch, the images are smoothed and the magnitude of gradient is computed pixel-wisely and then the potential feature images are produced by applying a nonlinear intensity mapping on the previously acquired gradient maps.
-%For the latter branch, the fast marching algorithm is used to generate the initial level sets after the original images have been appropriately thresholded.
-Then the geodesic active contours method evolves the contours thus the edge of the aorta is met.
-Finally the surface information representing the vessel is extracted by the marching cubes method from the segmentation results.
-This approach has been proved successful for the construction of 3-D surface model of the aorta based on the CTA series.
+与真实解剖结构几乎完全一致的血管模型是仿真系统的虚拟环境中的重要组成部分。
+由于主动脉与脊椎在某些位置有接触，因此“干净”、完整的分割主动脉而不涉及到相邻的椎骨成为一项具有挑战性的工作。
+在本章中，我们研究并开发了一种用于从CTA信息中分割主动脉的鲁棒的、半自动的方法。
+该方法以经典的测地学活动轮廓算法为核心，其计算需要我们提供原始图像的边缘势场，和距离图。
+我们构建了一个分支型的计算管线来完成上述的两项计算。
+在计算原始图像的边缘势场方面，首先对原始图像进行平滑处理，然后计算其梯度幅值，最后利用S型函数将梯度图像映射为所需的边缘势场。
+同时，在计算距离图方面，首先对平滑后的原始图像进行阈值滤波处理，将大部分无关细节（如：皮肤、肌肉、骨骼，等）滤去，然后利用快速步进法演进血管对应区域，从而获得距离图。
+然后，测地学活动轮廓算法以边缘势场提供的图像梯度和距离图提供的演进距离信息为参照，进行活动轮廓的演进计算，直至该轮廓“抵近”欲分割目标的边缘。
+最后，分割所得结果经过二值阈值处理后，我们再利用行进立方体方法提取分割所得区域边缘的等值面，进而实现主动脉内腔的三维可视化。
+
+本章第一节介绍部分训练系统中血管的建模方法；
+第二节介绍完成本工作所用方法的数学原理以及实现；
+第三节首先介绍本工作的实验过程，然后展示了部分典型的结果；
+最后一节总结了本部分的工作。
