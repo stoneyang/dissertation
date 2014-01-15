@@ -2,18 +2,12 @@
 \section{方法}
 \label{sec3_2}
 
-In this section the overall processing pipeline is discussed and the techniques used for the lumen segmentation of the abdominal aorta from CTA are detailed.
-% The original data adopted in our work is a series of CTA images with the dimension of $512\times512\times90$.
-% The series are acquired from the trunk of the patient with CVDs.
+本节介绍主动脉内腔分割过程中各个环节的数学原理和实现细节。
 
-The overall design of the pipeline is illustrated in Fig. \ref{fig:DataFlow3}.
-The format and data type of original images are firstly converted.
-Then the conditioned data is fed into two branches to produce the two inputs required by the main segmentation module.
-One branch performs several preprocessing work on the images to produce the feature images. %, including smoothing, gradient magnitude computation, and intensity mapping.
-And the other branch computes the initial level sets of the images. %, including a mini level set branch which requires numbers of seeds.
-After the branches end the computation, their production are fed into the main segmentation module, where the actual interface evolution takes place.
-In the final phase, the output level sets are extracted and then visualized by using a surface rendering technique.
-%The parameters and seeds are provided manually and tuned repeatedly during the processing.
+整个处理流程的设计如图\ref{fig:DataFlow3}所示。
+原始医学图像进行数据格式的转换之后，作为同时开始的两项不同计算任务的输入：一项用于计算并生成边缘势场，另一项用于生成距离图。
+这两项计算完成后，其结果即作为主动脉内腔分割的核心环节的输入数据，为该环节提供演进计算的参考。
+最后，分割所得结果（即：主动脉内腔）经过亮度的反转变换，再利用行进立方体方法提取其等值面（即：边缘），进而通过表面渲染技术获得主动脉内腔模型的立体可视效果。
 \begin{figure}[t]
 \centering
 \includegraphics[width=3.2in]{figures/chap03/DataFlow.eps}
