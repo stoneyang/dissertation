@@ -17,7 +17,7 @@ To reduce the computation time, the region that contains the major branches of t
 \begin{figure}[t]
 \centering
 \includegraphics[width=2.5in]{figures/chap03/ROI.eps}
-\caption{A typical ROI extraction of the original slice.}
+\caption[ROI提取]{对一张原始图像进行典型的ROI提取。}
 \label{fig_roi}
 \end{figure}
 % Then the segmentation process was split into two branches first and then merged into the main evolution pipeline.
@@ -55,7 +55,7 @@ This made the evolution of the level sets driven by (\ref{eqn:Geodesic3}) propag
 %\subfloat[Nonlinear mapping using an S-shaped function ($m = -3$, $n = 20$)]{\includegraphics[width=1.2in]{fig/dcm_sigmoid.jpg}%
 \subfloat[]{\includegraphics[width=1.2in]{figures/chap03/dcm_sigmoid.eps}%
 \label{fig:Sigmoid}}
-\caption{Producing the feature image in three steps: (a) smoothing with edge preserving ($\text{conductance parameter} = 9.0$); (b) computation of magnitude of gradient with Gaussian kernel ($\sigma = 0.9$); (c) nonlinear mapping using an S-shaped function ($m = -3$, $n = 20$).}
+\caption[特征图像的生成步骤]{生成特征图像的三个步骤：(a)保护物体边缘的平滑处理（$\text{conductance parameter} = 9.0$）；(b)基于高斯核的梯度幅值的计算（$\sigma = 0.9$）；(c)利用S型函数进行非线性映射（$m = -3$, $n = 20$）。}
 %\caption{Producing the feature image.}
 \label{fig:PotentialImageGeneration}
 \end{figure*}
@@ -76,7 +76,7 @@ This made the evolution of the level sets driven by (\ref{eqn:Geodesic3}) propag
 %\subfloat[Binary thresholding]{\includegraphics[width=1.2in]{fig/dcm_out.jpg}%
 \subfloat[]{\includegraphics[width=1.2in]{figures/chap03/dcm_out.eps}%
 \label{fig:BinaryThresholding}}
-\caption{Level set evolution: (a) thresholding ($\text{lower threshold} = 300\text{HU}$, $\text{higher threshold} = 2000\text{HU}$); (b) initial level set evolution from one seeding point using fast marching method; (c) edge detection using geodesic active contours; (d) binary thresholding to inverse the pixel intensities (intensity of the light area: $255$, intensity of the dark area: $0$).}
+\caption[水平集演进]{水平集的演进：(a)阈值滤波（$\text{lower threshold} = 300\text{HU}$, $\text{higher threshold} = 2000\text{HU}$）；(b)从某一种子点开始、利用快速步进法进行的初始水平集演进；(c)利用测地学活动轮廓进行边缘检测；(d)利用二值阈值滤波完成像素亮度的反转（intensity of the light area: $255$, intensity of the dark area: $0$）。}%
 \label{fig:LevelSetEvolution}
 \end{figure*}
 
@@ -111,6 +111,6 @@ The final visualization model is depicted in Fig. \ref{fig:VisualizationModel}.
 \begin{figure}[t]
 \centering
 \includegraphics[width=1.1in]{figures/chap03/model.eps}
-\caption{3-D surface model of the lumen of the aorta.}
+\caption[主动脉内腔三维模型]{人体主动脉内腔的三维表面模型。}
 \label{fig:VisualizationModel}
 \end{figure} 
