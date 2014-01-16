@@ -11,6 +11,7 @@ mythesis_UTF8.pdf
 *.out
 *.out.bak
 *.synctex.gz
+*.synctex.gz(busy)
 *.thm
 *.toc
 *.brf
