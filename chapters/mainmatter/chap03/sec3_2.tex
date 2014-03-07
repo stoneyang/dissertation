@@ -17,60 +17,72 @@
 
 \subsection{预处理}
 
-Before the main processing begins, several necessary pretreatment on the original images should be done.
-By considering the requirements of the methods chosen for this job, the preprocessing should include the production of feature images, and the generation of input level sets.
-The feature images provide the main level set method with the ``maps" about where to stop, while the input level sets give the main functioning module the initial contours from where the actual interface evolution begins.
+对原始图像的若干预处理工作需要在主要的处理工作开始之前完成。
+考虑分割工作所选取的方法的需求，预处理应当包括特征图像的生成，以及输入水平集的生成。
+特征图像为测地学活动轮廓方法提供轮廓演进的终止位置，这正如一幅“地图”，其中标的何处是“平原”（指像素亮度均匀一致的区域），何处是“峡谷”（指像素亮度明显有别于周围的狭长区域）；
+而输入水平集则为测地学活动轮廓方法提供轮廓演进的起始轮廓，轮廓的最初位置由输入水平集所确定。
 
 \subsubsection{特征图像的生成}
+\label{sec:EdgePotential}
 
-%The branch of feature image production is depicted in Fig. \ref{fig:DataFlow}.
-Image smoothing is a necessary job due to the original series acquired from the medical modality are often mixed with some noisy pixels.
-What to take care of is that the original edges of the target (i.e., aorta) should be preserved as completely as possible while removing the noises.
-Bear this in mind, a level-set curvature method with variable conductance \cite{Whitaker2001} is chosen for the job.
-This method is good at enhancing and preserving edges, and is robust to the edge contrast.
-It can be described as the following \emph{modified curvature diffusion equation} (MCDE):
+对图像的平滑处理是一项必须的环节，该环节的目的在于除去在医学模态获取原始图像序列的过程当中所引入的噪声像素，这一现象是不可避免的。
+在平滑处理过程当中，目标（此处指主动脉）的原始边缘信息应当得到尽可能完整地保护。
+基于这些考虑，我们选择使用一种具有可变通透性的水平集曲率方法\cite{Whitaker2001}来完成这一环节的处理工作。
+该方法长于在图像平滑的过程中增强和保护边缘信息，且对边缘对比度变化具有很好的鲁棒性。
+该方法可以通过所谓的“改进型曲率扩散方程”（Modified Curvature Diffusion Equation，MCDE）来表达：
 \begin{equation}
 \label{eqn:MCDE}
 I_t = |\nabla I| \nabla \cdot c(|\nabla I|) \frac{\nabla I}{|\nabla I|},
 \end{equation}
-where $I = I(x, y, 0)$ represents the input image, $I_t(\cdot) = I(x, y, t)$ represents the output image generated over time $t$, and $c$ is the conductance function given by
-$c(|\nabla I|) = k^2/(k^2 + |\nabla I|^2)$ with $k$ a parameter which determines the contrast of boundaries that will have significant effects on the smoothing.
+其中，$I = I(x, y, 0)$表示输入图像，
+$I_t(\cdot) = I(x, y, t)$表示图像像素关于时间$t$的偏导数，
+$c$是通透性函数$c(|\nabla I|) = k^2/(k^2 + |\nabla I|^2)$，
+边界的对比度将会对图像的平滑显著的影响，它由参数$k$所决定。
 
-After that, the computation of gradient magnitude is performed on the resulting series to detect the edge of target.
-Since the feature images to be produced are required by the downstream geodesic active contours module, the most important step in this series of tasks is the computation of the magnitude of gradient pixel-wisely for the images:
+由于即将生成的特征图像是随后进行的活动轮廓演进的必须信息，因此对图像像素的梯度计算即在此完成平滑处理后的图像上进行。
+这一环节的目的是探测目标的边缘。
+图像像素的梯度计算基本原理可表述如下：
 \begin{equation}
 \label{eqn:Gaussian}
 I_{grad} = \exp(-|(\nabla \ast G) \cdot I_t|),
 \end{equation}
-where $I_{grad}$ is magnitude of the gradient at some point in the image, and $\nabla \ast G$ means the first order derivative of a Gaussian operator.
+其中，$I_{grad}$表示图像中某像素点的梯度的幅值，
+$\nabla \ast G$代表对高斯算子进行一阶求导运算。
 
-The computed edge images are mapped through a nonlinear relation (usually represented in the form of an S-shaped function) in order to get the feature images:
+随后，上述计算所得的梯度幅值图像将通过一个非线性关系映射生成所需的特征图像，本文中，我们采用了S型函数：
 \begin{equation}
 \label{eqn:Sigmoid}
 I_{\sigma} = (I_{max} - I_{min}) \cdot \frac{1}{1 + \exp\left(-\frac{I_{grad} - n}{m}\right)} + I_{min},
 \end{equation}
-where $I_{\sigma}$ denotes the intensity values of the output image, $I_{max}$ and $I_{min}$ represent the maximum and minimum of the output intensity values, respectively; $m$ is a constant that controls the width of the input intensity range, and $n$ is a constant that gives an intensity around which the range is centered.
-The mapping results may vary due to different choices of the parameters for the individual modules in the pipeline.
+其中，$I_{\sigma}$表示输出图像的像素亮度，
+$I_{max}$与$I_{min}$分别代表输出像素亮度的最大值和最小值，
+$m$是一个常量，它控制输入图像中参与映射的像素亮度的区间，
+$n$则是一个确定该区间中心点的位置的常量。
+此映射的结果取决于上述参数的选择。
 
 \subsubsection{初始水平集的半自动生成}
 
-%The initial level set generation branch is parallel to the above one, which is responsible for the computation of the values required by the main evolution as its input level sets (see Fig. \ref{fig:DataFlow}).
-% This branch is a mini level set that takes numbers of seeding points (or seeds) before the computation begins.
-The first pass is a thresholding procedure that will strip out most of the irrelevant details of the images.
-After the thresholding is done, the fast marching algorithm \cite{Sethian1999} could focus its evolution on the target with the appropriately selected seeding points.
-For the curve $\mathcal{C}$ evolving over time $t$
+初始水平集的生成工作与\ref{sec:EdgePotential}所述之工作同时进行，该环节的目的在于生成活动轮廓演进所需的输入水平集。
+首先，我们利用阈值环节将图像中与水平集演进无关的内容细节（如：内脏，骨骼，等）滤去。
+然后，我们引入快速行进法\cite{Sethian1999}。
+这时，由于无关细节已经从图像中除去，因此该方法能够得以高效地进行处理。
+需要指出的是，在快速行进法开始时，我们需要手工输入该运算在图像中的起始位置（点的坐标），这也是“半自动生成”的由来。
+
+对关于时间参数$t$演化的曲线：
 \begin{equation}
 \label{eqn:Curves}
 \mathcal{C}(t) = \{(x,y) | T(x,y) = t\},
 \end{equation}
-where $(x,y)$ represents some point in the image, and $T(x,y)$ is the time of arrival.
-The algorithm solves the following Eikonal equation (which is in fact a stationary Hamilton-Jacobi equation)
+其中，$(x,y)$表示图像中某点的二维坐标，
+$T(x,y)$表示该曲线到达该点的时刻。
+该方法实际上是求解下面的Eikonal方程（稳态的Hamilton-Jacobi方程）
 \begin{equation}
 1 = | \nabla T | F,
 \end{equation}
-where $F$ denotes the velocity in the normal direction at some point $(x,y)$.
-$\mathcal{C}$ propagates inwards when $F < 0$; it propagates outwards when $F > 0$.
-The results of this computation are the time-crossing map in which contains of a series of curve interfaces at different time of evolution.
+其中，$F$表示图像内某点$(x,y)$处，该曲线沿着其发现方向演进的速度。
+当$F < 0$时，$\mathcal{C}$向“内”演进；反之，则向“外”演进。
+计算的结果是一幅到达时间图，图中的各点所对应的函数值是曲线$\mathcal{C}$演进过程中到达该点的时刻。
+因此，此结果事实上记录了整个演进过程。
 
 \subsection{测地学活动轮廓方法}
 
