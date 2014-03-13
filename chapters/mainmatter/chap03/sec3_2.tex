@@ -86,67 +86,56 @@ $T(x,y)$表示该曲线到达该点的时刻。
 
 \subsection{测地学活动轮廓方法}
 
-%The module that actually working towards the segmentation is illustrated in Fig. \ref{fig:DataFlow}.
-At this point, the geodesic active contours module has its two inputs available: the feature images and the initial level sets.
-The feature images provide the maps for the interface evolution initialized by the input level sets.
-The classical ``snakes" or active contour models for boundary detection were proposed by Kass et al. \cite{Kass1988}.
-The idea is to evolve a contour $\mathcal{C}$ such that the edge of the object can be detected.
-This evolution is achieved by minimizing an energy functional whose (local) minimum can be found at the edge of the object.
-% This energy functional of the contour $\mathcal{C}_0$ in the classical snakes approach is given by (the denotation is adopted from \cite{Caselles1997})
-% \setlength{\arraycolsep}{0.0em}
-% \begin{eqnarray}
-% \label{eqn:Snakes}
-% E(\mathcal{C})&{}={}&\alpha \int_0^1 |\mathcal{C}'(q)|^2 dq + \beta \int_0^1 |\mathcal{C}''(q)|^2 dq \nonumber \\
-                  % &&{-}\:\lambda \int_0^1 |\nabla I ( \mathcal{C}(q) ) | dq,
-% \end{eqnarray}
-\setlength{\arraycolsep}{5pt}
-% where $\mathcal{C}(q)$ denotes the parametrized planar curve $\mathcal{C}(q):[0,1]\rightarrow \mathrm{R}^2$, $I:[0,a]\times [0,b]\rightarrow \mathrm{R}^{+}$ represents an image on which the edge detection task is carried out, and $\alpha$, $\beta$, and $\lambda$ are all real positive constants.
-% The first two components control the smoothness of the curves to be detected, and the last one propagates the curve outwards (or inwards) until it ``touches" boundaries of the objects in the given image.
-% The classical problem is to find the curve $\mathcal{C}$ that minimizes the energy functional $E$, for the given constants $\alpha$, $\beta$, and $\lambda$.
-However, the curve in this approach cannot deal with the change of its topology so that detecting more than one object in the image is impossible without additional procedures \cite{Caselles1997}.
-Caselles \textit{et al.} \cite{Caselles1997} improved the classical ``snakes" by proposing the geodesic active contours method, which allows to detect both the internal and external boundaries of several objects simultaneously.
-This method incorporates the concepts of geodesic computation and level set evolution.
-The proposed model is a particular case of the classical model:
-\begin{equation}
+获得上述两个结果后，我们利用测地学活动轮廓方法进行血管内壁的分割计算。
+如上所述，特征图像为这一轮廓演进过程提供一个类似地形图的指引。
+
+经典的“蛇”或活动轮廓模型最早由Kass等人\cite{Kass1988}提出，该方法主要用于图像中的物体边缘的探测。
+其主导思想是通过演进一个轮廓（或“围线”）$\mathcal{C}$，以检测得出目标物体的边缘信息。
+这一演进过程实际上是通过使一个能量泛函最小化来实现的，取得这个（局部）最小值的位置恰好是目标物体的边缘。
+
+然而，该方法中的轮廓是无法控制其自身的拓扑的。
+这时，若无额外的处理，该方法则无法完成同时探测多个目标的任务\cite{Caselles1997}。
+Caselles等人\cite{Caselles1997}改进了经典的“蛇”模型——提出了测地活动轮廓方法，该方法允许围线同时探测图像中的多个目标的内部边缘和外部边缘。
+这一方法引入了测地学计算和水平集演进的概念，其数学模型事实上是经典模型的一个特例：\begin{equation}
 \label{eqn:ParticularSnakes}
 E(\mathcal{C}) = \alpha \int_0^1 | \mathcal{C}'(q) |^2 dq - \lambda \int_0^1 | \nabla I_{s} ( \mathcal{C}(q) ) |dq,
 \end{equation}
-where $\mathcal{C}(\cdot)$ denotes the parametrized planar curve $\mathcal{C}(q):[0,1]\rightarrow \mathrm{R}^2$, $I_{s}:[0,a]\times [0,b]\rightarrow \mathrm{R}^{+}$ represents an image on which the edge detection task is carried out.
+其中，$\mathcal{C}(\cdot)$表示参数化的平面内曲线$\mathcal{C}(q):[0,1]\rightarrow \mathrm{R}^2$，
+$I_{s}:[0,a]\times [0,b]\rightarrow \mathrm{R}^{+}$代表含有待探测目标物体的图像。
 
-To minimize the functional defined by (\ref{eqn:ParticularSnakes}), the curve at the points of maxima $|\nabla I_{s}|$ must be located.
-During this process, certain level of smoothness of the curve also needs to be kept.
-In (\ref{eqn:ParticularSnakes}), $|\nabla I_{s}|$ can be substituted by $-g(|\nabla I_{s}|)$, where $g(\cdot): [0, \infty) \rightarrow \mathrm{R}^{+}$ is a monotonically decreasing function. %such that $\lim_{x \to \infty} g(x) = 0}$.
-Hence, a general energy functional is obtained
+为最小化式(\ref{eqn:ParticularSnakes})所定义的泛函，通过取得最大值的点$|\nabla I_{s}|$的曲线的位置必须确定。
+在这一过程中，还必须保持该曲线的某种程度的平滑性。
+在式(\ref{eqn:ParticularSnakes})中，$|\nabla I_{s}|$可以由$-g(|\nabla I_{s}|)$所替换，其中$g(\cdot): [0, \infty) \rightarrow \mathrm{R}^{+}$是一个单调递减函数。
+由此可以得到如下的能量泛函：
 \begin{equation}
 \label{eqn:GeneralEnergy}
 E(\mathcal{C}) = \alpha \int_0^1 | \mathcal{C}'(q) |^2 dq + \lambda \int_0^1 g( | \nabla I_{s} ( \mathcal{C}(q) ) | )^2 dq.
 \end{equation}
-The aim of the evolution is trying to obtain
+演进的目的是为了获得
 \begin{equation}
 \label{eqn:MinModel}
 \min \int_0^1 g(|\nabla I_{s} ( \mathcal{C} (q) )|) |\mathcal{C}' (q)| dq.
 \end{equation}
-% Thus the problem has been shifted from the minimization of (\ref{eqn:ParticularSnakes}) to the geodesic computation.
-In (\ref{eqn:GeneralEnergy}), $g(\cdot)$ is equivalent to the speed of the evolution of the curve.
-And it is also dependent upon the geometry of the image content.
-For the ideal edges of the objects to be detected, the choice of parameter $g(\cdot)$ is independent of their geodesic computation.
-So the minimum given in (\ref{eqn:MinModel}) can be rewritten as:
+在式(\ref{eqn:GeneralEnergy})中，$g(\cdot)$等同于曲线演进的速度。
+而且它也依赖图像细节的几何性质。
+为了获得理想的目标物体的边缘探测结果，参数$g(\cdot)$的选择是独立于测地学计算的。
+因此，式(\ref{eqn:MinModel})所表示的最小值可以重新表示为：
 \begin{equation}
 \label{eqn:MinModel2}
 \min \int_0^1 g(I_{\sigma}) |\mathcal{C}' (q)| dq.
 \end{equation}
-To obtain the minimum given in (\ref{eqn:MinModel2}), the following Euler-Lagrange associated with this model needs to be calculated
+为了获得式(\ref{eqn:MinModel2})所表示的最小值，需要计算该模型的Euler-Lagrange方程：
 \begin{equation}
 \label{eqn:EvolutionModel}
 \frac{\partial \mathcal{C}(t)}{\partial t} = g(I_{\sigma}) \kappa \mathcal{N} - (\nabla g(I_{\sigma}) \cdot \mathcal{N}) \mathcal{N},
 \end{equation}
-where $\kappa$ is the curvature of $\mathcal{C}(t)$, $\mathcal{N}$ is the unit inward normal vector. %, and the right-hand side of the equation is the computation of Euler-Lagrange.
-This equation presents the way $\mathcal{C}$ evolving towards the boundaries of the objects to be detected.
-The initial curve is marked as $\mathcal{C}(0) = \mathcal{C}_0$, which evolves to a (local) minimum of (\ref{eqn:MinModel2}).
+其中$\kappa$表示曲线$\mathcal{C}(t)$的曲率，$\mathcal{N}$是指向“内部”的单位法向量。
+该方程刻画了曲线$\mathcal{C}$向欲探测的目标物体不断演进的过程。
+初始曲线为$\mathcal{C}(0) = \mathcal{C}_0$，它的演进目标就是式(\ref{eqn:MinModel2})所表示的（局部）最小值。
 
-According to (\ref{eqn:EvolutionModel}), this evolution will stop when $\frac{\partial \mathcal{C}(t)}{\partial t} = 0$, meaning that the boundaries of the objects are detected.
-Suppose that the curve $\mathcal{C}$ is a level-set of a function $u(\cdot):[0,a] \times [0,b] \rightarrow \mathrm{R}$.
-Regarding (\ref{eqn:MinModel2}) and (\ref{eqn:EvolutionModel}), the former geodesic calculation is transformed to finding the steady state solution of the following equation:
+根据式(\ref{eqn:EvolutionModel})，该演进过程将会在$\frac{\partial \mathcal{C}(t)}{\partial t} = 0$时停止，这意味着目标物体的边缘被成功探知。
+假设曲线$\mathcal{C}$是一个函数的水平集$u(\cdot):[0,a] \times [0,b] \rightarrow \mathrm{R}$。
+考虑式(\ref{eqn:MinModel2})和式(\ref{eqn:EvolutionModel})，之前的测地学计算即可转换为寻找如下方程的稳态解：
 \begin{equation}
 \label{eqn:LevelSetModel}
 \begin{split}
@@ -155,57 +144,36 @@ Regarding (\ref{eqn:MinModel2}) and (\ref{eqn:EvolutionModel}), the former geode
                               & = g(I_{\sigma}) |\nabla u| \kappa + \nabla g(I_{\sigma}) \cdot \nabla u,
 \end{split}
 \end{equation}
-where $\kappa = \textrm{div}\left(\frac{\nabla u}{|\nabla u|}\right)$.
-The right-hand side of this equation is the Euler-Lagrange of (\ref{eqn:MinModel2}).
-% Here in this equation, $u$ is the embedding function mentioned above that deforms according to $u_t = \beta |\nabla u|$, where $\beta$ is a function computed on the level sets.
-% From the perspective of image segmentation, a positive real constant $c$ is introduced in order to detect the boundaries of a non-convex object using a convex initial curve
-% \begin{equation}
-% \label{eqn:ImprovedLevelSetModel}
-% \begin{split}
-% \frac{\partial u}{\partial t} & = g(I) |\nabla u| \textrm{div} \left(\frac{\nabla u}{|\nabla u|}\right) + c g(I) |\nabla u| \\
-                              % & = g(I) ( \kappa + c ) |\nabla u|.
-% \end{split}
-% \end{equation}
+其中，$\kappa = \textrm{div}\left(\frac{\nabla u}{|\nabla u|}\right)$。
+该方程的等号右侧即为式(\ref{eqn:MinModel2})中的Euler-Lagrange。
 
-In order to increase the ``attractive force" to the contour towards the edges and allow the detection of non-convex objects, the term $cg(I_{\sigma})|\nabla u|$ is added to (\ref{eqn:LevelSetModel}):
+为了增加作用于围线的“吸引力”（该吸引力将围线向着目标物体的边缘吸引），并且允许探测非凸性目标物体，向式(\ref{eqn:LevelSetModel})中引入$cg(I_{\sigma})|\nabla u|$，可得：
+(\ref{eqn:LevelSetModel}):
 \begin{equation}
 \label{eqn:Geodesic1}
 \frac{\partial u}{\partial t} = |\nabla u| \textrm{div} \left(g(I_{\sigma}) \frac{\nabla u}{|\nabla u|}\right) + c g(I_{\sigma}) |\nabla u|,
 \end{equation}
-where $c$ is a constant and $c \in \mathrm{R}^+$.
-Regarding (\ref{eqn:LevelSetModel}), the above equation can be rewritten as
+其中，$c$为一常量，满足$c \in \mathrm{R}^+$。
+考虑式(\ref{eqn:LevelSetModel})，上述方程又可以表示为：
 \begin{equation}
 \label{eqn:Geodesic2}
 \frac{\partial u}{\partial t} = g( I_{\sigma} )( c + \kappa ) |\nabla u| + \nabla u \cdot \nabla g(I_{\sigma}).
 \end{equation}
-% which means that the level sets move according to
-The above equation can be transformed to the following equation
+此方程可以转换为下面的方程：
 \begin{equation}
 \label{eqn:Geodesic3}
 \frac{\partial \mathcal{C}}{\partial t} = g(I_{\sigma}) ( c + \kappa ) \mathcal{N} - ( \nabla g(I_{\sigma}) \cdot \mathcal{N} ) \mathcal{N}.
 \end{equation}
-The solution to this object detection problem is equivalent to the zero level-set of the steady state ($u_t = 0$) of (\ref{eqn:Geodesic1}).
-%Comparing (\ref{eqn:EvolutionModel}) and (\ref{eqn:Geodesic3}), one can find an added term $c g(I_{\sigma}) \mathcal{N}$, which is corresponding to the
-% For the ideal edges of the objects to be detected, the choice of parameter $g$ is independent of their geodesic computation.
-% It is a very simple edge detector which is given by the following equation
-% \begin{equation}
-% \label{eqn:EdgeDetector}
-% g = \frac{1}{1+\|\nabla \hat{I}\|^p},
-% \end{equation}
-% where $\hat{I}$ denotes a Gaussian-smoothed image of the original $I$ and $p$ is the exponential of $\hat{I}$.
-% What we are interested in is the time when the curve interface corresponding to the edges of the target.
-% After the evolution stopped, a binary thresholder is provoked to take a ``snapshot" of this interface.
-% This resulting level set should be the edges of the objects to be detected.
+这里，探测目标物体边缘的问题的解就等价于式(\ref{eqn:Geodesic1})的稳态（$u_t = 0$）的零水平集。
 
 \subsection{等值面的提取}
 
-To visualize the surface model, the surface information should be firstly extracted by the marching cubes method \cite{Lorensen1987MC}.
-As the initial step of surface extraction, arrays of cubes are created from the input with each cube consisting of eight pixels (four from one slice and the other four from the next slice).
-Then the index for each cube is calculated by comparing the eight intensity values to the specified isovalue corresponding to the surfaces of the objects.
-By referring to the triangulated cases with the indexes, the intersection patterns of the objects and the cubes can be roughly determined.
-Then the precise edge intersections are computed using linear interpolation with the intensity values at each vertex of the cubes.
-After that, the unit normals to the surface at each vertex of these cubes are computed via central differences.
-The resulting triangles are then sent to the graphics systems and displayed by standard rendering techniques.
-% The isovalue representing the edge of the segmented target is selected.
-% Then the 3-D model of the target can be reconstructed.
-% That is the 3-D surface model of the lumen of the aorta.
+要实现表面模型的可视化，就必须提取目标物体的表面信息（即已经获得的目标物体的边缘信息）。
+这里，我们采用了行进立方体方法\cite{Lorensen1987MC}。
+作为表面提取的初始步骤，该方法基于输入信息创建了立方体群。
+其中，对于每个立方体的八个顶点，四个位于某一帧图像，另外四个则位于与之相邻的另外一帧图像。
+然后，该方法通过比较八个顶点的亮度与指定的目标物体的等值面的值，来计算每个立方体的索引值。
+通过引用这些索引值所对应的三角形相交关系，目标物体与立方体群的相交关系就能够粗略地确定。
+之后，精确的边缘相交关系则通过计算各立方体中的各个顶点处的亮度的线性插值来获得。
+随后，该方法利用中心差分方法来计算表面模型位于这些立方体的各个顶点位置的法向量。
+所得到的三角形面片则传输至计算机的图形处理系统，并通过标准的渲染技术显示。
