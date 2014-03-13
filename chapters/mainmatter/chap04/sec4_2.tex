@@ -2,30 +2,28 @@
 \section{方法}
 \label{sec4_1}
 
-This section discusses the design of the segmentation pipeline and details the principles of the consisting modules.
-Fig. \ref{fig:DataFlow4} presents the block diagram of the processing pipeline in the bird's-eye view.
-The data type of the pixels in the original images is firstly converted.
-After the images are appropriately thresholded, the data needs to be enhanced appropriately, right before sending the data to the downstream modules.
-The enhancement should highlight the ``tube-like" objects, which are the coronary arteries in this paper.
-Next the intensities of the enhanced objects are tuned for the following processing.
-Then two computations are performed simultaneously to generate the speed images and the initial contours for the CURVES system.
-After that, the results are fed into the CURVES module, where the actual fronts propagation occurs.
-The CURVES system can evolve the input contours with the reference of the speed images until the contours ``touches" the wall of the tiny vessels.
-Finally the output contours are extracted and then visualized in the surface rendering way.
+本节讨论分割流程的设计，并详细介绍各个环节的原理。
+图\ref{fig:DataFlow4}宏观地展示了处理流程的方框图。
+首先，原始数据中像素的数据类型被转换，以便进行后续的增强计算。
+然后，我们利用设定恰当的阈值的阈值滤波器滤去了多数与本章工作无关的图像内容。
+随后，我们引入了图像增强环节对图像中的目标管状物体进行增强。
+接着，对增强后的图像进行两个并列进行的计算，以生成特征图像和输入水平集。
+此后，我们利用改进的测地学活动轮廓模型进行演进，从而获得图像中微小而复杂的冠状动脉的边缘信息。
+最后，血管的边缘被提取并通过面渲染的方式显示。
 \begin{figure}[t]
 \centering
 \includegraphics[height=3.2in,width=3.2in]{figures/chap04/DataFlow.eps}
-\caption{Collaboration diagram of the segmentation pipeline.}
+\caption{冠状动脉分割流程。}
 \label{fig:DataFlow4}
 \end{figure}
 
 \subsection{管状物体的增强}
 
-The tubular enhancement is a sort of multi-scale line filtering, whose scheme can be summarized as the ``tube-like" objects in the image are highlighted whilst the rest are attenuated. %
-To achieve this, the three dimensional multi-scale algorithm proposed by Sato \textit{et al.} \cite{Sato1998} is introduced.
+管状物体增强是一种多尺度的线滤波，这种策略可以总结为：突出图像中的“管状”目标，同时抑制其余的图像内容。
+为了实现这一策略，本文引入了Sato等人\cite{Sato1998}提出的三维多尺度算法。
 
-To shape the filter response to certain width of lines and suppress the noisy effects, the pixels need to convolving with the second order derivatives of a Gaussian kernel.
-This computation is an equivalent to the calculation of the Hessian matrix $\mathcal{H}$ of the three-dimensional image $I(\cdot)$:
+欲将滤波器的响应整形为某特定宽度的线形并抑制噪声的影响，就需要对像素与Gaussian核的二阶导数进行卷积运算。
+这一计算等价与计算三维图像$I(\cdot)$的Hessian矩阵$\mathcal{H}$：
 \begin{gather}
 \label{eqn:Hessian}
 \mathcal{H} = \nabla^2 I =
@@ -33,45 +31,36 @@ This computation is an equivalent to the calculation of the Hessian matrix $\mat
 I_{xx} & I_{xy} & I_{xz} \\ I_{yx} & I_{yy} & I_{yz} \\ I_{zx} & I_{zy} & I_{zz}
 \end{bmatrix},
 \end{gather}
-where $I_{xx} = \frac{\partial^2 I}{\partial^2 x}$, $I_{xy} = \frac{\partial^2 I}{\partial x \partial y}$, to name a few.
-And all these partial second order derivatives are the convolutions with the second order derivatives of a Gaussian kernel $G(x; \sigma)$ with the standard deviation $\sigma$:
+其中，$I_{xx} = \frac{\partial^2 I}{\partial^2 x}$，$I_{xy} = \frac{\partial^2 I}{\partial x \partial y}$，以此类推。
+而且，所有这些二阶偏导数都是与Gaussian核$G(x; \sigma)$进行卷积的结果，此处，Gaussian核的标准差为$\sigma$：
 \begin{equation}
 \label{GaussianConvolution}
 I_{xx} = I \ast \frac{\partial^2 G}{\partial^2 x}.
 \end{equation}
-The eigenvalues of (\ref{eqn:Hessian}) are $\lambda_1$, $\lambda_2$, and $\lambda_3$ with their values in descending order.
-Their associated eigenvectors are $e_1$, $e_2$, and $e_3$, respectively.
+式(\ref{eqn:Hessian})的特征值为：$\lambda_1$，$\lambda_2$，$\lambda_3$，$\lambda_1 > \lambda_2 > \lambda_3$。
+与之相对应的特征向量分别是：$e_1$，$e_2$，$e_3$。
 
-When $\lambda_1 \approx 0$ and $\lambda_2 \approx \lambda_3 \ll 0$, the line measure can be written as
+当$\lambda_1 \approx 0$ and $\lambda_2 \approx \lambda_3 \ll 0$时，线测度（line measure）可以表示为：
 \begin{equation}
 \label{eqn:LineMeasure}
 \lambda_{123} =
 \begin{cases}
 \left| \lambda_3 \right| \left( \frac{\lambda_2}{\lambda_3} \right)^{\gamma_{23}} \left( 1 + \frac{\lambda_1}{\left| \lambda_2 \right|} \right)^{\gamma_{12}}, & \lambda_1 \le 0 \\
 \left| \lambda_3 \right| \left( \frac{\lambda_2}{\lambda_3} \right)^{\gamma_{23}} \left( 1 - \alpha \frac{\lambda_1}{\left| \lambda_2 \right|} \right)^{\gamma_{12}}, & \frac{\left| \lambda_2 \right|}{\alpha} > \lambda_1 > 0 \\
-0, & \text{otherwise}.
+0, & \text{其它}.
 \end{cases}
 \end{equation}
-In (\ref{eqn:LineMeasure}), the additional parameters $\gamma_{12}$, $\gamma_{23}$, and $\alpha$ are all positive constant, where $\gamma_{12} \in [0, \infty)$ is used to discriminate between the branching structures and the noises as well as pseudo-branches, $\gamma_{23} \in [0, \infty)$ regulates the sharpness, and $\alpha \in (0, 1.0]$ maintains the asymmetrical characteristics of the last terms of the function for all possible $\lambda_1$.
+在式(\ref{eqn:LineMeasure})中，
+额外的参数$\gamma_{12}$，$\gamma_{23}$，以及$\alpha$均为正的常量，
+其中，
+$\gamma_{12} \in [0, \infty)$用于分辨分支状结构和噪声，以及伪分支，
+$\gamma_{23} \in [0, \infty)$控制锐度，
+对于任意$\lambda_1$，$\alpha \in (0, 1.0]$保持函数中最后一项对称性。
 
-Additionally, different choices of the eigenvalues can equip the line filter with the abilities in detecting different shapes of the objects as shown in Table. \ref{tbl:Eigenvalues}. %
-
-\subsection{水平集演进之前的预处理}
-
-\subsubsection{特征图像的计算}
-
-Level set algorithms evolves the contours in the gradient field with ``sharp" variations in intensity values from the inner or outer area to the boundaries.
-The aim of the speed images is to provide this gradient field in the form of nicely shaped gradient images.
-In the gradient images, the magnitude of the gradient at each pixel is calculated.
-Next the gradient images $I_{\nabla}$ are transformed into the speed images $I_{\sigma}$ by applying the nonlinear relation:
-\begin{equation}
-\label{eqn:Sigmoid}
-I_{\sigma} = (I_{max} - I_{min}) \cdot \frac{1}{1 + \exp\left(-\frac{I_{\nabla} - n}{m}\right)} + I_{min},
-\end{equation}
-where $I_{max}$ and $I_{min}$ are the two extreme values of the output intensity values, $m$ is a constant that controls the window width of the input intensity, and $n$ is a constant that defines the center of the window.
+此外，具有不同的特征值的线形滤波器能够用于增强不同形状的目标物体（见表\ref{tbl:Eigenvalues}）。
 \begin{table}
 \renewcommand{\arraystretch}{1.3}
-\caption{Eigenvalue sets for detecting different shapes}
+\caption{增强不同形状所需的特征值}
 \label{tbl:Eigenvalues}
 \centering
 \begin{tabular}{l||c}
@@ -88,51 +77,76 @@ Dark spheres   & $\lambda_1 \approx \lambda_2 \approx \lambda_3 \gg 0$ \\
 \end{tabular}
 \end{table}
 
+\subsection{水平集演进之前的预处理}
+
+\subsubsection{特征图像的计算}
+
+水平集算法驱动围线在梯度场中演进。
+在这种梯度场中，像素的亮度在目标物体的边缘处发生“尖锐的”变化。
+特征图像的目的就是提供一幅形状完好的梯度场。
+在获得梯度场的过程中，我们首先计算各个像素处的梯度的幅值。
+然后，梯度图像$I_{\nabla}$被转换为特征图像$I_{\sigma}$，这一转换通过应用S型函数来完成:
+\begin{equation}
+\label{eqn:Sigmoid}
+I_{\sigma} = (I_{max} - I_{min}) \cdot \frac{1}{1 + \exp\left(-\frac{I_{\nabla} - n}{m}\right)} + I_{min},
+\end{equation}
+其中，
+$I_{max}$与$I_{min}$分别表示输出亮度的最值，
+$m$是一个常量，它控制输入像素亮度的的窗口宽度，
+$n$则是一个确定该窗口中心位置的常量。
+
 \subsubsection{一种改进的Fast Marching方法}
 
-The aim of the colliding fronts module is to evolve the contours for the CURVES system from the user-defined seeding points.
-The colliding fronts method is implemented based on the principles of the fast marching algorithm \cite{Sethian1999}.
-However, this method requires two seeds for each round of evolution such that the area between the seeds can be extracted.
-The output of this module is the dot production of the gradient field of arrival times of the two wavefronts.
-The level set initialization for the prolonged objects greatly benefit from this feature of the method.
-On the other hand, the method also shortens the computation time.
+波面碰撞（colliding fronts）——一种改进的快速行进法，其目的是为后续的分割工作生成输入水平集。
+这种方法的实现建立在经典的快速行进法\cite{Sethian1999}的基础上。
+与经典方法不同的是，在同一轮计算中，我们可以同时为其提供两个种子点，两个种子点就意味着两个波面同时传播，直到它们相互“碰撞”为止。
+这样，我们就可以较快地获得水平集结果。
 
 \subsection{CURVES演进模型}
 
-The CURVES method \cite{Lorigo2001} is chosen as the functioning segmentation method because of the complex nature of the coronary arteries.
-It is highly effective in the segmentation of the complicated curvilinear structures in the volumetric medical images.
-In addition, the criterion of CURVES method also takes the local smoothness of the boundaries to be detected (i.e., the inner wall of the coronary arteries) into account.
+在本章中，我们引入了CURVES方法\cite{Lorigo2001}来对结构复杂的冠状动脉进行分割。
+该方法在分割立体医学数据中的复杂线状结构十分有效。
+此外，CURVES方法的准则还考虑到了欲分割目标边缘的局部平滑性。
 
-This method is a modification of the geodesic active contours method developed in Caselles \textit{et al.} \cite{Caselles1997}.
-As the extensive research of the geodesic active contours, CURVES is a level set algorithm that models the tiny vessels as spatial curves with arbitrarily complicated topology \cite{Lorigo2001}. %
-CURVES evolves the level sets to the boundaries of the targets based on the criterion of the minimization of the following energy functional
+该方法是对Caselles等人\cite{Caselles1997}所提出的测地学活动轮廓的一项改进。
+作为测地学活动轮廓的扩展研究，CURVES是一种水平集算法，它将细微的血管抽象为具有任意复杂度的拓扑结构的空间曲线\cite{Lorigo2001}。
+CURVES将水平集演进到目标物体的边缘，这一过程基于如下能量泛函的最小化：
 \begin{equation}
 \label{eqn:CURVES}
 \oint_0^1 g\left( \left| \nabla I \left( \mathcal{C} \left(  s \right) \right) \right| \right) \left| \mathcal{C}'\left( s \right) \right| ds,
 \end{equation}
-where $\mathcal{C}\left( s \right): [0,1] \rightarrow \mathrm{R}^3$ is a one-dimension curve, $I\left( \cdot \right): [0, a] \times [0, b] \times [0, c] \rightarrow [0, \infty)$ is an image on which the curve evolution takes place, and $g\left( \cdot \right): [0, \infty) \rightarrow \mathrm{R}^+$ is a monotonically decreasing function. %
+其中，
+$\mathcal{C}\left( s \right): [0,1] \rightarrow \mathrm{R}^3$是一个一维曲线，
+$I\left( \cdot \right): [0, a] \times [0, b] \times [0, c] \rightarrow [0, \infty)$是曲线演进所在的图像，
+$g\left( \cdot \right): [0, \infty) \rightarrow \mathrm{R}^+$则是一个单调递减函数。
 
-The minimization of this functional can be achieved by searching for the gradient descent direction of the functional itself, which means the Euler-Lagrange equations associated with (\ref{eqn:CURVES}) needs to be computed. %
-Thus the geodesic flow equation that controls the contour evolution in this process of minimization can be obtained as follows
+该泛函的最小化可以通过搜索泛函自身的梯度下降方向来实现。
+也就是说，需要计算与式(\ref{eqn:CURVES})相关的Euler-Lagrange方程。
+于是，我们可以得到如下的测地流方程，该方程控制围线在这一过程当中的演进：
 \begin{equation}
 \label{eqn:Evolution}
 \frac{\partial \mathcal{C}}{\partial t} = k \mathcal{N} - \frac{g'}{g} \varPi \left( \mathcal{H} \frac{\nabla I}{ \left| \nabla I \right| } \right),
 \end{equation}
-where $\mathcal{H}$ is the Hessian matrix of the image $I$, $k$ is the Euclidean curvature, $\mathcal{N}$ is the unit normal vector, $\varPi(\cdot)$ is the projection operator projects the argument onto the normal space. %
-The update equation can be obtained as
+其中，
+$\mathcal{H}$是图像$I$的Hessian矩阵，
+$k$是欧式曲率，
+$\mathcal{N}$单位法向量，
+$\varPi(\cdot)$是投影算子，它将一个参数投影至正则空间。
+据此，我们可以得到更新方程：
 \begin{equation}
 \label{eqn:Update}
 \frac{\partial v}{\partial t} = \mathcal{F} \left( \nabla v(x, t), \nabla^2 v(x, t) \right) + \frac{g'}{g} \nabla v(x, t) \mathcal{H} \frac{\nabla I}{ \left| \nabla I \right| },
 \end{equation}
-where $v(\cdot): \mathrm{R}^3 \rightarrow [0, \infty)$ is the embedding function of the curve $\mathcal{C}$, $\mathcal{F} \left( \nabla v(x, t), \nabla^2 v(x, t) \right)$ is the smaller eigenvalue of the matrix $P_{\nabla v} \nabla^2 v P_{\nabla v}$. %
-The matrix $P_q$ is defined as a projector which projects some vector onto the normal plane of vector $q \in \mathrm{R}^3$:
+其中，$v(\cdot): \mathrm{R}^3 \rightarrow [0, \infty)$是曲线$\mathcal{C}$的嵌入函数，
+$\mathcal{F} \left( \nabla v(x, t), \nabla^2 v(x, t) \right)$是矩阵$P_{\nabla v} \nabla^2 v P_{\nabla v}$较小的特征值。
+矩阵$P_q$可定义为一个投影算子，它能将某向量投影到向量$q \in \mathrm{R}^3$张成的正则空间：
 \begin{equation}
 \label{eqn:ProjectionOperator}
 P_q = I_0 - \frac{qq^T}{\left| q \right|^2},
 \end{equation}
-where $I_0$ denotes the identity matrix.
+其中，$I_0$代表单位矩阵。
 
-By incorporating the speed images $I_{\sigma}$ to the evolution equation (\ref{eqn:Evolution}), the evolution in our case can be obtained as
+通过向演进方程(\ref{eqn:Evolution})中引入特征图像$I_{\sigma}$，这种情形的演进可以表示成：
 \begin{equation}
 \label{eqn:Application}
 \frac{\partial \mathcal{C}}{\partial t} = k \mathcal{N} - \frac{g'(I_{\sigma})}{g(I_{\sigma})} \varPi \left( \mathcal{H} \frac{\nabla I_{\sigma}}{ \left| \nabla I_{\sigma} \right| } \right).%
@@ -140,11 +154,4 @@ By incorporating the speed images $I_{\sigma}$ to the evolution equation (\ref{e
 
 \subsection{等值面渲染}
 
-The surface information is extracted for the visualization by the marching cubes method \cite{Lorensen1987MC}.
-Cubes are created based on the input information and are organized into an array structure.
-Each cube consists of eight pixels (each four pixels are from a slice).
-The index of each cube is labeled by comparing the intensity values of every pixel to the isovalue of the surfaces.
-Next the patterns of the intersection between objects and cubes are initially determined based on the triangulated cases.
-Then the precise intersection are computed using linear interpolation with the intensity values at each vertex.
-The unit normals to the surface are calculated via central differences for the vertices of the cubes.
-Finally the generated triangles are ready for the surface rendering. 
+用于可视化的表面信息通过行进立方体方法\cite{Lorensen1987MC}来获得。
