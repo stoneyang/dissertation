@@ -3,45 +3,44 @@
 \label{sec3_3}
 
 \subsection{实验场景与数据}
-Many experiments were carried out using different parameters for the validation of the approach to segment the aorta from CTA.
-In our case, the CTA series in DICOM format had been converted to the form of XML first.
-Then the converted data was fed into the feature image production branch and input level sets generation branch.
-The resulting data from the two branches were sent to geodesic active contours module in order to generate the final results.
-Finally, the marching cubes method is used to visualize the segmented data.
-The experiments were all run on a machine with Intel's 2.83GHz Core 2 Quad CPU and 4GB RAM.
 
-The input series was obtained by a 128-slice Siemens SOMATOM Definition Flash CT with the slice thickness of 0.6mm.
-And the series contains the patient's entire abdominal aorta.
-For illustrative purposes, a typical slice was selected from the series.
-To reduce the computation time, the region that contains the major branches of the abdominal vasculature in the selected image were cropped (see Fig. \ref{fig_roi}).
+为了验证本章所提出的方法对于从CTA中分割主动脉内腔的有效性，并在此基础上获得尽可能满意的结果，我们利用不同的参数进行了实验。
+首先，以DICOM格式存储的原始CTA序列要转换成XML格式。
+然后，被转换后的数据被同时传输至生成特征图像和输入水平集的两个分支当中。
+随后，这两个分支的计算结果作为测地学活动轮廓的的输入。
+最后，利用行进立方体方法来实现分割结果的提取。
+所有实验运行于一台配有Intel 2.83GHz Core 2 Quad CPU以及4GB内存的台式计算机上。
+
+原始数据利用Siemens的SOMATOM Definition Flash CT来获取，该设备属于128排CT，图像帧间距为$0.6\text{mm}$。
+该数据序列中含有病人的完整主动脉信息。
+为了叙述方便，本章选取了其中的一帧来说明实验的主要过程。
+在实验中，为了缩短计算时间，我们从原始序列中特意截取了含有主动脉及其主要分支的区域（见图\ref{fig_roi}）。
 \begin{figure}[t]
 \centering
 \includegraphics[width=2.5in]{figures/chap03/ROI.eps}
 \caption[ROI提取]{对一张原始图像进行典型的ROI提取。}
 \label{fig_roi}
 \end{figure}
-% Then the segmentation process was split into two branches first and then merged into the main evolution pipeline.
-%This two-branching structure is built due to the two essential requirements of geodesic active contours module: the feature images and initial level sets.
 
 \subsection{特征图像的计算}
-In the feature image production branch, the following preprocessing tasks were performed sequentially:
+
+在计算特征图像的分支中，我们需要逐个完成下面的三个任务：
 \begin{enumerate}
-\item removing noises without affecting the edges;
-\item computing the gradient magnitude pixel-wisely;
-\item mapping the intensity into the required feature.
+\item 在不对边缘造成影响的前提下去除图像中的噪声；
+\item 计算各像素的梯度的幅值；
+\item 将梯度幅值图像映射为满足需要的特征图像。
 \end{enumerate}
-At the beginning, a level-set curvature method with variable conductance was utilized to perform the smoothing task.
-It is an edge-preserving smoothing method that can remove the unnecessary noises from the images while preserving the nature of the boundaries of the objects.
-The image was smoothed nicely and the boundaries of the aorta even the minor vessels (which means weaker edges) were preserved (see Fig. \ref{fig:Smoothing}).
-Then the gradient magnitude module was introduced to fulfill the requirements of gradient computing.
-It computes the magnitude of the gradient pixel-wisely for the image by performing the convolution with the first order derivatives of a Gaussian kernel defined by (\ref{eqn:Gaussian}).
-%The only parameter of the kernel is its deviation $\sigma$ and we set it to 0.9.
-The edges of the vessels, bones, and skins were extracted completely in the resulting image (see Fig. \ref{fig:Gradient}).
-After computing the magnitude of the gradient, the non-linear intensity mapping was employed to generate the edge potential map.
-The choices of the parameters in (\ref{eqn:Sigmoid}) heavily depends on extreme values of the pixel intensities in the gradient image.
-In this case, to reverse the relationship between objects (in low intensities in the gradient map) and their edges (in high intensities in the gradient map), $m$ was set to be a negative value and $n$ to be a positive value which is larger than $|m|$.
-The mapping produced the expected feature image with the proximities of the edges of the objects in zero intensity (see Fig. \ref{fig:Sigmoid}).
-This made the evolution of the level sets driven by (\ref{eqn:Geodesic3}) propagated faster in the ``flat area" (with uniformly high intensities), whilst much slower (in a speed of about zero) in the ``ridge" (with rapid decreasing intensities).
+首先，我们利用具有可变通透度的水平集曲率方法进行图像的平滑降噪处理。
+该方法作为一种保护边缘的平滑方法，能够在有效除去图像中的噪声的同时，很好地保护目标物体的边缘特征。
+从图\ref{fig:Smoothing}中可以看到，图像中的噪声得到了有效的抑制，而主动脉甚至是一些相对细小的血管（意味着较为薄弱的边缘）都得到了保持。
+然后，我们引入梯度幅值模块来进行图像中各像素的梯度幅值计算。
+该计算通过对式(\ref{eqn:Gaussian})中所定义的Gaussian核的一阶偏导数进行卷积运算来实现。
+从图\ref{fig:Gradient}中可以看到，血管，骨骼，以及皮肤的边缘处的梯度幅值较高（意味着较大的亮度变化）。
+完成梯度幅值的计算之后，我们采用了一个非线性的映射关系来生成所需的特征图像。
+式(\ref{eqn:Sigmoid})是一个S型函数，在这里，参数的选择极大地依赖于梯度幅值图像中像素亮度的极值。
+在本文中，为了实现目标物体（梯度幅值图像中亮度较低区域）与其边缘（梯度幅值图像中亮度较高区域）的反转，$m$必须设定为一个负数，$n$必须设定为一个正数，且$n > |m|$。
+通过这个映射获得的特征图像如图\ref{fig:Sigmoid}所示，其中的目标物体的边缘均为低亮度，而其所包围的区域则为高亮度。
+这使得随后进行的由式(\ref{eqn:Geodesic3})所驱动的水平集演进在“平坦区域”（具有均一的高亮度）内速度较快，而在“峡谷”（具有急剧减低的亮度）附近速度极慢（接近于零）。
 \begin{figure*}[t]
 \centering
 %\subfloat[Smoothing with edge preserving (Conductance parameter = 0.9)]{\includegraphics[width=1.2in]{fig/dcm_smoothing.jpg}%
@@ -81,33 +80,27 @@ This made the evolution of the level sets driven by (\ref{eqn:Geodesic3}) propag
 \end{figure*}
 
 \subsection{水平集演进}
-The initial level set generation branch works for the level sets that required by the geodesic active contours module.
-In this process, the thresholding module was called first to trim off the irrelevant organs with lower intensities, such as lungs, liver, kidneys, bowels, stomach, etc. (see Fig. \ref{fig:Threholding}).
-%In our case, we set the lower and upper threshold values at 300HU (HU is short for Hounsfield Unit) and 2000HU, respectively.
-This can further reduce the hunger for memory and dramatically shorten the computation time.
-When finished this, the fast marching module is provoked to generate the initial interfaces.
-One seed located interior of the region representing the aorta was fed to this module in this two dimensional image.
-% And these seeds evolved the interfaces surrounding themselves respectively towards each other (see Fig. \ref{fig:FastMarching}).
-And the time of arrival $T(x,y)$ given in (\ref{eqn:Curves}) were computed (see Fig. \ref{fig:FastMarching}).
-Considering the prolonged geometric nature of the aorta and the characteristics of the algorithm, multiple seeding points inside the space representing the aorta should be fed in the three dimension case to acquire better results and much shorter computation time.
-% We set the stopping time for the fast marching filter in order to shorten the time for the generation of initial level sets.
 
-% \subsection{Geodesic Evolution}
-The geodesic active contours evolution began working when all the preceding computation finished.
-The module took the feature image and the initial contours as its inputs.
-The contours evolved by the drive defined by (\ref{eqn:Geodesic3}) with the feature image as their reference.
-The segmentation module evolved the contours until the edges were met (see Fig. \ref{fig:GeodesicActiveContours}).
-After that, a binary thresholding step was performed to fill the inner area of the final contours as the light zone while the outer area as the dark zone.
-This result is illustrated in Fig. \ref{fig:BinaryThresholding}.
-All the parameters chosen manually to make the drive suitable to evolve the contour to the expected results were reused in the three dimensional case.
+生成初始水平集的计算与上述计算同时进行，其目的是为测地学活动轮廓的演进提供每一步的形状提示。
+在这一过程当中，我们首先引入了阈值计算来滤去输入图像（原始图像）当中的与本步骤无关的内容细节，例如：肝脏，双肾，肠道，胃，等等（见图\ref{fig:Threholding}）。
+这个处理能够进一步降低计算任务对内存的占用，同时能够明显地缩短计算时间。
+随后，我们引入了快速行进法来生成初始的传播界面。
+我们制定了位于主动脉内部的一点作为种子点。
+计算过程中，在图像中的某一点，将计算式(\ref{eqn:Curves})中界面到达该点的时刻$T(x,y)$（见图\ref{fig:FastMarching}）。
+注意到主动脉所具有的细长的几何特征，以及算法的特性，我们在对完整序列的实验中，沿着主动脉的中心线附近提供了一系列的种子点，这进一步缩短了计算时间，同时获得了更好的计算结果。
+
+测地学活动轮廓的演进以特征图像和输入水平集为初始信息，由式(\ref{eqn:Geodesic3})所驱动。
+由图\ref{fig:GeodesicActiveContours}可以看到，这一演进过程一直进行，直到轮廓到达目标物体的边缘。
+随后，我们引入二值阈值滤波，将最终轮廓的“内部”转换为高亮度区域，而轮廓的“外部”则转换为低亮度区域，以便随后的等值面提取（见图\ref{fig:BinaryThresholding}）。
+这里，所有通过本实验手动选定的各个参数均可以直接应用于三维（即完整序列）的情形。
 
 \subsection{基于分割结果的表面重建}
-Finally, the resulting volume were processed using the marching cubes method \cite{Lorensen1987MC}.
-The isovalue corresponding to the edge of the lumen of abdominal aorta was picked manually.
-Here the higher threshold value of the binary thresholder was provided as the isovalue for the isosurface extraction.
-This ensured that the rendered surface representing the surfaces of the lumen of the aorta.
-The final visualization model is depicted in Fig. \ref{fig:VisualizationModel}.
-%From this figure, we can see that the lumen of the aorta was extracted successfully using the approach described here.
+
+最后，分割所得到的体数据信息将通过行进立方体方法\cite{Lorensen1987MC}进行处理，以获得目标的等值面信息。
+等值面的值对应于主动脉内腔边缘的像素亮度值。
+这里，之前的二值阈值滤波中的阈值上限被选为等值面的值。
+这确保了随后所渲染的表面模型表示主动脉的内腔表面。
+最终的可视化模型如图\ref{fig:VisualizationModel}所示。
 \begin{figure}[t]
 \centering
 \includegraphics[width=1.1in]{figures/chap03/model.eps}
