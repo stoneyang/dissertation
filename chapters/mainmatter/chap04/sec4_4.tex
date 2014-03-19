@@ -3,18 +3,18 @@
 \label{sec4_4}
 %The conclusion goes here.
 
-The three dimensional visualization of the blood vessels plays an important role in the construction of the virtual scenario for the robotic surgical simulator.
-Further, the visualization of the coronary arteries is the most critical and difficult work.
-Because of the complex spatial topologies, details can be easily lost in the process of segmentation.
-In this paper, a vasculature segmentation method based on tubular-enhanced CURVES has been developed.
-Then the process of the experiment was presented and the results were demonstrated.
-The experimental results showed that the proposed approach is capable of enhancing the tiny dark vessels and visualizing the geometric details of them.
+在上一章，我们提到三维血管模型在构建仿真手术系统中的虚拟解剖环境工作中的重要作用。
+作为三维血管模型的一部分，冠状动脉的三维模型对于心血管介入手术的仿真的作用不言而喻。
+由于其天然的复杂空间结构，冠状动脉的细节容易在图像的获取，以及后续的图像分割等过程中丢失。
+本章中，我们提出了一种基于管状物体增强的CURVES血管分割方法。
+然后介绍了实验的主要过程，展示了这些过程中的典型结果。
+实验结果表明，本章所提出的方法能够有效地对细微且亮度较低的血管结构进行增强，并能够将其细节完整分割。
 
-The tubular feature of coronary arteries was enhanced and the speed images were generated.
-Meanwhile, the initial contours for the CURVES method were computed by a modified version of fast marching method in another process.
-The actual level sets evolution began after the above computation finished and the evolution took a specified number of iterations to detect the coronary arteries.
-At the end of the segmentation, the resulting pixels were all conversed in their intensities.
-Finally the data representing the surface of the arteries was extracted by the marching cubes method.
+首先，冠状动脉的管状特征得到增强。
+然后，同时计算生成了增强后图像的特征图像和输入水平集。
+第三，利用CURVES这一扩展的测地学活动轮廓方法分割得到了冠状动脉的主要细节信息。
+最后，利用行进立方体方法对分割结果进行了等值面提取。
 
-Our future plans are the further optimization of the blood vessel models for the simulation with virtual tools of the robotic surgical simulator.
-The principle work will be the decimation of the quantity of the triangles consisting the blood vessels and the improvements of the visualization effects of the virtual scenario. 
+至此，本章与第三章的工作完成了虚拟心血管系统的构建。
+但是，作为心血管介入手术的仿真中的虚拟解剖环境，我们还应当考虑其与虚拟手术工具（即：虚拟导丝/虚拟导管）的可交互性等问题。
+从下一章开始，我们将介绍与这方面问题相关的工作。

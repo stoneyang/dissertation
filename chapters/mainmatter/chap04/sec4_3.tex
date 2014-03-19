@@ -4,38 +4,37 @@
 
 \subsection{医学数据与实验设置}
 
-The original chest CTA series was acquired by a 128-slice Siemens SOMATOM Definition Flash CT.
-The slice thickness was $0.6 \text{mm}$ and the in-slice resolution was $0.4 \times 0.4 \text{mm}^2$.
-Since the work was all on the coronary arteries, the volume contained the whole heart (i.e., ROI, which is the abbreviation of \textit{region of interest}) was cropped from the original data as shown in Fig. \ref{fig:Original}. %
+原始的胸部CTA影像序列同样由Siemens公司的128排CT（SOMATOM Definition Flash）从真实病例获得。
+帧间距为$0.6 \text{mm}$，帧内分辨率为$0.4 \times 0.4 \text{mm}^2$。
+由于本章的全部工作都针对冠状动脉，因此，我们将包含完整心脏区域的部分从整个原始数据剥离出来（见图\ref{fig:Original}）。
 
-Numbers of experiments were conducted with different sets of parameters to segment the coronary arteries from CTA for the testament of the approach in this paper.
-In our case, the original CTA series in DICOM format had been converted to the form of XML first; and the data type of pixels are converted for the incoming computation.
-Next the converted data was enhanced by the module which was implemented based on the algorithm developed in \cite{Sato1998}.
-Then the tubular enhanced data was send to the following modules to perform calculations of speed image production and input level sets generation.
-The two set of the resulting data from the two computation pipelines were transferred to the CURVES module in order to generate the final fronts evolution results.
-Finally, the marching cubes method was employed to extract the iso-surface corresponding to the wall of the coronary arteries.
-All the experiments were performed on a machine with Intel's 2.83GHz Core 2 Quad CPU and 4GB RAM.
+为了获得较好的分割结果，我们进行了一系列实验，以获得更合适的参数。
+首先，在这些实验中，我们仍然对剥离出来的体数据的存储格式和像素的数据类型进行转换，以便于随后进行的计算。
+然后，我们对转换后的数据进行增强，该工作采用\ref{sec:4_2_2}中所介绍的算法\cite{Sato1998}进行。
+其次，增强后的影像数据将被同时用于生成影像的特征图像和输入水平集。
+再次，我们引入CURVES算法在特征图像和输入水平集的基础上来完成冠状动脉的分割。
+最后，分割结果通过行进立方体方法进行等值面的提取，再由计算机图形系统显示提取结果。
+本章中的全部实验均在一部搭载Intel 2.83GHz Core 2 Quad CPU和4GB内存的台式计算机上完成。
 
 \subsection{管状物体的增强及其后处理}
 
-Before the tubular enhancement started, a global binary thresholding was performed in order to provide the enhancing filter with the focus on the tiny bright tubular objects.
-To achieve this, the thresholder was called to trim the irrelevant contents in the images, e.g., dark lung regions with negative intensity values, bright bone regions with large positive intensity values, etc. %
-As shown in Fig. \ref{fig:Binary1}, the intensity values of the regions within the interval between the lower threshold and the upper threshold were uniformly assigned a unique intensity value, i.e., $255$ in our case; the intensity values of the rest regions were uniformly assign a zero intensity value. %
+在管状物体增强之前，我们对输入的数据进行了二值化阈值滤波，以使增强环节的作用能够更集中于细微的明亮管状目标上。
+为了达到这一目的，我们利用阈值滤波器除去了输入影像中与本章工作目的无关的细节内容，例如：亮度较低的肺部，亮度较高的骨骼，等等。
+如图\ref{fig:Binary1}所示，亮度在阈值上下限之间的像素被重新赋予了一个新的亮度值，本章中，我们将其设定为$255$；而亮度在阈值上下限意外的像素则一律被重新赋予零亮度值。
 
-Referring to the shape prior guidelines listed in Table. \ref{tbl:Eigenvalues}, the tubular enhancement filter was fed the parameters to detect the bright tubular objects, i.e., coronary arteries. %
-Among these parameters, $\sigma$ controls the diameter of cross-section of the tubular objects to be enhanced, $\gamma_{12}$ is the measure of the tube similarity, and $\gamma_{23}$ is used for the recovery of vessel regions with inhomogeneous contrast or intensity loss. %
-As shown in Fig. \ref{fig:Vesselness}, the tiny vessels including the coronary arteries and the vessels in lung areas were enhanced with a small $\sigma$ whilst the tubular structures with cross-section diameters larger than this value were not enhanced. %
+参照表\ref{tbl:Eigenvalues}所列写的形状先验约束，我们为管状增强滤波器设置了探测明亮管状目标（即：冠状动脉）的参数值。
+在这些参数中，$\sigma$控制要增强的管状目标物体的横截面的直径，$\gamma_{12}$是管状相似性测度，$\gamma_{23}$则被用于恢复非齐对比度或者亮度损失的血管区域的情形。
+正如图\ref{fig:Vesselness}，包括冠状动脉和位于肺部区域内的血管在内的具有较小的$\sigma$值的细微血管都获得增强，而具有较大$\sigma$值（即：较大的横截面直径）的管状结构并没有被增强。
 
-The intensity values of the enhanced tubular objects were relatively low and scattered in a wide range.
-This is a mass for the selection of the intensity value in the following processing steps.
-To deal with it and facilitate this situation, some intensity transformation step was needed.
-The nonlinear intensity mapping filter and the binary threshold filter were the candidates.
+增强后的管状目标物体的像素亮度相对较暗，且亮度值的分布较为分散。
+这给后续的工作环节中所遇到的像素选择带来不便。
+为了解决这种问题，从而使后续的处理易于进行，有必要在实验中引入像素亮度的变换。
+本章中，我们圈定了非线性亮度映射和二值化阈值滤波作为完成这一工作的候选方法。
 
-Equation (\ref{eqn:Sigmoid}) showed that the nonlinear intensity mapping transformed the input image into the image with partial enhancement and partial attenuation.
-With the well chosen parameters, the intensity values corresponding to the targeting objects in this case were enlarged and the rest part of the images in lower intensities were all depressed as near zero intensity areas. %
-Because of the mapping characteristics of the sigmoid functions, the intensity values of the bright tubular structures were not uniformly distributed and stayed at the relatively low levels (see Fig. \ref{fig:Sigmoid}). %
-In another test, the binary threshold filter extracted the pixels with the intensities in the specified range and assigned them with a unique large intensity value as discussed above (see Fig. \ref{fig:Binary2}). %
-Comparing the result of the two candidates, the binary threshold filter was selected to improve the results of the precedent tubular enhancement filter (see Fig. \ref{fig:DataFlow}). %
+式(\ref{eqn:Sigmoid})表明非线性亮度映射将输入图像变换为某一亮度范围内的像素获得增强而其余像素的亮度被明显削弱的图像。
+只要提供恰当选取的参数，目前已经获得增强的影像中，对应于目标物体的亮度将得以增强，而剩余部分的亮度将被降低。
+在另外一组采用二值化阈值滤波器的测试中，正如上文所述，亮度落在特定阈值上下限之间的像素重新赋予新的高亮度，而为亮度落在特定阈值上下限之外的像素统一位置为零（见图\ref{fig:Binary2}）。
+对比这两种方法的效果，我们选择二值化滤波器来改善之前管状物体增强所得到的结果（见图\ref{fig:DataFlow}）。
 \begin{figure}[t]
 \centering
 \includegraphics[width=2.8in]{figures/chap04/original.eps}
