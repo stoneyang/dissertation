@@ -1,16 +1,11 @@
 
-%Cardiovascular diseases are among the most fatal illnesses in the world.
-%Percutaneous coronary intervention is the gold standard in the past decades due to the much less trauma and quick recovery.
-%On the other hand, for the guidance of the fluoroscope required by the procedure, the clinicians have to suffer high risks of tumors and other diseases.
-%Intravascular robotic systems are applied to change this situation.
-%Hence the clinicians need to participate full training projects to ensure the flexible manipulation of the systems.
-The computer-aided surgical simulation aims to provide an economic tool of effectiveness and convenience for the training process.
-In building this simulation system, the construction of the virtual anatomic environment is one of the major tasks.
-It provides the virtual tools with the scenario in which they are manipulated by the trainee.
-In intravascular surgery simulation, the surface model of the blood vessels is the most important part of the virtual environment.
-In order to achieve better performances in the simulation of path planning and navigation, the surface model based on real patient's CTA data needs further process.
-We proposed in this paper an approach to extract the centerlines of each segment of the image-based surface model of the blood vessels.
-The surface model is firstly processed to check the connectivity of the consisting polygons in order to extract the largest connected region within the surface.
-Next, the resulting surface is smoothed by a windowed sinc function kernel with proper parameters.
-After the normal vectors of the smoothed surface are computed, the surface is subdivided and the centerlines of the surface model are computed by using the power crust algorithm. %
-The experimental results show that the approach is capable of extracting the centerlines of the vessel model.
+在前两章中，我们介绍了有关基于CTA的人体心血管三维模型的分割与可视化的基础性工作。
+在心血管介入手术的仿真中，为了改善和提高心血管系统模型与虚拟手术工具的交互性能，还需这一基于CTA的表面模型进行进一步的处理。
+为行进中的虚拟手术工具提供基准的空间位置参考，就需要计算出血管模型的几何特征；为提高血管模型与虚拟手术工作的交互性能，以提高仿真度，就需要在不明显破坏模型的真实性的前提下，对模型的构成进行精简。
+在本章中，我们提出了一种用于计算血管模型中心线的方法。
+该方法首先检查基于CTA的血管模型中，各顶点的连接关系，进而提取血管模型的最大连接区域。
+然后，利用windowed sinc函数对所得区域进行平滑处理。
+其次，计算各个多边形面片的法向量。
+再次，为提高中心线的准确性，我们对平滑后的表面模型进行了细分。
+最后，我们引入power crust算法计算了表面模型的中心线。
+实验结果表明，我们所提出的方法能够完成血管表面模型的中心线的提取计算。
