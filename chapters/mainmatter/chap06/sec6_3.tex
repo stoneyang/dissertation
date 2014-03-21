@@ -102,18 +102,6 @@ Table \ref{tbl:Decimate} illustrates the effects of the decimation algorithm.
 Figure \ref{fig:Decimate} depicts the visualization results of the decimation with typical parameters.
 Observing the results, visualization in Figures \ref{fig:Decimate90} and \ref{fig:Decimate99} contain acceptable amounts of polygons.
 However, the visualization in fig. \ref{fig:Decimate99} unveiled obvious alterations in its geometry.
-
-\subsection{讨论}
-
-本章实验中用到的计算机程序都是利用C++实现的。
-其中的一些计算方法的实现则采用了VTK\cite{Schroeder2000VTK}中的实现。
-
-在检验表面模型中相邻顶点的连接性的过程中，我们将所采用的算法设置为提取最大连接区域的模式。
-为了抑制图像处理过程中所引入的噪声网格的影响，我们采用了一种表面平滑算法通过轻微地改变相关顶点的位置来除去这些网格。
-平滑表面的算法具有两个关键的可设置参数，分别用于设置算法的带宽和迭代次数。
-通过实验发现，平滑算法的迭代次数与平滑程度呈正相关关系，即：迭代次数越多，表面则越平滑。
-另一方面，平滑算法的带宽与平滑程度则呈现出负相关关系，即：带宽越狭窄，表面越光滑。
-需要指出的是，平滑算法在平整表面的同时，对表面的几何特征有轻微的破坏。
 \begin{table}[t]
 \renewcommand{\arraystretch}{1.3}
 \caption[削减率与削减计算后的表面模型的多边形数量]{削减率与削减计算后的表面模型的多边形数量}
@@ -128,6 +116,59 @@ However, the visualization in fig. \ref{fig:Decimate99} unveiled obvious alterat
 \hline
 \end{tabular}
 \end{table}
+
+\subsection{验证削减后的表面模型的交互性能}
+
+我们进行了若干组的测试来验证不同精简率的血管模型与虚拟导丝\cite{Mi2013ROBIO}在仿真环境中的交互性能。
+表\ref{tbl:FPS1}列出了本章中所选取的血管模型片段在经过不同精简率处理的结果模型与显示刷新率（frames per second，fps）之间的关系。
+表\ref{tbl:FPS2}则列出了完整的血管模型（包含主动脉与冠状动脉）不同精简率处理的结果模型在与fps之间的关系。
+从这些结果可以得出，我们采用了精简率为$99\%$的完整血管模型用于后续的交互仿真研究。
+\begin{table}[t]
+\renewcommand{\arraystretch}{1.3}
+\caption[精简率与fps——情形I]{精简率与fps——情形I}
+\label{tbl:FPS1}
+\centering
+\begin{tabular}{c||r r r r r}
+\hline
+精简率($\%$)    & $10$ & $50$ & $75$ & $90$ & $99$ \\
+\hline
+仿真初始fps              & $30$ & $35$ & $38$ & $41$ & $42$ \\
+\hline
+仿真平均fps              &  $6$ & $10$ & $15$ & $18$ & $30$ \\
+\hline\hline
+是否完成仿真？(是/否)        &  否  &  否  & 是  & 是  & 是  \\
+\hline
+\end{tabular}
+\end{table}
+\begin{table}[t]
+\renewcommand{\arraystretch}{1.3}
+\caption[精简率与fps——情形II]{精简率与fps——情形II}
+\label{tbl:FPS2}
+\centering
+\begin{tabular}{c||r r r r r}
+\hline
+精简率($\%$)    & $90$ & $95$ & $99$ \\
+\hline
+仿真初始fps              & $20$ & $32$ & $31$ \\
+\hline
+仿真平均fps              &  $4$ &  $6$ & $11$ \\
+\hline\hline
+是否完成仿真？(是/否)        &  否  &  否  & 是  \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{讨论}
+
+本章实验中用到的计算机程序都是利用C++实现的。
+其中的一些计算方法的实现则采用了VTK\cite{Schroeder2000VTK}中的实现。
+
+在检验表面模型中相邻顶点的连接性的过程中，我们将所采用的算法设置为提取最大连接区域的模式。
+为了抑制图像处理过程中所引入的噪声网格的影响，我们采用了一种表面平滑算法通过轻微地改变相关顶点的位置来除去这些网格。
+平滑表面的算法具有两个关键的可设置参数，分别用于设置算法的带宽和迭代次数。
+通过实验发现，平滑算法的迭代次数与平滑程度呈正相关关系，即：迭代次数越多，表面则越平滑。
+另一方面，平滑算法的带宽与平滑程度则呈现出负相关关系，即：带宽越狭窄，表面越光滑。
+需要指出的是，平滑算法在平整表面的同时，对表面的几何特征有轻微的破坏。
 \begin{figure}[t]
 \centering
 \subfloat[]{\includegraphics[height=2.0in]{figures/chap06/smooth_100_01_d10.eps}%
@@ -156,3 +197,6 @@ However, the visualization in fig. \ref{fig:Decimate99} unveiled obvious alterat
 在本章的实验中，我们测试了一系列设置不同精简率的情况，并且成功地确定了生成的结果可接受的精简率参数。
 面片削减的输出是progressive网格\cite{Hoppe1996}。
 除了前述的对输入网格的削减，结果中的网格很好地保持了模型的几何特征，以及其整体的外观（法线，颜色，等）。
+
+在验证交互性能的过程中，大于10的fps对于本样机是足够的。
+在本章中，用于手术仿真研究的主动脉的冠状动脉的表面模型的多边形数量被削减了$99\%$，在交互实验中实现了$11$fps（$> 10$）。
