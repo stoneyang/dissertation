@@ -4,15 +4,15 @@
 
 \subsection{概观}
 
-This section discusses the layout of the main methods used in processing and optimization of the meshes consisting the model surface.
-The surface model of the vasculature used in this work was generated from the CTA information which was acquired from some real patient.
-In order to put the model into the use of virtual interaction, the amount of information of the model have to be limited because of the constraints of the graphics hardware.
-To limit the amount of information is equivalent to eliminate the total number of the polygonal elements that consist the model as much as possible, while preserving the original geometry of the vasculature. %
+本节讨论优化构成血管表面模型的多边形网格的完整工作流程。
+本章中用到的血管表面模型来自基于真实病例的CTA影像数据，该工作的具体细节参见本文第\ref{chap3}章。
+为了顺利地将血管模型应用于虚拟交互的环境中，考虑到计算机图形硬件性能的限制，模型的数据量势必需要精简。
+在这里，精简模型的数据量等同于在保持血管模型的原始几何特征不发生明显改变的前提下，尽可能地削减构成血管表面模型的多边形的数量。
 
-Some preprocessing steps illustrated in Fig. \ref{fig:DataFlow6} are necessary before the elimination of the polygons in the surface.
-First of all, the validation of the connectivity among the vertices in the image-based model surface are performed to guarantee that the surface to be processed is complete as a whole and all the vertices are connected. %
-Secondly, the smoothing step is introduced in order to depress the bulges and sunken areas in the connected surface.
-Finally, the polygonal elements in the surface model are selected and part of them are deleted; the ``holes" left are patched and the geometry of the model is preserved as complete as possible. %
+图\ref{fig:DataFlow6}给出了在实际削减模型的多边形之前所必需完成的预处理工作的流程。
+首先，需要对基于CTA的血管模型中的顶点的连接性进行检验，以确保要处理的表面是一体的，并且其中所有的顶点都是连通的。
+其次，引入平滑算法以处理模型表面的“毛刺”和“凹陷”等不平整的区域。
+最后，对表面模型的多边形面片进行削减，同时，血管模型的几何特征得到最大限度的保护。
 
 \subsection{表面顶点的连接性检验}
 
@@ -29,7 +29,7 @@ In this work, one of our objectives is the smoothing or fairing of the model sur
 \begin{figure}[t]
 \centering
 \includegraphics[width=3.2in]{figures/chap06/DataFlow.eps}
-\caption{Overview of the work flow.}
+\caption[血管表面模型优化的工作流程]{血管表面模型优化的工作流程}
 \label{fig:DataFlow6}
 \end{figure}
 \begin{figure}[t]
@@ -39,7 +39,7 @@ In this work, one of our objectives is the smoothing or fairing of the model sur
 \hfil
 \subfloat[]{\includegraphics[height=1.0in]{figures/chap06/artifact_removed.eps}%
 \label{fig:ArtifactRemoved}}
-\caption{Smoothing the artifacts due to the approximation in visualization. (a) the artifacts (the horizontal ``steps" on the model surface of the vasculature); (b) the results after the smoothing process.}%
+\caption[对可视化过程中引入的估计所带来的不平整区域进行平滑处理]{对可视化过程中引入的估计所带来的不平整区域进行平滑处理。(a) 不平整区域（血管模型表面上水平方向的“台阶”）；(b) 平滑处理后的该区域。}%
 \label{fig:ArtifactComparison}
 \end{figure}
 A signal processing approach is employed to fulfill this task.
@@ -136,7 +136,7 @@ For simple vertices, two special cases are further specified as boundary vertice
 \input{figuresrc/chap06/Corner}
 \label{fig:Corner}
 }
-\caption{Five classes of the vertex in the surface. (a) General simple case; (b) Complex case; (c) Boundary case; (d) Interior edge case; (e) Corner case. }%
+\caption[表面中的顶点位置的五种情形]{表面中的顶点位置的五种情形。(a) 一般简单情形；(b) 复杂情形；(c) 边缘情形；(d) 边缘内部情形；(e) 拐角情形。}%
 \label{fig:FiveClasses}
 \end{figure}
 \begin{figure}[t]
@@ -150,7 +150,7 @@ For simple vertices, two special cases are further specified as boundary vertice
 \input{figuresrc/chap06/BoundaryReduction}
 \label{fig:BoundaryReduction}
 }
-\caption{Reduction of polygons before and after eliminating the vertex. (a) General simple vertex case: number of polygons before reduction: $6$, number of polygons after reduction: $4$; (b) Boundary vertex case: number of polygons before reduction: $5$, number of polygons after reduction: $4$. Note that the edge in \emph{red} does not belong to the surface before the computation. }%
+\caption[削减顶点所引起的多边形数量的减少]{削减顶点所引起的多边形数量的减少。(a) 一般简单情形：削减前的多边形数量：$6$，削减后的多边形数量：$4$；(b) 边缘情形：削减前的多边形数量：$5$，削减后的多边形数量：$4$。注意：在削减计算之前，红色的边并不属于表面。}%
 \label{fig:Reduction}
 \end{figure}
 

@@ -1,17 +1,13 @@
 
-%Cardiovascular diseases are among the most fatal illnesses in the world.
-Percutaneous coronary intervention is the gold standard to coronary diseases in the past decades due to much less trauma and quick recovery.
-%On the other hand, for the guidance of the fluoroscope required by the procedure, the clinicians have to suffer high risks of tumors and other diseases.
-%Intravascular robotic systems are applied to change this situation.
-%Hence the clinicians need to participate full training projects to ensure the flexible manipulation of the systems.
-However, due to its minimally invasive traits, clinicians have to defeat the difficulties in eye-hand coordination during the procedure, which also makes it a non-trivial task in the training lab. %
-The computer-aided surgical simulation is designed to provide a reliable tool for the early stage of the training process.
-In this simulation system, the surface model of the vessels contribute the major part in the virtual anatomic environment.
-On the other hand, heavy interactions between the virtual surgical tools and the model surface occur during the training.
-In order to achieve acceptable performances, the patient-specific vessel surface model needs further process to adapt to this situation.
-We proposed in this paper an approach to optimize the meshes that consist the surface model with its application in consideration.
-The connectivity of the surface model is firstly checked.
-Next a smooth processing is applied without modifying the geometry of the largest-connected surface.
-Then the quantities of the polygons consisting the model surface are eliminated both dramatically and appropriately.
-Experimental results illustrated the capability of the proposed approach in optimizing the image-based surface model of human vessels.
-The resultant surface model can be used as the validation and experimentation involving the virtual surgical tools.
+在心血管介入手术仿真系统中，血管系统的表面模型在虚拟解剖环境中的居于核心位置。
+在仿真操作的过程中，虚拟的血管模型要承受来自虚拟手术工具对其内侧表面的次数频繁的各种交互。
+为了实现可接受的性能，基于真实病例的血管模型还需要经过进一步的处理才能满足上述要求。
+在本章中，基于对上述实际问题的考虑，我们提出了一种优化构成血管表面的多边形网格的计算方法。
+该方法在不明显破坏原始血管模型的几何特征的指导原则下，最大限度地提高了血管表面模型的平整程度，精简了模型的数据量，从而提高了血管模型与虚拟手术工具的交互性能。
+
+本章余下的内容安排如下：
+第一节介绍与本章工作相关的典型研究。
+第二节分析本章工作的完整流程，以及各个环节的基本原理。
+第三节记录本章工作的实验设计，展示各环节的典型结果，讨论实验中的一些问题。
+最后一节总结本章的工作。
+ 
