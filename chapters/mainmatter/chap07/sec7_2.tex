@@ -5,12 +5,12 @@
 \subsection{工作流程一览}
 \label{sec:overview}
 
-Figure \ref{fig:DataFlow7} illustrates the main steps taken in segmenting the heart from the CT information.
-The raw data is firstly smoothed and is then thresholded into a well-shaped binary images.
-Next, the preprocessed data is simultaneously distributed to compute the distance map and the edge potential map.
-%Finally, the active contours are evolved toward the boundaries of the heart.
-After that, the active contours are evolved toward the boundaries of the heart.
-Finally, the resultant information is organized and rendered into a surface model.
+本章所述的基于CT的心脏分割工作的完整流程如图\ref{fig:DataFlow7}所示。
+首先，对原始影像数据进行平滑处理。
+随后，将平滑处理后的影像数据通过阈值滤波转换为边缘保持较完整的二值图像。
+第三，同时计算二值图像的特征图像和输入水平集。
+第四，利用活动轮廓方法获得心脏区域的边界。
+最后，在上一步工作的基础上，对心脏表面模型进行可视化。
 \begin{figure}[t]
 \centering
 \includegraphics[height=2.0in]{figures/chap07/DataFlow.eps}
@@ -23,19 +23,20 @@ Finally, the resultant information is organized and rendered into a surface mode
 
 \subsubsection{具有边缘保护作用的图像平滑处理}
 
-The pepper noises introduced in the stage of image acquisition will considerably affect the following segmentation.
-Thus the smoothing must be taken before any other processing steps.
-The principle is to remove the noisy pixels as much as possible while to protect the details of the edge as complete as possible.
-The smoothing algorithm based on the following \emph{modified curvature diffusion equation} (MCDE) \cite{Whitaker2001} is adopted:
+在图像获取环节中引入的颗粒性噪声会给随后进行的分割工作带来相当大的不利影响。
+因此，在其处理环节开始前，对影像进行平滑处理是必要的。
+平滑处理的原则是尽可能多地除去图像中的噪声，同时尽可能完整地保护图像内容的细节，尤其是物体的边缘细节。
+为此，我们采用了一种基于MCDE的平滑算法\cite{Whitaker2001}：
 \begin{equation}
 \label{eqn:MCDE}
 \frac{\partial I}{\partial t} = |\nabla I| \nabla \cdot c(|\nabla I|) \frac{\nabla I}{|\nabla I|},
 \end{equation}
-where $I(\cdot)$ represents the input image, $c$ is the conductance function given by $c(|\nabla I|) = k^2/(k^2 + |\nabla I|^2)$ with a free parameter $k$, determining the contrast of edges. %
+其中，$I(\cdot)$代表输入图像，$c$代表通透性函数$c(|\nabla I|) = k^2/(k^2 + |\nabla I|^2)$，其中$k$为自由选定的参数，它决定着边缘的对比度。
 
 \subsubsection{二值阈值滤波}
 
-The thresholding is introduced to convert the images into the ``well-featured" ones, in which most of the uninterested contents will be excluded by assigning them a zero intensity value, while the contents of interest in a bright and uniform intensity (see Fig. \ref{fig:BinaryThresholdFunc}): %
+为了获得“形状完好的”图像，我们引入了阈值滤波运算来处理平滑后的影像。
+在阈值滤波的过程中，与本章工作目标无关的图像内容的像素的亮度将会被统一地赋值为零，而相关的图像内容的像素的亮度将会被统一地赋值为$255$（如图\ref{fig:BinaryThresholdFunc}所示）：
 \begin{equation}
 \label{eqn:BinaryThreshold}
 I_{\text{output}} =
@@ -44,12 +45,6 @@ I_{\text{output}} =
 0,   & \text{otherwise}.
 \end{cases}
 \end{equation}
-%\begin{figure}[t]
-%\centering
-%\input{../FigureSrc/binary_threshold}
-%\caption{Binary thresholding function.}
-%\label{fig:BinaryThresholdFunc}
-%\end{figure}
 
 \subsubsection{梯度幅值的计算}
 
