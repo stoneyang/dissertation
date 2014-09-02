@@ -1,17 +1,6 @@
 
-\section{用于血管介入术训练的虚拟现实系统}
-\label{sec2-2}
-
-
 \section{研究现状}
-\label{sec1-3}
-
-%本节叙述内容：
-%\begin{enumerate}
-%  \item 国外研究现状
-%  \item 国内研究现状
-%  \item 相关技术现状
-%\end{enumerate}
+\label{State_of_the_art}
 
 在军事和工业领域，基于虚拟现实的仿真技术在训练、以及评估在特定环境下使用者解决问题的反应等方面，已经显示了重大的实际价值 \cite{Goodwin1978Simulator,Rolfe1986Simulators,Ressler1999Simulators,Wachtel1985Simulators,Liu2013Military}。%
 经过数十年时间的发展 \cite{Dawson1998}，仿真技术在医学、尤其是医学训练领域的应用也已经比较广泛，包括内窥镜 \cite{Vining1995Endoscopy,Preminger1996Endoscopy}、神经医学\cite{Kockro2000Neurosurgery,Cotin2005EVE,Ma2007NeuroCath}、麻醉学\cite{Gaba1988Anesthesiology}、支气管镜\cite{Vining1996Bronchoscopy}、腹腔镜\cite{Hon1994Laparoscopy,Derossis1998Laparoscopy}、以及心血管和外周血管系统的介入手术\cite{Chui1998ICard,Cotin2000ICTS,Tan2012NUDT}等。%
@@ -21,7 +10,7 @@
 本节将分别介绍国内外科研人员在虚拟医学训练、尤其是血管介入术虚拟训练以及相关研究方向上所作的主要工作和重要成果。
 
 \subsection{国外研究现状}
-\label{sec1-4-1}
+\label{Foreign}
 
 最早出现的介入放射学仿真系统之一是美国HT Medical公司开发的Dawson-Kaufman血管介入放射学虚拟系统 \cite{Higgins1995DK,Dawson1996DK,meglan1996DK}。
 该系统首先用于腹主动脉介入的仿真 \cite{Wang1998ICard}。
@@ -34,14 +23,6 @@
 血管壁由包围血管壁的内部区域的势能场来表示，这个势能场决定了导管和血管壁之间相互作用的能量，导管的建模采用有限元方法，把导管抽象为六自由度的梁元 \cite{Chui1996daVinci,Wang1996daVinci}。%
 虚拟导管的材料特性通过杨氏模量和切变模量来体现，但忽略了导管与血管壁之间的摩擦力 \cite{Anderson1998daVinci}。
 Lawton等人 \cite{Lawton2000daVinci}还开发了一种物理模型和数值算法，用于仿真将导管插入动脉系统并推进的过程。
-
-%\begin{figure}[!ht]
-%\centering
-%\includegraphics[scale=0.5]{Figures/DaVinci.png}
-%\caption{新加坡国立大学和美国约翰·霍普金斯大学医学院共同研究的腹主动脉介入仿真训练系统daVinci\cite{Anderson1998daVinci}}
-%\captionof{figure}[腹主动脉介入仿真训练系统daVinci]{新加坡国立大学和美国约翰·霍普金斯大学医学院共同研究的腹主动脉介入仿真训练系统daVinci\cite{Anderson1998daVinci}}
-%\label{fig1-1}
-%\end{figure}
 
 几乎与此同时，开发daVinci的科研团队在前期工作的基础上，先后实现了用于心血管介入仿真训练的ICard系统(\textbf{\textit{I}}nterventional \textbf{\textit{Card}}iology Simulator) \cite{Wang1997ICard,Chui1998ICard,Wang1998ICard,Cai2004ICard,Cai2006ICard}，以及用于脑血管介入仿真训练的NeuroCath系统(\textbf{\textit{Neuro}}radiology \textbf{\textit{Cath}}erization Simulator) \cite{Ma2000NeuroCath,Nowinski2000NeuroCath,Ma2001NeuroCath,Li2001NeuroCath,Nowinski2001NeuroCath,Anderson2001NeuroCath,Chui2002NeuroCath,Anderson2002NeuroCath,Ma2004NeuroCath,Volkau2005Vessel,Ma2005NeuroCath,Ma2006NeuroCath,Ma2006aNeuroCath,Ma2007NeuroCath}。%
 
