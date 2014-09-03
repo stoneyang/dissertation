@@ -1,0 +1,19 @@
+\begin{tikzpicture}[xscale=0.35,yscale=4.5]
+\draw [help lines,dotted,step=0.5] (-10,0) grid (10,1);
+\draw [thin] (-10,0) -- (-10,1);
+\draw [thin] (-10,1) -- (10,1);
+\draw [thin] (10,0) -- (10,1);
+\draw [thin] (-10,0) -- (10,0);
+\node [below] at (0,0) {\footnotesize{$0$}};
+\node [left] at (-10,0) {\footnotesize{$0.0$}};
+\node [left] at (-10,0.5) {\footnotesize{$0.5$}};
+\node [left] at (-10,1) {\footnotesize{$1.0$}};
+\node [below] at (-10,0) {\footnotesize{$-10$}};
+\node [below] at (10,0) {\footnotesize{$10$}};
+\node [above left] at (2,0.4) {\scriptsize{$n = 2$}};
+\node [above left] at (0,0.6) {\scriptsize{$n = - 2$}};
+\node [above left] at (1,0.5) {\scriptsize{$n = 0$}};
+\draw [cyan,thin,domain=-10:10] plot (\x,{1/(1+exp(-0.5*(\x-2)))});
+\draw [green,thin,domain=-10:10] plot (\x,{1/(1+exp(-0.5*(\x+2)))});
+\draw [red,thin,domain=-10:10] plot (\x,{1/(1+exp(-0.5*\x))});
+\end{tikzpicture} 

@@ -1,0 +1,117 @@
+
+\section{实验与结果}
+\label{sec:coronary_enhanced_experiments}
+
+\subsection{医学数据与实验设置}
+\label{subsec:coronary_enhanced_setup_data}
+
+原始的胸部CTA影像序列同样由Siemens公司的128排CT（SOMATOM Definition Flash）从真实病例获得。
+帧间距为$0.6 \text{mm}$，帧内分辨率为$0.4 \times 0.4 \text{mm}^2$。
+由于本章的全部工作都针对冠状动脉，因此，我们将包含完整心脏区域的部分从整个原始数据剥离出来（见图\ref{fig:coronary_enhanced_original}）。
+
+为了获得较好的分割结果，我们进行了一系列实验，以获得更合适的参数。
+首先，在这些实验中，我们仍然对剥离出来的体数据的存储格式和像素的数据类型进行转换，以便于随后进行的计算。
+然后，我们对转换后的数据进行增强，该工作采用\ref{subsec:coronary_enhanced_tubular}中所介绍的算法\cite{Sato1998}进行。
+其次，增强后的影像数据将被同时用于生成影像的特征图像和输入水平集。
+再次，我们引入CURVES算法在特征图像和输入水平集的基础上来完成冠状动脉的分割。
+最后，分割结果通过行进立方体方法进行等值面的提取，再由计算机图形系统显示提取结果。
+本章中的全部实验均在一部搭载Intel 2.83GHz Core 2 Quad CPU和4GB内存的台式计算机上完成。
+
+\subsection{管状物体的增强及其后处理}
+\label{subsec:coronary_enhanced_tubular_processing}
+
+在管状物体增强之前，我们对输入的数据进行了二值化阈值滤波，以使增强环节的作用能够更集中于细微的明亮管状目标上。
+为了达到这一目的，我们利用阈值滤波器除去了输入影像中与本章工作目的无关的细节内容，例如：亮度较低的肺部，亮度较高的骨骼，等等。
+如图\ref{fig:coronary_enhanced_binary_1}所示，亮度在阈值上下限之间的像素被重新赋予了一个新的亮度值，本章中，我们将其设定为$255$；而亮度在阈值上下限意外的像素则一律被重新赋予零亮度值。
+
+参照表\ref{tbl:coronary_enhanced_eigenvalues}所列写的形状先验约束，我们为管状增强滤波器设置了探测明亮管状目标（即：冠状动脉）的参数值。
+在这些参数中，$\sigma$控制要增强的管状目标物体的横截面的直径，$\gamma_{12}$是管状相似性测度，$\gamma_{23}$则被用于恢复非齐对比度或者亮度损失的血管区域的情形。
+正如图\ref{fig:coronary_enhanced_vesselness}，包括冠状动脉和位于肺部区域内的血管在内的具有较小的$\sigma$值的细微血管都获得增强，而具有较大$\sigma$值（即：较大的横截面直径）的管状结构并没有被增强。
+
+增强后的管状目标物体的像素亮度相对较暗，且亮度值的分布较为分散。
+这给后续的工作环节中所遇到的像素选择带来不便。
+为了解决这种问题，从而使后续的处理易于进行，有必要在实验中引入像素亮度的变换。
+本章中，我们圈定了非线性亮度映射和二值化阈值滤波作为完成这一工作的候选方法。
+
+式(\ref{eqn:coronary_enhanced_sigmoid})表明非线性亮度映射将输入图像变换为某一亮度范围内的像素获得增强而其余像素的亮度被明显削弱的图像。
+只要提供恰当选取的参数，目前已经获得增强的影像中，对应于目标物体的亮度将得以增强，而剩余部分的亮度将被降低。
+在另外一组采用二值化阈值滤波器的测试中，正如上文所述，亮度落在特定阈值上下限之间的像素重新赋予新的高亮度，而为亮度落在特定阈值上下限之外的像素统一位置为零（见图\ref{fig:coronary_enhanced_binary_2}）。
+对比这两种方法的效果，我们选择二值化滤波器来改善之前管状物体增强所得到的结果（见图\ref{fig:DataFlow}）。
+\begin{figure}[t]
+\centering
+\includegraphics[width=2.8in]{figures/coronary_enhanced/original.eps}
+\caption{体数据的ROI提取}
+\label{fig:coronary_enhanced_original}
+\end{figure}
+\begin{figure}[t]
+\centering
+\subfloat[]{\includegraphics[width=2.8in]{figures/coronary_enhanced/binary1.eps}%
+\label{fig:coronary_enhanced_binary_1}}
+\hfil
+\subfloat[]{\includegraphics[width=2.8in]{figures/coronary_enhanced/hessian.eps}%
+\label{fig:coronary_enhanced_vesselness}}
+\caption[基于“vesselness”的原始CTA影像的预处理]{基于“vesselness”的原始CTA影像的预处理：(a) 二值阈值滤波（$\text{lower threshold} = 300$, $\text{upper threshold} = 600$）；(b) 管状物体增强（$\sigma = 0.9$, $\gamma_{12} = 0.1$, $\gamma_{23} = 2.0$）。}%
+\label{fig:coronary_enhanced_preprocessing}
+\end{figure}
+
+\subsection{特征图像的计算}
+\label{subsec:coronary_enhanced_feature_image_processing}
+
+To generate the feature images for the CURVES system, two steps were performed:
+(1) calculating the gradient magnitude at each pixel; and
+(2) converting the gradient images into the speed images.
+%\begin{enumerate}
+%\item calculating the gradient magnitude at each pixel;
+%\item converting the gradient images into the speed images.
+%\end{enumerate}
+The gradient magnitude module computed the magnitude of the gradient pixel-wisely for the image by performing the convolution with the first order derivatives of a Gaussian kernel.
+The wall of the tiny vessels were extracted before the nonlinear intensity mapping was employed to generate the edge potential maps.
+The extreme values of the pixel intensities in the gradient magnitude images directly effected the selection of the parameters in (\ref{eqn:coronary_enhanced_sigmoid}).
+To reverse the lightness of the objects (in low intensities in the gradient magnitude images) and its edges (in high intensities in the gradient magnitude images), $n$ was chosen to be the center of the intensity window containing the vessels, and $m$ a negative value with $|m|$ as the width of the window. %
+The minus sign of $m$ means the reverse operation on the pixels.
+The neighborhood of the boundaries of the objects were in almost zero intensity, which made the evolution driven by (\ref{eqn:coronary_enhanced_application}) faster in the ``plateau" (with uniformly high intensities), whilst much slower (in a speed of about zero) in the ``ridges" (with rapid decreasing intensities). %
+
+\subsection{波面的传播}
+\label{subsec:coronary_enhanced_propagation}
+
+The initial level sets were evolved by the colliding fronts module.
+Two seeds were located interior of the regions corresponding to the coronary arteries and the interfaces surrounding each seeds evolved towards each other.
+The dot production of the gradients of arrival times of the two wavefronts were computed.
+\begin{figure}[t]
+\centering
+\subfloat[]{\includegraphics[width=2.8in]{figures/coronary_enhanced/sigmoid.eps}%
+\label{fig:coronary_enhanced_sigmoid}}
+\hfil
+\subfloat[]{\includegraphics[width=2.8in]{figures/coronary_enhanced/binary2.eps}%
+\label{fig:coronary_enhanced_binary_2}}
+\caption[两种不同的像素亮度处理结果的对比]{两种不同的像素亮度处理结果的对比：(a) 非线性亮度映射（$m = 80$, $n = 120$）；(b) 二值阈值滤波（$\text{lower threshold} = 40$, $\text{upper threshold} = 200$）。}%
+\label{fig:coronary_enhanced_intensity_conditioning}
+\end{figure}
+\begin{figure}[t]
+\centering
+\includegraphics[width=2.8in]{figures/coronary_enhanced/curves.eps}
+\caption[基于输入水平集和特征图像的CURVES演进]{基于输入水平集和特征图像的CURVES演进}%
+\label{fig:coronary_enhanced_CURVES}
+\end{figure}
+\begin{figure*}[t]
+\centering
+\subfloat[]{\includegraphics[width=2.8in]{figures/coronary_enhanced/model_conventional.eps}%
+\label{fig:coronary_enhanced_CURVES_visualization}}
+\hfil
+\subfloat[]{\includegraphics[width=2.4in]{figures/coronary_enhanced/model_enhanced.eps}%
+\label{fig:coronary_enhanced_normal_CURVES}}
+\caption[不同方法分割得到的冠状动脉模型的对比]{不同方法分割得到的冠状动脉模型的对比：(a) 传统的CURVES演进；(b) 管状物体增强后的CURVES演进。}%
+\label{fig:coronary_enhanced_comparison}
+\end{figure*}
+
+The CURVES system started working when all the preceding calculation completed.
+The module took the speed images as its evolution maps and the initial contours as its initial states and regulates the evolution according to (\ref{eqn:coronary_enhanced_application}).
+The evolution terminated when the contours evolved against the wall of the coronary arteries in the specified steps of iterations.
+And the resulting evolution extracted the coronary arteries as shown in Fig. \ref{fig:coronary_enhanced_CURVES}.
+Next a binary thresholding step was provoked to label the inner area of the coronary arteries with high intensity value whilst the outer area with zero intensity value.
+
+\subsection{分割结果的可视化}
+\label{subsec:coronary_enhanced_visualization}
+
+By manually picked the isovalue corresponding to the wall of the coronary arteries, the resulting volume were processed using the marching cubes method \cite{Lorensen1987MC}.
+The visualization models of the coronary arteries respectively based on the CURVES regions without and with tubular enhancement demonstrated their capabilities of displaying the complicated geometrical details (see Fig. \ref{fig:coronary_enhanced_CURVES_visualization} and \ref{fig:coronary_enhanced_normal_CURVES}). %

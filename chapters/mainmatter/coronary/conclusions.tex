@@ -1,0 +1,17 @@
+\section{Conclusions}
+\label{sec:coronary_conclusions}
+
+The visualization of the coronary arteries tree is the key part in the construction of the virtual scenario for the robotic surgical simulator.
+For the complex spatial structures, the visualization work of the coronary arteries is full of challenges.
+In this paper, a segmentation method based on the CURVES system has been developed.
+The experiments were presented and the results were demonstrated.
+The efforts showed that the proposed approach is capable of segmenting and visualizing the complex geometric structures of the coronary arteries tree.
+
+The original CTA images were firstly extracted so that only the heart area with the coronary arteries was included.
+Then the extracted images were smoothed without affecting the edges of the vasculature and thresholded in order to trim off the irrelevant contents.
+After this, image features calculation and initial contours generation were conducted on the resulting images.
+The CURVES evolution began thereafter and the evolution took a specified number of iterations to detect the boundaries.
+Then the resulting pixels, extracted by converting their intensities and representing the boundaries of the vasculature, were extracted and organized by the marching cubes method.
+
+Our future plans are the further improvements of the proposed approach such that more details of the tree structure can be extracted.
+And the goals also include the optimization of the blood vessel models for the simulation with virtual tools of the robotic surgical simulator.

@@ -1,0 +1,194 @@
+
+\section{实验与讨论}
+\label{sec:centerlines_experiments}
+
+\subsection{数据与实验设置}
+\label{subsec:centerlines_setup_data}
+
+血管表面模型来自真实病例的CTA数据。
+
+在本章的实验中，计算机程序由C++编写，并运行于一台搭载Intel公司的2.83GHz的CPU以及4GB内存的台式计算机上。
+为节省计算资源并缩短计算时间，我们选取了原始血管模型中的一段用于验证方法的有效性和参数设置的合理性（见图\ref{fig:centerlins_VOI}）。
+所提出的方法被直接用于计算整个主动脉三维模型的中心线的任务。
+\begin{figure}[t]
+\centering
+\includegraphics[height=2.4in]{figures/centerlines/VOI.eps}
+\caption[原始的主动脉下半段表面模型与VOI提取的模型局部]{原始的主动脉下半段表面模型（由$205,590$个多边形构成）与VOI提取的模型局部（红色方框内）。}
+\label{fig:centerlins_VOI}
+\end{figure}
+
+\subsection{表面模型的连接性检验}
+\label{subsec:centerlines_connectivity_experiments}
+
+提取中心线前，基于CTA的血管模型需要经过预处理才能保证提取运算能够稳定进行。
+首先，需要对组成整个可视化模型的相互比邻的多边形面片的连接性进行验证。
+这样做的目的是寻找并连接所给表面模型的最大连通区域（见图\ref{fig:centerlins_connectivity_local}）。
+表\ref{tbl:centerlins_connectivity}列出了验证前后构成表面模型的多边形面片的数量。
+由此表可以得出，面片的数量在验证前后并没有发生变化，说明构成这段血管模型的多边形面片所张成的区域已经是最大连通的区域了。
+\begin{figure}[t]
+\centering
+\includegraphics[width=1.5in]{figures/centerlines/connectivity_local.eps}
+\caption[血管表面模型的连接性验证结果]{血管表面模型的连接性验证结果（包含的多边形面片的数量：$70,625$）。}
+\label{fig:centerlins_connectivity_local}
+\end{figure}
+
+\begin{table}[t]
+\renewcommand{\arraystretch}{1.3}
+\caption[连接性验证前后多边形的数量]{连接性验证前后多边形的数量}
+\label{tbl:centerlins_connectivity}
+\centering
+\begin{tabular}
+{@{}llr@{}}
+%{@{}llrr@{}}
+\toprule
+%\hline
+%~      & ~                       & \multicolumn{2}{c}{Quantities} \\
+%\cmidrule(4){3-4}
+%~      & ~                       & Vertices & Polygons            \\
+~      &                         & 多边形的数量 \\
+%\midrule
+\hline\hline
+%Local  & Before validation       & N/A      & 70,625  \\
+%~      & After validation        & N/A      & 70,625  \\
+模型局部   & 验证前        & $70,625$  \\
+~          & 验证后        & $70,625$  \\
+\hline\hline
+%Global & Before validation       & N/A      & 205,590 \\
+%~      & After validation        & N/A      & 205,452 \\
+模型整体 & 验证前        & $205,590$ \\
+~        & 验证后        & $205,452$ \\
+\bottomrule
+%\hline
+\end{tabular}
+\end{table}
+\begin{figure}[t]
+\centering
+\subfloat[]{\includegraphics[width=1.5in]{figures/centerlines/smooth_30_1_local.eps}%
+\label{fig:centerlins_smooth30-1local}}
+\hfil
+\subfloat[]{\includegraphics[width=1.45in]{figures/centerlines/smooth_30_01_local.eps}%
+\label{fig:centerlins_smooth30-01local}}
+\hfil\\
+\subfloat[]{\includegraphics[width=1.5in]{figures/centerlines/smooth_100_1_local.eps}%
+\label{fig:centerlins_smooth100-1local}}
+\hfil
+\subfloat[]{\includegraphics[width=1.45in]{figures/centerlines/smooth_100_01_local.eps}%
+\label{fig:centerlins_smooth100-01local}}
+\caption[设置不同参数所获得平滑效果]{设置不同参数所获得平滑效果：(a) $\text{带宽} = 0.1$，$\text{迭代次数} = 30$；(b) $\text{带宽} = 0.01$，$\text{迭代次数} = 30$；(c) $\text{带宽} = 0.1$，$\text{迭代次数} = 100$；(d) $\text{带宽} = 0.01$，$\text{迭代次数} = 100$。}%
+\label{fig:centerlins_smooth_local}
+\end{figure}
+
+\subsection{连接性检验后的平滑处理}
+\label{subsec:centerlines_smoothing_experiments}
+
+本章中所采用的中心线提取方法对输入表面的噪声是很敏感的。
+由于原始图像在获取过程中某些程度的细节上的失真，后续的分割工作就不可避免的向可视化结果中引入了噪声。
+直观上，就是有些局部区域中，表面不平整的现象。
+这些瑕疵可能会在血管模型与虚拟手术工具的交互过程中影响工具在血管模型内腔中的顺利行进。
+为了抑制模型表面的噪声，我们采用了基于低通滤波原理的表面平滑算法。
+在我们的实现中，这个算法具有两个可调参数。
+一个参数制定该算法的迭代次数，这等同于一个多项式的阶数，该多项式用于逼近式(\ref{eqn:centerlines_approximation})中所定义的windowed sinc函数。
+另一个参数则用于设定低通滤波器的带宽。
+如图\ref{fig:centerlins_smooth_local}所示，我们为平滑算法设置了不同的参数以观察算法的平滑效果。
+从对这些结果的观察可以得出，为图\ref{fig:centerlins_smooth100-01local}所设置的参数优于其它组的参数设置。
+
+\subsection{利用改进的Butterfly策略进行表面细分}
+\label{subsec:centerlines_subdivision_experiments}
+
+为进一步抑制噪声对中心线提取计算的影响，并提高中心线提取的准确性，我们又需要增加表达同一块表面的多边形的数量。
+为了完成这一工作，我们需要在不引入更多扰动的前提下，对已经平滑过的表面进行细分。
+图\ref{fig:centerlins_subdivision_local}给出了基于改进的butterfly策略的表面细分的计算结果。
+同时，由表\ref{tbl:centerlins_subdivision}可以得出，在完成表面细分的计算之后，构成表面模型的多边形面片的数量得到了显著的增加。
+通过比较细分处理前后的多边形面片的数量可知，细分后的多边形的数量是细分之前的多边形的数量的四倍。
+\begin{figure}[t]
+\centering
+\includegraphics[width=3.0in]{figures/centerlines/subdivision.eps}
+\caption[对平滑处理后的表面细分]{利用改进的butterfly策略对平滑处理后的表面进行细分。左：表面细分的局部。右上：表面细分之前的多边形表面。右下：表面细分之后的多边形表面。}%
+\label{fig:centerlins_subdivision_local}
+\end{figure}
+
+\begin{table}[t]
+\renewcommand{\arraystretch}{1.3}
+\caption[表面细分前后的多边形面片数量]{利用改进的butterfly策略进行表面细分前后的多边形面片数量}
+\label{tbl:centerlins_subdivision}
+\centering
+\begin{tabular}
+%{@{}llr@{}}
+{@{}llrr@{}}
+\toprule
+%\hline
+%~      & ~                       & \multicolumn{2}{c}{Quantities} \\
+%\cmidrule(4){3-4}
+%~      & ~                       & Vertices & Polygons            \\
+~      &                         & 多边形的数量 & 百分比 ($\%$)\\
+%\midrule
+\hline\hline
+%Local  & Before subdivision      & N/A      &  70,625  \\
+%~      & After subdivision       & N/A      & 281,060  \\
+模型局部  & 表面细分之前         &  $70,625$  &\\
+~         & 表面细分之后         & $281,060$  & $398$ \\
+\hline\hline
+%Global & Before validation       & N/A      & 205,452  \\
+%~      & After validation        & N/A      & 821,808  \\
+模型整体 & 表面细分之前       & $205,452$  &\\
+~        & 表面细分之后       & $821,808$  & $400$ \\
+\bottomrule
+%\hline
+\end{tabular}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\subfloat[]{\includegraphics[width=1.5in]{figures/centerlines/overlay_100_01_voronoi_local.eps}%
+\label{fig:centerlins_voronoi_local}}
+\hfil
+\subfloat[]{\includegraphics[width=1.5in]{figures/centerlines/overlay_100_01_centerlines_local.eps}%
+\label{fig:centerlins_overlay_local}}
+\caption[主动脉模型局部的中心线提取]{主动脉模型局部的中心线提取：(a) 嵌入Voronoi图；(b) 叠加于血管模型内的中心线。}%
+\label{fig:CenterlinesLocal}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\subfloat[]{\includegraphics[height=2.0in]{figures/centerlines/overlay_100_01_voronoi.eps}
+%\caption{Voronoi diagrams of the abdominal aorta.}
+\label{fig:centerlins_voronoi_global}}
+\hfil
+\subfloat[]{\includegraphics[height=2.0in]{figures/centerlines/overlay_100_01_centerlines.eps}
+%\caption{Centerlines of the abdominal aorta.}
+\label{fig:centerlins_overlay_global}}
+\caption[主动脉模型下半段的中心线提取]{主动脉模型下半段的中心线提取：(a) Voronoi图；(b) 中心线。}
+\label{fig:centerlins_global}
+\end{figure}
+
+\subsection{基于表面模型的中心线提取}
+\label{subsec:centerlines_centerlines_experiments}
+
+中心线的提取计算在细分后的表面模型上进行。
+首先，生成表面模型的嵌入Voronoi图（见图\ref{fig:centerlins_voronoi_local}）。
+然后，计算管状表面模型的中心线（见图\ref{fig:centerlins_overlay_local}）。
+图中的标注在Voronoi图和中心线上的彩色表示此处的横截面的直径，颜色从蓝到红表示直径从大到小。
+同样的处理流程应用于整个主动脉的表面模型，结果见图\ref{fig:centerlins_voronoi_global}和图\ref{fig:centerlins_overlay_global}。
+仔细观察可以看出，中心线的起始点和终止点并没有恰好位于血管表面模型的“入口”和“出口”。
+这一现象的原因是组成中心线的点所在Voronoi图一定不会与表面模型相交，即：中心线的各个端点逐渐地向表面模型逼近，但是永远不会到达表面所在的位置。
+\begin{figure}[t]
+\centering
+\subfloat[]{\includegraphics[width=0.7in]{figures/centerlines/surface.eps}%
+\label{fig:centerlins_surface}}
+\hfil
+\subfloat[]{\includegraphics[width=0.9in]{figures/centerlines/centerlines.eps}%
+\label{fig:centerlins_centerlines_model}}
+\caption[完整主动脉模型的中心线]{完整主动脉模型的中心线：(a) 基于CTA的表面模型（多边形的数量：$757,538$；(b) 表面模型的中心线。}%
+\label{fig:centerlins_visualization}
+\end{figure}
+
+\subsection{讨论}
+\label{subsec:centerlines_discussion}
+
+本章中的计算机程序由C++编写，程序中的部分算法的实现参照了VTK（Visualization Toolkit），它是一个开源库，其中包含了科学可视化领域常用的计算设施和算法。
+为了抑制由非结构化的多边形表面，以及图像获取和处理过程中所引入的噪声所带来的不利影响，我们在提取血管模型的中心线之前进行了一系列的预处理工作。
+在这一过程中，构成模型表面的多边形的连接性得到了梳理，模型的表面得到了平整。
+为保证中心线计算的稳定性和提高中心线提取的准确性，模型的表面又进行了细分。
+所有的处理都是在不破坏原始几何特征的前提下进行的。
+需要特别指出的是，中心线提取的计算任务是一项极其占用计算机资源（时间和空间）的工作。
+例如，为完成如图\ref{fig:centerlins_visualization}所示的计算工作，在对程序进行了特殊修改之后，我们仍然花费了大约八小时的时间。

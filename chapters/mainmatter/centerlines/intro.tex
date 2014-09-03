@@ -1,0 +1,18 @@
+
+\section{引言}
+\label{sec:centerlines_intro}
+
+在前两章中，我们介绍了有关基于CTA的人体心血管三维模型的分割与可视化的基础性工作。
+在心血管介入手术的仿真中，为了改善和提高心血管系统模型与虚拟手术工具的交互性能，还需这一基于CTA的表面模型进行进一步的处理。
+为行进中的虚拟手术工具提供基准的空间位置参考，就需要计算出血管模型的几何特征；为提高血管模型与虚拟手术工作的交互性能，以提高仿真度，就需要在不明显破坏模型的真实性的前提下，对模型的构成进行精简。
+
+The centerlines is an effective way of describing the shape of the model \cite{Ogniewicz1995}, which will provide accurate shape description for the path planning in interactive simulation.
+In this paper, we developed an automatic approach based on the Voronoi diagram \cite{Antiga2003} to extract the centerlines of the vasculature.
+
+在本章中，我们提出了一种用于计算血管模型中心线的方法。
+该方法首先检查基于CTA的血管模型中，各顶点的连接关系，进而提取血管模型的最大连接区域。
+然后，利用windowed sinc函数对所得区域进行平滑处理。
+其次，计算各个多边形面片的法向量。
+再次，为提高中心线的准确性，我们对平滑后的表面模型进行了细分。
+最后，我们引入power crust算法计算了表面模型的中心线。
+实验结果表明，我们所提出的方法能够完成血管表面模型的中心线的提取计算。
