@@ -34,17 +34,17 @@ Figure \ref{fig:heart_binary_threshold_experiments} depicted the results of the 
 \begin{figure}[t]
 \centering
 \includegraphics[height=2.6in]{Figures/heart/original.eps}
-\caption{The anterior view of the original volume contains the whole heart region extracted from the raw CT image series acquired from a real patient.}
+\caption[基于真实病例的心脏区域体数据的前面观]{The anterior view of the original volume contains the whole heart region extracted from the raw CT image series acquired from a real patient.}
 \label{fig:heart_original}
 \end{figure}
 \begin{figure}[t]
 \centering
 \includegraphics[height=2.6in]{Figures/heart/binary_threshold.eps}
-\caption{Volume after the binary threshold processing. Note that the pericardium, and most of the blood vessel structures are excluded.}%
+\caption[二值阈值处理后的心脏区域体数据的前面观]{Volume after the binary threshold processing. Note that the pericardium, and most of the blood vessel structures are excluded.}%
 \label{fig:heart_binary_threshold_experiments}
 \end{figure}
 
-\subsection{Calculation of Gradients and Initial Contours}
+\subsection{梯度与初始围线的计算}
 
 After thresholding the images into the binary form, the rest two steps (the calculation of the edge potential and the initial contours) were performed simultaneously.
 The aim of pixel-wisely computing of the gradients is to provide the ``snakes" model the references of the edges of the objects.
@@ -70,17 +70,17 @@ The resultant images demonstrated the edges of the objects in zero intensity ($\
 \begin{figure}[t]
 \centering
 \input{FigureSrc/heart/sigmoid_window_width}
-\caption{Relation between the parameter $m$ and the window width of the S-shaped function for nonlinear intensity mapping: the curve with $m = 4$ (in cyan) can invert the pixels lie between wider range than the ones with $m = -2$ (in red) and $m = 2$ (in green). Note that the minus sign of $m$ can introduce inverse effect to the output.}%
+\caption[S函数的参数$m$与窗宽之间的关系]{Relation between the parameter $m$ and the window width of the S-shaped function for nonlinear intensity mapping: the curve with $m = 4$ (in cyan) can invert the pixels lie between wider range than the ones with $m = -2$ (in red) and $m = 2$ (in green). Note that the minus sign of $m$ can introduce inverse effect to the output.}%
 \label{fig:heart_sigmoid_width}
 \end{figure}
 \begin{figure}[t]
 \centering
 \input{FigureSrc/heart/sigmoid_center_location}
-\caption{Relation between the parameter $n$ and the location of the center of the window of the S-shaped function for nonlinear intensity mapping: the curve shifts right when $n < 0$ (e.g., the curve in green), and shifts left when $n > 0$ (e.g., the curve in cyan). Note that the absolute values of $n$ regulate the distance from the origin.}%
+\caption[S函数的参数$n$与窗宽之间的关系]{Relation between the parameter $n$ and the location of the center of the window of the S-shaped function for nonlinear intensity mapping: the curve shifts right when $n < 0$ (e.g., the curve in green), and shifts left when $n > 0$ (e.g., the curve in cyan). Note that the absolute values of $n$ regulate the distance from the origin.}%
 \label{fig:heart_sigmoid_center}
 \end{figure}
 
-\subsubsection{Evolving the Initial Contours}
+\subsubsection{初始围线的演进}
 
 Meanwhile, the evolution, driven by the fast marching algorithm \cite{Sethian1999}, started with the aim of generating the initial contours for the geodesic ``snakes" computation.
 The results provided the geodesic computation the \emph{time-crossing} map so that the ``snakes" can evolve according to the computed time-of-arrival.
@@ -102,6 +102,6 @@ To terminate the computation in time, the numbers of the iterations was set to $
 \begin{figure}[t]
 \centering
 \includegraphics[height=2.4in]{figures/heart/heart.eps}
-\caption{The anterior view of the three-dimensional surface model of the heart.}
+\caption[心脏轮廓表面模型的前面观]{The anterior view of the three-dimensional surface model of the heart.}
 \label{fig:heart_Heart}
 \end{figure}

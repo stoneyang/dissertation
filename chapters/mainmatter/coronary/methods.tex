@@ -1,4 +1,4 @@
-\section{Methods and Materials}
+\section{方法}
 \label{sec:coronary_methods}
 
 This section outlines the work flow of the segmentation and presents the mathematical principles of the consisting modules.
@@ -14,11 +14,11 @@ In the end, the resulting level sets are thoroughly extracted to form the surfac
 \begin{figure}[tb]
 \centering
 \includegraphics[width=3.2in]{Figures/coronary/DataFlow}
-\caption{Flowchart of the segmentation pipeline.}
+\caption[冠状动脉分割的工作流程]{Flowchart of the segmentation pipeline.}
 \label{fig:coronary_data_flow}
 \end{figure}
 
-\subsection{Preprocessing for Fronts Evolution}
+\subsection{预处理}
 \label{subsec:coronary_preprocessing}
 
 \subsubsection{Image Conditioning for Further Processing}
@@ -77,7 +77,7 @@ $\mathcal{C}$ evolves over time $t$: it propagates ``inwards" when $F < 0$; it p
 On the termination of the propagation, the map of the time-of-arrival of the contour is given.
 This mechanism demonstrates its advantage in generating the initial level sets of the prolonged targets for the main level set system.
 
-\subsection{CURVES Model}
+\subsection{CURVES模型}
 \label{subsec:coronary_CURVES}
 
 As the candidate method for the effort of the three dimensional segmentation of the coronary arteries tree structure, the CURVES system \cite{Lorigo2001} is highly effective in extracting the complex spatial curvilinear structures in the volumetric data.
@@ -118,7 +118,7 @@ By substituting the input image $I$ with the speed image $I_{\sigma}$ generated 
 \end{equation}
 Observing (\ref{eqn:coronary_application}), the contour evolution is restricted by the three factors: (1) the image features, (2) the force driving the contour ``inwards" or ``outwards", and (3) the curvature minimization.
 
-\subsection{Surface Extraction}
+\subsection{表面提取}
 \label{coronary_surface_extraction}
 
 The surface information is extracted for the final visualization by the marching cubes method \cite{Lorensen1987MC}.
