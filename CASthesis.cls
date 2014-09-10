@@ -71,7 +71,7 @@
 %\RequirePackage[sort&compress,numbers]{natbib}
 %\RequirePackage[super,authoryear,sort&compress,square]{natbib}
 %\RequirePackage[superscript]{cite}
-\RequirePackage{cite}
+\RequirePackage[noadjust]{cite}
 \newcommand{\ucite}[1]{\textsuperscript{\cite{#1}}}
 %% packages and settings depend on PDF mode
 \ifxetex
