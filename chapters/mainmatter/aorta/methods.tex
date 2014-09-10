@@ -76,7 +76,7 @@ $n$则是一个确定该区间中心点的位置的常量。
 \end{equation}
 其中，$(x,y)$表示图像中某点的二维坐标，
 $T(x,y)$表示该曲线到达该点的时刻。
-该方法实际上是求解下面的Eikonal方程（稳态的Hamilton-Jacobi方程）
+该方法实际上是求解下面的Eikonal方程（稳态的Hamilton-Jacobi方程）：
 \begin{equation}
 1 = | \nabla T | F,
 \end{equation}
@@ -121,7 +121,7 @@ E(\mathcal{C}) = \alpha \int_0^1 | \mathcal{C}'(q) |^2 dq + \lambda \int_0^1 g( 
 在式(\ref{eqn:aorta_general_energy})中，$g(\cdot)$等同于曲线演进的速度。
 而且它也依赖图像细节的几何性质。
 为了获得理想的目标物体的边缘探测结果，参数$g(\cdot)$的选择是独立于测地学计算的。
-因此，式(\ref{aorta_min_model})所表示的最小值可以重新表示为：
+因此，式(\ref{eqn:aorta_min_model})所表示的最小值可以重新表示为：
 \begin{equation}
 \label{eqn:aorta_min_model_2}
 \min \int_0^1 g(I_{\sigma}) |\mathcal{C}' (q)| dq.
@@ -135,9 +135,9 @@ E(\mathcal{C}) = \alpha \int_0^1 | \mathcal{C}'(q) |^2 dq + \lambda \int_0^1 g( 
 该方程刻画了曲线$\mathcal{C}$向欲探测的目标物体不断演进的过程。
 初始曲线为$\mathcal{C}(0) = \mathcal{C}_0$，它的演进目标就是式(\ref{eqn:aorta_min_model_2})所表示的（局部）最小值。
 
-根据式(\ref{aorta_evolution_model})，该演进过程将会在$\frac{\partial \mathcal{C}(t)}{\partial t} = 0$时停止，这意味着目标物体的边缘被成功探知。
+根据式(\ref{eqn:aorta_evolution_model})，该演进过程将会在$\frac{\partial \mathcal{C}(t)}{\partial t} = 0$时停止，这意味着目标物体的边缘被成功探知。
 假设曲线$\mathcal{C}$是一个函数的水平集$u(\cdot):[0,a] \times [0,b] \rightarrow \mathrm{R}$。
-考虑式(\ref{eqn:aorta_min_model_2})和式(\ref{aorta_evolution_model})，之前的测地学计算即可转换为寻找如下方程的稳态解：
+考虑式(\ref{eqn:aorta_min_model_2})和式(\ref{eqn:aorta_evolution_model})，之前的测地学计算即可转换为寻找如下方程的稳态解：
 \begin{equation}
 \label{eqn:aorta_level_set_model}
 \begin{split}
@@ -147,7 +147,7 @@ E(\mathcal{C}) = \alpha \int_0^1 | \mathcal{C}'(q) |^2 dq + \lambda \int_0^1 g( 
 \end{split}
 \end{equation}
 其中，$\kappa = \textrm{div}\left(\frac{\nabla u}{|\nabla u|}\right)$。
-该方程的等号右侧即为式(\ref{eqn:aorta_min_model_2})中的Euler-Lagrange。
+该方程的等号右侧即为式(\ref{eqn:aorta_min_model_2})中的Euler-Lagrange方程。
 
 为了增加作用于围线的“吸引力”（该吸引力将围线向着目标物体的边缘吸引），并且允许探测非凸性目标物体，向式(\ref{eqn:aorta_level_set_model})中引入$cg(I_{\sigma})|\nabla u|$，可得:
 \begin{equation}

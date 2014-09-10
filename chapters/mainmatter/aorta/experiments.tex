@@ -5,7 +5,7 @@
 \subsection{实验场景与数据}
 \label{subsec:aorta_setup_data}
 
-为了验证本章所提出的方法对于从CTA中分割主动脉内腔的有效性，并在此基础上获得尽可能满意的结果，我们利用不同的参数进行了实验。
+为了验证本章所提出的方法对于从CTA中分割主动脉内腔的有效性，并在此基础上获得尽可能满意的结果，我们应用不同的参数进行了实验。
 首先，以DICOM格式存储的原始CTA序列要转换成XML格式。
 然后，被转换后的数据被同时传输至生成特征图像和输入水平集的两个分支当中。
 随后，这两个分支的计算结果作为测地学活动轮廓的的输入。
@@ -53,7 +53,7 @@
 \hfil
 \subfloat[]{\includegraphics[width=1.2in]{figures/aorta/dcm_sigmoid.eps}%
 \label{fig:aorta_sigmoid}}
-\caption[特征图像的生成步骤]{生成特征图像的三个步骤：(a)保护物体边缘的平滑处理（$\text{conductance parameter} = 9.0$）；(b)基于高斯核的梯度幅值的计算（$\sigma = 0.9$）；(c)利用S型函数进行非线性映射（$m = -3$, $n = 20$）。}
+\caption[特征图像的生成步骤]{生成特征图像的三个步骤：(a)保护物体边缘的平滑处理（$\text{传导参数} = 9.0$）；(b)基于高斯核的梯度幅值的计算（$\sigma = 0.9$）；(c)利用S型函数进行非线性映射（$m = -3$, $n = 20$）。}
 \label{fig:aorta_potential_image_generation}
 \end{figure*}
 \begin{figure*}[t]
@@ -69,7 +69,7 @@
 \hfil
 \subfloat[]{\includegraphics[width=1.2in]{figures/aorta/dcm_out.eps}%
 \label{fig:aorta_binary_thresholding}}
-\caption[水平集演进]{水平集的演进：(a)阈值滤波（$\text{lower threshold} = 300\text{HU}$, $\text{higher threshold} = 2000\text{HU}$）；(b)从某一种子点开始、利用快速步进法进行的初始水平集演进；(c)利用测地学活动轮廓进行边缘检测；(d)利用二值阈值滤波完成像素亮度的反转（intensity of the light area: $255$, intensity of the dark area: $0$）。}%
+\caption[水平集演进]{水平集的演进：(a)阈值滤波（$\text{阈值下限} = 300\text{HU}$, $\text{阈值上限} = 2000\text{HU}$）；(b)从某一种子点开始、利用快速步进法进行的初始水平集演进；(c)利用测地学活动轮廓进行边缘检测；(d)利用二值阈值滤波完成像素亮度的反转（明亮区域的亮度值: $255$, 黑暗区域的亮度值: $0$）。}%
 \label{fig:aorta_level_set_evolution}
 \end{figure*}
 
@@ -92,14 +92,15 @@
 \subsection{分割方法的评估}
 \label{subsec:aorta_evaluation}
 
-In this paper, the proposed approach is evaluated in terms of two common indices: the Jaccard index \cite{Jaccard1912}, and the Dice index \cite{Zijdenbos1994}.
-Suppose that the target image $T$ is evaluated against the source image $S$, $i$ marks the various labels in the source and target images.
-Then the Jaccard index $J$ can be represented as the following equation:
+在本章中，我们所提出的方法的准确性将通过Jaccard指数\cite{Jaccard1912}和Dice指数\cite{Zijdenbos1994}进行评估。
+现假设评估目标图像$T$对于源图像$S$的准确性，记$i$为两图像中各个标签（即：欲分割或探测的目标）。
+那么Jaccard指数$J$则可以表示为：
 \begin{equation}
 \label{eqn:aorta_Jaccard}
 J = \frac{\sum_i | S_i \bigcap T_i |}{\sum_i | S_i \bigcup T_i |},
 \end{equation}
-where $S_i$ denotes the $i$-th label in the source image $S$, $T_i$ the $i$-th label in the target image $T$, $| \cdot |$ means the volume computed as the number of voxels (or pixels). The Jaccard index is also called the "union overlap", which means the intersection over the union of the target and source image.
+其中， $S_i$表示源图像$S$中的第$i$个标签，$T_i$表示源图像$T$中的第$i$个标签，$| \cdot |$ 则表示以体素（或像素）来计算所得到的体积。
+Jaccard指数又称为“并集重叠”，指目标图像与源图像的交集除以它们的并集。
 
 \begin{figure}[t]
 \centering
@@ -107,17 +108,17 @@ where $S_i$ denotes the $i$-th label in the source image $S$, $T_i$ the $i$-th l
 \label{fig:aorta_Jaccard}}\\
 \subfloat[]{\includegraphics[width=3.0in,height=1.98in]{figures/aorta/Dice.eps}%
 \label{fig:aorta_Dice}}
-\caption[分割方法的准确性评估]{分割方法的准确性评估: (a) Jaccard; (b) Dice.}%
+\caption[分割方法的准确性评估]{分割方法的准确性评估: (a) 基于Jaccard系数；(b) 基于Dice系数。}%
 \label{fig:aorta_evaluation}
 \end{figure}
 
-The Dice index $D$ can be written as:
+Dice指数$D$可表示为：
 \begin{equation}
 \label{eqn:aorta_Dice}
 D = 2 \frac{\sum_i | S_i \bigcap T_i |}{\sum_i ( | S_i | + | T_i |)}.
 \end{equation}
-It is also called the "mean overlap", which means the intersection divided by the mean volume of the two regions.
-Figure \ref{fig:aorta_evaluation} illustrates the two indices of the eleven data sets used in the experiments.
+它又称为“均值叠加”，指两区域相交部分除以此两区域的平均体积。
+图\ref{fig:aorta_evaluation}显示实验中十一组数据集的两项指数评估结果。
 
 \subsection{基于分割结果的表面重建}
 
