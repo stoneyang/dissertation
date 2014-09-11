@@ -33,49 +33,70 @@
 \end{figure}
 
 \begin{table}[t]
-\renewcommand{\arraystretch}{1.3}
-\caption[连接性验证前后多边形的数量]{连接性验证前后多边形的数量}
+\renewcommand{\arraystretch}{0.5}
+\caption[连接性验证前后多边形的数量]{连接性验证前后多边形的数量：(a) 本章实验数据；（b）完整的血管模型。}
 \label{tbl:centerlins_connectivity}
 \centering
-\begin{tabular}
-{@{}llr@{}}
-%{@{}llrr@{}}
+\subfloat[][]{
+\begin{tabular*}{40mm}{lc}
 \toprule
-%\hline
-%~      & ~                       & \multicolumn{2}{c}{Quantities} \\
-%\cmidrule(4){3-4}
-%~      & ~                       & Vertices & Polygons            \\
-~      &                         & 多边形的数量 \\
-%\midrule
-\hline\hline
-%Local  & Before validation       & N/A      & 70,625  \\
-%~      & After validation        & N/A      & 70,625  \\
-模型局部   & 验证前        & $70,625$  \\
-~          & 验证后        & $70,625$  \\
-\hline\hline
-%Global & Before validation       & N/A      & 205,590 \\
-%~      & After validation        & N/A      & 205,452 \\
-模型整体 & 验证前        & $205,590$ \\
-~        & 验证后        & $205,452$ \\
+~                                & \small{多边形数量} \\
+\midrule
+\small{验证前}                   & \small{$70,625$}  \\
+\midrule
+\small{验证后}                   & \small{$70,625$}  \\
 \bottomrule
-%\hline
-\end{tabular}
+\end{tabular*}
+}
+\hfil
+\subfloat[][]{
+\begin{tabular*}{40mm}{lc}
+\toprule
+~                                & \small{多边形数量} \\
+\midrule
+\small{验证前}                   & \small{$205,590$}  \\
+\midrule
+\small{验证后}                   & \small{$205,452$}  \\
+\bottomrule
+\end{tabular*}
+}
 \end{table}
+
+% \begin{figure}[t]
+% \centering
+% \subfloat[]{\includegraphics[width=1.5in]{figures/centerlines/smooth_30_1_local.eps}%
+% \label{fig:centerlins_smooth30-1local}}
+% \hfil
+% \subfloat[]{\includegraphics[width=1.45in]{figures/centerlines/smooth_30_01_local.eps}%
+% \label{fig:centerlins_smooth30-01local}}
+% \hfil\\
+% \subfloat[]{\includegraphics[width=1.5in]{figures/centerlines/smooth_100_1_local.eps}%
+% \label{fig:centerlins_smooth100-1local}}
+% \hfil
+% \subfloat[]{\includegraphics[width=1.45in]{figures/centerlines/smooth_100_01_local.eps}%
+% \label{fig:centerlins_smooth100-01local}}
+% \caption[设置不同参数所获得平滑效果]{设置不同参数所获得平滑效果：(a) $\text{带宽} = 0.1$，$\text{迭代次数} = 30$；(b) $\text{带宽} = 0.01$，$\text{迭代次数} = 30$；(c) $\text{带宽} = 0.1$，$\text{迭代次数} = 100$；(d) $\text{带宽} = 0.01$，$\text{迭代次数} = 100$。}%
+% \label{fig:centerlins_smooth_local}
+% \end{figure}
+
 \begin{figure}[t]
+% \begin{table}[t]
+\renewcommand{\arraystretch}{0.5}
+% \caption[为平滑算法设置不同的参数所获得的结果]{为平滑算法设置不同的参数所获得的结果（$N$：迭代次数；$\delta$：带宽）}
+% \label{tbl:mesh_smooth}
 \centering
-\subfloat[]{\includegraphics[width=1.5in]{figures/centerlines/smooth_30_1_local.eps}%
-\label{fig:centerlins_smooth30-1local}}
-\hfil
-\subfloat[]{\includegraphics[width=1.45in]{figures/centerlines/smooth_30_01_local.eps}%
-\label{fig:centerlins_smooth30-01local}}
-\hfil\\
-\subfloat[]{\includegraphics[width=1.5in]{figures/centerlines/smooth_100_1_local.eps}%
-\label{fig:centerlins_smooth100-1local}}
-\hfil
-\subfloat[]{\includegraphics[width=1.45in]{figures/centerlines/smooth_100_01_local.eps}%
-\label{fig:centerlins_smooth100-01local}}
-\caption[设置不同参数所获得平滑效果]{设置不同参数所获得平滑效果：(a) $\text{带宽} = 0.1$，$\text{迭代次数} = 30$；(b) $\text{带宽} = 0.01$，$\text{迭代次数} = 30$；(c) $\text{带宽} = 0.1$，$\text{迭代次数} = 100$；(d) $\text{带宽} = 0.01$，$\text{迭代次数} = 100$。}%
-\label{fig:centerlins_smooth_local}
+\begin{tabular}{|c|c|c|}
+\hline
+\bigstrut ~                                   & \raisebox{-1mm}{$N = 30$}                                                                   & \raisebox{-1mm}{$N = 100$}                                                  \\
+\hline
+\bigstrut[t] \raisebox{30mm}{$\delta = 0.1$}  & \raisebox{-1mm}{\includegraphics[height=178pt]{Figures/centerlines/smooth_30_1_local.eps}}  & \includegraphics[height=178pt]{Figures/centerlines/smooth_30_01_local.eps}  \\
+\hline
+\bigstrut[b] \raisebox{30mm}{$\delta = 0.01$} & \raisebox{-3mm}{\includegraphics[height=178pt]{Figures/centerlines/smooth_100_1_local.eps}} & \raisebox{-3mm}{\includegraphics[height=178pt]{Figures/centerlines/smooth_100_01_local.eps}} \\
+\hline
+\end{tabular}
+\caption[为平滑算法设置不同的参数所获得的结果]{为平滑算法设置不同的参数所获得的结果。（$N$：迭代次数；$\delta$：带宽）}
+\label{fig:mesh_smooth}
+% \end{table}
 \end{figure}
 
 \subsection{连接性检验后的平滑处理}
@@ -87,7 +108,7 @@
 这些瑕疵可能会在血管模型与虚拟手术工具的交互过程中影响工具在血管模型内腔中的顺利行进。
 为了抑制模型表面的噪声，我们采用了基于低通滤波原理的表面平滑算法。
 在我们的实现中，这个算法具有两个可调参数。
-一个参数制定该算法的迭代次数，这等同于一个多项式的阶数，该多项式用于逼近式(\ref{eqn:centerlines_approximation})中所定义的windowed sinc函数。
+一个参数制定该算法的迭代次数，这等同于一个多项式的阶数，该多项式用于逼近式（\ref{eqn:centerlines_approximation}）中所定义的windowed sinc函数。
 另一个参数则用于设定低通滤波器的带宽。
 如图\ref{fig:centerlins_smooth_local}所示，我们为平滑算法设置了不同的参数以观察算法的平滑效果。
 从对这些结果的观察可以得出，为图\ref{fig:centerlins_smooth100-01local}所设置的参数优于其它组的参数设置。
@@ -107,34 +128,64 @@
 \label{fig:centerlins_subdivision_local}
 \end{figure}
 
+% \begin{table}[t]
+% \renewcommand{\arraystretch}{1.3}
+% \caption[表面细分前后的多边形面片数量]{利用改进的butterfly策略进行表面细分前后的多边形面片数量}
+% \label{tbl:centerlins_subdivision}
+% \centering
+% \begin{tabular}
+% {@{}llr@{}}
+% {@{}llrr@{}}
+% \toprule
+% \hline
+% ~      & ~                       & \multicolumn{2}{c}{Quantities} \\
+% \cmidrule（4）{3-4}
+% ~      & ~                       & Vertices & Polygons            \\
+% ~      &                         & 多边形的数量 & 百分比 （$\%$）\\
+% \midrule
+% \hline\hline
+% Local  & Before subdivision      & N/A      &  70,625  \\
+% ~      & After subdivision       & N/A      & 281,060  \\
+% 模型局部  & 表面细分之前         &  $70,625$  &\\
+% ~         & 表面细分之后         & $281,060$  & $398$ \\
+% \hline\hline
+% Global & Before validation       & N/A      & 205,452  \\
+% ~      & After validation        & N/A      & 821,808  \\
+% 模型整体 & 表面细分之前       & $205,452$  &\\
+% ~        & 表面细分之后       & $821,808$  & $400$ \\
+% \bottomrule
+% \hline
+% \end{tabular}
+% \end{table}
+
 \begin{table}[t]
-\renewcommand{\arraystretch}{1.3}
-\caption[表面细分前后的多边形面片数量]{利用改进的butterfly策略进行表面细分前后的多边形面片数量}
+\renewcommand{\arraystretch}{0.5}
+\caption[表面细分前后的多边形面片数量]{利用改进的butterfly策略进行表面细分前后的多边形面片数量。(a) 本章实验数据，细分后的多边形数量是细分前的$3.98$倍；(b) 完整的血管模型，细分后的多边形数量是细分前的$4$倍。}
 \label{tbl:centerlins_subdivision}
 \centering
-\begin{tabular}
-%{@{}llr@{}}
-{@{}llrr@{}}
+\subfloat[][]{
+\begin{tabular*}{40mm}{lr}
 \toprule
-%\hline
-%~      & ~                       & \multicolumn{2}{c}{Quantities} \\
-%\cmidrule(4){3-4}
-%~      & ~                       & Vertices & Polygons            \\
-~      &                         & 多边形的数量 & 百分比 ($\%$)\\
-%\midrule
-\hline\hline
-%Local  & Before subdivision      & N/A      &  70,625  \\
-%~      & After subdivision       & N/A      & 281,060  \\
-模型局部  & 表面细分之前         &  $70,625$  &\\
-~         & 表面细分之后         & $281,060$  & $398$ \\
-\hline\hline
-%Global & Before validation       & N/A      & 205,452  \\
-%~      & After validation        & N/A      & 821,808  \\
-模型整体 & 表面细分之前       & $205,452$  &\\
-~        & 表面细分之后       & $821,808$  & $400$ \\
+~              & \small{多边形数量} \\
+\midrule
+\small{细分前} & \small{$70,625$}     \\
+\midrule
+\small{细分后} & \small{$281,060$}    \\
 \bottomrule
-%\hline
-\end{tabular}
+\end{tabular*}
+}
+\hfil
+\subfloat[][]{
+\begin{tabular*}{40mm}{lr}
+\toprule
+~              & \small{多边形数量} \\
+\midrule
+\small{细分前} & \small{$205,452$}    \\
+\midrule
+\small{细分后} & \small{$821,808$}    \\
+\bottomrule
+\end{tabular*}
+}
 \end{table}
 
 \begin{figure}[t]
