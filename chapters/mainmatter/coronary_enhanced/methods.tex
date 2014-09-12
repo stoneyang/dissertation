@@ -1,6 +1,6 @@
 
 \section{方法}
-\label{sec:coronary_enhanced_intro}
+\label{sec:coronary_enhanced_methods}
 
 本节讨论分割流程的设计，并详细介绍各个环节的原理。
 图\ref{fig:coronary_enhanced_data_flow}宏观地展示了处理流程的方框图。
@@ -85,19 +85,7 @@ $\gamma_{23} \in [0, \infty)$控制锐度，
 \subsubsection{特征图像的计算}
 \label{subsubsec:coronary_enhanced_feature_image}
 
-水平集算法驱动围线在梯度场中演进。
-在这种梯度场中，像素的亮度在目标物体的边缘处发生“尖锐的”变化。
-特征图像的目的就是提供一幅形状完好的梯度场。
-在获得梯度场的过程中，我们首先计算各个像素处的梯度的幅值。
-然后，梯度图像$I_{\nabla}$被转换为特征图像$I_{\sigma}$，这一转换通过应用S型函数来完成:
-\begin{equation}
-\label{eqn:coronary_enhanced_sigmoid}
-I_{\sigma} = (I_{max} - I_{min}) \cdot \frac{1}{1 + \exp\left(-\frac{I_{\nabla} - n}{m}\right)} + I_{min},
-\end{equation}
-其中，
-$I_{max}$与$I_{min}$分别表示输出亮度的最值，
-$m$是一个常量，它控制输入像素亮度的的窗口宽度，
-$n$则是一个确定该窗口中心位置的常量。
+本部分所用方法与第\label{subsec:aorta_edge_potential}节类似，此处不再赘述。
 
 \subsubsection{一种改进的Fast Marching方法}
 
@@ -108,54 +96,8 @@ $n$则是一个确定该窗口中心位置的常量。
 
 \subsection{CURVES演进模型}
 
-在本章中，我们引入了CURVES方法\cite{Lorigo2001}来对结构复杂的冠状动脉进行分割。
-该方法在分割立体医学数据中的复杂线状结构十分有效。
-此外，CURVES方法的准则还考虑到了欲分割目标边缘的局部平滑性。
-
-该方法是对Caselles等人\cite{Caselles1997}所提出的测地学活动轮廓的一项改进。
-作为测地学活动轮廓的扩展研究，CURVES是一种水平集算法，它将细微的血管抽象为具有任意复杂度的拓扑结构的空间曲线\cite{Lorigo2001}。
-CURVES将水平集演进到目标物体的边缘，这一过程基于如下能量泛函的最小化：
-\begin{equation}
-\label{eqn:coronary_enhanced_CURVES}
-\oint_0^1 g\left( \left| \nabla I \left( \mathcal{C} \left(  s \right) \right) \right| \right) \left| \mathcal{C}'\left( s \right) \right| ds,
-\end{equation}
-其中，
-$\mathcal{C}\left( s \right): [0,1] \rightarrow \mathrm{R}^3$是一个一维曲线，
-$I\left( \cdot \right): [0, a] \times [0, b] \times [0, c] \rightarrow [0, \infty)$是曲线演进所在的图像，
-$g\left( \cdot \right): [0, \infty) \rightarrow \mathrm{R}^+$则是一个单调递减函数。
-
-该泛函的最小化可以通过搜索泛函自身的梯度下降方向来实现。
-也就是说，需要计算与式(\ref{eqn:coronary_enhanced_CURVES})相关的Euler-Lagrange方程。
-于是，我们可以得到如下的测地流方程，该方程控制围线在这一过程当中的演进：
-\begin{equation}
-\label{eqn:coronary_enhanced_evolution}
-\frac{\partial \mathcal{C}}{\partial t} = k \mathcal{N} - \frac{g'}{g} \varPi \left( \mathcal{H} \frac{\nabla I}{ \left| \nabla I \right| } \right),
-\end{equation}
-其中，
-$\mathcal{H}$是图像$I$的Hessian矩阵，
-$k$是欧式曲率，
-$\mathcal{N}$单位法向量，
-$\varPi(\cdot)$是投影算子，它将一个参数投影至正则空间。
-据此，我们可以得到更新方程：
-\begin{equation}
-\label{eqn:coronary_enhanced_update}
-\frac{\partial v}{\partial t} = \mathcal{F} \left( \nabla v(x, t), \nabla^2 v(x, t) \right) + \frac{g'}{g} \nabla v(x, t) \mathcal{H} \frac{\nabla I}{ \left| \nabla I \right| },
-\end{equation}
-其中，$v(\cdot): \mathrm{R}^3 \rightarrow [0, \infty)$是曲线$\mathcal{C}$的嵌入函数，
-$\mathcal{F} \left( \nabla v(x, t), \nabla^2 v(x, t) \right)$是矩阵$P_{\nabla v} \nabla^2 v P_{\nabla v}$较小的特征值。
-矩阵$P_q$可定义为一个投影算子，它能将某向量投影到向量$q \in \mathrm{R}^3$张成的正则空间：
-\begin{equation}
-\label{eqn:coronary_enhanced_projection_operator}
-P_q = I_0 - \frac{qq^T}{\left| q \right|^2},
-\end{equation}
-其中，$I_0$代表单位矩阵。
-
-通过向演进方程(\ref{eqn:coronary_enhanced_evolution})中引入特征图像$I_{\sigma}$，这种情形的演进可以表示成：
-\begin{equation}
-\label{eqn:coronary_enhanced_application}
-\frac{\partial \mathcal{C}}{\partial t} = k \mathcal{N} - \frac{g'(I_{\sigma})}{g(I_{\sigma})} \varPi \left( \mathcal{H} \frac{\nabla I_{\sigma}}{ \left| \nabla I_{\sigma} \right| } \right).%
-\end{equation}
+本部分所采用的方法与第\ref{subsec:coronary_CURVES}节相同，此处不再赘述。
 
 \subsection{等值面渲染}
 
-用于可视化的表面信息通过行进立方体方法\cite{Lorensen1987MC}来获得。
+本部分所用方法与第\ref{subsec:aorta_isosurface}节相同，此处不再赘述。

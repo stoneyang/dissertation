@@ -12,8 +12,8 @@
 最后，利用行进立方体方法来实现分割结果的提取。
 所有实验运行于一台配有Intel 2.83GHz Core 2 Quad CPU以及4GB内存的台式计算机上。
 
-原始数据利用Siemens的SOMATOM Definition Flash CT来获取，该设备属于128排CT，图像帧间距为$0.6\text{mm}$。
-该数据序列中含有病人的完整主动脉信息。
+原始数据利用Siemens的SOMATOM Definition Flash CT来获取，该设备属于128排CT，图像帧间距为$0.6\text{mm}$，帧内分辨率达$512 \times 512$，即体素规格为$0.4 \times 0.4 \times 0.6 \text{mm}^3$。
+该数据序列中含有病人的完整主动脉以及冠状动脉树状结构信息。
 为了叙述方便，本章选取了其中的一帧来说明实验的主要过程。
 在实验中，为了缩短计算时间，我们从原始序列中特意截取了含有主动脉及其主要分支的区域（见图\ref{fig:aorta_roi}）。
 \begin{figure}[t]
@@ -121,6 +121,7 @@ D = 2 \frac{\sum_i | S_i \bigcap T_i |}{\sum_i ( | S_i | + | T_i |)}.
 图\ref{fig:aorta_evaluation}显示实验中十一组数据集的两项指数评估结果。
 
 \subsection{基于分割结果的表面重建}
+\label{subsec:aorta_experiments_isosurface}
 
 最后，分割所得到的体数据信息将通过行进立方体方法\cite{Lorensen1987MC}进行处理，以获得目标的等值面信息。
 等值面的值对应于主动脉内腔边缘的像素亮度值。
