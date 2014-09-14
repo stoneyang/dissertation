@@ -13,7 +13,7 @@
 \begin{figure}[t]
 \centering
 \includegraphics[height=3.2in,width=3.2in]{figures/coronary_enhanced/DataFlow.eps}
-\caption{冠状动脉分割流程。}
+\caption{改进的冠状动脉分割流程。}
 \label{fig:coronary_enhanced_data_flow}
 \end{figure}
 
@@ -36,7 +36,7 @@ I_{xx} & I_{xy} & I_{xz} \\ I_{yx} & I_{yy} & I_{yz} \\ I_{zx} & I_{zy} & I_{zz}
 而且，所有这些二阶偏导数都是与Gaussian核$G(x; \sigma)$进行卷积的结果，此处，Gaussian核的标准差为$\sigma$：
 \begin{equation}
 \label{eqn:coronary_enhanced_gaussian_convolution}
-I_{xx} = I \ast \frac{\partial^2 G}{\partial^2 x}.
+I_{xx} = I \ast \frac{\partial^2 G}{\partial^2 x}
 \end{equation}
 式(\ref{eqn:coronary_enhanced_Hessian})的特征值为：$\lambda_1$，$\lambda_2$，$\lambda_3$，$\lambda_1 > \lambda_2 > \lambda_3$；
 与之相对应的特征向量分别是：$e_1$，$e_2$，$e_3$。
@@ -85,9 +85,10 @@ $\gamma_{23} \in [0, \infty)$控制锐度，
 \subsubsection{特征图像的计算}
 \label{subsubsec:coronary_enhanced_feature_image}
 
-本部分所用方法与第\label{subsec:aorta_edge_potential}节类似，此处不再赘述。
+本部分所用方法与第\ref{subsec:aorta_edge_potential}节类似，此处不再赘述。
 
 \subsubsection{一种改进的Fast Marching方法}
+\label{subsec:coronary_enhanced_colliding_fronts}
 
 波面碰撞（colliding fronts）——一种改进的快速行进法，其目的是为后续的分割工作生成输入水平集。
 这种方法的实现建立在经典的快速行进法\cite{Sethian1999}的基础上。
