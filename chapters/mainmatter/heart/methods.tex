@@ -5,8 +5,8 @@
 \subsection{工作流程一览}
 \label{subsec:heart_overview}
 
-本章所述的基于CT的心脏分割工作的完整流程如图\ref{fig:heart_data_flow}所示。
-首先，对原始影像数据进行平滑处理。
+本章所述的基于CT的心脏分割方法由第\ref{chap:aorta}章工作的基础上改进而来，主要是针对分割CTA中的心脏区域做了一些方法上的调整，该方法完整的流程如图\ref{fig:heart_data_flow}所示。
+首先，我们从原始影像数据中选取心脏所在区域，然后进行对该区域平滑处理。
 随后，将平滑处理后的影像数据通过阈值滤波转换为边缘保持较完整的二值图像。
 第三，同时计算二值图像的特征图像和输入水平集。
 第四，利用活动轮廓方法获得心脏区域的边界。
@@ -14,7 +14,7 @@
 \begin{figure}[t]
 \centering
 \includegraphics[height=2.0in]{figures/heart/DataFlow.eps}
-\caption[心脏区域分割的工作流程]{Flowchart of the segmentation work flow.}
+\caption[心脏区域分割的工作流程]{心脏区域分割的工作流程。}
 \label{fig:heart_data_flow}
 \end{figure}
 
@@ -47,133 +47,36 @@ I_{\text{output}} =
 0,   & \text{otherwise}.
 \end{cases}
 \end{equation}
-where $\text{TH}_{\text{lower}}$ and $\text{TH}_{\text{upper}}$ mark the lower and upper thresholds of the intensity values, $I_{\text{input}}$ and $I_{\text{output}}$ mark the input and output image intensities.
+其中，$\text{TH}_{\text{lower}}$和$\text{TH}_{\text{upper}}$表示像素亮度的上下阈值，$I_{\text{input}}$和$I_{\text{output}}$表示输出图像中像素的亮度。
 \begin{figure}[t]
 \centering
 \input{FigureSrc/heart/binary_threshold}
-\caption[二值阈值函数]{Binary thresholding function.}
+\caption[二值阈值函数]{二值阈值函数。}
 \label{fig:heart_binary_threshold}
 \end{figure}
 
 \subsubsection{梯度幅值的计算}
 \label{subsubsec:heart_gradient}
 
-The gradient magnitude of the images need to be calculated to generate the so-called edge potential map, which can provide guidance to the evolution of the contours.
-The calculation can be performed by
-\begin{equation}
-\label{eqn:heart_gaussian}
-I_{grad} = \exp(-|(\nabla \ast G) \cdot I|),
-\end{equation}
-where $I_{grad}$ is the gradient at some point, and $\nabla \ast G$ denotes the first order derivative of a Gaussian operator.
-
-The edge images are mapped through an S-shaped function to get the edge potential maps (feature images):
-\begin{equation}
-\label{eqn:heart_sigmoid}
-%I_{\sigma} = (I_{max} - I_{min}) \cdot \frac{1}{1 + \exp\left(-\frac{I_{grad} - n}{m}\right)} + I_{min},
-I_{\sigma} = (I_{max} - I_{min}) \cdot \left(1 + \exp\left(-\frac{I_{grad} - n}{m}\right)\right)^{-1} + I_{min},
-\end{equation}
-where $I_{\sigma}$ denotes the output image, $I_{max}$ and $I_{min}$ represent the extreme values of the output intensities; $m$ controls the range of the input intensity, $n$ determines the location around which the range is centered. %
-%The results may vary due to different choices of the parameters for the individual modules in the pipeline.
+本部分所用方法与第\ref{subsec:aorta_edge_potential}节类似，此处不再赘述。
 \begin{figure}[t]
 \centering
 \input{FigureSrc/heart/sigmoid}
-\caption[用于非线性像素映射的S函数]{S-shaped function for nonlinear intensity mapping.}
+\caption[用于非线性像素映射的S函数]{用于非线性像素映射的S函数。}
 \label{fig:heart_sigmoid}
 \end{figure}
 
 \subsubsection{初始轮廓的生成}
 \label{subsubsec:heart_intial_contours}
 
-The initial contours will be generated using the fast marching method \cite{Sethian1999}, a numerical method used for the tracking of the propagating interface.
-The evolution begins from the appropriately selected seeding points.
-For the planar curve $\mathcal{C} = \{(x,y) | T(x,y) = t\}$,
-%\begin{equation}
-%\label{eqn:Curves}
-%\mathcal{C}(t) = \{(x,y) | T(x,y) = t\},
-%\end{equation}
-where $(x,y)$ represents some point in the image, and $T(x,y)$ marks the time when the interface crosses the point.
-The algorithm realizes the tracking of the evolution by solving the following equation
-\begin{equation}
-\label{eqn:heart_Eikonal}
-1 = | \nabla T | F,
-\end{equation}
-where $F$ denotes the speed in the normal direction at some point $(x,y)$.
-The interface propagates inwards when $F < 0$; and propagates outwards when $F > 0$.
-If the speed function $F$ only depends the position of the point, then (\ref{eqn:heart_Eikonal}) reduces to the Eikonal equation.
-The resultant images are the time-crossing map in which the time-of-arrival at every point are computed.
+本部分所用方法与第\ref{subsec:aorta_initial_contours}节类似，此处不再赘述。
 
 \subsection{测地学活动轮廓的演进}
 \label{subsec:heart_geodesic}
 
-The geodesic ``snakes" method \cite{Caselles1997}, based on the classical ``snakes" model \cite{Kass1988}, is aimed to implement the detection of the boundaries of multiple objects simultaneously without additional routines. %
-The idea of the classical model is to evolve a contour $\mathcal{C}$ such that the edge of the object can be detected, where the contour cannot deal with the change of its topology so that detecting more than one object in the image is impossible \cite{Caselles1997}. %.
-Computationally, the adopted geodesic ``snakes" connects the geodesic calculation and the level set evolution.
-
-The goal of this method is to find the following minimum:
-\begin{equation}
-\label{eqn:heart_min_model}
-\min \int_0^1 g(|\nabla I_{\sigma} ( \mathcal{C} (q) )|) |\mathcal{C}' (q)| dq,
-\end{equation}
-% Thus the problem has been shifted from the minimization of (\ref{eqn:ParticularSnakes}) to the geodesic computation.
-where $\mathcal{C}(q):[0,1]\rightarrow \mathrm{R}^2$ denotes the parametrized planar curve, $I_{\sigma}:[0,a]\times [0,b]\rightarrow \mathrm{R}^{+}$ represents the input image, $g(\cdot): [0, \infty) \rightarrow \mathrm{R}^{+}$ is a monotonically decreasing function. %
-In (\ref{eqn:heart_min_model}), $g(\cdot)$ is equivalent to the speed of the evolution of the curve.
-And it is also dependent upon the geometry of the image content.
-For the ideal edges of the objects to be detected, the choice of parameter $g(\cdot)$ is independent of their geodesic computation.
-
-To find the minimum of (\ref{eqn:heart_min_model}), the geodesic flow is calculated by
-\begin{equation}
-\label{eqn:heart_evolution_model}
-\mathcal{C}_t = \frac{\partial \mathcal{C}}{\partial t} = g(I_{\sigma}) \kappa \mathcal{N} - (\nabla g(I_{\sigma}) \cdot \mathcal{N}) \mathcal{N},
-\end{equation}
-where $\kappa$ is the Euclidean curvature of $\mathcal{C}$, $\mathcal{N}$ is the unit inward normal vector. %, and the right-hand side of the equation is the computation of Euler-Lagrange.
-Equation (\ref{eqn:heart_evolution_model}) shows the way $\mathcal{C}$ propagating towards the edges of the targets, i.e., the initial curve $\mathcal{C}(0)$ evolves to a (local) minimum of (\ref{eqn:heart_min_model}).
-
-According to (\ref{eqn:heart_evolution_model}), this evolution will stop at edges of the targets when $\mathcal{C}_t = 0$.
-%According to (\ref{eqn:heart_evolution_model}), this evolution will stop when $\frac{\partial \mathcal{C}(t)}{\partial t} = 0$, meaning that the boundaries of the objects are detected.
-Imagine that $\mathcal{C}$ is a level-set of a function $u(\cdot):[0,a] \times [0,b] \rightarrow \mathrm{R}$, and considering (\ref{eqn:heart_min_model}), the former evolution (\ref{eqn:heart_evolution_model}) is transformed to finding the steady state solution of the following equation: %
-\begin{equation}
-\label{eqn:heart_level_set_model}
-u_t = \frac{\partial u}{\partial t}  = g(I_{\sigma}) |\nabla u| \kappa + \nabla g(I_{\sigma}) \cdot \nabla u,
-%\begin{split}
-%\frac{\partial u}{\partial t} & = |\nabla u| \textrm{div} \left(g(I_{\sigma}) \frac{\nabla u}{|\nabla u|}\right) \\
-%                              %& = g(I_{\sigma}) |\nabla u| \textrm{div} \left(\frac{\nabla u}{|\nabla u|}\right) + \nabla g(I_{\sigma}) \cdot \nabla u \\
-%                              & = g(I_{\sigma}) |\nabla u| \kappa + \nabla g(I_{\sigma}) \cdot \nabla u,
-%\end{split}
-\end{equation}
-where $\kappa = \textrm{div}\left( \nabla u \cdot |\nabla u|^{-1} \right)$.
-%where $\kappa = \textrm{div}\left(\frac{\nabla u}{|\nabla u|}\right)$.
-
-To increase the ``attraction" to the contour towards the edges, a term is added to (\ref{eqn:heart_level_set_model}):
-\begin{equation}
-\label{eqn:heart_geodesic_driver}
-%\label{eqn:Geodesic1}
-u_t = g( I_{\sigma} )( c + \kappa ) |\nabla u| + \nabla u \cdot \nabla g(I_{\sigma}),
-%u_t = |\nabla u| \textrm{div} \left(g(I_{\sigma}) \frac{\nabla u}{|\nabla u|}\right) + c g(I_{\sigma}) |\nabla u|,
-\end{equation}
-where $c$ is a constant and $c \in \mathrm{R}^+$.
-Regarding (\ref{eqn:heart_level_set_model}), %the above equation can be rewritten as
-%\begin{equation}
-%\label{eqn:Geodesic2}
-%u_t = g( I_{\sigma} )( c + \kappa ) |\nabla u| + \nabla u \cdot \nabla g(I_{\sigma}).
-%\end{equation}
-% which means that the level sets move according to
-equation (\ref{eqn:heart_geodesic_driver}) can be transformed to the following evolution equation
-\begin{equation}
-\label{eqn:heart_geodesic_evolution}
-\mathcal{C}_t = g(I_{\sigma}) ( c + \kappa ) \mathcal{N} - ( \nabla g(I_{\sigma}) \cdot \mathcal{N} ) \mathcal{N}.
-\end{equation}
-The solution to this problem is equivalent to the zero level-set of the steady state (i.e., $u_t = 0$) of (\ref{eqn:heart_geodesic_driver}).
+本部分所用方法与第\ref{subsec:aorta_gac}节类似，此处不再赘述。
 
 \subsection{等值面的提取}
 \label{subsec:heart_surface}
 
-To visualize the surface model, the surface information should be firstly extracted by the marching cubes method \cite{Lorensen1987MC}.
-As the initial step of surface extraction, arrays of cubes are created from the input with each cube consisting of eight pixels (four from one slice and the other four from the next slice). %
-Then the index for each cube is calculated by comparing the eight intensity values to the specified isovalue corresponding to the surfaces of the objects.
-By referring to the triangulated cases with the indexes, the intersection patterns of the objects and the cubes can be roughly determined.
-Then the precise edge intersections are computed using linear interpolation with the intensity values at each vertex of the cubes.
-After that, the unit normals to the surface at each vertex of these cubes are computed via central differences.
-The resulting triangles are then sent to the graphics systems and displayed by standard rendering techniques.
-% The isovalue representing the edge of the segmented target is selected.
-% Then the 3-D model of the target can be reconstructed.
-% That is the 3-D surface model of the lumen of the aorta. 
+本部分所用方法与第\ref{subsec:aorta_isosurface}节类似，此处不再赘述。

@@ -2,16 +2,15 @@
 \section{讨论}
 \label{sec:heart_discussion}
 
-The computer programs implemented for this work were written in C++.
-As a matter of fact, one of the keys in the proposed approach is the well-chosen thresholds in the binary thresholding step before the computation of initial contours and edge potential maps. %
-In the results of this step, most of the irrelevant contents (i.e., aorta, pericardium, etc.) were successfully excluded otherwise can inevitably affect the following computation.
-In the evolution phase, the locations of the seeding points were vital, especially for those located at the vicinities of the indistinct boundaries between the heart and its surrounding organs. %
-To visualize the surface model, the iso-surface information were extracted and rearranged by the marching cubes method \cite{Lorensen1987MC}.
-Considering the context of this work, only an approximating surface model of the heart was delineated, which was sufficient for the intuition purpose (see Fig. \ref{fig:heart_overlay}).
+事实上，应用本章所述方法的关键是在生成特征图像和初始水平集围线之前，通过合理选择二值阈值滤波器的上下阈值。
+这样，就可以充分地除去与本章工作无关的图像内容，否则这些无关内容的存在会影响后续环节的计算效果，并最终影响心脏模型的构建。
+在围线演进的过程中，起始点位置的选取至关重要，尤其是那些心脏边缘与其周围组织结构边界重叠的区域。
+考虑到本文工作的实际需要，本章的工作方法仅用于生成心脏的近似轮廓的表面模型。
+而这一模型足以为仿真系统的使用者提供足够的直观性，图\ref{fig:heart_overlay}展示了本章结果与第\ref{chap:coronary_enhanced}章所得冠状动脉网络叠加于同一场景中的效果。
 \begin{figure}[t]
 \centering
 \includegraphics[height=2.4in]{figures/heart/heart_with_ca.eps}
 %\caption{The overlayed three-dimensional models of the heart and the coronary arteries acquired in the previous work \cite{Yang2013ROBIO} are rendered in the same scene.}
-\caption[叠加冠状动脉的心脏轮廓表面模型前面观]{The overlayed three-dimensional models of the heart and the coronary arteries are rendered in the same scene.}
+\caption[叠加冠状动脉的心脏轮廓表面模型前面观]{叠加冠状动脉的心脏轮廓表面模型前面观。}
 \label{fig:heart_overlay}
 \end{figure} 
