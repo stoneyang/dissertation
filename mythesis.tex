@@ -106,19 +106,27 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \mainmatter
 
+\part{引言}
+%\addcontentsline{toc}{chapter}{引言}
   \include{chapters/mainmatter/problem/main}             % problem
   \include{chapters/mainmatter/background/main}          % background
+\part{图像处理}
+%\addcontentsline{toc}{chapter}{图像处理}
   \include{chapters/mainmatter/aorta/main}               % aorta
   \include{chapters/mainmatter/coronary/main}            % coronary
   \include{chapters/mainmatter/coronary_enhanced/main}   % enhanced coronary
-  \include{chapters/mainmatter/mesh/main}                % mesh optimization
   \include{chapters/mainmatter/heart/main}               % heart region
+\part{数据可视化}
+%\addcontentsline{toc}{chapter}{数据可视化}
+  \include{chapters/mainmatter/mesh/main}                % mesh optimization
   \include{chapters/mainmatter/centerlines/main}         % centerlines extraction
   \include{chapters/mainmatter/state_model/main}         % state model
+\part{结论}
+%\addcontentsline{toc}{chapter}{结论}
   \include{chapters/mainmatter/conclusions/main}         % conclusions
 
   % 附录
-%  \appendix
+\appendix
 %
 %  \include{chapters/backmatter/maths}      % mathematical equations
 %  \include{chapters/backmatter/software}   % software engineering
@@ -127,7 +135,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% 附件部分
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\backmatter
+%\backmatter
 
   % 参考文献
   % 使用 BibTeX
