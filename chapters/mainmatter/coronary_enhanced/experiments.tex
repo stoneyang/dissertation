@@ -37,19 +37,29 @@
 对比这两种方法的效果，我们选择二值化滤波器来改善之前管状物体增强所得到的结果（见图\ref{fig:coronary_enhanced_data_flow}）。
 \begin{figure}[t]
 \centering
-\includegraphics[width=2.8in]{figures/coronary_enhanced/original.eps}
+\includegraphics[width=2.5in]{figures/coronary_enhanced/original.eps}
 \caption[心脏区域的VOI提取]{心脏区域的VOI提取。}
 \label{fig:coronary_enhanced_original}
 \end{figure}
 \begin{figure}[t]
 \centering
-\subfloat[]{\includegraphics[width=2.8in]{figures/coronary_enhanced/binary1.eps}%
+\subfloat[]{\includegraphics[width=2.5in]{figures/coronary_enhanced/binary1.eps}%
 \label{fig:coronary_enhanced_binary_1}}
 \hfil
-\subfloat[]{\includegraphics[width=2.8in]{figures/coronary_enhanced/hessian.eps}%
+\subfloat[]{\includegraphics[width=2.5in]{figures/coronary_enhanced/hessian.eps}%
 \label{fig:coronary_enhanced_vesselness}}
 \caption[基于“vesselness”的原始CTA影像的预处理]{基于“vesselness”的原始CTA影像的预处理：(a) 二值阈值滤波（$\text{lower threshold} = 300$, $\text{upper threshold} = 600$）；(b) 管状物体增强（$\sigma = 0.9$, $\gamma_{12} = 0.1$, $\gamma_{23} = 2.0$）。}%
 \label{fig:coronary_enhanced_preprocessing}
+\end{figure}
+\begin{figure}[t]
+\centering
+\subfloat[]{\includegraphics[width=2.5in]{figures/coronary_enhanced/sigmoid.eps}%
+\label{fig:coronary_enhanced_sigmoid}}
+\hfil
+\subfloat[]{\includegraphics[width=2.5in]{figures/coronary_enhanced/binary2.eps}%
+\label{fig:coronary_enhanced_binary_2}}
+\caption[两种不同的像素亮度处理结果的对比]{两种不同的像素亮度处理结果的对比：(a) 非线性亮度映射（$m = 80$, $n = 120$）；(b) 二值阈值滤波（$\text{lower threshold} = 40$, $\text{upper threshold} = 200$）。}%
+\label{fig:coronary_enhanced_intensity_conditioning}
 \end{figure}
 
 \subsection{特征图像的计算}
@@ -63,41 +73,32 @@
 与第\ref{chap:coronary}章不同，本章在生成初始的水平集围线的时候应用了一种改进的快速步进算法。
 正如第\ref{subsec:coronary_enhanced_colliding_fronts}节所述，这种算法需要在计算开始时提供成对的起始点。
 而当以这两个起始点演进的围线一旦相遇，演进过程即终止。
+在选取起始点用于计算的时候，我们需要考虑冠状动脉走向的多变性和空间结构的复杂，一定要在曲率较大（即半径较小）的位置设置起始点，以保证水平集的演进能够将这些区段包含在内。
+
+与第\ref{subsec:coronary_experiments_propagation}节类似，CURVES算法以体数据的特征图像为演进参考，并以上述过程生成的初始水平集围线为输入，根据式(\ref{eqn:coronary_application})进行围线演进。
+在手工指定的迭代步数内，围线演进至冠状动脉内壁附近时停止计算，即可得到冠状动脉内壁的表面信息。
+图\ref{fig:coronary_enhanced_CURVES}展示CURVES演进的结果。
+随后，我们同样需要利用二值阈值滤波来处理这一结果，以便进行等值面的提取等工作。
 \begin{figure}[t]
 \centering
-\subfloat[]{\includegraphics[width=2.8in]{figures/coronary_enhanced/sigmoid.eps}%
-\label{fig:coronary_enhanced_sigmoid}}
-\hfil
-\subfloat[]{\includegraphics[width=2.8in]{figures/coronary_enhanced/binary2.eps}%
-\label{fig:coronary_enhanced_binary_2}}
-\caption[两种不同的像素亮度处理结果的对比]{两种不同的像素亮度处理结果的对比：(a) 非线性亮度映射（$m = 80$, $n = 120$）；(b) 二值阈值滤波（$\text{lower threshold} = 40$, $\text{upper threshold} = 200$）。}%
-\label{fig:coronary_enhanced_intensity_conditioning}
-\end{figure}
-\begin{figure}[t]
-\centering
-\includegraphics[width=2.8in]{figures/coronary_enhanced/curves.eps}
+\includegraphics[width=2.5in]{figures/coronary_enhanced/curves.eps}
 \caption[基于输入水平集和特征图像的CURVES演进]{基于输入水平集和特征图像的CURVES演进}%
 \label{fig:coronary_enhanced_CURVES}
 \end{figure}
-\begin{figure*}[t]
-\centering
-\subfloat[]{\includegraphics[width=2.8in]{figures/coronary_enhanced/model_conventional.eps}%
-\label{fig:coronary_enhanced_CURVES_visualization}}
-\hfil
-\subfloat[]{\includegraphics[width=2.4in]{figures/coronary_enhanced/model_enhanced.eps}%
-\label{fig:coronary_enhanced_normal_CURVES}}
-\caption[不同方法分割得到的冠状动脉模型的对比]{不同方法分割得到的冠状动脉模型的对比：(a) 传统的CURVES演进；(b) 管状物体增强后的CURVES演进。}%
-\label{fig:coronary_enhanced_comparison}
-\end{figure*}
-
-The CURVES system started working when all the preceding calculation completed.
-The module took the speed images as its evolution maps and the initial contours as its initial states and regulates the evolution according to (\ref{eqn:coronary_application}).
-The evolution terminated when the contours evolved against the wall of the coronary arteries in the specified steps of iterations.
-And the resulting evolution extracted the coronary arteries as shown in Fig. \ref{fig:coronary_enhanced_CURVES}.
-Next a binary thresholding step was provoked to label the inner area of the coronary arteries with high intensity value whilst the outer area with zero intensity value.
 
 \subsection{分割结果的可视化}
 \label{subsec:coronary_enhanced_visualization}
 
-By manually picked the isovalue corresponding to the wall of the coronary arteries, the resulting volume were processed using the marching cubes method \cite{Lorensen1987MC}.
-The visualization models of the coronary arteries respectively based on the CURVES regions without and with tubular enhancement demonstrated their capabilities of displaying the complicated geometrical details (see Fig. \ref{fig:coronary_enhanced_CURVES_visualization} and \ref{fig:coronary_enhanced_normal_CURVES}). %
+与第\ref{subsec:coronary_experiments_isosurface}节所述类似，我们需要显示的表面正是应用本章所述方法所得分割结果的边缘（即冠状动脉的内腔边缘）。
+这里，我们同样应用行进立方体方法\cite{Lorensen1987MC}来完成等值面的提取，图\ref{fig:coronary_enhanced_CURVES_visualization}展示了对本章分割结果的表面渲染。
+通过对比图\ref{fig:coronary_CURVES_visualization}，我们可以观察到，不仅冠状动脉主要分支内腔的表面被比较完整地分离出来，而且还进一步提取出了更为细小的分支。
+\begin{figure}[t]
+\centering
+\subfloat[]{\includegraphics[height=2.5in]{figures/coronary_enhanced/model_conventional.eps}%
+\label{fig:coronary_enhanced_CURVES_visualization}}
+\hfil
+\subfloat[]{\includegraphics[height=2.8in]{figures/coronary_enhanced/model_enhanced.eps}%
+\label{fig:coronary_enhanced_normal_CURVES}}
+\caption[不同方法分割得到的冠状动脉模型的对比]{不同方法分割得到的冠状动脉模型的对比：(a) 传统的CURVES演进（方法见第\ref{chap:coronary}章）；(b) 管状物体增强后的CURVES演进（本章方法）。}%
+\label{fig:coronary_enhanced_comparison}
+\end{figure}
