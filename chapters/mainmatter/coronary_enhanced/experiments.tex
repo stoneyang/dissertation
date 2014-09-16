@@ -91,14 +91,14 @@
 
 与第\ref{subsec:coronary_experiments_isosurface}节所述类似，我们需要显示的表面正是应用本章所述方法所得分割结果的边缘（即冠状动脉的内腔边缘）。
 这里，我们同样应用行进立方体方法\cite{Lorensen1987MC}来完成等值面的提取，图\ref{fig:coronary_enhanced_CURVES_visualization}展示了对本章分割结果的表面渲染。
-通过对比图\ref{fig:coronary_CURVES_visualization}，我们可以观察到，不仅冠状动脉主要分支内腔的表面被比较完整地分离出来，而且还进一步提取出了更为细小的分支。
+通过对比图\ref{fig:coronary_enhanced_normal_CURVES}，我们可以观察到，不仅冠状动脉主要分支内腔的表面被比较完整地分离出来，而且还进一步提取出了更为细小的分支。
 \begin{figure}[t]
 \centering
 \subfloat[]{\includegraphics[height=2.5in]{figures/coronary_enhanced/model_conventional.eps}%
-\label{fig:coronary_enhanced_CURVES_visualization}}
+\label{fig:coronary_enhanced_normal_CURVES}}
 \hfil
 \subfloat[]{\includegraphics[height=2.8in]{figures/coronary_enhanced/model_enhanced.eps}%
-\label{fig:coronary_enhanced_normal_CURVES}}
+\label{fig:coronary_enhanced_CURVES_visualization}}
 \caption[不同方法分割得到的冠状动脉模型的对比]{不同方法分割得到的冠状动脉模型的对比：(a) 传统的CURVES演进（方法见第\ref{chap:coronary}章）；(b) 管状物体增强后的CURVES演进（本章方法）。}%
 \label{fig:coronary_enhanced_comparison}
 \end{figure}

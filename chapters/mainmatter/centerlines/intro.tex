@@ -2,17 +2,23 @@
 \section{引言}
 \label{sec:centerlines_intro}
 
-在前两章中，我们介绍了有关基于CTA的人体心血管三维模型的分割与可视化的基础性工作。
-在心血管介入手术的仿真中，为了改善和提高心血管系统模型与虚拟手术工具的交互性能，还需这一基于CTA的表面模型进行进一步的处理。
-为行进中的虚拟手术工具提供基准的空间位置参考，就需要计算出血管模型的几何特征；为提高血管模型与虚拟手术工作的交互性能，以提高仿真度，就需要在不明显破坏模型的真实性的前提下，对模型的构成进行精简。
+在第\ref{chap:mesh}章中，我们介绍了有关基于CTA的人体心血管三维模型的数据优化方面的工作。
+该工作的目的是提高血管模型与虚拟手术工作的交互性能，提高仿真程度。
+该工作通过在不明显破坏模型的几何特性的前提下，对其基本构成单位（即：多边形）进行精简。
+在心血管介入手术的仿真中，为实现仿真系统的回放和评估等功能，我们还需要提取基于CTA的表面模型的几何信息，从而为行进中的虚拟手术工具提供基准的空间位置参考，就需要计算出血管模型的几何特征。
+中心线是一种描述模型形状（或几何信息）的有效办法\cite{Ogniewicz1995}，在交互仿真中的路径规划方面，该方法能够提供准确的形状信息。
+在本章中，我们设计并实现了一种基于Voronoi图演进方法\cite{Antiga2003}的自动化方法，以用于提取血管系统表面模型的中心线。
 
-The centerlines is an effective way of describing the shape of the model \cite{Ogniewicz1995}, which will provide accurate shape description for the path planning in interactive simulation.
-In this paper, we developed an automatic approach based on the Voronoi diagram \cite{Antiga2003} to extract the centerlines of the vasculature.
-
-在本章中，我们提出了一种用于计算血管模型中心线的方法。
 该方法首先检查基于CTA的血管模型中，各顶点的连接关系，进而提取血管模型的最大连接区域。
-然后，利用windowed sinc函数对所得区域进行平滑处理。
+然后，利用windowed sinc函数\footnote{详见：\url{http://www.cg.tuwien.ac.at/~theussl/DA/node34.html}}对所得区域进行平滑处理。
 其次，计算各个多边形面片的法向量。
 再次，为提高中心线的准确性，我们对平滑后的表面模型进行了细分。
-最后，我们引入power crust算法计算了表面模型的中心线。
+最后，我们引入power crust算法\cite{Amenta2001}计算了表面模型的中心线。
 实验结果表明，我们所提出的方法能够完成血管表面模型的中心线的提取计算。
+
+本章余下的内容安排如下：
+第\ref{sec:centerlines_related_work}节简要介绍与本章内容的相关的主要工作。
+第\ref{sec:centerlines_methods}节分析本章工作的完整流程，以及各个环节的基本原理。
+第\ref{sec:centerlines_experiments}节记录本章工作的实验设计，展示各环节的典型结果。
+第\ref{sec:centerlines_discussion}节讨论实验中的一些问题。
+第\ref{sec:centerlines_conclusions}节总结本章的工作。

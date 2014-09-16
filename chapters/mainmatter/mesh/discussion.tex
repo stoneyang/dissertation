@@ -21,3 +21,37 @@
 
 在验证交互性能的过程中，大于10的fps对于本样机是足够的。
 在本章中，用于手术仿真研究的主动脉的冠状动脉的表面模型的多边形数量被削减了$99\%$，在交互实验中实现了$11$fps（$> 10$）。
+\begin{table}[t]
+\renewcommand{\arraystretch}{0.5}
+\caption[精简率与fps——情形I]{精简率与fps——情形I}
+\label{tbl:mesh_FPS1}
+\centering
+\begin{tabular*}{100mm}{c r r r r r}
+\toprule
+\hspace{5mm} \small{精简率（$\%$）}           & \small{$10$} & \small{$50$} & \small{$75$} & \small{$90$} & \small{$99$} \\
+\midrule
+\hspace{5mm} \small{仿真初始fps}              & \small{$30$} & \small{$35$} & \small{$38$} & \small{$41$} & \small{$42$} \\
+\midrule
+\hspace{5mm} \small{仿真平均fps}              &  \small{$6$} & \small{$10$} & \small{$15$} & \small{$18$} & \small{$30$} \\
+\midrule
+\hspace{5mm} \small{是否完成仿真？（是/否）}  &  \small{否}  &  \small{否}  & \small{是}   & \small{是}   & \small{是}   \\
+\bottomrule
+\end{tabular*}
+\end{table}
+\begin{table}[t]
+\renewcommand{\arraystretch}{0.5}
+\caption[精简率与fps——情形II]{精简率与fps——情形II}
+\label{tbl:mesh_FPS2}
+\centering
+\begin{tabular*}{80mm}{c r r r r r}
+\toprule
+\hspace{5mm} \small{精简率（$\%$）}           & \small{$90$} & \small{$95$} & \small{$99$} \\
+\midrule
+\hspace{5mm} \small{仿真初始fps}              & \small{$20$} & \small{$32$} & \small{$31$} \\
+\midrule
+\hspace{5mm} \small{仿真平均fps}              &  \small{$4$} &  \small{$6$} & \small{$11$} \\
+\midrule
+\hspace{5mm} \small{是否完成仿真？（是/否）}  &  \small{否}  &  \small{否}  & \small{是}   \\
+\bottomrule
+\end{tabular*}
+\end{table}
