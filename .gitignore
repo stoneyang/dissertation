@@ -1,5 +1,6 @@
 mythesis.pdf
 mythesis_UTF8.pdf
+paperwork/*.pdf
 
 *.aux
 *.bbl
