@@ -17,29 +17,29 @@
 \label{fig:coronary_data_flow}
 \end{figure}
 
-\subsection{预处理}
-\label{subsec:coronary_preprocessing}
+% \subsection{预处理}
+% \label{subsec:coronary_preprocessing}
 
-本部分平滑处理所使用的方法与第\ref{subsec:aorta_preprocessing}节类似，此处不再赘述。
+% 本部分平滑处理所使用的方法与第\ref{subsec:aorta_preprocessing}节类似，此处不再赘述。
 
-在平滑处理后，我们利用设置恰当的阈值滤波来去除图像中非血管部分。
-阈值滤波的函数可表示如下：
-\begin{equation}
-\label{eqn:coronary_threshold}
-I_{\text{output}} =
-\begin{cases}
-I_{\text{input}}, & \text{TH}_{\text{lower}} \le I_{\text{input}} \le \text{TH}_{\text{upper}}, \\%
-0,   & \text{otherwise}.
-\end{cases}
-\end{equation}
-其中， $\text{TH}_{\text{lower}}$与$\text{TH}_{\text{upper}}$分别表示阈值的上下限，而$I_{\text{input}}$与$I_{\text{output}}$则分别表示输入和输出的像素强度。
-上述函数可表示为图\ref{fig:coronary_threshold_function}。
-\begin{figure}[t]
-\centering
-\input{FigureSrc/heart/binary_threshold}
-\caption[阈值函数]{阈值函数}
-\label{fig:coronary_threshold_function}
-\end{figure}
+% 在平滑处理后，我们利用设置恰当的阈值滤波来去除图像中非血管部分。
+% 阈值滤波的函数可表示如下：
+% \begin{equation}
+% \label{eqn:coronary_threshold}
+% I_{\text{output}} =
+% \begin{cases}
+% I_{\text{input}}, & \text{TH}_{\text{lower}} \le I_{\text{input}} \le \text{TH}_{\text{upper}}, \\%
+% 0,   & \text{otherwise}.
+% \end{cases}
+% \end{equation}
+% 其中， $\text{TH}_{\text{lower}}$与$\text{TH}_{\text{upper}}$分别表示阈值的上下限，而$I_{\text{input}}$与$I_{\text{output}}$则分别表示输入和输出的像素强度。
+% 上述函数可表示为图\ref{fig:coronary_threshold_function}。
+% \begin{figure}[t]
+% \centering
+% \input{FigureSrc/heart/binary_threshold}
+% \caption[阈值函数]{阈值函数}
+% \label{fig:coronary_threshold_function}
+% \end{figure}
 
 \subsection{CURVES模型}
 \label{subsec:coronary_CURVES}
@@ -92,7 +92,7 @@ P_q = I_0 - \frac{qq^T}{\left| q \right|^2},
 \frac{\partial \mathcal{C}}{\partial t} = k \mathcal{N} - \frac{g'(I_{\sigma})}{g(I_{\sigma})} \varPi \left( \mathcal{H} \frac{\nabla I_{\sigma}}{ \left| \nabla I_{\sigma} \right| } \right).%
 \end{equation}
 
-\subsection{表面提取}
-\label{coronary_surface_extraction}
+% \subsection{表面提取}
+% \label{coronary_surface_extraction}
 
-本部分所用方法与第\ref{subsec:aorta_isosurface}节相同，此处不再赘述。
+% 本部分所用方法与第\ref{subsec:aorta_isosurface}节相同，此处不再赘述。

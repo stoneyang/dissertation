@@ -18,65 +18,65 @@
 \label{fig:heart_data_flow}
 \end{figure}
 
-\subsection{预处理}
-\label{subsec:heart_preprocessing}
+% \subsection{预处理}
+% \label{subsec:heart_preprocessing}
 
-\subsubsection{具有边缘保护作用的图像平滑处理}
-\label{subsubsec:heart_smoothing}
+% \subsubsection{具有边缘保护作用的图像平滑处理}
+% \label{subsubsec:heart_smoothing}
 
-在图像获取环节中引入的颗粒性噪声会给随后进行的分割工作带来相当大的不利影响。
-因此，在其处理环节开始前，对影像进行平滑处理是必要的。
-平滑处理的原则是尽可能多地除去图像中的噪声，同时尽可能完整地保护图像内容的细节，尤其是物体的边缘细节。
-为此，我们采用了一种基于MCDE的平滑算法\cite{Whitaker2001}：
-\begin{equation}
-\label{eqn:heart_MCDE}
-\frac{\partial I}{\partial t} = |\nabla I| \nabla \cdot c(|\nabla I|) \frac{\nabla I}{|\nabla I|},
-\end{equation}
-其中，$I(\cdot)$代表输入图像，$c$代表通透性函数$c(|\nabla I|) = k^2/(k^2 + |\nabla I|^2)$，其中$k$为自由选定的参数，它决定着边缘的对比度。
+% 在图像获取环节中引入的颗粒性噪声会给随后进行的分割工作带来相当大的不利影响。
+% 因此，在其处理环节开始前，对影像进行平滑处理是必要的。
+% 平滑处理的原则是尽可能多地除去图像中的噪声，同时尽可能完整地保护图像内容的细节，尤其是物体的边缘细节。
+% 为此，我们采用了一种基于MCDE的平滑算法\cite{Whitaker2001}：
+% \begin{equation}
+% \label{eqn:heart_MCDE}
+% \frac{\partial I}{\partial t} = |\nabla I| \nabla \cdot c(|\nabla I|) \frac{\nabla I}{|\nabla I|},
+% \end{equation}
+% 其中，$I(\cdot)$代表输入图像，$c$代表通透性函数$c(|\nabla I|) = k^2/(k^2 + |\nabla I|^2)$，其中$k$为自由选定的参数，它决定着边缘的对比度。
 
-\subsubsection{二值阈值滤波}
-\label{subsubsec:heart_binary}
+% \subsubsection{二值阈值滤波}
+% \label{subsubsec:heart_binary}
 
-为了获得“形状完好的”图像，我们引入了阈值滤波运算来处理平滑后的影像。
-在阈值滤波的过程中，与本章工作目标无关的图像内容的像素的亮度将会被统一地赋值为零，而相关的图像内容的像素的亮度将会被统一地赋值为$255$（如图\ref{fig:heart_binary_threshold}所示）：
-\begin{equation}
-\label{eqn:heart_binary_threshold}
-I_{\text{output}} =
-\begin{cases}
-255, & \text{TH}_{\text{lower}} \le I_{\text{input}} \le \text{TH}_{\text{upper}}, \\%
-0,   & \text{otherwise}.
-\end{cases}
-\end{equation}
-其中，$\text{TH}_{\text{lower}}$和$\text{TH}_{\text{upper}}$表示像素亮度的上下阈值，$I_{\text{input}}$和$I_{\text{output}}$表示输出图像中像素的亮度。
-\begin{figure}[t]
-\centering
-\input{FigureSrc/heart/binary_threshold}
-\caption[二值阈值函数]{二值阈值函数。}
-\label{fig:heart_binary_threshold}
-\end{figure}
+% 为了获得“形状完好的”图像，我们引入了阈值滤波运算来处理平滑后的影像。
+% 在阈值滤波的过程中，与本章工作目标无关的图像内容的像素的亮度将会被统一地赋值为零，而相关的图像内容的像素的亮度将会被统一地赋值为$255$（如图\ref{fig:heart_binary_threshold}所示）：
+% \begin{equation}
+% \label{eqn:heart_binary_threshold}
+% I_{\text{output}} =
+% \begin{cases}
+% 255, & \text{TH}_{\text{lower}} \le I_{\text{input}} \le \text{TH}_{\text{upper}}, \\%
+% 0,   & \text{otherwise}.
+% \end{cases}
+% \end{equation}
+% 其中，$\text{TH}_{\text{lower}}$和$\text{TH}_{\text{upper}}$表示像素亮度的上下阈值，$I_{\text{input}}$和$I_{\text{output}}$表示输出图像中像素的亮度。
+% \begin{figure}[t]
+% \centering
+% \input{FigureSrc/heart/binary_threshold}
+% \caption[二值阈值函数]{二值阈值函数。}
+% \label{fig:heart_binary_threshold}
+% \end{figure}
 
-\subsubsection{梯度幅值的计算}
-\label{subsubsec:heart_gradient}
+% \subsubsection{梯度幅值的计算}
+% \label{subsubsec:heart_gradient}
 
-本部分所用方法与第\ref{subsec:aorta_edge_potential}节类似，此处不再赘述。
-\begin{figure}[t]
-\centering
-\input{FigureSrc/heart/sigmoid}
-\caption[用于非线性像素映射的S函数]{用于非线性像素映射的S函数。}
-\label{fig:heart_sigmoid}
-\end{figure}
+% 本部分所用方法与第\ref{subsec:aorta_edge_potential}节类似，此处不再赘述。
+% \begin{figure}[t]
+% \centering
+% \input{FigureSrc/heart/sigmoid}
+% \caption[用于非线性像素映射的S函数]{用于非线性像素映射的S函数。}
+% \label{fig:heart_sigmoid}
+% \end{figure}
 
-\subsubsection{初始轮廓的生成}
-\label{subsubsec:heart_intial_contours}
+% \subsubsection{初始轮廓的生成}
+% \label{subsubsec:heart_intial_contours}
 
-本部分所用方法与第\ref{subsec:aorta_initial_contours}节类似，此处不再赘述。
+% 本部分所用方法与第\ref{subsec:aorta_initial_contours}节类似，此处不再赘述。
 
-\subsection{测地学活动轮廓的演进}
-\label{subsec:heart_geodesic}
+% \subsection{测地学活动轮廓的演进}
+% \label{subsec:heart_geodesic}
 
-本部分所用方法与第\ref{subsec:aorta_gac}节类似，此处不再赘述。
+% 本部分所用方法与第\ref{subsec:aorta_gac}节类似，此处不再赘述。
 
-\subsection{等值面的提取}
-\label{subsec:heart_surface}
+% \subsection{等值面的提取}
+% \label{subsec:heart_surface}
 
-本部分所用方法与第\ref{subsec:aorta_isosurface}节类似，此处不再赘述。
+% 本部分所用方法与第\ref{subsec:aorta_isosurface}节类似，此处不再赘述。

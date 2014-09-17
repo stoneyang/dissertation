@@ -39,6 +39,26 @@
 \subsection{表面模型的平滑处理}
 \label{subsec:mesh_smooth_experiments}
 
+\begin{figure}[t]
+% \begin{table}[t]
+\renewcommand{\arraystretch}{0.5}
+% \caption[为平滑算法设置不同的参数所获得的结果]{为平滑算法设置不同的参数所获得的结果（$N$：迭代次数；$\delta$：带宽）}
+% \label{tbl:mesh_smooth}
+\centering
+\begin{tabular}{|l|c|c|c|}
+\hline
+\bigstrut ~                                   & \raisebox{-1mm}{$N = 30$}                                     & \raisebox{-1mm}{$N = 60$}                                     & \raisebox{-1mm}{$N = 100$}                                     \\
+\hline
+\bigstrut[t] \raisebox{30mm}{$\delta = 0.1$}  & \includegraphics[height=180pt]{Figures/mesh/smooth_30_1.eps}  & \includegraphics[height=180pt]{Figures/mesh/smooth_60_1.eps}  & \raisebox{-1mm}{\includegraphics[height=180pt]{Figures/mesh/smooth_100_1.eps}}  \\
+\hline
+\bigstrut[b] \raisebox{30mm}{$\delta = 0.01$} & \raisebox{-3mm}{\includegraphics[height=180pt]{Figures/mesh/smooth_30_01.eps}} & \raisebox{-3mm}{\includegraphics[height=180pt]{Figures/mesh/smooth_60_01.eps}} & \raisebox{-3mm}{\includegraphics[height=180pt]{Figures/mesh/smooth_100_01.eps}} \\
+\hline
+\end{tabular}
+\caption[为平滑算法设置不同的参数所获得的结果]{为平滑算法设置不同的参数所获得的结果。（$N$：迭代次数；$\delta$：带宽）}
+\label{fig:mesh_smooth}
+% \end{table}
+\end{figure}
+
 鉴于在图像获取与处理过程中所不可避免的噪声，基于原始医学体数据的血管表面模型上存在大量的不平整片段。
 这些衍生物和“尖刺”的问题在于，它们可能会导致将来虚拟工具（主要是虚拟导管，虚拟导丝等）的推送过程不平顺的问题。
 为了避免这种情况的出现，我们需要对血管模型的表面进行彻底的平整处理。
@@ -76,25 +96,6 @@ $N$用于控制算法的迭代次数，它等价于式(\ref{eqn:mesh_approximation})给出的windowe
 % \caption[为平滑算法设置不同的参数所获得的结果]{为平滑算法设置不同的参数所获得的结果：上排展示了$\text{带宽} = 0.1$时的结果，迭代次数分别为：$30$，$60$，$100$；下排展示了$\text{带宽} = 0.01$，迭代次数分别为：$30$，$60$，$100$。}%
 % \label{fig:mesh_smooth}
 % \end{figure}
-\begin{figure}[ht]
-% \begin{table}[t]
-\renewcommand{\arraystretch}{0.5}
-% \caption[为平滑算法设置不同的参数所获得的结果]{为平滑算法设置不同的参数所获得的结果（$N$：迭代次数；$\delta$：带宽）}
-% \label{tbl:mesh_smooth}
-\centering
-\begin{tabular}{|l|c|c|c|}
-\hline
-\bigstrut ~                                   & \raisebox{-1mm}{$N = 30$}                                     & \raisebox{-1mm}{$N = 60$}                                     & \raisebox{-1mm}{$N = 100$}                                     \\
-\hline
-\bigstrut[t] \raisebox{30mm}{$\delta = 0.1$}  & \includegraphics[height=180pt]{Figures/mesh/smooth_30_1.eps}  & \includegraphics[height=180pt]{Figures/mesh/smooth_60_1.eps}  & \raisebox{-1mm}{\includegraphics[height=180pt]{Figures/mesh/smooth_100_1.eps}}  \\
-\hline
-\bigstrut[b] \raisebox{30mm}{$\delta = 0.01$} & \raisebox{-3mm}{\includegraphics[height=180pt]{Figures/mesh/smooth_30_01.eps}} & \raisebox{-3mm}{\includegraphics[height=180pt]{Figures/mesh/smooth_60_01.eps}} & \raisebox{-3mm}{\includegraphics[height=180pt]{Figures/mesh/smooth_100_01.eps}} \\
-\hline
-\end{tabular}
-\caption[为平滑算法设置不同的参数所获得的结果]{为平滑算法设置不同的参数所获得的结果。（$N$：迭代次数；$\delta$：带宽）}
-\label{fig:mesh_smooth}
-% \end{table}
-\end{figure}
 
 \subsection{精简多边形面片}
 \label{subsec:decimate_experiments}

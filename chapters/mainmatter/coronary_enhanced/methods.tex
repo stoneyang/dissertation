@@ -79,26 +79,26 @@ $\gamma_{23} \in [0, \infty)$控制锐度，
 % \caption{增强不同形状所需的特征值}
 \end{table}
 
-\subsection{水平集演进之前的预处理}
-\label{subsec:coronary_enhanced_preprocessing}
+% \subsection{水平集演进之前的预处理}
+% \label{subsec:coronary_enhanced_preprocessing}
 
-\subsubsection{特征图像的计算}
-\label{subsubsec:coronary_enhanced_feature_image}
+% \subsubsection{特征图像的计算}
+% \label{subsubsec:coronary_enhanced_feature_image}
 
-本部分所用方法与第\ref{subsec:aorta_edge_potential}节类似，此处不再赘述。
+% 本部分所用方法与第\ref{subsec:aorta_edge_potential}节类似，此处不再赘述。
 
-\subsubsection{一种改进的Fast Marching方法}
-\label{subsec:coronary_enhanced_colliding_fronts}
+% \subsubsection{一种改进的Fast Marching方法}
+% \label{subsec:coronary_enhanced_colliding_fronts}
 
-波面碰撞（colliding fronts）——一种改进的快速行进法，其目的是为后续的分割工作生成输入水平集。
-这种方法的实现建立在经典的快速行进法\cite{Sethian1999}的基础上。
-与经典方法不同的是，在同一轮计算中，我们可以同时为其提供两个种子点，两个种子点就意味着两个波面同时传播，直到它们相互“碰撞”为止。
-这样，我们就可以较快地获得水平集结果。
+% 波面碰撞（colliding fronts）——一种改进的快速行进法，其目的是为后续的分割工作生成输入水平集。
+% 这种方法的实现建立在经典的快速行进法\cite{Sethian1999}的基础上。
+% 与经典方法不同的是，在同一轮计算中，我们可以同时为其提供两个种子点，两个种子点就意味着两个波面同时传播，直到它们相互“碰撞”为止。
+% 这样，我们就可以较快地获得水平集结果。
 
-\subsection{CURVES演进模型}
+% \subsection{CURVES演进模型}
 
-本部分所采用的方法与第\ref{subsec:coronary_CURVES}节相同，此处不再赘述。
+% 本部分所采用的方法与第\ref{subsec:coronary_CURVES}节相同，此处不再赘述。
 
-\subsection{等值面渲染}
+% \subsection{等值面渲染}
 
-本部分所用方法与第\ref{subsec:aorta_isosurface}节相同，此处不再赘述。
+% 本部分所用方法与第\ref{subsec:aorta_isosurface}节相同，此处不再赘述。

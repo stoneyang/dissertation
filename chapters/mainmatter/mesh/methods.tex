@@ -15,95 +15,95 @@
 其次，引入平滑算法以处理模型表面的“毛刺”和“凹陷”等不平整的区域。
 最后，对表面模型的多边形面片进行削减，同时，血管模型的几何特征得到最大限度的保护。
 
-\subsection{表面顶点的连接性检验}
-\label{subsec:mesh_connectivity}
+% \subsection{表面顶点的连接性检验}
+% \label{subsec:mesh_connectivity}
 
-为了获得更为准确的血管系统中心线，我们需要确保血管模型在任何区域都是“单层的”，“无游离碎片的”。
-也就是说，我们需要寻找血管表面模型中的最大连接区域，这就需要对模型上所有的顶点逐一进行检验。
-这一步骤的工作机制是提取那些共享顶点的组成表面模型的多边形面片。
+% 为了获得更为准确的血管系统中心线，我们需要确保血管模型在任何区域都是“单层的”，“无游离碎片的”。
+% 也就是说，我们需要寻找血管表面模型中的最大连接区域，这就需要对模型上所有的顶点逐一进行检验。
+% 这一步骤的工作机制是提取那些共享顶点的组成表面模型的多边形面片。
 
-\subsection{表面的平滑处理}
-\label{subsec:mesh_smoothing}
+% \subsection{表面的平滑处理}
+% \label{subsec:mesh_smoothing}
 
-在计算机图形学和图像处理领域，二维或三维的曲线和表面（两者都可看作是“形状”）的可视化是普遍的，尤其对于医学领域的体数据而言。
-这类计算实际上是利用分段的曲线或者多边形表面来近似地估计原始的形状。
-典型的实例是图\ref{fig:mesh_artifact}所展示的表面上某种程度的衍生物（artifact），它在可视化过程中产生，能够在保持表面模型整体几何特性不发生改变的前提下被“打磨”平整（见图\ref{fig:mesh_artifact_removed}）。
-在本章中，我们的目标之一便是对由原始医学体数据处理而得到的模型的表面进行平整处理。
+% 在计算机图形学和图像处理领域，二维或三维的曲线和表面（两者都可看作是“形状”）的可视化是普遍的，尤其对于医学领域的体数据而言。
+% 这类计算实际上是利用分段的曲线或者多边形表面来近似地估计原始的形状。
+% 典型的实例是图\ref{fig:mesh_artifact}所展示的表面上某种程度的衍生物（artifact），它在可视化过程中产生，能够在保持表面模型整体几何特性不发生改变的前提下被“打磨”平整（见图\ref{fig:mesh_artifact_removed}）。
+% 在本章中，我们的目标之一便是对由原始医学体数据处理而得到的模型的表面进行平整处理。
 \begin{figure}[t]
 \centering
 \includegraphics[width=3.2in]{figures/mesh/DataFlow.eps}
 \caption[血管表面模型优化的工作流程]{血管表面模型优化的工作流程。}
 \label{fig:mesh_data_flow}
 \end{figure}
-\begin{figure}[t]
-\centering
-\subfloat[]{\includegraphics[height=1.5in]{figures/mesh/artifact.eps}%
-\label{fig:mesh_artifact}}
-\hfil
-\subfloat[]{\includegraphics[height=1.5in]{figures/mesh/artifact_removed.eps}%
-\label{fig:mesh_artifact_removed}}
-\caption[对可视化过程中引入的估计所带来的不平整区域进行平滑处理]{对可视化过程中引入的估计所带来的不平整区域进行平滑处理。(a) 不平整区域（血管模型表面上水平方向的“台阶”）；(b) 平滑处理后的该区域。}%
-\label{fig:mesh_artifact_comparison}
-\end{figure}
-为实现这一目标，我们引入一种信号处理方法。
-该方法实际上是一种线性低通滤波器\cite{Taubin1995ICCV}，属于数字信号处理领域中的一种低层处理技术。
-它能够应用于对几何上任意维度和复杂程度的曲线或者曲面进行平整处理。
-此外，这个计算过程并不会引起模型的收缩。
+% \begin{figure}[t]
+% \centering
+% \subfloat[]{\includegraphics[height=1.5in]{figures/mesh/artifact.eps}%
+% \label{fig:mesh_artifact}}
+% \hfil
+% \subfloat[]{\includegraphics[height=1.5in]{figures/mesh/artifact_removed.eps}%
+% \label{fig:mesh_artifact_removed}}
+% \caption[对可视化过程中引入的估计所带来的不平整区域进行平滑处理]{对可视化过程中引入的估计所带来的不平整区域进行平滑处理。(a) 不平整区域（血管模型表面上水平方向的“台阶”）；(b) 平滑处理后的该区域。}%
+% \label{fig:mesh_artifact_comparison}
+% \end{figure}
+% 为实现这一目标，我们引入一种信号处理方法。
+% 该方法实际上是一种线性低通滤波器\cite{Taubin1995ICCV}，属于数字信号处理领域中的一种低层处理技术。
+% 它能够应用于对几何上任意维度和复杂程度的曲线或者曲面进行平整处理。
+% 此外，这个计算过程并不会引起模型的收缩。
 
-该方法建立在“离散图信号”概念，及其三维的情形“离散表面信号”的基础上\cite{Taubin1995SIG}。
+% 该方法建立在“离散图信号”概念，及其三维的情形“离散表面信号”的基础上\cite{Taubin1995SIG}。
 
-所谓“离散图信号”，指的是某定义在离散图（有些文献中简称“digraph”）上的函数。
-与我们所考虑的多边形曲面所对应的是，离散图$G$可以记为：$G: \left\{ V_g, E\right\}$，其中，$V_g = \left\{ 1, \ldots, n \right\}$是顶点的集合，它包含图中的所有顶点，记号从$1$到$n$；而$E$是边的集合，它包含顶点集合$V_g$中任意一对顶点之间边。
-所谓的“离散图信号”是一个$n$维向量$x = \left[ x_1, \ldots, x_n \right]^T$，该向量的各分量$x_i$，$i = 1, \ldots, n$表示顶点$i \in V_g$处的信号强度。
+% 所谓“离散图信号”，指的是某定义在离散图（有些文献中简称“digraph”）上的函数。
+% 与我们所考虑的多边形曲面所对应的是，离散图$G$可以记为：$G: \left\{ V_g, E\right\}$，其中，$V_g = \left\{ 1, \ldots, n \right\}$是顶点的集合，它包含图中的所有顶点，记号从$1$到$n$；而$E$是边的集合，它包含顶点集合$V_g$中任意一对顶点之间边。
+% 所谓的“离散图信号”是一个$n$维向量$x = \left[ x_1, \ldots, x_n \right]^T$，该向量的各分量$x_i$，$i = 1, \ldots, n$表示顶点$i \in V_g$处的信号强度。
 
-所谓“离散表面信号”，指的是某定义在多边形曲面上的函数。
-多边形曲面$S$可表示为$S: \left\{ V_s, F\right\}$，其中，$V_s = \left\{ 1, \ldots, n \right\}$是顶点的集合，它包含多边形曲面中的所有顶点，记号从$1$到$n$；而$F$是面的集合，它包含顶点集合$V_s$中任意顶点以及它们之间的边所围成的面。
-离散表面信号也是一个$n$维向量$y = \left[ y_1, \ldots, y_n \right]^T$，该向量的各分量$y_j$，$j = 1, \ldots, n$表示顶点$j \in V_s$处的信号强度。
+% 所谓“离散表面信号”，指的是某定义在多边形曲面上的函数。
+% 多边形曲面$S$可表示为$S: \left\{ V_s, F\right\}$，其中，$V_s = \left\{ 1, \ldots, n \right\}$是顶点的集合，它包含多边形曲面中的所有顶点，记号从$1$到$n$；而$F$是面的集合，它包含顶点集合$V_s$中任意顶点以及它们之间的边所围成的面。
+% 离散表面信号也是一个$n$维向量$y = \left[ y_1, \ldots, y_n \right]^T$，该向量的各分量$y_j$，$j = 1, \ldots, n$表示顶点$j \in V_s$处的信号强度。
 
-对平面内分段式曲线的平整，我们可应用经典的Fourier分析将原始曲线根据不同的频率分解到正交子空间中去。
-然后，将高频分量看做噪声而除去，并将低频分量保留。
-这个想法可以推广至具有任意拓扑的多边形曲面的情形。
+% 对平面内分段式曲线的平整，我们可应用经典的Fourier分析将原始曲线根据不同的频率分解到正交子空间中去。
+% 然后，将高频分量看做噪声而除去，并将低频分量保留。
+% 这个想法可以推广至具有任意拓扑的多边形曲面的情形。
 
-对于离散表面信号$y$，$V_s$中的顶点处的加权Laplacian算子定义如下：
-\begin{equation}
-\label{eqn:mesh_laplacian}
-\Delta y_i = \sum_{j \in i^{\ast}} w_{ij} \left( y_j - y_i \right),
-\end{equation}
-其中，$w_{ij}$是$y_j - y_i$的正的加权值，而对任意$i$，其加权值之和为$1$，即：$\sum_{j \in i^{\ast}} w_{ij} = 1$。
-式(\ref{eqn:mesh_laplacian})写成矩阵形式如下：
-\begin{equation}
-\label{eqn:mesh_laplacian_matrix}
-\Delta y = - K y,
-\end{equation}
-其中，$K = I - W$，$W$是加权阵，$I$是单位阵。
-这里，我们定义$0 \leq \lambda_1 \leq \ldots \leq \lambda_n \leq 2$为$K$阵的实特征值，它们对应的右特征向量则是$e_1, \ldots, e_n$。
+% 对于离散表面信号$y$，$V_s$中的顶点处的加权Laplacian算子定义如下：
+% \begin{equation}
+% \label{eqn:mesh_laplacian}
+% \Delta y_i = \sum_{j \in i^{\ast}} w_{ij} \left( y_j - y_i \right),
+% \end{equation}
+% 其中，$w_{ij}$是$y_j - y_i$的正的加权值，而对任意$i$，其加权值之和为$1$，即：$\sum_{j \in i^{\ast}} w_{ij} = 1$。
+% 式(\ref{eqn:mesh_laplacian})写成矩阵形式如下：
+% \begin{equation}
+% \label{eqn:mesh_laplacian_matrix}
+% \Delta y = - K y,
+% \end{equation}
+% 其中，$K = I - W$，$W$是加权阵，$I$是单位阵。
+% 这里，我们定义$0 \leq \lambda_1 \leq \ldots \leq \lambda_n \leq 2$为$K$阵的实特征值，它们对应的右特征向量则是$e_1, \ldots, e_n$。
 
-至此，低通滤波就被转化为矩阵函数$f(K)$与输入信号$y$的乘积：
-\begin{equation}
-\label{eqn:mesh_low_pass_equivalent}
-y' = f(K) y.
-\end{equation}
-对任意多项式传递函数，式(\ref{eqn:mesh_low_pass_equivalent})中的输出函数可以重写为：
-\begin{equation}
-\label{eqn:mesh_low_pass_polynomial}
-y' = \sum_{i=1}^{n} \rho_i f(k_i) e_i,
-\end{equation}
-其中，$\rho_i$是输入信号$y$的单位右特征向量的线性组合的系数，即：$y = \sum_{i} \rho_i e_i$。
-为实现此低通滤波器，$f(k_i)$需要满足两个条件：对低频情况，$k_i \in [0,2]$，$f(k_i) \approx 1$；对高频情况：$f(k_i) \approx 0$。
+% 至此，低通滤波就被转化为矩阵函数$f(K)$与输入信号$y$的乘积：
+% \begin{equation}
+% \label{eqn:mesh_low_pass_equivalent}
+% y' = f(K) y.
+% \end{equation}
+% 对任意多项式传递函数，式(\ref{eqn:mesh_low_pass_equivalent})中的输出函数可以重写为：
+% \begin{equation}
+% \label{eqn:mesh_low_pass_polynomial}
+% y' = \sum_{i=1}^{n} \rho_i f(k_i) e_i,
+% \end{equation}
+% 其中，$\rho_i$是输入信号$y$的单位右特征向量的线性组合的系数，即：$y = \sum_{i} \rho_i e_i$。
+% 为实现此低通滤波器，$f(k_i)$需要满足两个条件：对低频情况，$k_i \in [0,2]$，$f(k_i) \approx 1$；对高频情况：$f(k_i) \approx 0$。
 
-低通滤波的机制可通过调整如下多项式估计中的权值来实现\cite{Taubin1996}：
-\begin{equation}
-\label{eqn:mesh_approximation}
-f_{N}(k) = w_0 \frac{\theta}{\pi} T_0 (1 - k / 2) + w_n \sum_{n} \frac{2 \sin (n \theta)}{n \pi} T_n(1 - k / 2),
-\end{equation}
-其中，$\theta$是$k = 2 (1 - \cos \theta)$在$[0, \pi / 2]$上的唯一解，而$T_0(\cdot)$和$T_n(\cdot)$则是Chebyshev多项式。
-在本章中，我们通过调整式(\ref{eqn:mesh_approximation})中的权值来形成Hamming窗\cite{Taubin1996}：
-\begin{equation}
-\label{eqn:mesh_hamming}
-w_n = 0.54 + 0.46 \cos (n \pi / (N + 1) ).
-\end{equation}
+% 低通滤波的机制可通过调整如下多项式估计中的权值来实现\cite{Taubin1996}：
+% \begin{equation}
+% \label{eqn:mesh_approximation}
+% f_{N}(k) = w_0 \frac{\theta}{\pi} T_0 (1 - k / 2) + w_n \sum_{n} \frac{2 \sin (n \theta)}{n \pi} T_n(1 - k / 2),
+% \end{equation}
+% 其中，$\theta$是$k = 2 (1 - \cos \theta)$在$[0, \pi / 2]$上的唯一解，而$T_0(\cdot)$和$T_n(\cdot)$则是Chebyshev多项式。
+% 在本章中，我们通过调整式(\ref{eqn:mesh_approximation})中的权值来形成Hamming窗\cite{Taubin1996}：
+% \begin{equation}
+% \label{eqn:mesh_hamming}
+% w_n = 0.54 + 0.46 \cos (n \pi / (N + 1) ).
+% \end{equation}
 
-在完成曲面的平整处理之后，我们需要为各个多边形网格计算法向量，以便标注表面的“内部”和“外部”。
+% 在完成曲面的平整处理之后，我们需要为各个多边形网格计算法向量，以便标注表面的“内部”和“外部”。
 
 \subsection{多边形面片的精简}
 \label{subsec:mesh_decimation}
@@ -113,6 +113,18 @@ w_n = 0.54 + 0.46 \cos (n \pi / (N + 1) ).
 
 如图\ref{fig:mesh_five_classes}所示，所有的顶点被归为简单，复杂，以及拐角等三种类型。
 其中，简单顶点又可以进一步被分为边缘顶点和边缘内部顶点。
+
+为删除那些不重要的顶点，就需要设计某种判定准则，并将其应用于验证模型内所有潜在目标的几何特征。
+首先，复杂顶点是必须保留的。
+然后，其余的顶点就得通过检验来决定其保留与否。
+对于不位于边缘和边缘内部的简单顶点来说，其与平均平面的距离是唯一的原则——如果该距离小于某个设定值，该顶点即被保留；反之，该顶点则被删除。
+位于边缘和边缘内部的顶点也利用类似的方法来检验——如果这些类型的顶点到平均平面的距离小于某一设定值，那么该顶点同样被保留；反之，该顶点将被剔除。
+一般情况下，位于拐角处的顶点被保留下来，用来保持削减结果表面对输入表面的几何特征的准确估计，或者留下那些在建模过程中所引入的“噪声”，稍后再采用更加妥当的方法进行处理。
+
+一旦删除某个顶点与之关联的边，表面上就会留下一个（简单情形）或两个（边缘情形或者边缘内部情形）漏洞需要修补。
+为了修补这些新生成的漏洞，算法会在这些区域中创建新的三角化网格，而这一步骤是在实际删除步骤开始之前就完成的。
+
+对比这一过程前后的三角形面片的数量可知，对于一般简单顶点，边缘内部顶点，以及某些拐角顶点，减少了两个三角形面片；而对于边缘顶点的情形，只减少了一个三角形面片（见图\ref{fig:mesh_reduction}）。
 \begin{figure}[t]
 \centering
 \subfloat[]{
@@ -156,15 +168,3 @@ w_n = 0.54 + 0.46 \cos (n \pi / (N + 1) ).
 \caption[削减顶点所引起的多边形数量的减少]{削减顶点所引起的多边形数量的减少。(a) 一般简单情形：削减前的多边形数量：$6$，削减后的多边形数量：$4$；(b) 边缘情形：削减前的多边形数量：$5$，削减后的多边形数量：$4$。注意：在削减计算之前，红色的边并不属于表面。}%
 \label{fig:mesh_reduction}
 \end{figure}
-
-为删除那些不重要的顶点，就需要设计某种判定准则，并将其应用于验证模型内所有潜在目标的几何特征。
-首先，复杂顶点是必须保留的。
-然后，其余的顶点就得通过检验来决定其保留与否。
-对于不位于边缘和边缘内部的简单顶点来说，其与平均平面的距离是唯一的原则——如果该距离小于某个设定值，该顶点即被保留；反之，该顶点则被删除。
-位于边缘和边缘内部的顶点也利用类似的方法来检验——如果这些类型的顶点到平均平面的距离小于某一设定值，那么该顶点同样被保留；反之，该顶点将被剔除。
-一般情况下，位于拐角处的顶点被保留下来，用来保持削减结果表面对输入表面的几何特征的准确估计，或者留下那些在建模过程中所引入的“噪声”，稍后再采用更加妥当的方法进行处理。
-
-一旦删除某个顶点与之关联的边，表面上就会留下一个（简单情形）或两个（边缘情形或者边缘内部情形）漏洞需要修补。
-为了修补这些新生成的漏洞，算法会在这些区域中创建新的三角化网格，而这一步骤是在实际删除步骤开始之前就完成的。
-
-对比这一过程前后的三角形面片的数量可知，对于一般简单顶点，边缘内部顶点，以及某些拐角顶点，减少了两个三角形面片；而对于边缘顶点的情形，只减少了一个三角形面片（见图\ref{fig:mesh_reduction}）。
