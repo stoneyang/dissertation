@@ -44,13 +44,13 @@ $n$则是一个确定该区间中心点的位置的常量。
 \begin{figure}[t]
 \centering
 \input{FigureSrc/heart/sigmoid_window_width}
-\caption[S函数的参数$m$与窗宽之间的关系]{S函数的参数$m$与窗宽之间的关系：$m = 4$的曲线（洋红色）具有比$m = -2$的曲线（红色）以及$m = 2$的曲线（绿色）更宽的映射区间。参数$m$的负号表明该S型函数引入了取反作用。}%
+\caption[S函数的参数$m$与窗宽之间的关系]{S函数的参数$m$与窗宽之间的关系：$m = 4$的曲线（青色）具有比$m = -2$的曲线（红色）以及$m = 2$的曲线（绿色）更宽的映射区间。参数$m$的负号表明该S型函数引入了取反作用。}%
 \label{fig:heart_sigmoid_width}
 \end{figure}
 \begin{figure}[t]
 \centering
 \input{FigureSrc/heart/sigmoid_center_location}
-\caption[S函数的参数$n$与窗宽之间的关系]{S函数的参数$n$与窗宽之间的关系：当$n < 0$时，曲线右移（如：绿色的曲线）而当$n > 0$时，曲线左移（如：洋红色的曲线）。$n$的绝对值决定S型函数几何中心与原点的横向距离。}%
+\caption[S函数的参数$n$与窗宽之间的关系]{S函数的参数$n$与窗宽之间的关系：当$n < 0$时，曲线左移（如：绿色的曲线）；而当$n > 0$时，曲线右移（如：青色的曲线）。$n$的绝对值决定S型函数几何中心与原点的横向距离。}%
 \label{fig:heart_sigmoid_center}
 \end{figure}
 
@@ -95,7 +95,7 @@ I_{\text{input}}, & \text{TH}_{\text{lower}} \le I_{\text{input}} \le \text{TH}_
 \label{eqn:coronary_threshold}
 I_{\text{output}} =
 \begin{cases}
-I_{\text{input}}, & \text{TH}_{\text{lower}} \le I_{\text{input}} \le \text{TH}_{\text{upper}}, \\%
+255, & \text{TH}_{\text{lower}} \le I_{\text{input}} \le \text{TH}_{\text{upper}}, \\%
 0,   & \text{otherwise}.
 \end{cases}
 \end{equation}
