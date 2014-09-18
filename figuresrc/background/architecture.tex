@@ -1,19 +1,17 @@
-\begin{tikzpicture}[scale=.7]
+\begin{tikzpicture}[scale=.5]
 
-\draw [black] (0,0) rectangle (5.5,2);
-\draw [black] (10.5,0) rectangle (16,2);
-\draw [black] (5.25,6.25) rectangle (10.75,8.25);
+\draw [fill=gray,black,thick,rounded corners] (-3,0) rectangle (3,3);
+\draw [black,thick,rounded corners] (-3,-4) rectangle (3,-2);
+\draw [black,thick,rounded corners] (-10.5,4.5) rectangle (-4.5,6.5);
+\draw [black,thick,rounded corners] (4.5,4.5) rectangle (10.5,6.5);
 
-\node [above right] at (6,7) {虚拟解剖环境};
-\node [above right] at (0.75,0.5) {虚拟手术工具};
-\node [above right] at (10.75,0.5) {触觉接口装置};
+\node [above right] at (-2.5,0.9) {\small 软件基础设施};
+\node [above right] at (-2.5,-3.6) {\small 触觉接口装置};
+\node [above right] at (-9.9,4.9) {\small 虚拟解剖环境};
+\node [above right] at (5.1,4.9) {\small 虚拟手术工具};
 
-\draw (5.5,1) -- (10.5,1);
+\draw [thick] (0,0) -- (0,-2);
+\draw [thick] (-7.5,4.5) -- (-2,3);
+\draw [thick] (7.5,4.5) -- (2,3);
 
 \end{tikzpicture} 
-
-% \begin{tikzpicture}[outline/.style={draw=#1,thick,fill=#1!50},
-% outline/.default=black]
-% \node [outline] at (0,1) {原点};
-% \node [outline=blue] at (0,0) {blue};
-% \end{tikzpicture}
