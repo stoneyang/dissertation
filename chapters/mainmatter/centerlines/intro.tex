@@ -10,7 +10,7 @@
 在本章中，我们设计并实现了一种基于Voronoi图演进方法\cite{Antiga2003}的自动化方法，以用于提取血管系统表面模型的中心线。
 
 该方法首先检查基于CTA的血管模型中，各顶点的连接关系，进而提取血管模型的最大连接区域。
-然后，利用windowed sinc函数\footnote{详见：\url{http://www.cg.tuwien.ac.at/~theussl/DA/node34.html}}对所得区域进行平滑处理。
+然后，利用windowed sinc函数对所得区域进行平滑处理。
 其次，计算各个多边形面片的法向量。
 再次，为提高中心线的准确性，我们对平滑后的表面模型进行了细分。
 最后，我们引入power crust算法\cite{Amenta2001}计算了表面模型的中心线。
