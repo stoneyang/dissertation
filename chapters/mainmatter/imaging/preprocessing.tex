@@ -78,7 +78,7 @@ $n$则是一个确定该区间中心点的位置的常量。
 \label{subsec:imaging_thresholding}
 
 在平滑处理后，我们利用设置恰当的阈值滤波来去除图像中非血管部分。
-阈值滤波的函数可表示如下：
+阈值滤波的函数\footnote{阈值滤波与二值阈值滤波简介：\url{http://docs.opencv.org/doc/tutorials/imgproc/threshold/threshold.html}}可表示如下：
 \begin{equation}
 \label{eqn:imaging_threshold}
 I_{\text{output}} =
@@ -91,7 +91,7 @@ I_{\text{input}}, & \text{TH}_{\text{lower}} \le I_{\text{input}} \le \text{TH}_
 上述函数可表示为图\ref{fig:imaging_threshold_function}。
 \begin{figure}[t]
 \centering
-\input{FigureSrc/imaging/binary_threshold}
+\input{FigureSrc/imaging/threshold}
 \caption[阈值函数]{阈值函数}
 \label{fig:imaging_threshold_function}
 \end{figure}
@@ -114,6 +114,6 @@ I_{\text{output}} =
 \begin{figure}[t]
 \centering
 \input{FigureSrc/imaging/binary_threshold}
-\caption[阈值函数]{阈值函数}
+\caption[二值阈值函数]{二值阈值函数}
 \label{fig:imaging_threshold_function}
 \end{figure}
