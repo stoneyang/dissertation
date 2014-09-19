@@ -1,0 +1,127 @@
+\documentclass[compress,CJK]{beamer}
+
+\usepackage{CJK}
+\usepackage{setspace}
+
+\newcommand{\songti}{\CJKfamily{song}}        % 宋体
+\newcommand{\fangsong}{\CJKfamily{fs}}        % 仿宋体
+\newcommand{\kaishu}{\CJKfamily{kai}}         % 楷体
+\newcommand{\heiti}{\CJKfamily{hei}}          % 黑体
+\newcommand{\lishu}{\CJKfamily{li}}           % 隶书
+\newcommand{\youyuang}{\CJKfamily{you}}       % 幼圆
+\newcommand{\sihao}{\fontsize{14pt}{\baselineskip}\selectfont}      % 字号设置
+\newcommand{\xiaosihao}{\fontsize{12pt}{\baselineskip}\selectfont}  % 字号设置
+\newcommand{\wuhao}{\fontsize{10.5pt}{\baselineskip}\selectfont}    % 字号设置
+\newcommand{\xiaowuhao}{\fontsize{9pt}{\baselineskip}\selectfont}   % 字号设置
+\newcommand{\liuhao}{\fontsize{7.875pt}{\baselineskip}\selectfont}  % 字号设置
+\newcommand{\qihao}{\fontsize{5.25pt}{\baselineskip}\selectfont}    % 字号设置
+
+% \usetheme{Warsaw}
+% \usetheme{Darmstadt}
+\usetheme{Berkeley}
+% \usetheme[left]{Marburg}
+% \usetheme{Copenhagen}
+% \usetheme{Luebeck}
+\usecolortheme{default}
+\usefonttheme[onlylarge]{structurebold}
+\setbeamerfont*{frametitle}{size=\normalsize,series=\bfseries}
+\setbeamertemplate{navigation symbols}{}
+\logo{\includegraphics[height=1.6cm]{../../Figures/cas_logo}}
+
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes}
+
+% caption
+\usepackage{caption}
+\captionsetup[figure]{labelformat=empty}
+%\setbeamertemplate{caption}[default]
+%\setbeamertemplate{caption}[numbered]
+%\setbeamertemplate{caption}[caption name own line]
+\setbeamerfont{caption}{size=\footnotesize}
+\setbeamerfont{captionname}{size=\footnotesize}
+
+% page number
+%\setbeamertemplate{footline}[frame number]
+
+\makeatletter
+\setbeamertemplate{frametitle}{%
+    \nointerlineskip%
+    \vskip-\beamer@headheight%
+    \vbox to \beamer@headheight{%
+      \vfil
+      \leftskip=-\beamer@leftmargin%
+      \advance\leftskip by0.3cm%
+      \rightskip=-\beamer@rightmargin%
+      \advance\rightskip by0.3cm plus1fil%
+      {\usebeamercolor[fg]{frametitle}
+          \usebeamerfont{frametitle}\insertframetitle\hfill\insertframenumber\par}% added number
+      {\usebeamercolor[fg]{framesubtitle}
+           \usebeamerfont{framesubtitle}\insertframesubtitle\par}%
+      \vbox{}%
+      \vskip-1em%
+      \vfil
+    }%
+  }
+\makeatother
+
+\addtobeamertemplate{frametitle}{\let\insertframetitle\insertsubsection}{}
+
+% table
+\usepackage{booktabs}
+
+\begin{document}
+\begin{CJK*}{GBK}{song}
+
+\title[冠脉介入仿真创建解剖环境的技术研究]{冠状动脉介入仿真中创建解剖环境的\\关键技术研究}%
+\author[杨帆]{
+\bf{博士学位论文答辩}\\
+\small ~~\\
+杨~~帆\\
+\small ~~\\
+指导教师: 侯增广~研究员\\
+}
+\institute[CASIA]{中国科学院自动化研究所\\复杂系统管理与控制国家重点实验室\\~~\\
+\href{mailto:fan.yang@ia.ac.cn}{fan.yang@ia.ac.cn}}
+\date{\scriptsize 2014~年~11~月}
+
+\AtBeginSubsection[]
+{
+\begin{frame}<beamer>{Outline}
+\tableofcontents[currentsection,currentsubsection]
+\end{frame}
+}
+
+% Beginning slide
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\tableofcontents
+\end{frame}
+
+\input{problem}
+\input{background}
+\section{医学影像处理}
+\input{aorta}
+\input{coronary}
+\input{coronary_enhanced}
+\input{heart}
+\section{医学可视化}
+\input{mesh}
+\input{centerlines}
+\input{state_model}
+\input{conclusions}
+\input{references}
+\input{publications}
+
+% Ending slide
+\begin{frame}
+\centerline{\huge \bf{感谢各位老师！}}
+\end{frame}
+
+\end{CJK*}
+\end{document} 
