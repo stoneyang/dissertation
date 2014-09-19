@@ -3,17 +3,17 @@
 
 在计算机图形学和图像处理领域，二维或三维的曲线和表面（两者都可看作是“形状”）的可视化是普遍的，尤其对于医学领域的体数据而言。
 这类计算实际上是利用分段的曲线或者多边形表面来近似地估计原始的形状。
-典型的实例是图\ref{fig:mesh_artifact}所展示的表面上某种程度的衍生物（artifact），它在可视化过程中产生，能够在保持表面模型整体几何特性不发生改变的前提下被“打磨”平整（见图\ref{fig:mesh_artifact_removed}）。
+典型的实例是图\ref{fig:visualization_artifact}所展示的表面上某种程度的衍生物（artifact），它在可视化过程中产生，能够在保持表面模型整体几何特性不发生改变的前提下被“打磨”平整（见图\ref{fig:visualization_artifact_removed}）。
 在本章中，我们的目标之一便是对由原始医学体数据处理而得到的模型的表面进行平整处理。
 \begin{figure}[t]
 \centering
-\subfloat[]{\includegraphics[height=1.5in]{figures/mesh/artifact.eps}%
-\label{fig:mesh_artifact}}
+\subfloat[]{\includegraphics[height=1.5in]{figures/visualization/artifact.eps}%
+\label{fig:visualization_artifact}}
 \hfil
-\subfloat[]{\includegraphics[height=1.5in]{figures/mesh/artifact_removed.eps}%
-\label{fig:mesh_artifact_removed}}
+\subfloat[]{\includegraphics[height=1.5in]{figures/visualization/artifact_removed.eps}%
+\label{fig:visualization_artifact_removed}}
 \caption[对可视化过程中引入的估计所带来的不平整区域进行平滑处理]{对可视化过程中引入的估计所带来的不平整区域进行平滑处理。(a) 不平整区域（血管模型表面上水平方向的“台阶”）；(b) 平滑处理后的该区域。}%
-\label{fig:mesh_artifact_comparison}
+\label{fig:visualization_artifact_comparison}
 \end{figure}
 为实现这一目标，我们引入一种信号处理方法。
 该方法实际上是一种线性低通滤波器\cite{Taubin1995ICCV}，属于数字信号处理领域中的一种低层处理技术。
