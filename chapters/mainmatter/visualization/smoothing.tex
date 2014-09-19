@@ -36,13 +36,13 @@
 
 对于离散表面信号$y$，$V_s$中的顶点处的加权Laplacian算子定义如下：
 \begin{equation}
-\label{eqn:mesh_laplacian}
+\label{eqn:visualization_laplacian}
 \Delta y_i = \sum_{j \in i^{\ast}} w_{ij} \left( y_j - y_i \right),
 \end{equation}
 其中，$w_{ij}$是$y_j - y_i$的正的加权值，而对任意$i$，其加权值之和为$1$，即：$\sum_{j \in i^{\ast}} w_{ij} = 1$。
-式(\ref{eqn:mesh_laplacian})写成矩阵形式如下：
+式(\ref{eqn:visualization_laplacian})写成矩阵形式如下：
 \begin{equation}
-\label{eqn:mesh_laplacian_matrix}
+\label{eqn:visualization_laplacian_matrix}
 \Delta y = - K y,
 \end{equation}
 其中，$K = I - W$，$W$是加权阵，$I$是单位阵。
@@ -50,12 +50,12 @@
 
 至此，低通滤波就被转化为矩阵函数$f(K)$与输入信号$y$的乘积：
 \begin{equation}
-\label{eqn:mesh_low_pass_equivalent}
+\label{eqn:visualization_low_pass_equivalent}
 y' = f(K) y.
 \end{equation}
-对任意多项式传递函数，式(\ref{eqn:mesh_low_pass_equivalent})中的输出函数可以重写为：
+对任意多项式传递函数，式(\ref{eqn:visualization_low_pass_equivalent})中的输出函数可以重写为：
 \begin{equation}
-\label{eqn:mesh_low_pass_polynomial}
+\label{eqn:visualization_low_pass_polynomial}
 y' = \sum_{i=1}^{n} \rho_i f(k_i) e_i,
 \end{equation}
 其中，$\rho_i$是输入信号$y$的单位右特征向量的线性组合的系数，即：$y = \sum_{i} \rho_i e_i$。
@@ -63,13 +63,13 @@ y' = \sum_{i=1}^{n} \rho_i f(k_i) e_i,
 
 低通滤波的机制可通过调整如下多项式估计中的权值来实现\cite{Taubin1996}：
 \begin{equation}
-\label{eqn:mesh_approximation}
+\label{eqn:visualization_approximation}
 f_{N}(k) = w_0 \frac{\theta}{\pi} T_0 (1 - k / 2) + w_n \sum_{n} \frac{2 \sin (n \theta)}{n \pi} T_n(1 - k / 2),
 \end{equation}
 其中，$\theta$是$k = 2 (1 - \cos \theta)$在$[0, \pi / 2]$上的唯一解，而$T_0(\cdot)$和$T_n(\cdot)$则是Chebyshev多项式。
-在本章中，我们通过调整式(\ref{eqn:mesh_approximation})中的权值来形成Hamming窗\cite{Taubin1996}：
+在本章中，我们通过调整式(\ref{eqn:visualization_approximation})中的权值来形成Hamming窗\cite{Taubin1996}：
 \begin{equation}
-\label{eqn:mesh_hamming}
+\label{eqn:visualization_hamming}
 w_n = 0.54 + 0.46 \cos (n \pi / (N + 1) ).
 \end{equation}
 
