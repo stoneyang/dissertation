@@ -31,7 +31,7 @@ $\nabla \ast G$代表对高斯算子进行一阶求导运算。
 
 \subsection{非线性像素亮度映射}
 
-随后，上述计算所得的梯度幅值图像将通过一个非线性关系映射生成所需的特征图像，本文中，我们采用了S型函数：
+随后，上述计算所得的梯度幅值图像将通过一个非线性关系映射生成所需的特征图像，本文中，我们采用了S型函数（见图\ref{fig:imaging_sigmoid}）：
 \begin{equation}
 \label{eqn:aorta_sigmoid}
 I_{\sigma} = (I_{max} - I_{min}) \cdot \frac{1}{1 + \exp\left(-\frac{I_{grad} - n}{m}\right)} + I_{min},
@@ -43,22 +43,28 @@ $n$则是一个确定该区间中心点的位置的常量。
 此映射的结果取决于上述参数的选择。
 \begin{figure}[t]
 \centering
-\input{FigureSrc/heart/sigmoid_window_width}
-\caption[S函数的参数$m$与窗宽之间的关系]{S函数的参数$m$与窗宽之间的关系：$m = 4$的曲线（青色）具有比$m = -2$的曲线（红色）以及$m = 2$的曲线（绿色）更宽的映射区间。参数$m$的负号表明该S型函数引入了取反作用。}%
-\label{fig:heart_sigmoid_width}
+\input{FigureSrc/imaging/sigmoid}
+\caption[用于非线性像素映射的S函数]{用于非线性像素映射的S函数。}
+\label{fig:imaging_sigmoid}
 \end{figure}
 \begin{figure}[t]
 \centering
-\input{FigureSrc/heart/sigmoid_center_location}
+\input{FigureSrc/imaging/sigmoid_window_width}
+\caption[S函数的参数$m$与窗宽之间的关系]{S函数的参数$m$与窗宽之间的关系：$m = 4$的曲线（青色）具有比$m = -2$的曲线（红色）以及$m = 2$的曲线（绿色）更宽的映射区间。参数$m$的负号表明该S型函数引入了取反作用。}%
+\label{fig:imaging_sigmoid_width}
+\end{figure}
+\begin{figure}[t]
+\centering
+\input{FigureSrc/imaging/sigmoid_center_location}
 \caption[S函数的参数$n$与窗宽之间的关系]{S函数的参数$n$与窗宽之间的关系：当$n < 0$时，曲线左移（如：绿色的曲线）；而当$n > 0$时，曲线右移（如：青色的曲线）。$n$的绝对值决定S型函数几何中心与原点的横向距离。}%
-\label{fig:heart_sigmoid_center}
+\label{fig:imaging_sigmoid_center}
 \end{figure}
 
 由式(\ref{eqn:aorta_sigmoid})定义的S型函数具有四个参数：用于控制窗宽的$m$，控制窗中心位置的$n$，以及确定输出图像中像素亮度极值的$\alpha$（极小值）和$\beta$（极大值）。
-图\ref{fig:heart_sigmoid_width}显示参数$m$如何控制S型函数的窗宽。
+图\ref{fig:imaging_sigmoid_width}显示参数$m$如何控制S型函数的窗宽。
 参数$m$的值越大，窗宽越宽；反之，则窗宽越窄。
 而负的$m$则意味着由其确定的S型函数对输入图像中的像素强度值具有取反作用。
-图\ref{fig:heart_sigmoid_center}显示参数$n$如何控制S型函数几何中心相对于坐标原点的横向距离。
+图\ref{fig:imaging_sigmoid_center}显示参数$n$如何控制S型函数几何中心相对于坐标原点的横向距离。
 参数$n$的绝对值越大，则由其确定的S型函数的几何中心相对于坐标原点的横线距离就越大（即：几何中心离坐标原点越远）。
 正的$n$说明S型函数向左平移；反之，则说明S型函数向右平移。
 如第\ref{subsec:aorta_preprocessing}节所述，在对梯度图像进行转换以生成特征图像的时候，参数$m$和$n$的选取是十分重要的。
@@ -82,7 +88,7 @@ I_{\text{input}}, & \text{TH}_{\text{lower}} \le I_{\text{input}} \le \text{TH}_
 上述函数可表示为图\ref{fig:coronary_threshold_function}。
 \begin{figure}[t]
 \centering
-\input{FigureSrc/heart/binary_threshold}
+\input{FigureSrc/imaging/binary_threshold}
 \caption[阈值函数]{阈值函数}
 \label{fig:coronary_threshold_function}
 \end{figure}
@@ -103,7 +109,7 @@ I_{\text{output}} =
 上述函数可表示为图\ref{fig:coronary_threshold_function}。
 \begin{figure}[t]
 \centering
-\input{FigureSrc/heart/binary_threshold}
+\input{FigureSrc/imaging/binary_threshold}
 \caption[阈值函数]{阈值函数}
 \label{fig:coronary_threshold_function}
 \end{figure}
