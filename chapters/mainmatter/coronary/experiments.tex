@@ -18,10 +18,10 @@
 
 \subsection{数据预处理}
 
-ROI提取完成后，我们利用第\ref{subsec:aorta_edge_potential}节所介绍的方法对图像进行平滑处理，目的是为了去除原始图像中的噪声。
+ROI提取完成后，我们利用第\ref{subsec:imaging_edge_potential}节所介绍的方法对图像进行平滑处理，目的是为了去除原始图像中的噪声。
 在本节的实验中，该滤波器能够在最大限度地保持图像内容中物体几何特征的完整的前提下，降低图像中的噪声，图\ref{fig:coronary_smoothing}显示去除噪声的结果。
 
-然后，我们继续引入第\ref{subsec:coronary_preprocessing}节中的阈值滤波器来去除该区域内不属于血管系统的图像内容，图\ref{fig:coronary_threshold}显示去除无关内容的结果。
+然后，我们继续引入第\ref{subsec:imaging_thresholding}节中的阈值滤波器来去除该区域内不属于血管系统的图像内容，图\ref{fig:coronary_threshold}显示去除无关内容的结果。
 \begin{figure}[!tb]
 \centering
 \subfloat[]{\includegraphics[height=2.5in]{Figures/coronary/smooth}%
@@ -36,7 +36,7 @@ ROI提取完成后，我们利用第\ref{subsec:aorta_edge_potential}节所介绍的方法对图像进
 \subsection{图像特征计算}
 \label{subsec:coronary_feature_image}
 
-本部分的计算过程与第\ref{subsec:aorta_feature_image}节类似（见图\ref{fig:coronary_image_features}），都是先计算图像的梯度（根据式(\ref{eqn:aorta_gaussian})），再对梯度图像进行非线性像素亮度的映射（根据式(\ref{eqn:aorta_sigmoid})）。
+本部分的计算过程与第\ref{subsec:aorta_feature_image}节类似（见图\ref{fig:coronary_image_features}），都是先计算图像的梯度（根据式(\ref{eqn:imaging_gaussian})），再对梯度图像进行非线性像素亮度的映射（根据式(\ref{eqn:imaging_sigmoid})）。
 
 图像中各处的梯度的幅值通过此处像素亮度与Gaussian核的一阶导数的卷积算得。
 Gaussian核的方差$\sigma$是这一计算步骤中唯一的可调整参数。
@@ -44,7 +44,7 @@ Gaussian核的方差$\sigma$是这一计算步骤中唯一的可调整参数。
 如图\ref{fig:coronary_gradient}所示，所得图像中的血管，以及骨骼等物体的边缘都被完整提取。
 其后，我们需要对此梯度图像中各像素的亮度进行翻转：使得物体的边缘亮度较暗，而其内部和外部则较亮。
 这一过程通过对梯度图像进行非线性映射（此处应用S函数）来实现。
-如第\ref{subsec:aorta_edge_potential}节所述，式(\ref{eqn:aorta_sigmoid})中各参数的选择依赖于输入的梯度图像中像素亮度的极值。
+如第\ref{subsec:imaging_sigmoid}节所述，式(\ref{eqn:imaging_sigmoid})中各参数的选择依赖于输入的梯度图像中像素亮度的极值。
 为实现物体边缘与图像其他区域的亮度的翻转，这里为参数$m$选取了负值，而为参数$n$选取了一个正值，它满足：$n > |m|$。
 如图\ref{fig:coronary_sigmoid}所示，所得图像中的血管，以及骨骼的边缘亮度变得很暗，而其它区域则变得很明亮。
 这一像素亮度的翻转，对后续由式(\ref{eqn:coronary_application})所驱动的波面演进过程起“向导”作用，即：波面在高亮度（较明亮）的区域演进速度较快，而在低亮度（较暗）的区域演进的速度极慢（近乎为零）。

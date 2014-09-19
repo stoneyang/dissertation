@@ -2,6 +2,7 @@
 \label{sec:imaging_preprocessing}
 
 \subsection{曲率各向异性扩散滤波}
+\label{subsec:imaging_edge_potential}
 
 对图像的平滑处理是一项必须的环节，该环节的目的在于除去在医学模态获取原始图像序列的过程当中所引入的噪声像素，这一现象是不可避免的。
 在平滑处理过程当中，目标（此处指主动脉）的原始边缘信息应当得到尽可能完整地保护。
@@ -30,6 +31,7 @@ I_{grad} = \exp(-|(\nabla \ast G) \cdot I_t|),
 $\nabla \ast G$代表对高斯算子进行一阶求导运算。
 
 \subsection{非线性像素亮度映射}
+\label{subsec:imaging_sigmoid}
 
 随后，上述计算所得的梯度幅值图像将通过一个非线性关系映射生成所需的特征图像，本文中，我们采用了S型函数（见图\ref{fig:imaging_sigmoid}）：
 \begin{equation}
@@ -73,6 +75,7 @@ $n$则是一个确定该区间中心点的位置的常量。
 而鉴于我们的应用需要，通常把$\alpha$设定为$0$，而把$\beta$设定为$255$。
 
 \subsection{阈值滤波}
+\label{subsec:imaging_thresholding}
 
 在平滑处理后，我们利用设置恰当的阈值滤波来去除图像中非血管部分。
 阈值滤波的函数可表示如下：
