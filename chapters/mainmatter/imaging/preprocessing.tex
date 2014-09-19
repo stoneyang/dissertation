@@ -22,7 +22,7 @@ $c$是通透性函数：$c(|\nabla I|) = k^2/(k^2 + |\nabla I|^2)$，
 
 由于即将生成的特征图像是随后进行的活动轮廓演进的必须信息，因此对图像像素的梯度计算即在此完成平滑处理后的图像上进行。
 这一环节的目的是探测目标的边缘。
-图像像素的梯度计算基本原理可表述如下：
+图像像素的梯度计算基本原理可表述如下\footnote{详见：\url{http://math.nist.gov/mcsd/savg/software/filters/gradient/}}：
 \begin{equation}
 \label{eqn:imaging_gaussian}
 I_{grad} = \exp(-|(\nabla \ast G) \cdot I_t|),
@@ -33,7 +33,7 @@ $\nabla \ast G$代表对高斯算子进行一阶求导运算。
 \subsection{非线性像素亮度映射}
 \label{subsec:imaging_sigmoid}
 
-随后，上述计算所得的梯度幅值图像将通过一个非线性关系映射生成所需的特征图像，本文中，我们采用了S型函数（见图\ref{fig:imaging_sigmoid}）：
+随后，上述计算所得的梯度幅值图像将通过一个非线性关系映射生成所需的特征图像，本文中，我们采用了S型函数\footnote{详见：\url{http://en.wikipedia.org/wiki/Sigmoid_function}}（见图\ref{fig:imaging_sigmoid}）：
 \begin{equation}
 \label{eqn:imaging_sigmoid}
 I_{\sigma} = (I_{max} - I_{min}) \cdot \frac{1}{1 + \exp\left(-\frac{I_{grad} - n}{m}\right)} + I_{min},
