@@ -49,9 +49,9 @@
 \hline
 \bigstrut ~                                   & \raisebox{-1mm}{$N = 30$}                                     & \raisebox{-1mm}{$N = 60$}                                     & \raisebox{-1mm}{$N = 100$}                                     \\
 \hline
-\bigstrut[t] \raisebox{30mm}{$\delta = 0.1$}  & \includegraphics[height=180pt]{Figures/mesh/smooth_30_1.eps}  & \includegraphics[height=180pt]{Figures/mesh/smooth_60_1.eps}  & \raisebox{-1mm}{\includegraphics[height=180pt]{Figures/mesh/smooth_100_1.eps}}  \\
+\bigstrut[t] \raisebox{0mm}{$\delta = 0.1$}  & \Includegraphics[height=180pt]{Figures/mesh/smooth_30_1.eps}  & \Includegraphics[height=180pt]{Figures/mesh/smooth_60_1.eps}  & \Includegraphics[height=180pt]{Figures/mesh/smooth_100_1.eps}  \\
 \hline
-\bigstrut[b] \raisebox{30mm}{$\delta = 0.01$} & \raisebox{-3mm}{\includegraphics[height=180pt]{Figures/mesh/smooth_30_01.eps}} & \raisebox{-3mm}{\includegraphics[height=180pt]{Figures/mesh/smooth_60_01.eps}} & \raisebox{-3mm}{\includegraphics[height=180pt]{Figures/mesh/smooth_100_01.eps}} \\
+\bigstrut[b] \raisebox{0mm}{$\delta = 0.01$} & \Includegraphics[height=180pt]{Figures/mesh/smooth_30_01.eps} & \Includegraphics[height=180pt]{Figures/mesh/smooth_60_01.eps} & \Includegraphics[height=180pt]{Figures/mesh/smooth_100_01.eps} \\
 \hline
 \end{tabular}
 \caption[为平滑算法设置不同的参数所获得的结果]{为平滑算法设置不同的参数所获得的结果。（$N$：迭代次数；$\delta$：带宽）}
@@ -133,7 +133,7 @@ R = \frac{Q_r}{Q}.
 \bottomrule
 \end{tabular*}
 \end{table}
-\begin{figure}[t]
+\begin{figure}[!ht]
 % \begin{table}[t]
 \renewcommand{\arraystretch}{0.5}
 % \caption[为削减算法设置不同参数所获得的结果]{为平滑算法设置不同的参数所获得的结果（$N$：迭代次数；$\delta$：带宽）}
@@ -143,9 +143,9 @@ R = \frac{Q_r}{Q}.
 \hline
 \bigstrut ~                                    & \raisebox{-1mm}{$10\%$}                                                                 & \raisebox{-1mm}{$90\%$}                                                               & \raisebox{-1mm}{$99\%$}                                     \\
 \hline
-\bigstrut[t] \raisebox{30mm}{\small{表面模型}} & \raisebox{-1mm}{\includegraphics[height=178pt]{Figures/mesh/smooth_100_01_d10.eps}}     & \raisebox{-0.8mm}{\includegraphics[height=178pt]{Figures/mesh/smooth_100_01_d90.eps}} & \raisebox{-1mm}{\includegraphics[height=178pt]{Figures/mesh/smooth_100_01_d99.eps}}  \\
+\bigstrut[t] \raisebox{0mm}{\small{表面模型}} & \Includegraphics[height=178pt]{Figures/mesh/smooth_100_01_d10.eps}     & \Includegraphics[height=178pt]{Figures/mesh/smooth_100_01_d90.eps}   & \Includegraphics[height=178pt]{Figures/mesh/smooth_100_01_d99.eps}   \\
 \hline
-\bigstrut[b] \raisebox{30mm}{\small{线框模型}} & \raisebox{-3mm}{\includegraphics[height=178pt]{Figures/mesh/smooth_100_01_d10_w.eps}}   & \raisebox{-3mm}{\includegraphics[height=178pt]{Figures/mesh/smooth_100_01_d90_w.eps}} & \raisebox{-3mm}{\includegraphics[height=178pt]{Figures/mesh/smooth_100_01_d99_w.eps}} \\
+\bigstrut[b] \raisebox{0mm}{\small{线框模型}} & \Includegraphics[height=178pt]{Figures/mesh/smooth_100_01_d10_w.eps}   & \Includegraphics[height=178pt]{Figures/mesh/smooth_100_01_d90_w.eps} & \Includegraphics[height=178pt]{Figures/mesh/smooth_100_01_d99_w.eps} \\
 \hline
 \end{tabular}
 \caption[为削减算法设置不同参数所获得的结果]{为削减算法设置不同参数所获得的结果：上排展示了削减率分别为$10\%$，$90\%$，$99\%$时的结果；下排展示了上排相应削减结果所对应的线框表示。}

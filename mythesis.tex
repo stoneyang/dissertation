@@ -26,6 +26,12 @@
 \usepackage{bigstrut}
 \setlength\bigstrutjot{3pt}
 
+\usepackage{stackengine}
+\newsavebox\mybox
+\newcommand\Includegraphics[2][]{\sbox{\mybox}{%
+  \includegraphics[#1]{#2}}\abovebaseline[-.5\ht\mybox]{%
+  \addstackgap{\usebox{\mybox}}}}
+
 \usepackage{subfig}
 \usepackage{tikz}
 \usetikzlibrary{arrows,shapes}
