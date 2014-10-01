@@ -1,0 +1,10 @@
+\section{引言}
+\label{sec:imaging_intro}
+
+本章介绍本文在医学影像处理部分所用到的图像处理方法和绘制方法。
+第\ref{sec:imaging_preprocessing}节介绍我们在对原始医学体数据进行预处理时使用的主要方法，包括：曲率各向异性扩散滤波，基于Gaussian核的梯度幅值滤波，阈值滤波，二值阈值滤波，非线性像素亮度映射等。
+第\ref{sec:imaging_levelsets}节介绍我们在对经过预处理后的体数据进行水平集演进时所使用的主要方法，包括：快速步进算法\cite{Sethian1999}，以及该算法的一种改进——波面碰撞算法（colliding fronts）。
+第\ref{sec:imaging_marchingcubes}节介绍我们提取分割结果时所使用的行进立方体算法\cite{Lorensen1987MC}。
+第\ref{sec:visualization_connectivity}节介绍我们在检测血管表面模型中各节点的连接性时所用到的算法。
+第\ref{sec:visualization_smoothing}节介绍我们在对血管模型的表面进行平整处理时所用到的算法。
+第\ref{sec:visualization_subdivision}节介绍我们对血管模型的表面进行细分时所用到的算法。  

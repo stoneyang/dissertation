@@ -4,11 +4,8 @@
 
 针对\ref{subsec:requirements}所列出各项需求，我们首先给出如下的基本方案，较为详细的说明将在本节随后给出：
 \begin{itemize}
-  \item 基于医学体数据的血管系统的分割与可视化（见第\ref{chap:aorta}，\ref{chap:coronary}，\ref{chap:coronary_enhanced}章）；
-  \item 基于医学体数据的心脏外围轮廓的近似分割与可视化（见第\ref{chap:heart}章）；
-  \item 面向虚拟工具交互的血管系统模型的数据精简与网格优化（见第\ref{chap:mesh}章）；
-  \item 血管系统模型的形状信息的提取（见第\ref{chap:centerlines}章）；
-  \item 基于状态机的冠状动脉介入术基本操作流程的建模（见第\ref{chap:state_model}章）。
+  \item 基于医学体数据的人体解剖结构（本文指心血管系统的主要部分）的分割与可视化（见第\ref{chap:aorta}，\ref{chap:coronary}章）；
+  \item 面向虚拟工具交互的血管系统模型的优化及几何信息提取（见第\ref{chap:postprocessing}章）。
 \end{itemize}
 
 \subsection{基于医学体数据的解剖结构的分割与可视化}
@@ -67,7 +64,3 @@ CURVES\cite{Lorigo2001}是对GAC的一项改进。
 其后进行模型表面的全局细分处理；
 最后再构建表面模型内部空间的Voronoi划分，并基于这一划分进行类似水平集演进的的计算，得到血管模型的中心线。
 
-\subsection{基于状态机的冠状动脉介入术基本操作流程的建模}
-
-为构建手术过程的模型，我们提出了血管介入手术过程的状态化建模的初步方法。
-该模型立足于血管模型中心线上的状态检测点，试图通过虚拟工具与这些点的碰撞检测来探知虚拟操作的进程。

@@ -94,7 +94,7 @@
   \include{chapters/frontmatter/abstract_EN}
 
   % 致谢
-  \include{chapters/frontmatter/thanks}
+  %\include{chapters/frontmatter/thanks}
 
   % 全文布局
   \include{chapters/frontmatter/layout}
@@ -112,35 +112,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \mainmatter
 
-\part{引言}
-\label{part:intro}
-  \include{chapters/mainmatter/problem/main}             % problem
-  \include{chapters/mainmatter/background/main}          % background
-\part{医学影像处理}
-\label{part:imaging}
-  \include{chapters/mainmatter/imaging/main}             % imaging
-  \include{chapters/mainmatter/aorta/main}               % aorta
-  \include{chapters/mainmatter/coronary/main}            % coronary
-  \include{chapters/mainmatter/coronary_enhanced/main}   % enhanced coronary
-  \include{chapters/mainmatter/heart/main}               % heart region
-\part{医学数据可视化}
-\label{part:visualization}
-  \include{chapters/mainmatter/visualization/main}       % visualization
-  \include{chapters/mainmatter/mesh/main}                % mesh optimization
-  \include{chapters/mainmatter/centerlines/main}         % centerlines extraction
-\part{尾声}
-\label{part:summary}
-  \include{chapters/mainmatter/state_model/main}         % state model
-%\part{尾声}
-%\label{part:summary}
-  \include{chapters/mainmatter/conclusions/main}         % conclusions
-
-  % 附录
-%  \appendix
-%
-%  \include{chapters/backmatter/maths}      % mathematical equations
-%  \include{chapters/backmatter/software}   % software engineering
-
+  \include{chapters/mainmatter/problem/main}              % problem
+  \include{chapters/mainmatter/background/main}           % background
+  \include{chapters/mainmatter/methodologies/main}        % methodologies
+  \include{chapters/mainmatter/gac/main}                  % aorta & heart
+  \include{chapters/mainmatter/coronary/main}             % coronary
+  \include{chapters/mainmatter/postprocessing/main}       % postprocessing
+  \include{chapters/mainmatter/conclusions/main}          % conclusions
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% 附件部分
@@ -161,7 +139,7 @@
   \include{chapters/backmatter/resume}
 
   % 致谢
-  %\include{chapters/backmatter/thanks}
+  \include{chapters/backmatter/thanks}
 
 
 \end{document}

@@ -1,49 +1,5 @@
-\section{方法}
-\label{sec:coronary_methods}
-
-本节讨论冠状动脉分割的流程的设计，并详细介绍各个环节的原理。
-图\ref{fig:coronary_data_flow}是展示处理流程的方框图。
-由于我们的目的是分割冠状动脉，因此，我们首先将原始数据中的心脏区域提取出来，以便节约计算时间和计算资源。
-然后，我们利用平滑滤波器滤去图像中的噪声，在利用阈值滤波器除去非血管内容，以便准确计算图像梯度和顺利演进水平集。
-随后，图像进入类似第\ref{chap:aorta}章的分支管线。
-一个分支用于计算图像的梯度，并通过非线性映射生成特征图像；
-另一个分支则用于生成图像的初始水平集，该水平集将用作距离图。
-随后，我们利用改进的测地学活动轮廓模型进行演进，从而获得图像中微小而复杂的冠状动脉的边缘信息。
-最后，血管的边缘被提取并通过面渲染的方式显示。
-\begin{figure}[tb]
-\centering
-\input{FigureSrc/coronary/data_flow}
-% \includegraphics[width=3.2in]{Figures/coronary/DataFlow}
-\caption[冠状动脉分割的工作流程]{冠状动脉分割的工作流程。}
-\label{fig:coronary_data_flow}
-\end{figure}
-
-% \subsection{预处理}
-% \label{subsec:coronary_preprocessing}
-
-% 本部分平滑处理所使用的方法与第\ref{subsec:aorta_preprocessing}节类似，此处不再赘述。
-
-% 在平滑处理后，我们利用设置恰当的阈值滤波来去除图像中非血管部分。
-% 阈值滤波的函数可表示如下：
-% \begin{equation}
-% \label{eqn:coronary_threshold}
-% I_{\text{output}} =
-% \begin{cases}
-% I_{\text{input}}, & \text{TH}_{\text{lower}} \le I_{\text{input}} \le \text{TH}_{\text{upper}}, \\%
-% 0,   & \text{otherwise}.
-% \end{cases}
-% \end{equation}
-% 其中， $\text{TH}_{\text{lower}}$与$\text{TH}_{\text{upper}}$分别表示阈值的上下限，而$I_{\text{input}}$与$I_{\text{output}}$则分别表示输入和输出的像素强度。
-% 上述函数可表示为图\ref{fig:coronary_threshold_function}。
-% \begin{figure}[t]
-% \centering
-% \input{FigureSrc/heart/binary_threshold}
-% \caption[阈值函数]{阈值函数}
-% \label{fig:coronary_threshold_function}
-% \end{figure}
-
-\subsection{CURVES模型}
-\label{subsec:coronary_CURVES}
+\section{CURVES模型}
+\label{sec:coronary_CURVES}
 
 在本章中，我们引入了CURVES方法\cite{Lorigo2001}来对结构复杂的冠状动脉进行分割。
 该方法在分割立体医学数据中的复杂线状结构十分有效。
@@ -92,8 +48,3 @@ P_q = I_0 - \frac{qq^T}{\left| q \right|^2},
 \label{eqn:coronary_application}
 \frac{\partial \mathcal{C}}{\partial t} = k \mathcal{N} - \frac{g'(I_{\sigma})}{g(I_{\sigma})} \varPi \left( \mathcal{H} \frac{\nabla I_{\sigma}}{ \left| \nabla I_{\sigma} \right| } \right).%
 \end{equation}
-
-% \subsection{表面提取}
-% \label{coronary_surface_extraction}
-
-% 本部分所用方法与第\ref{subsec:aorta_isosurface}节相同，此处不再赘述。
