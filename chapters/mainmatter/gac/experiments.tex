@@ -1,5 +1,5 @@
 
-\section{主动脉内腔分割实验与结果}
+\section{主动脉内腔分割}
 \label{sec:aorta_experiments}
 
 \subsection{实验场景与数据}
@@ -19,7 +19,7 @@
 \begin{figure}[t]
 \centering
 \includegraphics[width=2.5in]{Figures/gac/ROI.eps}
-\caption[ROI提取]{对一张原始图像进行典型的ROI提取。}
+\caption[原始图像的ROI提取]{原始图像的ROI提取。}
 \label{fig:aorta_roi}
 \end{figure}
 
@@ -27,7 +27,7 @@
 \centering
 \input{FigureSrc/gac/data_flow}
 % \includegraphics[width=3.2in]{Figures/gac/DataFlow.eps}
-\caption[主动脉分割的流程]{基于测地学活动轮廓的主动脉分割方法的工作流程。}
+\caption[主动脉内腔分割流程]{主动脉内腔分割流程。}
 \label{fig:aorta_data_flow}
 \end{figure}
 
@@ -41,7 +41,7 @@
 \hfil
 \subfloat[]{\includegraphics[width=1.2in]{Figures/gac/dcm_sigmoid.eps}%
 \label{fig:aorta_sigmoid}}
-\caption[特征图像的生成步骤]{生成特征图像的三个步骤：(a)保护物体边缘的平滑处理（$\text{传导参数} = 9.0$）；(b)基于高斯核的梯度幅值的计算（$\sigma = 0.9$）；(c)利用S型函数进行非线性映射（$m = -3$, $n = 20$）。}
+\caption[特征图像的生成步骤]{特征图像的生成步骤：(a)保护物体边缘的平滑处理（$\text{传导参数} = 9.0$）；(b)基于高斯核的梯度幅值的计算（$\sigma = 0.9$）；(c)利用S型函数进行非线性映射（$m = -3$, $n = 20$）。}
 \label{fig:aorta_potential_image_generation}
 \end{figure*}
 
@@ -58,7 +58,7 @@
 特征图像为测地学活动轮廓方法提供轮廓演进的终止位置，这正如一幅“地图”，其中标的何处是“平原”（指像素亮度均匀一致的区域），何处是“峡谷”（指像素亮度明显有别于周围的狭长区域）；
 而输入水平集则为测地学活动轮廓方法提供轮廓演进的起始轮廓，轮廓的最初位置由输入水平集所确定。
 
-\subsection{特征图像的计算}
+\subsection{特征图像计算}
 \label{subsec:aorta_feature_image}
 
 在计算特征图像的分支中，我们需要逐个完成下面的三个任务：
@@ -78,19 +78,6 @@
 在本文中，为了实现目标物体（梯度幅值图像中亮度较低区域）与其边缘（梯度幅值图像中亮度较高区域）的反转，$m$必须设定为一个负数，$n$必须设定为一个正数，且$n > |m|$。
 通过这个映射获得的特征图像如图\ref{fig:aorta_sigmoid}所示，其中的目标物体的边缘均为低亮度，而其所包围的区域则为高亮度。
 这使得随后进行的由式(\ref{eqn:aorta_geodesic_3})所驱动的水平集演进在“平坦区域”（具有均一的高亮度）内速度较快，而在“峡谷”（具有急剧减低的亮度）附近速度极慢（接近于零）。
-% \begin{figure*}[t]
-% \centering
-% \subfloat[]{\includegraphics[width=1.2in]{Figures/gac/dcm_smoothing.eps}%
-% \label{fig:aorta_smoothing}}
-% \hfil
-% \subfloat[]{\includegraphics[width=1.2in]{Figures/gac/dcm_gradient.eps}%
-% \label{fig:aorta_gradient}}
-% \hfil
-% \subfloat[]{\includegraphics[width=1.2in]{Figures/gac/dcm_sigmoid.eps}%
-% \label{fig:aorta_sigmoid}}
-% \caption[特征图像的生成步骤]{生成特征图像的三个步骤：(a)保护物体边缘的平滑处理（$\text{传导参数} = 9.0$）；(b)基于高斯核的梯度幅值的计算（$\sigma = 0.9$）；(c)利用S型函数进行非线性映射（$m = -3$, $n = 20$）。}
-% \label{fig:aorta_potential_image_generation}
-% \end{figure*}
 \begin{figure*}[t]
 \centering
 \subfloat[]{\includegraphics[width=1.2in]{Figures/gac/dcm_threshold.eps}%
@@ -104,7 +91,7 @@
 \hfil
 \subfloat[]{\includegraphics[width=1.2in]{Figures/gac/dcm_out.eps}%
 \label{fig:aorta_binary_thresholding}}
-\caption[水平集演进]{水平集的演进：(a)阈值滤波（$\text{阈值下限} = 300\text{HU}$, $\text{阈值上限} = 2000\text{HU}$）；(b)从某一种子点开始、利用快速步进法进行的初始水平集演进；(c)利用测地学活动轮廓进行边缘检测；(d)利用二值阈值滤波完成像素亮度的反转（明亮区域的亮度值: $255$, 黑暗区域的亮度值: $0$）。}%
+\caption[水平集演进过程]{水平集演进过程：(a)阈值滤波（$\text{阈值下限} = 300\text{HU}$, $\text{阈值上限} = 2000\text{HU}$）；(b)从某一种子点开始、利用快速步进法进行的初始水平集演进；(c)利用测地学活动轮廓进行边缘检测；(d)利用二值阈值滤波完成像素亮度的反转（明亮区域的亮度值: $255$, 黑暗区域的亮度值: $0$）。}%
 \label{fig:aorta_level_set_evolution}
 \end{figure*}
 
@@ -124,7 +111,7 @@
 随后，我们引入二值阈值滤波，将最终轮廓的“内部”转换为高亮度区域，而轮廓的“外部”则转换为低亮度区域，以便随后的等值面提取（见图\ref{fig:aorta_binary_thresholding}）。
 这里，所有通过本实验手动选定的各个参数均可以直接应用于三维（即完整序列）的情形。
 
-\subsection{分割方法的评估}
+\subsection{分割结果评估}
 \label{subsec:aorta_evaluation}
 
 在本章中，我们所提出的方法的准确性将通过Jaccard指数\cite{Jaccard1912}和Dice指数\cite{Zijdenbos1994}进行评估。
@@ -147,7 +134,7 @@ D = 2 \frac{\sum_i | S_i \bigcap T_i |}{\sum_i ( | S_i | + | T_i |)}.
 图\ref{fig:aorta_evaluation}显示指数评估结果的柱状图。
 \begin{table}[t]
 \renewcommand{\arraystretch}{0.5}
-\caption[主动脉内腔表面模型分割结果两项指数的评估]{各组数据集中主动脉内腔表面模型分割结果两项指数的评估}
+\caption[主动脉内腔分割结果评估]{主动脉内腔表面模型分割结果评估}
 \label{tbl:aorta_evaluation}
 \centering
 \begin{tabular*}{75mm}{c c c}
@@ -184,11 +171,11 @@ D = 2 \frac{\sum_i | S_i \bigcap T_i |}{\sum_i ( | S_i | + | T_i |)}.
 \label{fig:aorta_Jaccard}}\\
 \subfloat[]{\includegraphics[width=3.0in,height=1.98in]{Figures/gac/Dice.eps}%
 \label{fig:aorta_Dice}}
-\caption[分割方法的准确性评估]{分割方法的准确性评估: (a) 基于Jaccard系数；(b) 基于Dice系数。}%
+\caption[主动脉内腔分割结果评估]{主动脉内腔分割结果评估: (a) 基于Jaccard系数；(b) 基于Dice系数。}%
 \label{fig:aorta_evaluation}
 \end{figure}
 
-\subsection{基于分割结果的表面重建}
+\subsection{表面重建}
 \label{subsec:aorta_experiments_isosurface}
 
 最后，分割所得到的体数据信息将通过行进立方体方法\cite{Lorensen1987MC}进行处理，以获得目标的等值面信息。
@@ -199,6 +186,6 @@ D = 2 \frac{\sum_i | S_i \bigcap T_i |}{\sum_i ( | S_i | + | T_i |)}.
 \begin{figure}[t]
 \centering
 \includegraphics[height=3.5in]{Figures/gac/model.eps}
-\caption[主动脉内腔三维模型]{人体主动脉内腔的三维表面模型。}
+\caption[主动脉内腔三维模型]{主动脉内腔三维模型。}
 \label{fig:aorta_visualization}
 \end{figure} 

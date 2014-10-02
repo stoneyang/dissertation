@@ -1,4 +1,4 @@
-\section{医学影像处理中的预处理}
+\section{医学影像预处理}
 \label{sec:imaging_preprocessing}
 
 \subsection{曲率各向异性扩散滤波}
@@ -18,7 +18,7 @@ $I_t(\cdot) = I(x, y, t)$表示图像像素关于时间$t$的偏导数，
 $c$是通透性函数：$c(|\nabla I|) = k^2/(k^2 + |\nabla I|^2)$，
 边界的对比度将会对图像的平滑显著的影响，它由参数$k$所决定。
 
-\subsection{基于Gaussian核的梯度幅值滤波}
+\subsection{梯度幅值滤波}
 
 由于即将生成的特征图像是随后进行的活动轮廓演进的必须信息，因此对图像像素的梯度计算即在此完成平滑处理后的图像上进行。
 这一环节的目的是探测目标的边缘。
@@ -30,7 +30,7 @@ I_{grad} = \exp(-|(\nabla \ast G) \cdot I_t|),
 其中，$I_{grad}$表示图像中某像素点的梯度的幅值，
 $\nabla \ast G$代表对高斯算子进行一阶求导运算。
 
-\subsection{非线性像素亮度映射}
+\subsection{像素亮度非线性映射}
 \label{subsec:imaging_sigmoid}
 
 随后，上述计算所得的梯度幅值图像将通过一个非线性关系映射生成所需的特征图像，本文中，我们采用了S型函数\footnote{详见：\url{http://en.wikipedia.org/wiki/Sigmoid_function}}（见图\ref{fig:imaging_sigmoid}）：
@@ -46,19 +46,19 @@ $n$则是一个确定该区间中心点的位置的常量。
 \begin{figure}[t]
 \centering
 \input{FigureSrc/methodologies/sigmoid}
-\caption[用于非线性像素映射的S函数]{用于非线性像素映射的S函数。}
+\caption[用于非线性映射的S函数]{用于非线性映射的S函数。}
 \label{fig:imaging_sigmoid}
 \end{figure}
 \begin{figure}[t]
 \centering
 \input{FigureSrc/methodologies/sigmoid_window_width}
-\caption[S函数的参数$m$与窗宽之间的关系]{S函数的参数$m$与窗宽之间的关系：$m = 4$的曲线（青色）具有比$m = -2$的曲线（红色）以及$m = 2$的曲线（绿色）更宽的映射区间。参数$m$的负号表明该S型函数引入了取反作用。}%
+\caption[S函数的参数$m$与窗宽的关系]{S函数的参数$m$与窗宽的关系：$m = 4$的曲线（青色）具有比$m = -2$的曲线（红色）以及$m = 2$的曲线（绿色）更宽的映射区间。参数$m$的负号表明该S型函数引入了取反作用。}%
 \label{fig:imaging_sigmoid_width}
 \end{figure}
 \begin{figure}[t]
 \centering
 \input{FigureSrc/methodologies/sigmoid_center_location}
-\caption[S函数的参数$n$与窗位置之间的关系]{S函数的参数$n$与窗宽之间的关系：当$n < 0$时，曲线左移（如：绿色的曲线）；而当$n > 0$时，曲线右移（如：青色的曲线）。$n$的绝对值决定S型函数几何中心与原点的横向距离。}%
+\caption[S函数的参数$n$与窗中心位置的关系]{S函数的参数$n$与窗中心位置的关系：当$n < 0$时，曲线左移（如：绿色的曲线）；而当$n > 0$时，曲线右移（如：青色的曲线）。$n$的绝对值决定S型函数几何中心与原点的横向距离。}%
 \label{fig:imaging_sigmoid_center}
 \end{figure}
 
@@ -107,6 +107,6 @@ I_{\text{output}} =
 \begin{figure}[t]
 \centering
 \input{FigureSrc/methodologies/binary_threshold}
-\caption[二值阈值函数]{二值阈值函数}
+\caption[二值阈值函数]{二值阈值函数。}
 \label{fig:imaging_threshold_function}
 \end{figure}

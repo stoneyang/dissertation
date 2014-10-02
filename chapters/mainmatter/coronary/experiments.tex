@@ -1,7 +1,7 @@
-\section{基于CURVES的冠状动脉分割实验与结果}
+\section{基于CURVES的冠状动脉分割}
 \label{sec:coronary_experiments}
 
-\subsection{医学数据与实验设置}
+\subsection{实验场景与数据}
 \label{subsec:coronary_setup_data}
 
 本章中，我们使用的原始体数据与第\ref{subsec:aorta_setup_data}节所述的数据完全一致。
@@ -12,7 +12,7 @@
 \begin{figure}[t]
 \centering
 \includegraphics[width=2.1in]{Figures/coronary/ROI_Extraction}
-\caption[原始图像中包含心脏的ROI]{原始图像中包含心脏的ROI。}
+\caption[心脏区域的ROI提取]{心脏区域的ROI提取。}
 \label{fig:coronary_ROI}
 \end{figure}
 
@@ -28,11 +28,11 @@
 \centering
 \input{FigureSrc/coronary/data_flow}
 % \includegraphics[width=3.2in]{Figures/coronary/DataFlow}
-\caption[冠状动脉分割的工作流程]{冠状动脉分割的工作流程。}
+\caption[基于CURVES的冠脉分割流程]{基于CURVES的冠状动脉分割流程。}
 \label{fig:coronary_data_flow}
 \end{figure}
 
-\subsection{数据预处理}
+\subsection{预处理}
 
 ROI提取完成后，我们利用第\ref{subsec:imaging_edge_potential}节所介绍的方法对图像进行平滑处理，目的是为了去除原始图像中的噪声。
 在本节的实验中，该滤波器能够在最大限度地保持图像内容中物体几何特征的完整的前提下，降低图像中的噪声，图\ref{fig:coronary_smoothing}显示去除噪声的结果。
@@ -45,7 +45,7 @@ ROI提取完成后，我们利用第\ref{subsec:imaging_edge_potential}节所介绍的方法对图像
 \hfil
 \subfloat[]{\includegraphics[height=2.1in]{Figures/coronary/threshold}%
 \label{fig:coronary_threshold}}
-\caption[原始区域数据的预处理结果]{原始区域数据的预处理结果：(a) 边缘保护前提下的平滑（$\text{传导参数} = 0.9$）；(b) 阈值滤波（$\text{TH}_{\text{lower}} = 160$, $\text{TH}_{\text{upper}} = 600$）。}%
+\caption[预处理结果]{预处理结果：(a) 边缘保护前提下的平滑（$\text{传导参数} = 0.9$）；(b) 阈值滤波（$\text{TH}_{\text{lower}} = 160$, $\text{TH}_{\text{upper}} = 600$）。}%
 \label{fig:coronary_preprocessing}
 \end{figure}
 \begin{figure}[!htb]
@@ -55,11 +55,11 @@ ROI提取完成后，我们利用第\ref{subsec:imaging_edge_potential}节所介绍的方法对图像
 \hfil
 \subfloat[]{\includegraphics[height=2.1in]{Figures/coronary/sigmoid}%
 \label{fig:coronary_sigmoid}}
-\caption[原始数据的图像特性]{原始数据的图像特性：(a) 基于Gaussian核运算所得到的梯度图像（$\sigma = 0.9$）；(b) 通过S函数实现的非线性像素亮度映射（$m = -80$, $n = 120$），其中$m$的负号表示该运算对输入图像中的像素亮度进行反相的映射。}%
+\caption[特征图像计算]{特征图像计算：(a) 基于Gaussian核运算所得到的梯度图像（$\sigma = 0.9$）；(b) 通过S函数实现的像素亮度非线性映射（$m = -80$, $n = 120$），其中$m$的负号表示该运算对输入图像中的像素亮度进行反相的映射。}%
 \label{fig:coronary_image_features}
 \end{figure}
 
-\subsection{图像特征计算}
+\subsection{特征图像计算}
 \label{subsec:coronary_feature_image}
 
 本部分的计算过程与第\ref{subsec:aorta_feature_image}节类似（见图\ref{fig:coronary_image_features}），都是先计算图像的梯度（根据式(\ref{eqn:imaging_gaussian})），再对梯度图像进行非线性像素亮度的映射（根据式(\ref{eqn:imaging_sigmoid})）。
@@ -75,7 +75,7 @@ Gaussian核的方差$\sigma$是这一计算步骤中唯一的可调整参数。
 如图\ref{fig:coronary_sigmoid}所示，所得图像中的血管，以及骨骼的边缘亮度变得很暗，而其它区域则变得很明亮。
 这一像素亮度的翻转，对后续由式(\ref{eqn:coronary_application})所驱动的波面演进过程起“向导”作用，即：波面在高亮度（较明亮）的区域演进速度较快，而在低亮度（较暗）的区域演进的速度极慢（近乎为零）。
 
-\subsection{波面传导}
+\subsection{水平集演进}
 \label{subsec:coronary_experiments_propagation}
 
 初始的水平集围线自手工选取的起始点（亦称“种子点”）演进而生成。
@@ -115,11 +115,11 @@ Gaussian核的方差$\sigma$是这一计算步骤中唯一的可调整参数。
 \fbox{\includegraphics[height=2.1in]{Figures/coronary/final}}%
 % \includegraphics[height=2in]{Figures/coronary/final}
 \label{fig:coronary_final}}
-\caption[波面传导过程]{波面传导过程：(a) 通过快速步进算法生成的初始水平集围线；(b) 由CURVES驱动的围线演进结果；(c) 对演进结果进行二值阈值滤波处理后的结果。}%
+\caption[水平集演进过程]{水平集演进过程：(a) 通过快速步进算法生成的初始水平集围线；(b) 由CURVES驱动的围线演进结果；(c) 对演进结果进行二值阈值滤波处理后的结果。}%
 \label{fig:Evolution}
 \end{figure}
 
-\subsection{分割数据的可视化}
+\subsection{分割结果可视化}
 \label{subsec:coronary_experiments_isosurface}
 
 与第\ref{subsec:aorta_experiments_isosurface}节所述类似，我们需要显示的表面正是将本章所述方法用于心脏体数据所得分割结果的边缘（即冠状动脉的内腔边缘）。
@@ -129,6 +129,6 @@ Gaussian核的方差$\sigma$是这一计算步骤中唯一的可调整参数。
 \begin{figure}[tb]
 \centering
 \includegraphics[height=2.3in]{Figures/coronary/model}
-\caption[冠状动脉的表面模型]{冠状动脉的表面模型。}%
+\caption[冠状动脉表面模型]{冠状动脉表面模型。}%
 \label{fig:coronary_CURVES_model}
 \end{figure}

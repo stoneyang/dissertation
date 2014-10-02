@@ -1,22 +1,16 @@
 
-\section{经皮冠状动脉介入术虚拟训练系统的设计}
+\section{虚拟训练系统的设计}
 \label{sec:design}
 
-由第\ref{sec:state_of_the_art}节，我们知道，目前正式投入使用的训练系统中的人体解剖模型（主要是血管系统模型）都是产品的固有部分，致使该系统的使用者无法及时地接受更多更富有实际的病例学习与训练。
+由第\ref{sec:state_of_the_art}节我们知道，目前正式投入使用的训练系统中的人体解剖模型（主要是血管系统模型）都是产品的固有部分，致使该系统的使用者无法及时地接受更多更富有实际的病例学习与训练。
 而我们目前所研究的训练系统样机（见图\ref{fig:casia_simulator}）系统提供医学影像处理功能，当需要在某新病例（通常由教学者指定）上进行学习和训练时，使用者可以直接对新病例数据进行分割及可视化处理，以获得其中的血管系统模型，从而使训练系统具备了较高的灵活性。
 此外，系统还提供开放的数据输入功能，使所有基于真实的临床数据（主要是CT血管造影，即CTA）血管系统模型都能够即时读入。
-正如第\ref{sec:robotic_simulation}节所述，目前尚无专门面向血管介入手术机器人的训练系统，而这也将是该样机的一个重要研究方向。
+正如第\ref{subsec:robotic_simulation}节所述，目前尚无专门面向血管介入手术机器人的训练系统，而这也将是该样机的一个重要研究方向。
 \begin{figure}[t]
 \centering
 \includegraphics[height=150pt]{Figures/background/simulator.eps}
-\caption[虚拟训练系统样机]{经皮冠状动脉介入术虚拟训练系统样机。}
+\caption[虚拟训练系统样机]{冠状动脉介入术虚拟训练系统样机。}
 \label{fig:casia_simulator}
-\end{figure}
-\begin{figure}[t]
-\centering
-\input{FigureSrc/background/architecture}
-\caption[虚拟训练系统样机的结构]{经皮冠状动脉介入术虚拟训练系统样机的结构。}
-\label{fig:casia_simulator_arch}
 \end{figure}
 
 如第\ref{subsec:statement}节所述，样机由软件系统和机电一体化的硬件系统组成。
@@ -26,14 +20,30 @@
 它主要由提供模拟进给操作功能的机械部分，和产生阻力的电机控制系统组成。
 前者主要为使用者提供模拟手术中对手术工具执行推送操作的对象；
 后者则主要根据自计算机系统中传来的手术工具与解剖环境发生碰撞的信号来产生相应的阻力。
+\begin{figure}[t]
+\centering
+\input{FigureSrc/background/architecture}
+\caption[样机结构]{冠状动脉介入术虚拟训练系统样机的结构。}
+\label{fig:casia_simulator_arch}
+\end{figure}
 
 图\ref{fig:casia_simulator_components}展示我们设计系统样机时用到的基本软件工具和硬件装置。
 我们的训练系统样机运行于Windows\textsuperscript{\textregistered}操作系统之上\footnote{由于在研究与开发的过程中，我们所采用的软件工具和开发方式，该系统样机也可以移植到Linux操作系统上运行。}。
 \begin{figure}[t]
 \centering
 \input{FigureSrc/background/components}
-\caption[虚拟训练系统样机的组成]{经皮冠状动脉介入术虚拟训练系统样机的各组成部分。}
+\caption[样机组成]{冠状动脉介入术虚拟训练系统样机的组成。}
 \label{fig:casia_simulator_components}
+\end{figure}
+\begin{figure}[!h]
+\centering
+\subfloat[]{\includegraphics[height=1.75in]{Figures/background/simulation2.eps}}
+\hfil
+\subfloat[]{\includegraphics[height=1.75in]{Figures/background/simulation.eps}}
+\hfil
+\subfloat[]{\includegraphics[height=1.75in]{Figures/background/interface.eps}}
+\caption[样机基本功能]{冠状动脉介入术虚拟训练系统样机的基本功能：(a)和(b)展示虚拟导丝在基于真实病例的血管系统中推送；(c) 展示具备触力反馈的操作接口。}
+\label{fig:casia_simulator_function}
 \end{figure}
 
 我们的研究计划分为如下五个阶段：
@@ -45,16 +55,7 @@
 \item 机器人辅助手术中工具与解剖结构的交互。
 \end{enumerate}
 我们已经完成工作主要有：基于真实病例的解剖结构重建，手术工具的建模，具备触觉反馈功能的操作接口的设计与制造，以及手工手术中工具与解剖结构的交互（见图\ref{fig:casia_simulator_function}）。
-\begin{figure}[t]
-\centering
-\subfloat[]{\includegraphics[height=100pt]{Figures/background/simulation2.eps}}
-\hfil
-\subfloat[]{\includegraphics[height=100pt]{Figures/background/simulation.eps}}
-\hfil
-\subfloat[]{\includegraphics[height=100pt]{Figures/background/interface.eps}}
-\caption[虚拟训练系统样机的基本功能]{经皮冠状动脉介入术虚拟训练系统样机的基本功能：(a)和(b)展示虚拟导丝在基于真实病例的血管系统中推送；(c) 展示具备触力反馈的操作接口。}
-\label{fig:casia_simulator_function}
-\end{figure}
+
 其中，本文主要讲述基于真实病例的解剖结构重建方面的工作，内容主要包含：
 \begin{itemize}
 \item 人体心血管系统模型
@@ -65,9 +66,7 @@
 \end{itemize}
 \item 血管系统模型的数据优化与精简
 \item 血管系统模型的几何信息提取
-\item 手术过程的状态化建模
 \end{itemize}
-人体心血管系统模型的重建主要包括从CTA中提取各解剖结构的对应信息并将其边缘表面进行可视化，从而得到相应的表面模型。
+人体心血管系统模型的重建是指从CTA中提取各解剖结构的对应信息并将其边缘表面进行可视化。
 面对虚拟工具与血管模型交互过程中，系统对计算资源占用巨大的实际情况，对血管系统模型进行合理的数据优化与精简是使系统保持性能的重要一环。
-血管系统的几何信息能够为虚拟仿真过程中虚拟工具的行进提供参考，同时还能够为手术过程的建模提供基础。
-手术过程状态化模型的建立，能为系统的操作过程回放，操作水平评估等后续功能提供研究基础。
+血管系统的几何信息则能够为虚拟仿真过程中虚拟工具的行进提供参考，同时还能够为手术过程的建模提供位置参考信息。

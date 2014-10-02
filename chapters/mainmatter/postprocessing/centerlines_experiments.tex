@@ -1,5 +1,5 @@
 
-\section{类水平集演进中心线提取实验与讨论}
+\section{类水平集演进中心线提取}
 \label{sec:centerlines_experiments}
 
 本节讨论血管表面模型中心线提取的处理流程，以及各个环节的原理。
@@ -13,11 +13,11 @@
 \centering
 \input{FigureSrc/postprocessing/centerlines/data_flow}
 % \includegraphics[width=3.2in]{Figures/postprocessing/centerlines/DataFlow.eps}
-\caption[表面模型中心线提取的工作流程]{表面模型中心线提取的工作流程}
+\caption[表面模型中心线提取流程]{表面模型中心线提取流程。}
 \label{fig:centerlines_data_flow}
 \end{figure}
 
-\subsection{数据与实验设置}
+\subsection{实验场景与数据}
 \label{subsec:centerlines_setup_data}
 
 血管表面模型来自真实病例的CTA数据。
@@ -37,15 +37,15 @@
 \subfloat[]{\includegraphics[height=2.0in]{Figures/postprocessing/centerlines/connectivity_local.eps}
 % \caption[血管表面模型的连接性验证结果]{血管表面模型的连接性验证结果（包含的多边形面片的数量：$70,625$）。}
 \label{fig:centerlins_connectivity_local}}
-\caption[实验用区段血管模型及其顶点连接性验证]{实验用区段血管模型及其顶点连接性验证：(a) 原始的主动脉下半段表面模型（由$205,590$个多边形构成）与VOI提取的模型局部（红色方框内）；(b) 血管表面模型的连接性验证结果（包含的多边形面片的数量：$70,625$）。}
+\caption[区段模型及其顶点连接性验证]{区段模型及其顶点连接性验证：(a) 主动脉下半段表面模型（由$205,590$个多边形构成）与VOI提取的模型局部（红色方框内）；(b) 血管表面模型的连接性验证结果（包含的多边形面片的数量：$70,625$）。}
 \end{figure}
 
-\subsection{表面模型的连接性检验}
+\subsection{顶点连接性检验}
 \label{subsec:centerlines_connectivity_experiments}
 
 \begin{table}[!ht]
 \renewcommand{\arraystretch}{0.5}
-\caption[连接性验证前后多边形的数量]{连接性验证前后多边形的数量：(a) 本章实验数据；(b) 完整的血管模型。}
+\caption[连接性检验前后的多边形数量（中心线）]{连接性验证前后多边形的数量：(a) 本章实验数据；(b) 完整的血管模型。}
 \label{tbl:centerlins_connectivity}
 \centering
 \subfloat[][]{
@@ -93,12 +93,12 @@
 \bigstrut[b] \raisebox{0mm}{$\delta = 0.01$} & \Includegraphics[height=2.0in]{Figures/postprocessing/centerlines/smooth_100_1_local.eps} & \Includegraphics[height=2.0in]{Figures/postprocessing/centerlines/smooth_100_01_local.eps} \\
 \hline
 \end{tabular}
-\caption[为平滑算法设置不同的参数所获得的结果]{为平滑算法设置不同的参数所获得的结果。（$N$：迭代次数；$\delta$：带宽）}
+\caption[设置不同参数获得的平滑结果（中心线）]{设置不同参数获得的平滑结果。（$N$：迭代次数；$\delta$：带宽）}
 \label{fig:centerlines_smooth}
 % \end{table}
 \end{figure}
 
-\subsection{连接性检验后的平滑处理}
+\subsection{表面模型的平整}
 \label{subsec:centerlines_smoothing_experiments}
 
 本章中所采用的中心线提取方法对输入表面的噪声是很敏感的。
@@ -112,7 +112,7 @@
 如图\ref{fig:centerlines_smooth}所示，我们为平滑算法设置了不同的参数以观察算法的平滑效果。
 从对这些结果的观察可以得出，为右下角所示的结果所设置的参数优于其它组的参数设置。
 
-\subsection{利用改进的Butterfly策略进行表面细分}
+\subsection{表面细分}
 \label{subsec:centerlines_subdivision_experiments}
 
 为进一步抑制噪声对中心线提取计算的影响，并提高中心线提取的准确性，我们又需要增加表达同一块表面的多边形的数量。
@@ -125,12 +125,12 @@
 \begin{figure}[t]
 \centering
 \includegraphics[width=3.0in]{Figures/postprocessing/centerlines/subdivision.eps}
-\caption[对平滑处理后的表面细分]{利用改进的butterfly策略对平滑处理后的表面进行细分。左：表面细分的局部。右上：表面细分之前的多边形表面。右下：表面细分之后的多边形表面。}%
+\caption[对平整后表面进行细分]{对平整后表面进行细分。左：表面细分的局部。右上：表面细分之前的多边形表面。右下：表面细分之后的多边形表面。}%
 \label{fig:centerlins_subdivision_local}
 \end{figure}
 \begin{table}[t]
 \renewcommand{\arraystretch}{0.5}
-\caption[表面细分前后的多边形面片数量]{利用改进的butterfly策略进行表面细分前后的多边形面片数量。(a) 本章实验数据；(b) 完整的血管模型。}
+\caption[表面细分前后多边形数量对比]{表面细分前后多边形数量对比。(a) 本章实验数据；(b) 完整的血管模型。}
 \label{tbl:centerlins_subdivision}
 \centering
 \subfloat[][]{
@@ -158,7 +158,7 @@
 }
 \end{table}
 
-\subsection{基于表面模型的中心线提取}
+\subsection{中心线提取}
 \label{subsec:centerlines_centerlines_experiments}
 
 中心线的提取计算在细分后的表面模型上进行。
@@ -183,29 +183,7 @@
 \bigstrut[b] \raisebox{0mm}{主动脉下半段} & \Includegraphics[height=2.0in]{Figures/postprocessing/centerlines/overlay_100_01_voronoi.eps} & \Includegraphics[height=2.0in]{Figures/postprocessing/centerlines/overlay_100_01_centerlines.eps} \\
 \hline
 \end{tabular}
-\caption[中心线提取的结果]{不同区段血管模型中心线的提取结果。}
+\caption[不同区段模型的中心线提取结果]{不同区段模型的中心线提取结果。}
 \label{fig:centerlines}
 % \end{table}
 \end{figure}
-% \begin{figure}[t]
-% \centering
-% \subfloat[]{\includegraphics[height=2.0in]{Figures/postprocessing/centerlines/overlay_100_01_voronoi_local.eps}%
-% \label{fig:centerlins_voronoi_local}}
-% \hfil
-% \subfloat[]{\includegraphics[height=2.0in]{Figures/postprocessing/centerlines/overlay_100_01_centerlines_local.eps}%
-% \label{fig:centerlins_overlay_local}}
-% \caption[主动脉模型局部的中心线提取]{本章实验模型的中心线提取：(a) Voronoi图；(b) 中心线。}%
-% \label{fig:CenterlinesLocal}
-% \end{figure}
-% \begin{figure}[h]
-% \centering
-% \subfloat[]{\includegraphics[height=2.0in]{Figures/postprocessing/centerlines/overlay_100_01_voronoi.eps}
-% \caption{Voronoi diagrams of the abdominal aorta.}
-% \label{fig:centerlins_voronoi_global}}
-% \hfil
-% \subfloat[]{\includegraphics[height=2.0in]{Figures/postprocessing/centerlines/overlay_100_01_centerlines.eps}
-% \caption{Centerlines of the abdominal aorta.}
-% \label{fig:centerlins_overlay_global}}
-% \caption[主动脉模型下半段的中心线提取]{主动脉下半段的中心线提取：(a) Voronoi图；(b) 中心线。}
-% \label{fig:centerlins_global}
-% \end{figure}

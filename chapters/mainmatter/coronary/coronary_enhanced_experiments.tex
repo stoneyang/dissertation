@@ -1,8 +1,8 @@
 
-\section{基于管状物增强CURVES方法的冠状动脉分割实验与结果}
+\section{基于管状增强CURVES的冠脉分割}
 \label{sec:coronary_enhanced_experiments}
 
-\subsection{医学数据与实验设置}
+\subsection{实验场景与数据}
 \label{subsec:coronary_enhanced_setup_data}
 
 由于本章的全部工作都针对冠状动脉，因此，与第\ref{subsec:coronary_setup_data}节类似，我们将包含完整心脏区域的部分从整个原始数据剥离出来（见图\ref{fig:coronary_enhanced_original}）。
@@ -37,7 +37,7 @@
 \label{fig:coronary_enhanced_data_flow}
 \end{figure}
 
-\subsection{管状物体的增强及其后处理}
+\subsection{管状物增强及后处理}
 \label{subsec:coronary_enhanced_tubular_processing}
 
 在管状物体增强之前，我们对输入的数据进行了二值化阈值滤波，以使增强环节的作用能够更集中于细微的明亮管状目标上。
@@ -59,7 +59,7 @@
 \hfil
 \subfloat[]{\includegraphics[height=2.1in]{Figures/coronary/coronary_enhanced/hessian.eps}%
 \label{fig:coronary_enhanced_vesselness}}
-\caption[基于“vesselness”的原始CTA影像的预处理]{基于“vesselness”的原始CTA影像的预处理：(a) 二值阈值滤波（$\text{lower threshold} = 300$, $\text{upper threshold} = 600$）；(b) 管状物体增强（$\sigma = 0.9$, $\gamma_{12} = 0.1$, $\gamma_{23} = 2.0$）。}%
+\caption[基于vesselness的预处理]{基于vesselness的预处理：(a) 二值阈值滤波（$\text{lower threshold} = 300$, $\text{upper threshold} = 600$）；(b) 管状物体增强（$\sigma = 0.9$, $\gamma_{12} = 0.1$, $\gamma_{23} = 2.0$）。}%
 \label{fig:coronary_enhanced_preprocessing}
 \end{figure}
 \begin{figure}[!h]
@@ -69,7 +69,7 @@
 \hfil
 \subfloat[]{\includegraphics[height=2.1in]{Figures/coronary/coronary_enhanced/binary2.eps}%
 \label{fig:coronary_enhanced_binary_2}}
-\caption[两种不同的像素亮度处理结果的对比]{两种不同的像素亮度处理结果的对比：(a) 非线性亮度映射（$m = 80$, $n = 120$）；(b) 二值阈值滤波（$\text{lower threshold} = 40$, $\text{upper threshold} = 200$）。}%
+\caption[两种像素亮度处理结果对比]{两种像素亮度处理结果对比：(a) 非线性亮度映射（$m = 80$, $n = 120$）；(b) 二值阈值滤波（$\text{lower threshold} = 40$, $\text{upper threshold} = 200$）。}%
 \label{fig:coronary_enhanced_intensity_conditioning}
 \end{figure}
 式(\ref{eqn:imaging_sigmoid})表明非线性亮度映射将输入图像变换为某一亮度范围内的像素获得增强而其余像素的亮度被明显削弱的图像。
@@ -77,7 +77,7 @@
 在另外一组采用二值化阈值滤波器的测试中，正如上文所述，亮度落在特定阈值上下限之间的像素重新赋予新的高亮度，而为亮度落在特定阈值上下限之外的像素统一设置为零（见图\ref{fig:coronary_enhanced_binary_2}）。
 对比这两种方法的效果，我们选择二值化滤波器来改善之前管状物体增强所得到的结果（见图\ref{fig:coronary_enhanced_data_flow}）。
 
-\subsection{波面的传播}
+\subsection{水平集演进}
 \label{subsec:coronary_enhanced_propagation}
 
 与第\ref{chap:coronary}章不同，本章在生成初始的水平集围线的时候应用了一种改进的快速步进算法。
@@ -92,11 +92,11 @@
 \begin{figure}[t]
 \centering
 \includegraphics[height=2.1in]{Figures/coronary/coronary_enhanced/curves.eps}
-\caption[基于输入水平集和特征图像的CURVES演进]{基于输入水平集和特征图像的CURVES演进}%
+\caption[增强处理后的CURVES演进]{增强处理后的CURVES演进。}%
 \label{fig:coronary_enhanced_CURVES}
 \end{figure}
 
-\subsection{分割结果的可视化}
+\subsection{分割结果可视化}
 \label{subsec:coronary_enhanced_visualization}
 
 与第\ref{subsec:coronary_experiments_isosurface}节所述类似，我们需要显示的表面正是应用本章所述方法所得分割结果的边缘（即冠状动脉的内腔边缘）。
@@ -109,6 +109,6 @@
 \hfil
 \subfloat[]{\includegraphics[height=2.4in]{Figures/coronary/coronary_enhanced/model_enhanced.eps}%
 \label{fig:coronary_enhanced_CURVES_visualization}}
-\caption[不同方法分割得到的冠状动脉模型的对比]{不同方法分割得到的冠状动脉模型的对比：(a) 传统的CURVES演进；(b) 管状物体增强后的CURVES演进。}%
+\caption[冠状动脉模型对比]{冠状动脉模型对比：(a) 传统CURVES演进；(b) 管状物增强后的CURVES演进。}%
 \label{fig:coronary_enhanced_comparison}
 \end{figure}

@@ -1,5 +1,5 @@
 
-\section{多边形面片的精简}
+\section{多边形面片精简算法}
 \label{sec:mesh_decimation}
 
 为了削减构成表面模型的多边形总数，我们采用了一种削减三角形网格的算法\cite{Schroeder1992}。
@@ -30,7 +30,7 @@
 \input{FigureSrc/postprocessing/mesh/Corner}
 \label{fig:mesh_corner}
 }
-\caption[表面中的顶点位置的五种情形]{表面中的顶点位置的五种情形。(a) 一般简单情形；(b) 复杂情形；(c) 边缘情形；(d) 边缘内部情形；(e) 拐角情形。}%
+\caption[表面中顶点位置的五种情形]{表面中顶点位置的五种情形。(a) 简单情形；(b) 复杂情形；(c) 边缘情形；(d) 边缘内部情形；(e) 拐角情形。}%
 \label{fig:mesh_five_classes}
 \end{figure}
 \begin{figure}[t]
@@ -44,7 +44,7 @@
 \input{FigureSrc/postprocessing/mesh/BoundaryReduction}
 \label{fig:mesh_boundary_reduction}
 }
-\caption[削减顶点所引起的多边形数量的减少]{削减顶点所引起的多边形数量的减少。(a) 一般简单情形：削减前的多边形数量：$6$，削减后的多边形数量：$4$；(b) 边缘情形：削减前的多边形数量：$5$，削减后的多边形数量：$4$。注意：在削减计算之前，红色的边并不属于表面。}%
+\caption[削减顶点引起的多边形减少]{削减顶点引起的多边形减少。(a) 简单情形：削减前的多边形数量：$6$，削减后的多边形数量：$4$；(b) 边缘情形：削减前的多边形数量：$5$，削减后的多边形数量：$4$。注意：在削减计算之前，红色的边并不属于表面。}%
 \label{fig:mesh_reduction}
 \end{figure}
 如图\ref{fig:mesh_five_classes}所示，所有的顶点被归为简单，复杂，以及拐角等三种类型。

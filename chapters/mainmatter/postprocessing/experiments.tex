@@ -1,5 +1,5 @@
 
-\section{多边形面片精简实验与结果}
+\section{多边形精简}
 \label{sec:mesh_experiments}
 
 本节讨论优化构成血管表面模型的多边形网格的完整工作流程。
@@ -15,11 +15,11 @@
 \centering
 \input{FigureSrc/postprocessing/mesh/data_flow}
 % \includegraphics[width=3.2in]{Figures/postprocessing/mesh/DataFlow.eps}
-\caption[血管表面模型优化的工作流程]{血管表面模型优化的工作流程。}
+\caption[血管表面模型优化流程]{血管表面模型优化流程。}
 \label{fig:mesh_data_flow}
 \end{figure}
 
-\subsection{数据与实验设置}
+\subsection{实验场景与数据}
 \label{subsec:mesh_setup_data}
 
 在本章中，基于原始医学影像数据的血管表面模型通过第\ref{chap:aorta}章的工作获得。
@@ -28,11 +28,11 @@
 \begin{figure}[t]
 \centering
 \includegraphics[height=2.0in]{Figures/postprocessing/mesh/original.eps}
-\caption[VOI提取的表面模型]{VOI提取的表面模型（由$74,307$个多边形构成）。}
+\caption[表面模型的VOI提取]{表面模型的VOI提取（由$74,307$个多边形构成）。}
 \label{fig:mesh_VOI}
 \end{figure}
 
-\subsection{检验顶点之间的连接性}
+\subsection{顶点连接性检验}
 \label{subsec:mesh_connectivity_experiments}
 
 首先，我们要对基于真实病例的血管表面模型中的多边形元素的顶点的连接性进行检查。
@@ -40,7 +40,7 @@
 表\ref{tbl:mesh_connectivity}显示，组成模型的多边形的数量在检查前后并未发生变化，这就表明所输入的模型（即第\ref{subsec:mesh_setup_data}节所取的一段）在检查之前就已经是完整且无冗余的了。
 \begin{table}[t]
 \renewcommand{\arraystretch}{0.5}
-\caption[连接性检验前后的多边形数量]{连接性检验前后的多边形数量}
+\caption[连接性检验前后的多边形数量（优化）]{连接性检验前后的多边形数量}
 \label{tbl:mesh_connectivity}
 \centering
 \begin{tabular*}{80mm}{lc}
@@ -53,7 +53,7 @@
 \end{tabular*}
 \end{table}
 
-\subsection{表面模型的平滑处理}
+\subsection{表面模型的平整}
 \label{subsec:mesh_smooth_experiments}
 
 \begin{figure}[t]
@@ -71,7 +71,7 @@
 \bigstrut[b] \raisebox{0mm}{$\delta = 0.01$} & \Includegraphics[height=2.0in]{Figures/postprocessing/mesh/smooth_30_01.eps} & \Includegraphics[height=2.0in]{Figures/postprocessing/mesh/smooth_60_01.eps} & \Includegraphics[height=2.0in]{Figures/postprocessing/mesh/smooth_100_01.eps} \\
 \hline
 \end{tabular}
-\caption[为平滑算法设置不同的参数所获得的结果]{为平滑算法设置不同的参数所获得的结果。（$N$：迭代次数；$\delta$：带宽）}
+\caption[设置不同参数获得的平滑结果（优化）]{设置不同参数获得的平滑结果。（$N$：迭代次数；$\delta$：带宽）}
 \label{fig:mesh_smooth}
 % \end{table}
 \end{figure}
@@ -91,30 +91,8 @@ $N$用于控制算法的迭代次数，它等价于式(\ref{eqn:visualization_approximation})给出
 与下面一排（$\delta = 0.01$）相比，上面一排（$\delta = 0.1$）的曲面仍显得较为粗糙。
 在同一排的结果中，随着迭代次数的增加，平整的效果也逐渐明显。
 处理至这一步，我们选择生成右下角结果的参数（即：$N = 100$，$\delta = 0.01$）来作为平整处理的参数。
-% \begin{figure}[t]
-% \centering
-% \subfloat[]{\includegraphics[height=2.0in]{Figures/postprocessing/mesh/smooth_30_1.eps}%
-% \label{fig:mesh_smooth30-1}}
-% \hfil
-% \subfloat[]{\includegraphics[height=2.0in]{Figures/postprocessing/mesh/smooth_60_1.eps}%
-% \label{fig:mesh_smooth60-1}}
-% \hfil
-% \subfloat[]{\includegraphics[height=2.0in]{Figures/postprocessing/mesh/smooth_100_1.eps}%
-% \label{fig:mesh_smooth100-1}}
-% \hfil\\
-% \subfloat[]{\includegraphics[height=2.0in]{Figures/postprocessing/mesh/smooth_30_01.eps}%
-% \label{fig:mesh_smooth30-01}}
-% \hfil
-% \subfloat[]{\includegraphics[height=2.0in]{Figures/postprocessing/mesh/smooth_60_01.eps}%
-% \label{fig:mesh_smooth60-01}}
-% \hfil
-% \subfloat[]{\includegraphics[height=2.0in]{Figures/postprocessing/mesh/smooth_100_01.eps}%
-% \label{fig:mesh_smooth100-01}}
-% \caption[为平滑算法设置不同的参数所获得的结果]{为平滑算法设置不同的参数所获得的结果：上排展示了$\text{带宽} = 0.1$时的结果，迭代次数分别为：$30$，$60$，$100$；下排展示了$\text{带宽} = 0.01$，迭代次数分别为：$30$，$60$，$100$。}%
-% \label{fig:mesh_smooth}
-% \end{figure}
 
-\subsection{精简多边形面片}
+\subsection{多边形精简}
 \label{subsec:decimate_experiments}
 
 我们在完成对模型表面的平整处理后，进行对模型表面的多边形元素的精简。
@@ -137,13 +115,13 @@ $N$用于控制算法的迭代次数，它等价于式(\ref{eqn:visualization_approximation})给出
 \bigstrut[b] \raisebox{0mm}{\small{线框模型}} & \Includegraphics[height=2.0in]{Figures/postprocessing/mesh/smooth_100_01_d10_w.eps}   & \Includegraphics[height=2.0in]{Figures/postprocessing/mesh/smooth_100_01_d90_w.eps} & \Includegraphics[height=2.0in]{Figures/postprocessing/mesh/smooth_100_01_d99_w.eps} \\
 \hline
 \end{tabular}
-\caption[为削减算法设置不同参数所获得的结果]{为削减算法设置不同参数所获得的结果：上排展示了削减率分别为$10\%$，$90\%$，$99\%$时的结果；下排展示了上排相应削减结果所对应的线框表示。}
+\caption[设置不同参数获得的精简]{设置不同参数获得的精简：上排展示了削减率分别为$10\%$，$90\%$，$99\%$时的结果；下排展示了上排相应削减结果所对应的线框表示。}
 \label{fig:mesh_decimate}
 % \end{table}
 \end{figure}
 \begin{table}[H]
 \renewcommand{\arraystretch}{0.5}
-\caption[削减率与削减计算后的表面模型的多边形数量]{削减率与削减计算后的表面模型的多边形数量}
+\caption[削减率与削减后的多边形数量]{削减率与削减后的多边形数量}
 \label{tbl:mesh_decimate}
 \centering
 \begin{tabular*}{100mm}{c r r r r r}
@@ -168,7 +146,7 @@ R = \frac{Q_r}{Q}.
 然而，进一步观察精简率为$99\%$的表面，可以发现该结果对模型原有的几何特性产生了明显的影响。
 因此，我们选定精简率$90\%$为本章的工作参数。
 
-\subsection{验证削减后的表面模型的交互性能}
+\subsection{交互性能的验证}
 \label{subsec:mesh_validation}
 
 我们进行了若干组的测试来验证不同精简率的血管模型与虚拟导丝\cite{Mi2013ROBIO}在仿真环境中的交互性能。
