@@ -4,7 +4,11 @@
 
 针对\ref{subsec:requirements}所列出各项需求，我们首先给出如下的基本方案，较为详细的说明将在本节随后给出：
 \begin{itemize}
-  \item 基于医学体数据的人体解剖结构（本文指心血管系统的主要部分）的分割与可视化（见第\ref{chap:aorta}，\ref{chap:coronary}章）；
+  \item 基于医学体数据的人体解剖结构的分割与可视化：
+  \begin{itemize}
+    \item 主动脉内腔的分割与心脏近似轮廓的分割（见第\ref{chap:aorta}章）；
+    \item 冠状动脉树状结构的分割（见第\ref{chap:coronary}章）。
+  \end{itemize}
   \item 面向虚拟工具交互的血管系统模型的优化及几何信息提取（见第\ref{chap:postprocessing}章）。
 \end{itemize}
 
@@ -45,7 +49,7 @@ CURVES\cite{Lorigo2001}是对GAC的一项改进。
 
 最后一步是在分割所得的模型像素的基础上，在虚拟场景中渲染出分割所得到的模型。
 渲染处理属于计算机图形学范畴，主要的绘制方法有两类：面绘制（或面渲染）和体绘制（或体渲染）。
-鉴于训练系统的需求，本文工作所采用的方法是Marching Cubes方法\cite{Lorensen1987MC}。
+鉴于训练系统的需求，本文工作所采用的方法是行进立方体方法（Marching Cubes）\cite{Lorensen1987MC}。
 该方法的基本原理是：采用隐式的等值面提取方法从体数据中获取等值的信息。
 算法需要用户提供一个阈值，也就是所希望提取出来的物质的密度，然后根据体数据的信息，就可以把相应阈值内的数据全部提取出来，并且通过三角网格表示出来。
 
