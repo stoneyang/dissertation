@@ -2,10 +2,7 @@
 \section{测地活动轮廓}
 \label{sec:aorta_gac}
 
-获得上述两个结果后，我们利用测地学活动轮廓方法进行血管内壁的分割计算。
-如上所述，特征图像为这一轮廓演进过程提供一个类似地形图的指引。
-
-测地学活动轮廓方法是一种用于物体边缘探测的图像处理方法，它根植于“蛇”模型，是一种对该模型的改进。
+测地活动轮廓方法是一种用于物体边缘探测的图像处理方法，它根植于“蛇”模型，是一种对该模型的改进。
 经典的“蛇”或活动轮廓模型最早由Kass等人\cite{Kass1988}提出，该方法主要用于图像中的物体边缘的探测。
 其主导思想是通过演进一个轮廓（或“围线”）$\mathcal{C}$，以检测得出目标物体的边缘信息。
 这一演进过程实际上是通过使一个能量泛函最小化来实现的，取得这个（局部）最小值的位置恰好是目标物体的边缘。
@@ -36,7 +33,7 @@ E(\mathcal{C}) = \alpha \int_0^1 | \mathcal{C}'(q) |^2 dq + \lambda \int_0^1 g( 
 \end{equation}
 在式(\ref{eqn:aorta_general_energy})中，$g(\cdot)$等同于曲线演进的速度。
 而且它也依赖图像细节的几何性质。
-为了获得理想的目标物体的边缘探测结果，参数$g(\cdot)$的选择是独立于测地学计算的。
+为了获得理想的目标物体的边缘探测结果，参数$g(\cdot)$的选择是独立于测地计算的。
 因此，式(\ref{eqn:aorta_min_model})所表示的最小值可以重新表示为：
 \begin{equation}
 \label{eqn:aorta_min_model_2}
@@ -53,7 +50,7 @@ E(\mathcal{C}) = \alpha \int_0^1 | \mathcal{C}'(q) |^2 dq + \lambda \int_0^1 g( 
 
 根据式(\ref{eqn:aorta_evolution_model})，该演进过程将会在$\frac{\partial \mathcal{C}(t)}{\partial t} = 0$时停止，这意味着目标物体的边缘被成功探知。
 假设曲线$\mathcal{C}$是一个函数的水平集$u(\cdot):[0,a] \times [0,b] \rightarrow \mathrm{R}$。
-考虑式(\ref{eqn:aorta_min_model_2})和式(\ref{eqn:aorta_evolution_model})，之前的测地学计算即可转换为寻找如下方程的稳态解：
+考虑式(\ref{eqn:aorta_min_model_2})和式(\ref{eqn:aorta_evolution_model})，之前的测地计算即可转换为寻找如下方程的稳态解：
 \begin{equation}
 \label{eqn:aorta_level_set_model}
 \begin{split}

@@ -5,13 +5,13 @@
 \subsection{小结}
 
 主动脉的三维模型是血管介入手术机器人训练系统中虚拟环境的重要组成部分之一。
-在本章中，我们提出了一种鲁棒性强，半自动的基于测地学活动轮廓的血管分割方法。
+在本章中，我们提出了一种半自动的基于测地活动轮廓的血管分割方法。
 在介绍了方法的原理和设计后，我们详细地描述了实验中需要考虑的各种因素，同时给出了分析过程和计算结果。
 实验的结果表明，我们所提出的方法能够顺利地完成预定的任务，克服了主动脉与脊椎等相邻器官和组织之间的交联情况，获得了主动脉内腔的三维模型。
 
 在本章中，原始CTA数据的格式首先被转换。
 然后，我们对转换后的数据同时进行了特征图像的生成和初始水平集的生成等两项计算工作。
-在这两项工作完成之后，开始进行测地学活动轮廓的演进。
+在这两项工作完成之后，开始进行测地活动轮廓的演进。
 该演进过程在活动轮廓遇到目标边缘后停止。
 然后，我们利用二值阈值滤波进行了像素亮度的反转。
 最后，行进立方体方法则提取主动脉内腔的表面信息。
@@ -31,6 +31,6 @@
 \centering
 \includegraphics[height=2.4in]{Figures/gac/heart/heart_with_ca.eps}
 %\caption{The overlayed three-dimensional models of the heart and the coronary arteries acquired in the previous work \cite{Yang2013ROBIO} are rendered in the same scene.}
-\caption[叠加冠脉的心脏模型前面观]{叠加冠状动脉的心脏模型前面观。}
+\caption[叠加冠脉的心脏模型前面观]{叠加冠状动脉（红色）的心脏模型前面观。}
 \label{fig:heart_overlay}
 \end{figure} 
