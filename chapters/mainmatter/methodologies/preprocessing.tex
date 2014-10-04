@@ -4,39 +4,53 @@
 \subsection{曲率各向异性扩散滤波}
 \label{subsec:imaging_edge_potential}
 
-对图像的平滑处理是一项必须的环节，该环节的目的在于除去在医学模态获取原始图像序列的过程当中所引入的噪声像素，这一现象是不可避免的。
-在平滑处理过程当中，目标（此处指主动脉）的原始边缘信息应当得到尽可能完整地保护。
-基于这些考虑，我们选择使用一种具有可变通透性的水平集曲率方法\cite{Whitaker2001}来完成这一环节的处理工作。
+图像的平滑处理是预处理中的重要环节，其目的在于除去在医学模态获取原始图像序列的过程当中所引入的噪声像素——这一现象是不可避免的。
+在平滑处理过程当中，目标（此处指主动脉等需要分割的解剖结构）的原始边缘信息应当得到尽可能完整地保护。
+基于这些考虑，我们选择使用一种具有可变传导性的水平集曲率方法\cite{Whitaker2001}来完成这一环节的处理工作。
 该方法长于在图像平滑的过程中增强和保护边缘信息，且对边缘对比度变化具有很好的鲁棒性。
-该方法可以通过所谓的“改进型曲率扩散方程”（Modified Curvature Diffusion Equation，MCDE）来表达：
+该方法可以通过所谓的“改进型曲率扩散方程”（Modified Curvature Diffusion Equation，简称MCDE）来表达：
 \begin{equation}
 \label{eqn:imaging_MCDE}
 I_t = |\nabla I| \nabla \cdot c(|\nabla I|) \frac{\nabla I}{|\nabla I|},
 \end{equation}
 其中，$I = I(x, y, 0)$表示输入图像，
-$I_t(\cdot) = I(x, y, t)$表示图像像素关于时间$t$的偏导数，
-$c$是通透性函数：$c(|\nabla I|) = k^2/(k^2 + |\nabla I|^2)$，
-边界的对比度将会对图像的平滑显著的影响，它由参数$k$所决定。
+$I_t = I(x, y, t)$表示图像像素关于时间$t$的偏导数，
+$c$是传导函数（conductance function）：$c(|\nabla I|) = k^2/(k^2 + |\nabla I|^2)$，它是单调递减函数，这样可以保证梯度方向上的扩散为负，从而减小目标边缘附近平滑作用的幅度；
+边界的对比度会对图像的平滑显著的影响，它由该函数中的自由参数$k$所决定。
+与典型的非线性扩散算法相比，MCDE在增强（即之前所说的“保护”）边缘方面更优，而在对图像对比度的反应方面则更为迟钝。
 
 \subsection{梯度幅值滤波}
 
-由于即将生成的特征图像是随后进行的活动轮廓演进的必须信息，因此对图像像素的梯度计算即在此完成平滑处理后的图像上进行。
-这一环节的目的是探测目标的边缘。
-图像像素的梯度计算基本原理可表述如下\footnote{详见：\url{http://math.nist.gov/mcsd/savg/software/filters/gradient/}}：
+由于即将生成的特征图像是随后进行的活动轮廓演进的必须信息。
+而特征图像的本质是图像中各个目标的边缘信息。
+为探测目标的边缘，我们选择计算图像的梯度。
+在本文中，我们引入基于Gaussian核的递归式梯度幅值计算方法。
+在计算机视觉和图像处理领域，基本的Gaussian滤波是一种有力的计算处理工具。
+它被广泛地应用于图像降噪，像素亮度的梯度计算，以及图像各方向的二阶运算\cite{Derich1993}。
+对于平面图像，该方法首先对各像素的亮度$I$与既定标准差$\sigma$的Gaussian核$G$进行卷积即得各像素的梯度$\nabla I$：
 \begin{equation}
-\label{eqn:imaging_gaussian}
-I_{grad} = \exp(-|(\nabla \ast G) \cdot I_t|),
+\label{eqn:imaging_convolution}
+\nabla I = I \ast G = \int_{-\infty}^{\infty} I(s, t) G(s-x, t-y) ds dt
 \end{equation}
-其中，$I_{grad}$表示图像中某像素点的梯度的幅值，
-$\nabla \ast G$代表对高斯算子进行一阶求导运算。
+其中Gaussian核可表示为$G(x, y) = \frac{ 1 }{ \sigma \sqrt{ 2 \pi } } \exp{ \left( - \frac{x^2 + y^2}{ 2 \sigma^2 } \right) }$。
+在此基础上，可求得梯度的幅值：
+\begin{equation}
+\label{eqn:imaging_magnitude}
+\| \nabla I \| = \sqrt{I \ast G}
+\end{equation}
+最后，将对应像素的亮度替换为此幅值，即得到输入图像的梯度幅值图像。
+这里所采用的递归式实现旨在解决Gaussian滤波在面对多解析度图像时出现的计算开支过大的难题。
+该实现实质上是一种IIR滤波器，它能够独立地减少并固定各输出所需运算次数\cite{Derich1993}。
 
 \subsection{像素亮度非线性映射}
 \label{subsec:imaging_sigmoid}
 
-随后，上述计算所得的梯度幅值图像将通过一个非线性关系映射生成所需的特征图像，本文中，我们采用了S型函数\footnote{详见：\url{http://en.wikipedia.org/wiki/Sigmoid_function}}（见图\ref{fig:imaging_sigmoid}）：
+在本文中，我们通过对梯度幅值图像进行非线性映射来生成特征图像。
+为此，我们引入S型函数，该函数是一种广泛用于数据分析，人工智能，神经科学等领域的基本数学工具\footnote{详见：\url{http://en.wikipedia.org/wiki/Sigmoid_function}}（见图\ref{fig:imaging_sigmoid}）。
+在计算机视觉和图像处理领域中，它的一般表示形式如下：
 \begin{equation}
 \label{eqn:imaging_sigmoid}
-I_{\sigma} = (I_{max} - I_{min}) \cdot \frac{1}{1 + \exp\left(-\frac{I_{grad} - n}{m}\right)} + I_{min},
+I_{\sigma} = (I_{max} - I_{min}) \cdot \frac{1}{1 + \exp\left(-\frac{I - n}{m}\right)} + I_{min},
 \end{equation}
 其中，$I_{\sigma}$表示输出图像的像素亮度，
 $I_{max}$与$I_{min}$分别代表输出像素亮度的最大值和最小值，
