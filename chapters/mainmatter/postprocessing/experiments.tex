@@ -21,13 +21,26 @@
 \label{subsec:mesh_setup_data}
 
 本章中用到的血管表面模型来自基于真实病例的CTA影像数据，该工作的具体细节参见本文第\ref{chap:aorta}章。
-为便于叙述和节省空间，我们在这里只对原先的血管模型的一段应用本章的方法，图\ref{fig:mesh_VOI}说明了本章所用数据的来历。
+为便于叙述和节省空间，我们在这里只对原先的血管模型的一段应用本章的方法，图\ref{fig:mesh_connectivity}说明了本章所用数据的来历。
 特别说明的是，本章的方法可以直接用于与介入术仿真相关的完整血管表面模型的优化精简处理。
-\begin{figure}[t]
+\begin{figure}[!ht]
 \centering
 \includegraphics[height=2.0in]{Figures/postprocessing/mesh/original.eps}
-\caption[表面模型的VOI提取]{表面模型的VOI提取（由$74,307$个多边形构成）。}
-\label{fig:mesh_VOI}
+\qquad
+\raisebox{20mm}{
+\centering
+\renewcommand{\arraystretch}{0.5}
+\begin{tabular*}{40mm}{lc}
+\toprule
+~                & \small{多边形数量} \\
+\midrule
+\small{检验前}   & \small{$74,307$}  \\
+\small{检验后}   & \small{$74,307$}  \\
+\bottomrule
+\end{tabular*}
+}
+\caption[表面模型的VOI提取及连接性检验]{表面模型的VOI提取及连接性检验。}
+\label{fig:mesh_connectivity}
 \end{figure}
 
 \subsection{顶点连接性检验}
@@ -35,21 +48,22 @@
 
 首先，我们要对基于真实病例的血管表面模型中的多边形元素的顶点的连接性进行检查。
 通过这一步骤，使得模型表面的完整性得到保障，并剔除了冗余的多边形元素。
-表\ref{tbl:mesh_connectivity}显示，组成模型的多边形的数量在检查前后并未发生变化，这就表明所输入的模型（即第\ref{subsec:mesh_setup_data}节所取的一段）在检查之前就已经是完整且无冗余的了。
-\begin{table}[t]
-\renewcommand{\arraystretch}{0.5}
-\caption[连接性检验前后的多边形数量（优化）]{连接性检验前后的多边形数量}
-\label{tbl:mesh_connectivity}
-\centering
-\begin{tabular*}{80mm}{lc}
-\toprule
-~                              & \hspace{15mm} \small{多边形数量} \\
-\midrule
-\hspace{10mm} \small{检验前}   & \hspace{15mm} \small{$74,307$}  \\
-\hspace{10mm} \small{检验后}   & \hspace{15mm} \small{$74,307$}  \\
-\bottomrule
-\end{tabular*}
-\end{table}
+图\ref{fig:mesh_connectivity}显示，组成模型的多边形的数量在检查前后并未发生变化，这就表明所输入的模型（即第\ref{subsec:mesh_setup_data}节所取的一段）在检查之前就已经是完整且无冗余的了。
+% 表\ref{tbl:mesh_connectivity}显示，组成模型的多边形的数量在检查前后并未发生变化，这就表明所输入的模型（即第\ref{subsec:mesh_setup_data}节所取的一段）在检查之前就已经是完整且无冗余的了。
+% \begin{table}[t]
+% \renewcommand{\arraystretch}{0.5}
+% \caption[连接性检验前后的多边形数量（优化）]{连接性检验前后的多边形数量}
+% \label{tbl:mesh_connectivity}
+% \centering
+% \begin{tabular*}{80mm}{lc}
+% \toprule
+% ~                              & \hspace{15mm} \small{多边形数量} \\
+% \midrule
+% \hspace{10mm} \small{检验前}   & \hspace{15mm} \small{$74,307$}  \\
+% \hspace{10mm} \small{检验后}   & \hspace{15mm} \small{$74,307$}  \\
+% \bottomrule
+% \end{tabular*}
+% \end{table}
 
 \subsection{表面模型的平整}
 \label{subsec:mesh_smooth_experiments}
@@ -93,11 +107,6 @@ $N$用于控制算法的迭代次数，它等价于式(\ref{eqn:visualization_approximation})给出
 \subsection{多边形精简}
 \label{subsec:decimate_experiments}
 
-我们在完成对模型表面的平整处理后，进行对模型表面的多边形元素的精简。
-对于输入的模型表面，共有超过$74$k个多边形用于张成这段血管表面模型。
-渲染如此大量的数据会导致主流配置的机器内存的耗尽，这样，就没有足够的空间来满足交互仿真的需要了。
-为改善这种情况，我们采用第\ref{sec:mesh_decimation}节所介绍的多边形精简方法来简化表面模型的数据。
-与上一节类似，我们也引入若干组不同的参数进行实验，来筛选尽可能好的配置。
 \begin{figure}[t]
 % \begin{table}[t]
 \renewcommand{\arraystretch}{0.5}
@@ -117,6 +126,13 @@ $N$用于控制算法的迭代次数，它等价于式(\ref{eqn:visualization_approximation})给出
 \label{fig:mesh_decimate}
 % \end{table}
 \end{figure}
+
+我们在完成对模型表面的平整处理后，进行对模型表面的多边形元素的精简。
+对于输入的模型表面，共有超过$74$k个多边形用于张成这段血管表面模型。
+渲染如此大量的数据会导致主流配置的机器内存的耗尽，这样，就没有足够的空间来满足交互仿真的需要了。
+为改善这种情况，我们采用第\ref{sec:mesh_decimation}节所介绍的多边形精简方法来简化表面模型的数据。
+与上一节类似，我们也引入若干组不同的参数进行实验，来筛选尽可能好的配置。
+
 \begin{table}[H]
 \renewcommand{\arraystretch}{0.5}
 \caption[削减率与削减后的多边形数量]{削减率与削减后的多边形数量}
@@ -131,6 +147,7 @@ $N$用于控制算法的迭代次数，它等价于式(\ref{eqn:visualization_approximation})给出
 \bottomrule
 \end{tabular*}
 \end{table}
+
 在本章中，精简算法的停止条件即是算法的精简率$R$，即：被算法除去的多边形元素的数量$Q_r$与输入表面的所包含的多边形元素的总数$Q$之比：
 \begin{equation}
 \label{eqn:mesh_reduction_rate}
