@@ -4,16 +4,25 @@
 \subsection{实验场景与数据}
 \label{subsec:coronary_setup_data}
 
+\begin{figure}[t]
+\centering
+\includegraphics[width=2.1in]{Figures/coronary/ROI_Extraction}
+\caption[心脏区域的ROI提取]{心脏区域的ROI提取。}
+\label{fig:coronary_ROI}
+\end{figure}
+
 本章中，我们使用的原始体数据与第\ref{subsec:aorta_setup_data}节所述的数据完全一致。
 不过，我们对该数据进行了区域提取，即：把心脏的立方体区域提取出来，这样做是为集中处理冠状动脉，从而节约计算时间和计算资源。
 为简化叙述，我们在本节以分割体数据其中一帧中的冠状动脉右降支\footnote{冠状动脉的一条主要分支，详见：\url{http://en.wikipedia.org/wiki/Coronary_circulation}}为目标，展示本章所提方法的有效性。
 提取感兴趣的区域（Region of interest，ROI）时，我们需要指定取景矩形的起始顶点及其在水平和垂直两个方向上的尺寸，该过程如图\ref{fig:coronary_ROI}所示。
 该方法可以直接用于体数据中冠状动脉树状结构的主要分支的分割。
-\begin{figure}[t]
+
+\begin{figure}[tb]
 \centering
-\includegraphics[width=2.3in]{Figures/coronary/ROI_Extraction}
-\caption[心脏区域的ROI提取]{心脏区域的ROI提取。}
-\label{fig:coronary_ROI}
+\input{FigureSrc/coronary/data_flow}
+% \includegraphics[width=3.2in]{Figures/coronary/DataFlow}
+\caption[基于CURVES的冠脉分割流程]{基于CURVES的冠状动脉分割流程。}
+\label{fig:coronary_data_flow}
 \end{figure}
 
 图\ref{fig:coronary_data_flow}是展示处理流程的方框图。
@@ -24,13 +33,6 @@
 另一个分支则用于生成图像的初始水平集，该水平集将用作距离图。
 随后，我们利用改进的测地活动轮廓模型进行演进，从而获得图像中微小而复杂的冠状动脉的边缘信息。
 最后，我们对整个分割结果进行二值阈值滤波处理，以达到像素亮度的反转，以便血管的边缘被提取并进行面绘制。
-\begin{figure}[tb]
-\centering
-\input{FigureSrc/coronary/data_flow}
-% \includegraphics[width=3.2in]{Figures/coronary/DataFlow}
-\caption[基于CURVES的冠脉分割流程]{基于CURVES的冠状动脉分割流程。}
-\label{fig:coronary_data_flow}
-\end{figure}
 
 \subsection{预处理}
 
@@ -85,12 +87,6 @@ Gaussian核的标准差$\sigma$是这一计算步骤中唯一的可调整参数。
 而对于完整的心脏区域的体数据来讲，在进行这一步骤时，可以在冠状动脉内部选取一系列的起始点，以便节约计算时间。
 图\ref{fig:coronary_Fast_Marching}显示，这帧图像中RCA周围的初始水平集围线已经成功生成。
 
-在特征图像和初始水平集的计算之后，我们即可引入CURVES进行分割提取。
-作为改进的GAC算法，它所驱动的演进过程由式(\ref{eqn:coronary_application})来提供。
-在这一过程中，特征图像为演进提供“向导”，而初始水平集则提供初始位置和每一时刻的演进形状（通过“时刻”限制）。
-这一过程直至在CURVES算法驱动下不断演进的围线遇到目标物体的边缘方才停止（见图\ref{fig:coronary_CURVES}）。
-待演进过程完成，我们引入二值阈值滤波对演进的结果图像的亮度进行翻转。
-图\ref{fig:coronary_final}显示这一翻转的结果，我们可以看出目标RCA所对应区域呈高亮度显示，而图像内的其余区域均为黑暗（即亮度为~$0$）。
 \begin{figure}[H]
 \centering
 \subfloat[]{
@@ -116,6 +112,13 @@ Gaussian核的标准差$\sigma$是这一计算步骤中唯一的可调整参数。
 \caption[水平集演进过程]{水平集演进过程：(a) 通过快速步进算法生成的初始水平集围线；(b) 由CURVES驱动的围线演进结果；(c) 对演进结果进行二值阈值滤波处理后的结果。}%
 \label{fig:Evolution}
 \end{figure}
+
+在特征图像和初始水平集的计算之后，我们即可引入CURVES进行分割提取。
+作为改进的GAC算法，它所驱动的演进过程由式(\ref{eqn:coronary_application})来提供。
+在这一过程中，特征图像为演进提供“向导”，而初始水平集则提供初始位置和每一时刻的演进形状（通过“时刻”限制）。
+这一过程直至在CURVES算法驱动下不断演进的围线遇到目标物体的边缘方才停止（见图\ref{fig:coronary_CURVES}）。
+待演进过程完成，我们引入二值阈值滤波对演进的结果图像的亮度进行翻转。
+图\ref{fig:coronary_final}显示这一翻转的结果，我们可以看出目标RCA所对应区域呈高亮度显示，而图像内的其余区域均为黑暗（即亮度为~$0$）。
 
 \subsection{分割结果可视化}
 \label{subsec:coronary_experiments_isosurface}

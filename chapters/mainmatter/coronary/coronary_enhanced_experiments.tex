@@ -50,7 +50,7 @@
 增强后的管状目标物体的像素亮度相对较暗，且亮度值的分布较为分散。
 这给后续的工作环节中所遇到的像素选择带来不便。
 为了解决这种问题，从而使后续的处理易于进行，有必要在实验中引入像素亮度的变换。
-本章中，我们圈定了非线性亮度映射和二值化阈值滤波作为完成这一工作的候选方法。
+在本章中，我们圈定非线性亮度映射（第\ref{subsec:imaging_sigmoid}节）和二值阈值滤波（第\ref{subsec:imaging_binary}节）作为完成这一工作的候选方法。
 \begin{figure}[t]
 \centering
 \subfloat[]{\includegraphics[height=2.1in]{Figures/coronary/coronary_enhanced/binary1.eps}%
@@ -61,16 +61,6 @@
 \caption[基于vesselness的预处理]{基于vesselness的预处理：(a) 二值阈值滤波（$\text{lower threshold} = 300$, $\text{upper threshold} = 600$）；(b) 管状物体增强（$\sigma = 0.9$, $\gamma_{12} = 0.1$, $\gamma_{23} = 2.0$）。}%
 \label{fig:coronary_enhanced_preprocessing}
 \end{figure}
-\begin{figure}[!h]
-\centering
-\subfloat[]{\includegraphics[height=2.1in]{Figures/coronary/coronary_enhanced/sigmoid.eps}%
-\label{fig:coronary_enhanced_sigmoid}}
-\hfil
-\subfloat[]{\includegraphics[height=2.1in]{Figures/coronary/coronary_enhanced/binary2.eps}%
-\label{fig:coronary_enhanced_binary_2}}
-\caption[两种像素亮度处理结果对比]{两种像素亮度处理结果对比：(a) 非线性亮度映射（$m = 80$, $n = 120$）；(b) 二值阈值滤波（$\text{lower threshold} = 40$, $\text{upper threshold} = 200$）。}%
-\label{fig:coronary_enhanced_intensity_conditioning}
-\end{figure}
 式(\ref{eqn:imaging_sigmoid})表明非线性亮度映射将输入图像变换为某一亮度范围内的像素获得增强而其余像素的亮度被明显削弱的图像。
 只要提供恰当选取的参数，目前已经获得增强的影像中，对应于目标物体的亮度将得以增强，而剩余部分的亮度将被降低。
 在另外一组采用二值化阈值滤波器的测试中，正如上文所述，亮度落在特定阈值上下限之间的像素重新赋予新的高亮度，而为亮度落在特定阈值上下限之外的像素统一设置为零（见图\ref{fig:coronary_enhanced_binary_2}）。
@@ -79,7 +69,18 @@
 \subsection{水平集演进}
 \label{subsec:coronary_enhanced_propagation}
 
-与第\ref{chap:coronary}章不同，本章在生成初始的水平集围线的时候应用了一种改进的快速步进算法。
+\begin{figure}[t]
+\centering
+\subfloat[]{\includegraphics[height=2.1in]{Figures/coronary/coronary_enhanced/sigmoid.eps}%
+\label{fig:coronary_enhanced_sigmoid}}
+\hfil
+\subfloat[]{\includegraphics[height=2.1in]{Figures/coronary/coronary_enhanced/binary2.eps}%
+\label{fig:coronary_enhanced_binary_2}}
+\caption[两种像素亮度处理结果对比]{两种像素亮度处理结果对比：(a) 非线性亮度映射（$m = 80$, $n = 120$）；(b) 二值阈值滤波（$\text{TH}_{\text{lower}} = 40$, $\text{TH}_{\text{upper}} = 200$）。}%
+\label{fig:coronary_enhanced_intensity_conditioning}
+\end{figure}
+
+与第\ref{sec:coronary_experiments}节不同，本章在生成初始的水平集围线的时候应用了一种改进的快速步进算法。
 正如第\ref{subsec:imaging_colliding_fronts}节所述，这种算法需要在计算开始时提供成对的起始点。
 而当以这两个起始点演进的围线一旦相遇，演进过程即终止。
 在选取起始点用于计算的时候，我们需要考虑冠状动脉走向的多变性和空间结构的复杂，一定要在曲率较大（即半径较小）的位置设置起始点，以保证水平集的演进能够将这些区段包含在内。
