@@ -37,8 +37,9 @@ E(\mathcal{C}) = \alpha \int_0^1 | \mathcal{C}'(q) |^2 dq + \lambda \int_0^1 g( 
 因此，式(\ref{eqn:aorta_min_model})所表示的最小值可以重新表示为：
 \begin{equation}
 \label{eqn:aorta_min_model_2}
-\min \int_0^1 g(I_{\sigma}) |\mathcal{C}' (q)| dq.
+\min \int_0^1 g(I_{\sigma}) |\mathcal{C}' (q)| dq,
 \end{equation}
+其中，$I_{\sigma}$表示输入的特征图像（生成过程见第\ref{subsec:aorta_feature_image}节）。
 为了获得式(\ref{eqn:aorta_min_model_2})所表示的最小值，需要计算该模型的Euler-Lagrange方程：
 \begin{equation}
 \label{eqn:aorta_evolution_model}

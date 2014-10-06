@@ -56,7 +56,7 @@
 特征图像为测地活动轮廓方法提供轮廓演进的终止位置，这正如一幅“地图”，其中标出何处是“平原”（指像素亮度均匀一致的区域），何处是“峡谷”（指像素亮度明显有别于周围的狭长区域）；
 而输入水平集则为测地活动轮廓方法提供轮廓演进的起始轮廓，活动轮廓的最初位置由输入水平集所确定，输入水平集主要提供“到达时间”等信息。
 
-\subsection{特征图像计算}
+\subsubsection{特征图像计算}
 \label{subsec:aorta_feature_image}
 
 在计算特征图像的分支中，我们需要逐个完成下面的三个任务：
@@ -65,7 +65,8 @@
 \item 计算各像素的梯度的幅值；
 \item 将梯度幅值图像映射为满足需要的特征图像。
 \end{enumerate}
-首先，我们利用具有可变通透度的水平集曲率方法进行图像的平滑降噪处理。
+
+首先，我们利用具有可变传导性的水平集曲率方法进行图像的平滑降噪处理。
 该方法作为一种保护边缘的平滑方法，能够在有效除去图像中的噪声的同时，很好地保护目标物体的边缘特征。
 从图\ref{fig:aorta_smoothing}中可以看到，图像中的噪声得到了有效的抑制，而主动脉甚至是一些相对细小的血管（意味着较为薄弱的边缘）都得到了保持。
 然后，我们引入梯度幅值模块来进行图像中各像素的梯度幅值计算。
@@ -89,11 +90,11 @@
 \hfil
 \subfloat[]{\includegraphics[width=1.2in]{Figures/gac/dcm_out.eps}%
 \label{fig:aorta_binary_thresholding}}
-\caption[水平集演进过程]{水平集演进过程：(a) 阈值滤波（$\text{阈值下限} = 300\text{HU}$, $\text{阈值上限} = 2000\text{HU}$）；(b) 从某一种子点开始、利用快速步进法进行的初始水平集演进；(c) 利用测地活动轮廓进行边缘检测；(d)利用二值阈值滤波完成像素亮度的反转（明亮区域的亮度值: $255$, 黑暗区域的亮度值: $0$）。}%
+\caption[水平集演进过程]{水平集演进过程：(a) 阈值滤波（$\text{阈值下限} = 300\text{HU}$, $\text{阈值上限} = 2000\text{HU}$）；(b) 从某一种子点开始、利用快速步进法进行的初始水平集演进；(c) 利用测地活动轮廓进行边缘检测（迭代次数: $100$）；(d)利用二值阈值滤波完成像素亮度的反转（明亮区域的亮度值: $255$, 黑暗区域的亮度值: $0$）。}%
 \label{fig:aorta_level_set_evolution}
 \end{figure*}
 
-\subsection{水平集演进}
+\subsubsection{初始水平集演进}
 \label{subsec:aorta_level_set}
 
 生成初始水平集的计算与上述计算同时进行，其目的是为测地活动轮廓的演进提供每一步的形状提示。
@@ -104,6 +105,9 @@
 我们制定了位于主动脉内部的一点作为种子点。
 计算过程中，在图像中的某一点，将计算式(\ref{eqn:imaging_curves})中界面到达该点的时刻$T(x,y)$（见图\ref{fig:aorta_Fast_Marching}）。
 注意到主动脉所具有的细长的几何特征，以及算法的特性，我们在对完整序列的实验中，沿着主动脉的中心线附近提供了一系列的种子点，这进一步缩短了计算时间，同时获得了更好的计算结果。
+
+\subsection{GAC水平集演进}
+\label{subsec:aorta_level_set}
 
 测地活动轮廓的演进以特征图像和输入水平集为初始信息，由式(\ref{eqn:aorta_geodesic_3})所驱动。
 由图\ref{fig:aorta_geodesic_active_contours}可以看到，这一演进过程一直进行，直到轮廓到达目标物体的边缘。
@@ -123,14 +127,6 @@ J = \frac{\sum_i | S_i \bigcap T_i |}{\sum_i | S_i \bigcup T_i |},
 其中， $S_i$表示源图像$S$中的第$i$个标签，$T_i$表示源图像$T$中的第$i$个标签，$| \cdot |$ 则表示以体素（或像素）来计算所得到的体积。
 Jaccard指数又称为“并集重叠”，指目标图像与源图像的交集除以它们的并集。
 
-Dice指数$D$可表示为：
-\begin{equation}
-\label{eqn:aorta_Dice}
-D = 2 \frac{\sum_i | S_i \bigcap T_i |}{\sum_i ( | S_i | + | T_i |)}.
-\end{equation}
-它又称为“均值叠加”，指两区域相交部分除以此两区域的平均体积。
-表\ref{tbl:aorta_evaluation}记录本章实验中的十一组数据集两项指数的评估结果。
-图\ref{fig:aorta_evaluation}显示指数评估结果的柱状图。
 \begin{table}[t]
 \renewcommand{\arraystretch}{0.5}
 \caption[主动脉内腔分割结果评估]{主动脉内腔表面模型分割结果评估}
@@ -173,6 +169,15 @@ D = 2 \frac{\sum_i | S_i \bigcap T_i |}{\sum_i ( | S_i | + | T_i |)}.
 \caption[主动脉内腔分割结果评估]{主动脉内腔分割结果评估: (a) 基于Jaccard系数；(b) 基于Dice系数。}%
 \label{fig:aorta_evaluation}
 \end{figure}
+
+Dice指数$D$可表示为：
+\begin{equation}
+\label{eqn:aorta_Dice}
+D = 2 \frac{\sum_i | S_i \bigcap T_i |}{\sum_i ( | S_i | + | T_i |)}.
+\end{equation}
+它又称为“均值叠加”，指两区域相交部分除以此两区域的平均体积。
+表\ref{tbl:aorta_evaluation}记录本章实验中的十一组数据集两项指数的评估结果。
+图\ref{fig:aorta_evaluation}显示指数评估结果的柱状图。
 
 \subsection{表面重建}
 \label{subsec:aorta_experiments_isosurface}
