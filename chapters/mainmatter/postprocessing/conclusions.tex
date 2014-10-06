@@ -34,6 +34,17 @@
 另一方面，平滑算法的带宽与平滑程度则呈现出负相关关系，即：带宽越狭窄，表面越光滑。
 需要指出的是，平滑算法在平整表面的同时，对表面的几何特征有轻微的破坏。
 
+\begin{figure}[t]
+\centering
+\subfloat[]{\includegraphics[height=3.3in]{Figures/postprocessing/centerlines/surface.eps}%
+\label{fig:centerlins_surface}}
+\hfil
+\subfloat[]{\includegraphics[height=3.4in]{Figures/postprocessing/centerlines/centerlines.eps}%
+\label{fig:centerlins_centerlines_model}}
+\caption[完整主动脉模型的中心线]{完整主动脉模型的中心线：(a) 基于CTA的表面模型（多边形的数量：$757,538$）；(b) 表面模型的中心线。}%
+\label{fig:centerlins_visualization}
+\end{figure} 
+
 在削减多边形面片的过程中，我们需要权衡的是：一方面，根据仿真交互系统的需要，我们需要尽可能多地精简模型的数据量；另一方面，过高的精简率会严重扭曲模型的原始几何特征，从而造成对模型的几何特征的严重破坏。
 这在选择削减率参数的时候是需要考虑的。
 在本章的实验中，我们测试了一系列设置不同精简率的情况，并且成功地确定了生成的结果可接受的精简率参数。
@@ -50,13 +61,3 @@
 所有的处理都是在尽可能不破坏原始几何特征的前提下进行的。
 需要特别指出的是，中心线提取的计算任务是一项极其占用计算机资源（时间和空间）的工作。
 例如，为完成如图\ref{fig:centerlins_visualization}所示的计算工作，在对程序进行了特殊修改之后，我们仍然花费了大约八小时的时间。
-\begin{figure}[t]
-\centering
-\subfloat[]{\includegraphics[height=3.5in]{Figures/postprocessing/centerlines/surface.eps}%
-\label{fig:centerlins_surface}}
-\hfil
-\subfloat[]{\includegraphics[height=3.6in]{Figures/postprocessing/centerlines/centerlines.eps}%
-\label{fig:centerlins_centerlines_model}}
-\caption[完整主动脉模型的中心线]{完整主动脉模型的中心线：(a) 基于CTA的表面模型（多边形的数量：$757,538$）；(b) 表面模型的中心线。}%
-\label{fig:centerlins_visualization}
-\end{figure} 

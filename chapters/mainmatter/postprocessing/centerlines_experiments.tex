@@ -167,6 +167,7 @@
 同样的处理流程应用于整个主动脉的表面模型，结果见图\ref{fig:centerlines}。
 仔细观察可以看出，中心线的起始点和终止点并没有恰好位于血管表面模型的“入口”和“出口”。
 这一现象的原因是组成中心线的点所在Voronoi图一定不会与表面模型相交，即：中心线的各个端点逐渐地向表面模型逼近，但是永远不会到达表面所在的位置。
+表\ref{tbl:centerlins_computation_time}列出图\ref{fig:centerlines}所进行实验耗费的时间。
 \begin{figure}[t]
 % \begin{table}[t]
 \renewcommand{\arraystretch}{0.5}
@@ -182,7 +183,25 @@
 \bigstrut[b] \raisebox{0mm}{主动脉下半段} & \Includegraphics[height=2.0in]{Figures/postprocessing/centerlines/overlay_100_01_voronoi.eps} & \Includegraphics[height=2.0in]{Figures/postprocessing/centerlines/overlay_100_01_centerlines.eps} \\
 \hline
 \end{tabular}
+% \raisebox{45mm}{\includegraphics[height=1.0in,width=0.2in]{Figures/postprocessing/centerlines/scalarbar.eps}}
+% \raisebox{-45mm}{\includegraphics[width=0.2in]{Figures/postprocessing/centerlines/scalarbar2.eps}}
+\raisebox{-33mm}{\includegraphics[width=0.2in]{Figures/postprocessing/centerlines/scalarbar12.eps}}
 \caption[不同区段模型的中心线提取结果]{不同区段模型的中心线提取结果。}
 \label{fig:centerlines}
 % \end{table}
 \end{figure}
+\begin{table}[!ht]
+\renewcommand{\arraystretch}{0.5}
+\caption[中心线计算时间]{中心线计算时间}
+\label{tbl:centerlins_computation_time}
+\centering
+\begin{tabular*}{55mm}{lr}
+\toprule
+~                                & \small{耗费时间（s）} \\
+\midrule
+\small{本章实验模型}             & \small{$780$}  \\
+\midrule
+\small{主动脉下半段}             & \small{$2,760$}  \\
+\bottomrule
+\end{tabular*}
+\end{table}
