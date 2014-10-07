@@ -21,7 +21,7 @@
 \label{subsec:centerlines_setup_data}
 
 血管表面模型来自真实病例的CTA数据（见第\ref{chap:aorta}章）。
-在本章的实验中，计算机程序由C++实现，并运行于一台搭载Intel 2.83GHz CPU以及4GB内存的台式计算机上。
+在本节实验中，计算机程序均由C++实现，并运行于一台搭载Intel 2.83GHz CPU以及4GB内存的台式计算机上。
 为节省计算资源并缩短计算时间，我们选取了原始血管模型中的一段用于验证方法的有效性和参数设置的合理性（见图\ref{fig:centerlins_VOI}）。
 所提出的方法被直接用于计算整个主动脉三维模型的中心线的任务。
 \begin{figure}[t]
@@ -120,7 +120,7 @@
 同时，由表\ref{tbl:centerlins_subdivision}可以得出，在完成表面细分的计算之后，构成表面模型的多边形面片的数量得到了显著的增加。
 通过比较细分处理前后的多边形面片的数量可知，细分后的多边形的数量是细分之前的多边形的数量的四倍。
 其中，本章实验数据细分后的多边形数量是细分前的$3.98$倍，而完整的血管模型，细分后的多边形数量则是细分前的$4$倍。
-这一结果符合我们的预期。
+这一结果符合预期，而这也正是本文所采用的细分策略的名称中“butterfly”的由来\cite{Dyn1990}。
 \begin{figure}[t]
 \centering
 \includegraphics[width=3.5in]{Figures/postprocessing/centerlines/subdivision.eps}

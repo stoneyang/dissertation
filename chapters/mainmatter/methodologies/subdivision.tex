@@ -11,13 +11,13 @@
 一旦完成初始的细分循环步骤，具有非$6$价的顶点（即共享该顶点的边数非$6$）的最大数目就不会多于一个。
 三角化的各边的重点的新标量值通过下述细分策略来计算：
 \begin{itemize}
-\item \textbf{连接两个正常顶点的边（均为$6$价）} \quad 其权值可由下式确定：
+\item \textbf{连接两个正常顶点的边（均为$6$价）} 其权值可由下式确定：
 \begin{equation}
 \label{eqn:methodologies_subdivision_case1}
 a = \frac{1}{2} - w, \quad b = \frac{1}{8} + 2w, \quad c = -\frac{1}{16} - w, \quad d = w,
 \end{equation}
 其中，$w$可以取任意小的非负值，在该方法中取$w = 0$；
-\item \textbf{连接一个正常顶点（$6$价）和一个$K-$顶点的边（$K \neq 6$）} \quad 
+\item \textbf{连接一个正常顶点（$6$价）和一个$K-$顶点的边（$K \neq 6$）} 
 对于$K \geq 5$，其权值如下：
 \begin{equation}
 \label{eqn:methodologies_subdivision_case2_a}
@@ -34,8 +34,8 @@ s_0 = \frac{5}{12}, \quad s_{1,2} = - \frac{1}{12},
 \label{eqn:methodologies_subdivision_case2_c}
 s_0 = \frac{3}{8}, \quad s_{2} = - \frac{1}{8}, \quad s_{1,3} = 0.
 \end{equation}
-\item \textbf{连接两个异常顶点的边} \quad 此时，两顶点均为非$6$价顶点，其权值的确定方法依据上一种情形中的相应价数的计算公式来确定；
-\item \textbf{边缘处的边} \quad 我们利用$1$维$4$点策略来细分这些边：
+\item \textbf{连接两个异常顶点的边} 此时，两顶点均为非$6$价顶点，其权值的确定方法依据上一种情形中的相应价数的计算公式来确定；
+\item \textbf{边缘处的边} 我们利用$1$维$4$点策略来细分这些边：
 \begin{equation}
 \label{eqn:methodologies_subdivision_case4}
 s_{-1} = s_{2} = -\frac{1}{16}, \quad s_{0} = s_{1} = \frac{9}{16}.

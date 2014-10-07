@@ -11,7 +11,7 @@
 \caption[心脏区域的VOI提取]{心脏区域的VOI提取。}
 \label{fig:coronary_enhanced_original}
 \end{figure}
-由于本节的全部工作都针对冠状动脉，因此，与第\ref{sec:coronary_experiments}节类似，我们将包含完整心脏区域的部分从整个原始数据剥离出来（见图\ref{fig:coronary_enhanced_original}）。
+由于本节的全部工作都针对冠状动脉，因此，与第\ref{subsec:coronary_setup_data}节类似，我们将包含完整心脏区域的部分从整个原始数据剥离出来（见图\ref{fig:coronary_enhanced_original}）。
 为了获得较好的分割结果，我们进行了一系列实验，以获得更合适的参数。
 首先，在这些实验中，我们仍然对剥离出来的体数据的存储格式和像素的数据类型进行转换，以便于随后进行的计算。
 然后，我们对转换后的数据进行增强，该工作采用第\ref{sec:coronary_enhanced_tubular}节中所介绍的算法\cite{Sato1998}进行。
@@ -80,7 +80,7 @@
 \label{fig:coronary_enhanced_intensity_conditioning}
 \end{figure}
 
-与第\ref{sec:coronary_experiments}节不同，本章在生成初始的水平集围线的时候应用了一种改进的快速步进算法。
+本节在生成初始的水平集围线的时候应用了一种改进的快速步进算法。
 正如第\ref{subsec:imaging_colliding_fronts}节所述，这种算法需要在计算开始时提供成对的起始点。
 而当以这两个起始点演进的围线一旦相遇，演进过程即终止。
 在选取起始点用于计算的时候，我们需要考虑冠状动脉走向的多变性和空间结构的复杂，一定要在曲率较大（即半径较小）的位置设置起始点，以保证水平集的演进能够将这些区段包含在内。
