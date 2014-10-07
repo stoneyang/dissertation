@@ -28,7 +28,7 @@
 图\ref{fig:coronary_data_flow}是展示处理流程的方框图。
 由于我们的目的是分割冠状动脉，因此，我们首先将原始数据中的心脏区域提取出来，以便节约计算时间和计算资源。
 然后，我们利用平滑滤波器滤去图像中的噪声，在利用阈值滤波器除去非血管内容，以便准确计算图像梯度和顺利演进水平集。
-随后，图像进入类似第\ref{chap:aorta}章的分支管线。
+随后，图像进入类似第\ref{chap:aorta}章所述的分支管线。
 一个分支用于计算图像的梯度，并通过非线性映射生成特征图像；
 另一个分支则用于生成图像的初始水平集，该水平集将用作距离图。
 随后，我们利用改进的测地活动轮廓模型进行演进，从而获得图像中微小而复杂的冠状动脉的边缘信息。
@@ -60,7 +60,7 @@ ROI提取完成后，我们利用第\ref{subsec:imaging_edge_potential}节所介绍的方法对图像
 \label{fig:coronary_image_features}
 \end{figure}
 
-\subsection{特征图像计算}
+\subsubsection{特征图像计算}
 \label{subsec:coronary_feature_image}
 
 本部分的计算过程与第\ref{subsec:aorta_feature_image}节类似（见图\ref{fig:coronary_image_features}），都是先计算图像的梯度（根据式(\ref{eqn:imaging_magnitude})），再对梯度图像进行非线性像素亮度的映射（根据式(\ref{eqn:imaging_sigmoid})）。
@@ -83,7 +83,7 @@ Gaussian核的标准差$\sigma$是这一计算步骤中唯一的可调整参数。
 演进运算开始前，通过人工方式在目标物体内部（或者外部）选取算法的起始点。
 在计算过程中，围线不断“向外”（或者“向内”）“膨胀”（或者“收缩”），直到围线到达目标的边缘停止。
 至此，在围线演进的沿途各点，其亮度则变成了围线途经此处的“时刻”。
-正如第\ref{subsec:coronary_setup_data}节所述，这帧图像中的RCA是本章分割工作的目标物体。
+正如第\ref{subsec:coronary_setup_data}节所述，这帧图像中的RCA是本节分割工作的目标物体。
 而对于完整的心脏区域的体数据来讲，在进行这一步骤时，可以在冠状动脉内部选取一系列的起始点，以便节约计算时间。
 图\ref{fig:coronary_Fast_Marching}显示，这帧图像中RCA周围的初始水平集围线已经成功生成。
 
