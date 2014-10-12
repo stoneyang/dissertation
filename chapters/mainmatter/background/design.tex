@@ -12,6 +12,12 @@
 \caption[虚拟训练系统样机]{冠状动脉介入术虚拟训练系统样机。}
 \label{fig:casia_simulator}
 \end{figure}
+\begin{figure}[t]
+\centering
+\input{FigureSrc/background/architecture}
+\caption[样机结构]{冠状动脉介入术虚拟训练系统样机的结构。}
+\label{fig:casia_simulator_arch}
+\end{figure}
 
 如第\ref{subsec:statement}节所述，样机由软件系统和机电一体化的硬件系统组成。
 图\ref{fig:casia_simulator_arch}展示系统样机的基本结构。
@@ -20,12 +26,6 @@
 它主要由提供模拟进给操作功能的机械部分，以及产生阻力的电机控制系统组成。
 前者主要为使用者提供模拟手术中对手术工具执行推送操作的对象；
 后者则主要根据自计算机系统中传来的手术工具与解剖环境发生碰撞的信号来产生相应的阻力。
-\begin{figure}[t]
-\centering
-\input{FigureSrc/background/architecture}
-\caption[样机结构]{冠状动脉介入术虚拟训练系统样机的结构。}
-\label{fig:casia_simulator_arch}
-\end{figure}
 
 图\ref{fig:casia_simulator_components}展示我们设计系统样机时用到的基本软件工具和硬件装置。
 目前，我们的训练系统样机运行于Windows操作系统上\footnote{由于在研究与开发的过程中，我们所采用的软件工具和开发方式，该系统样机也可以方便地移植到Linux操作系统上运行。}。
@@ -35,7 +35,7 @@
 \caption[样机组成]{冠状动脉介入术虚拟训练系统样机的组成。}
 \label{fig:casia_simulator_components}
 \end{figure}
-\begin{figure}[!h]
+\begin{figure}[t]
 \centering
 \subfloat[]{\includegraphics[height=1.75in]{Figures/background/simulation2.eps}}
 \hfil
@@ -55,7 +55,6 @@
 \item 机器人辅助手术中工具与解剖结构的交互。
 \end{enumerate}
 我们已经完成工作主要有：基于真实病例的解剖结构重建，手术工具的建模，具备触觉反馈功能的操作接口的设计与制造，以及手工手术中工具与解剖结构的交互（见图\ref{fig:casia_simulator_function}）。
-
 其中，本文主要讲述基于真实病例的解剖结构重建方面的工作，内容主要包含：
 \begin{itemize}
 \item 人体心血管系统模型
