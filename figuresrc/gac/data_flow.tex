@@ -5,10 +5,14 @@
 
 \draw [black,thick,rounded corners] (-8,7) rectangle (-2,9); % fast marching
 \draw [black,thick,rounded corners] (-8,13) rectangle (-2,15); % thresholding
+\draw [black,thin,dashed] (-8.5,6.5) rectangle (-1.5,15.5);
+\node [above right] at (-8.5,15.5) {\small 初始水平集};
 
 \draw [black,thick,rounded corners] (2,7) rectangle (8,9);   % sigmoid
 \draw [black,thick,rounded corners] (2,10) rectangle (8,12); % gradient
 \draw [black,thick,rounded corners] (2,13) rectangle (8,15); % curvature anisotropic diffusion
+\draw [black,thin,dashed] (1.5,6.5) rectangle (8.5,15.5);
+\node [above right] at (5,15.5) {\small 特征图像};
 
 \draw [black,thick,rounded corners] (-3,17) rectangle (3,19); % raw input
 
