@@ -1,20 +1,21 @@
-\documentclass[compress,CJK]{beamer}
+%# -*- coding:utf-8 -*-
+\documentclass[10pt,compress,hyperref={unicode=true}]{beamer}
 
-\usepackage{CJK}
+\usepackage{CJKutf8}
 \usepackage{setspace}
 
-\newcommand{\songti}{\CJKfamily{song}}        % ËÎÌå
-\newcommand{\fangsong}{\CJKfamily{fs}}        % ·ÂËÎÌå
-\newcommand{\kaishu}{\CJKfamily{kai}}         % ¿¬Ìå
-\newcommand{\heiti}{\CJKfamily{hei}}          % ºÚÌå
-\newcommand{\lishu}{\CJKfamily{li}}           % Á¥Êé
-\newcommand{\youyuang}{\CJKfamily{you}}       % Ó×Ô²
-\newcommand{\sihao}{\fontsize{14pt}{\baselineskip}\selectfont}      % ×ÖºÅÉèÖÃ
-\newcommand{\xiaosihao}{\fontsize{12pt}{\baselineskip}\selectfont}  % ×ÖºÅÉèÖÃ
-\newcommand{\wuhao}{\fontsize{10.5pt}{\baselineskip}\selectfont}    % ×ÖºÅÉèÖÃ
-\newcommand{\xiaowuhao}{\fontsize{9pt}{\baselineskip}\selectfont}   % ×ÖºÅÉèÖÃ
-\newcommand{\liuhao}{\fontsize{7.875pt}{\baselineskip}\selectfont}  % ×ÖºÅÉèÖÃ
-\newcommand{\qihao}{\fontsize{5.25pt}{\baselineskip}\selectfont}    % ×ÖºÅÉèÖÃ
+\newcommand{\songti}{\CJKfamily{song}}        % å®‹ä½“
+\newcommand{\fangsong}{\CJKfamily{fs}}        % ä»¿å®‹ä½“
+\newcommand{\kaishu}{\CJKfamily{kai}}         % æ¥·ä½“
+\newcommand{\heiti}{\CJKfamily{hei}}          % é»‘ä½“
+\newcommand{\lishu}{\CJKfamily{li}}           % éš¶ä¹¦
+\newcommand{\youyuang}{\CJKfamily{you}}       % å¹¼åœ†
+\newcommand{\sihao}{\fontsize{14pt}{\baselineskip}\selectfont}      % å­—å·è®¾ç½®
+\newcommand{\xiaosihao}{\fontsize{12pt}{\baselineskip}\selectfont}  % å­—å·è®¾ç½®
+\newcommand{\wuhao}{\fontsize{10.5pt}{\baselineskip}\selectfont}    % å­—å·è®¾ç½®
+\newcommand{\xiaowuhao}{\fontsize{9pt}{\baselineskip}\selectfont}   % å­—å·è®¾ç½®
+\newcommand{\liuhao}{\fontsize{7.875pt}{\baselineskip}\selectfont}  % å­—å·è®¾ç½®
+\newcommand{\qihao}{\fontsize{5.25pt}{\baselineskip}\selectfont}    % å­—å·è®¾ç½®
 
 % \usetheme{Warsaw}
 % \usetheme{Darmstadt}
@@ -40,8 +41,8 @@
 %\setbeamertemplate{caption}[default]
 %\setbeamertemplate{caption}[numbered]
 %\setbeamertemplate{caption}[caption name own line]
-\setbeamerfont{caption}{size=\footnotesize}
-\setbeamerfont{captionname}{size=\footnotesize}
+\setbeamerfont{caption}{size=\scriptsize}
+\setbeamerfont{captionname}{size=\scriptsize}
 
 % page number
 %\setbeamertemplate{footline}[frame number]
@@ -73,19 +74,19 @@
 \usepackage{booktabs}
 
 \begin{document}
-\begin{CJK*}{GBK}{song}
+\begin{CJK*}{UTF8}{song}
 
-\title[¹ÚÂö½éÈë·ÂÕæ´´½¨½âÆÊ»·¾³µÄ¼¼ÊõÑĞ¾¿]{¹Ú×´¶¯Âö½éÈë·ÂÕæÖĞ´´½¨½âÆÊ»·¾³µÄ\\¹Ø¼ü¼¼ÊõÑĞ¾¿}%
-\author[Ñî·«]{
-\bf{²©Ê¿Ñ§Î»ÂÛÎÄ´ğ±ç}\\
+\title[å† è„‰ä»‹å…¥ä»¿çœŸåˆ›å»ºè§£å‰–ç¯å¢ƒçš„æŠ€æœ¯ç ”ç©¶]{å† çŠ¶åŠ¨è„‰ä»‹å…¥ä»¿çœŸä¸­åˆ›å»ºè§£å‰–ç¯å¢ƒçš„\\å…³é”®æŠ€æœ¯ç ”ç©¶}%
+\author[æ¨å¸†]{
+\bf{åšå£«å­¦ä½è®ºæ–‡ç­”è¾©}\\
 \small ~~\\
-Ñî~~·«\\
+æ¨~~å¸†\\
 \small ~~\\
-Ö¸µ¼½ÌÊ¦: ºîÔö¹ã~ÑĞ¾¿Ô±\\
+æŒ‡å¯¼æ•™å¸ˆ: ä¾¯å¢å¹¿~ç ”ç©¶å‘˜\\
 }
-\institute[CASIA]{ÖĞ¹ú¿ÆÑ§Ôº×Ô¶¯»¯ÑĞ¾¿Ëù\\¸´ÔÓÏµÍ³¹ÜÀíÓë¿ØÖÆ¹ú¼ÒÖØµãÊµÑéÊÒ\\~~\\
+\institute[CASIA]{ä¸­å›½ç§‘å­¦é™¢è‡ªåŠ¨åŒ–ç ”ç©¶æ‰€\\å¤æ‚ç³»ç»Ÿç®¡ç†ä¸æ§åˆ¶å›½å®¶é‡ç‚¹å®éªŒå®¤\\~~\\
 \href{mailto:fan.yang@ia.ac.cn}{fan.yang@ia.ac.cn}}
-\date{\scriptsize 2014~Äê~11~ÔÂ}
+\date{\scriptsize 2014~å¹´~11~æœˆ}
 
 \AtBeginSubsection[]
 {
@@ -103,25 +104,24 @@
 \tableofcontents
 \end{frame}
 
-\input{problem}
-\input{background}
-\section{Ò½Ñ§Ó°Ïñ´¦Àí}
-\input{aorta}
-\input{coronary}
-\input{coronary_enhanced}
-\input{heart}
-\section{Ò½Ñ§¿ÉÊÓ»¯}
-\input{mesh}
-\input{centerlines}
-\input{state_model}
-\input{conclusions}
-\input{references}
-\input{publications}
+\input{problem_utf8}
+\input{background_utf8}
+\section{åŒ»å­¦å½±åƒå¤„ç†}
+\input{aorta_utf8}
+\input{heart_utf8}
+\input{coronary_utf8}
+\input{coronary_enhanced_utf8}
+\section{åŒ»å­¦å¯è§†åŒ–}
+\input{mesh_utf8}
+\input{centerlines_utf8}
+\input{conclusions_utf8}
+\input{references_utf8}
+\input{publications_utf8}
 
 % Ending slide
-\section[]{¸ĞĞ»}
+\section[]{æ„Ÿè°¢}
 \begin{frame}
-\centerline{\huge \bf{¸ĞĞ»¸÷Î»ÀÏÊ¦£¡}}
+\centerline{\huge \bf{æ„Ÿè°¢å„ä½è€å¸ˆï¼}}
 \end{frame}
 
 \end{CJK*}
