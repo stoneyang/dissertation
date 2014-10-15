@@ -1,6 +1,8 @@
 mythesis.pdf
 mythesis_UTF8.pdf
 paperwork/*.pdf
+presentation/slides/*.pdf
+presentation/slides/*.ps
 
 *.aux
 *.bbl
