@@ -1,0 +1,18 @@
+%# -*- coding:utf-8 -*-
+\begin{tikzpicture}[scale=.2]
+
+\draw [black,thick,rounded corners] (-6,11) rectangle (6,13);  % decimation
+\draw [black,thick,rounded corners] (-6,14) rectangle (6,16);  % subdivision
+\draw [black,thick,rounded corners] (-6,17) rectangle (6,19);  % smoothing
+\draw [black,thick,rounded corners] (-6,20) rectangle (6,22);  % connectivity
+
+\node [above right] at (-1.9,11.5) {\small 多边形精简};
+\node [above right] at (-1.5,14.5) {\small 曲面细分};
+\node [above right] at (-1.5,17.5) {\small 曲面平整};
+\node [above right] at (-2.4,20.5) {\small 检查顶点连接性};
+
+\draw [<-,thick] (0,13) -- (0,14);
+\draw [<-,thick] (0,16) -- (0,17);
+\draw [<-,thick] (0,19) -- (0,20);
+
+\end{tikzpicture} 

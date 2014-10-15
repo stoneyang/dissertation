@@ -73,6 +73,14 @@
 
 % table
 \usepackage{booktabs}
+\usepackage{bigstrut}
+\setlength\bigstrutjot{3pt}
+
+\usepackage{../../stackengine}
+\newsavebox\mybox
+\newcommand\Includegraphics[2][]{\sbox{\mybox}{%
+  \includegraphics[#1]{#2}}\abovebaseline[-.5\ht\mybox]{%
+  \addstackgap{\usebox{\mybox}}}}
 
 \begin{document}
 \begin{CJK*}{UTF8}{kai}

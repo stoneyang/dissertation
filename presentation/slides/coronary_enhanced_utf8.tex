@@ -2,11 +2,112 @@
 \subsection[冠状动脉分割II]{改进的基于CURVES的冠状动脉分割}
 
 \begin{frame}
-
+\begin{itemize}
+  \item \textbf{心脏区域的VOI提取}：
+\end{itemize}
+\begin{figure}[t]
+\centering
+\includegraphics[width=1.5in]{../../Figures/coronary/coronary_enhanced/original}
+% \caption[心脏区域的ROI提取]{心脏区域的ROI提取。}
+% \label{fig:coronary_ROI}
+\end{figure}
 \end{frame}
 
 \begin{frame}
+\begin{itemize}
+  \item \textbf{改进的冠状动脉分割流程}：
+\end{itemize}
+\begin{figure}[t]
+\centering
+\input{../../FigureSrc/coronary/data_flow_utf8}
+% \includegraphics[width=3.2in]{Figures/coronary/DataFlow}
+% \caption[心脏区域的ROI提取]{心脏区域的ROI提取。}
+% \label{fig:coronary_ROI}
+\end{figure}
+\end{frame}
 
+\begin{frame}
+\begin{itemize}
+  \item \textbf{基于vesselness的预处理}：
+  \begin{enumerate}
+    \item 二值阈值滤波（$\text{lower threshold} = 300$, $\text{upper threshold} = 600$）
+    \item 管状物体增强（$\sigma = 0.9$, $\gamma_{12} = 0.1$, $\gamma_{23} = 2.0$）
+  \end{enumerate}
+\end{itemize}
+\begin{columns}[b,onlytextwidth]
+\begin{column}{.5\textwidth}
+\begin{figure}[t]
+\centering
+\includegraphics[height=1.5in]{../../Figures/coronary/coronary_enhanced/binary1.eps}
+\end{figure}
+\end{column}
+\begin{column}{.5\textwidth}
+\begin{figure}[t]
+\centering
+\includegraphics[height=1.5in]{../../Figures/coronary/coronary_enhanced/hessian.eps}
+\end{figure}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+  \item \textbf{两种像素亮度处理结果对比}：
+  \begin{enumerate}
+    \item 非线性亮度映射（$m = 80$, $n = 120$）
+    \item 二值阈值滤波（$\text{TH}_{\text{lower}} = 40$, $\text{TH}_{\text{upper}} = 200$）
+  \end{enumerate}
+\end{itemize}
+\begin{columns}[b,onlytextwidth]
+\begin{column}{.5\textwidth}
+\begin{figure}[t]
+\centering
+\includegraphics[height=1.5in]{../../Figures/coronary/coronary_enhanced/sigmoid.eps}
+\end{figure}
+\end{column}
+\begin{column}{.5\textwidth}
+\begin{figure}[t]
+\centering
+\includegraphics[height=1.5in]{../../Figures/coronary/coronary_enhanced/binary2.eps}
+\end{figure}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+  \item \textbf{增强处理后的CURVES演进}：
+\end{itemize}
+\begin{figure}[t]
+\centering
+\includegraphics[width=1.5in]{../../Figures/coronary/coronary_enhanced/curves}
+% \caption[心脏区域的ROI提取]{心脏区域的ROI提取。}
+% \label{fig:coronary_ROI}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+  \item \textbf{冠状动脉模型对比}：
+  \begin{enumerate}
+    \item 传统CURVES演进
+    \item 管状物增强后的CURVES演进
+  \end{enumerate}
+\end{itemize}
+\begin{columns}[b,onlytextwidth]
+\begin{column}{.5\textwidth}
+\begin{figure}[t]
+\centering
+\includegraphics[height=1.5in]{../../Figures/coronary/coronary_enhanced/model_conventional.eps}
+\end{figure}
+\end{column}
+\begin{column}{.5\textwidth}
+\begin{figure}[t]
+\centering
+\includegraphics[height=1.5in]{../../Figures/coronary/coronary_enhanced/model_enhanced.eps}
+\end{figure}
+\end{column}
+\end{columns}
 \end{frame}
 
 \begin{frame}
