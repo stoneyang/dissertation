@@ -2,16 +2,171 @@
 \subsection[主动脉分割]{基于测地活动轮廓的主动脉分割}
 
 \begin{frame}
-
+\begin{figure}[t]
+\centering
+\input{../../FigureSrc/gac/data_flow_utf8}
+% \includegraphics[width=3.2in]{Figures/gac/DataFlow.eps}
+\caption[主动脉内腔分割流程]{主动脉内腔分割流程。}
+\label{fig:aorta_data_flow}
+\end{figure}
 \end{frame}
 
 \begin{frame}
-
+\begin{figure}[t]
+\centering
+\includegraphics[width=2.0in]{../../Figures/gac/ROI.eps}
+\caption[原始图像的ROI提取]{原始图像的ROI提取。}
+\label{fig:aorta_roi}
+\end{figure}
 \end{frame}
 
 \begin{frame}
-
+\begin{itemize}
+  \item \textbf{特征图像的生成步骤}：
+  \begin{enumerate}
+    \item 保护物体边缘的平滑处理（$\text{传导参数} = 9.0$）
+    \item 基于Gaussian核的梯度幅值计算（$\sigma = 0.9$）
+    \item 利用S型函数进行非线性映射（$m = -3$, $n = 20$）
+  \end{enumerate}
+\end{itemize}
+\begin{columns}[b,onlytextwidth]
+\begin{column}{.3\textwidth}
+\begin{figure}[t]
+\centering
+\includegraphics[height=1.5in]{../../Figures/gac/dcm_smoothing.eps}
+\end{figure}
+\end{column}
+\begin{column}{.3\textwidth}
+\begin{figure}[t]
+\centering
+\includegraphics[height=1.5in]{../../Figures/gac/dcm_gradient.eps}
+\end{figure}
+\end{column}
+\begin{column}{.3\textwidth}
+\begin{figure}[t]
+\centering
+\includegraphics[height=1.5in]{../../Figures/gac/dcm_sigmoid.eps}
+\end{figure}
+\end{column}
+\end{columns}
 \end{frame}
+
+\begin{frame}
+\begin{itemize}
+  \item \textbf{水平集演进过程}：
+  \begin{enumerate}
+    \item 阈值滤波（$\text{TH}_{\text{lower}} = 300\text{HU}$, $\text{TH}_{\text{upper}} = 2000\text{HU}$）
+    \item 从某一种子点开始，利用快速步进法进行的初始水平集演进
+    \item 利用测地活动轮廓进行边缘检测（迭代次数: $100$）
+    \item 利用二值阈值滤波完成像素亮度的反转（明亮区域的亮度值: $255$, 黑暗区域的亮度值: $0$）
+  \end{enumerate}
+\end{itemize}
+\begin{columns}[b,onlytextwidth]
+\begin{column}{.25\textwidth}
+\begin{figure}[t]
+\centering
+\includegraphics[height=1.5in]{../../Figures/gac/dcm_threshold.eps}
+\end{figure}
+\end{column}
+\begin{column}{.25\textwidth}
+\begin{figure}[t]
+\centering
+\includegraphics[height=1.5in]{../../Figures/gac/dcm_fastMarching.eps}
+\end{figure}
+\end{column}
+\begin{column}{.25\textwidth}
+\begin{figure}[t]
+\centering
+\includegraphics[height=1.5in]{../../Figures/gac/dcm_out.eps}
+\end{figure}
+\end{column}
+\begin{column}{.25\textwidth}
+\begin{figure}[t]
+\centering
+\includegraphics[height=1.5in]{../../Figures/gac/dcm_sigmoid.eps}
+\end{figure}
+\end{column}
+\end{columns}
+\end{frame} 
+
+\begin{frame}
+\begin{itemize}
+  \item \textbf{主动脉内腔分割结果评估}：
+  % \begin{enumerate}
+    % \item 基于Jaccard系数
+    % \item 基于Dice系数
+  % \end{enumerate}
+\end{itemize}
+\begin{table}[t]
+\renewcommand{\arraystretch}{0.5}
+% \caption[主动脉内腔分割结果评估]{主动脉内腔表面模型分割结果评估}
+% \label{tbl:aorta_evaluation}
+\centering
+\begin{tabular*}{75mm}{c c c}
+\toprule
+\hspace{2mm} \small{数据集序号}  & \hspace{2mm} \small{Jaccard}    & \hspace{2mm} \small{Dice}       \\
+\midrule
+\hspace{2mm} \small{1}           & \hspace{2mm} \small{$0.936434$} & \hspace{2mm} \small{$0.967174$} \\
+\midrule
+\hspace{2mm} \small{2}           & \hspace{2mm} \small{$0.928468$} & \hspace{2mm} \small{$0.962907$} \\
+\midrule
+\hspace{2mm} \small{3}           & \hspace{2mm} \small{$0.911307$} & \hspace{2mm} \small{$0.953595$} \\
+\midrule
+\hspace{2mm} \small{4}           & \hspace{2mm} \small{$0.918612$} & \hspace{2mm} \small{$0.95758$} \\
+\midrule
+\hspace{2mm} \small{5}           & \hspace{2mm} \small{$0.893099$} & \hspace{2mm} \small{$0.943531$} \\
+\midrule
+\hspace{2mm} \small{6}           & \hspace{2mm} \small{$0.953753$} & \hspace{2mm} \small{$0.976329$} \\
+\midrule
+\hspace{2mm} \small{7}           & \hspace{2mm} \small{$0.983812$} & \hspace{2mm} \small{$0.99184$} \\
+\midrule
+\hspace{2mm} \small{8}           & \hspace{2mm} \small{$0.922035$} & \hspace{2mm} \small{$0.959436$} \\
+\midrule
+\hspace{2mm} \small{9}           & \hspace{2mm} \small{$0.928791$} & \hspace{2mm} \small{$0.963081$} \\
+\midrule
+\hspace{2mm} \small{10}          & \hspace{2mm} \small{$0.937794$} & \hspace{2mm} \small{$0.967899$} \\
+\midrule
+\hspace{2mm} \small{11}          & \hspace{2mm} \small{$0.950207$} & \hspace{2mm} \small{$0.974468$} \\
+\bottomrule
+\end{tabular*}
+\end{table}
+\end{frame} 
+
+\begin{frame}
+\begin{itemize}
+  \item \textbf{主动脉内腔分割结果评估}：
+  \begin{enumerate}
+    \item 基于Jaccard系数
+    \item 基于Dice系数
+  \end{enumerate}
+\end{itemize}
+\begin{columns}[b,onlytextwidth]
+\begin{column}{.5\textwidth}
+\begin{figure}[t]
+\centering
+\includegraphics[width=1.5in,height=1.0in]{../../Figures/gac/Jaccard.eps}
+\end{figure}
+\end{column}
+\begin{column}{.5\textwidth}
+\begin{figure}[t]
+\centering
+\includegraphics[width=1.5in,height=1.0in]{../../Figures/gac/Dice.eps}
+\end{figure}
+\end{column}
+\end{columns}
+\end{frame} 
+
+\begin{frame}
+\begin{itemize}
+  \item \textbf{主动脉内腔三维模型}：
+\end{itemize}
+\begin{figure}[t]
+\centering
+\includegraphics[height=1.8in]{../../Figures/gac/model.eps}
+% \caption[主动脉内腔三维模型]{主动脉内腔三维模型。}
+% \label{fig:aorta_visualization}
+\end{figure} 
+\end{frame} 
 
 \begin{frame}
 

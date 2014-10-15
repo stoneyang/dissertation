@@ -1,8 +1,6 @@
 
-\section{小结与讨论}
+\section{小结}
 \label{sec:gac_conclusions}
-
-\subsection{小结}
 
 主动脉的三维模型是血管介入手术机器人训练系统中虚拟环境的重要组成部分之一。
 在本章中，我们提出了一种半自动的基于测地活动轮廓的血管分割方法。
@@ -19,18 +17,3 @@
 在心脏的分割过程中，体数据中的心脏被我们成功提取并可视化。
 所得结果是心脏的外围轮廓表面，即心脏的一个近似模型。
 虽然在仿真交互过程中，使用者并不会与之进行直接作用，但是心脏的轮廓模型还是能够为仿真系统的使用者提供足够的直观性，借以满足其判断冠状动脉不同分支的需要。
-
-\subsection{讨论}
-
-事实上，在心脏的分割过程中，应用本章所述方法的关键是在生成特征图像和初始水平集围线之前，通过合理选择二值阈值滤波器的上下阈值。
-这样，就可以充分地除去与本章工作无关的图像内容，否则这些无关内容的存在会影响后续环节的计算效果，并最终影响心脏模型的构建。
-在围线演进的过程中，起始点位置的选取至关重要，尤其是那些心脏边缘与其周围组织结构边界重叠的区域。
-考虑到本文工作的实际需要，本章的工作方法仅用于生成心脏的近似轮廓的表面模型。
-而这一模型足以为仿真系统的使用者提供足够的直观性，图\ref{fig:heart_overlay}展示了本章结果与第\ref{chap:coronary}章所得冠状动脉网络叠加于同一场景中的效果。
-\begin{figure}[t]
-\centering
-\includegraphics[height=2.4in]{Figures/gac/heart/heart_with_ca.eps}
-%\caption{The overlayed three-dimensional models of the heart and the coronary arteries acquired in the previous work \cite{Yang2013ROBIO} are rendered in the same scene.}
-\caption[叠加冠脉的心脏模型前面观]{叠加冠状动脉（红色）的心脏模型前面观。}
-\label{fig:heart_overlay}
-\end{figure} 

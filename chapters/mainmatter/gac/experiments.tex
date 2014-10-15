@@ -5,19 +5,6 @@
 \subsection{实验场景与数据}
 \label{subsec:aorta_setup_data}
 
-\begin{figure}[t]
-\centering
-\includegraphics[width=2.7in]{Figures/gac/ROI.eps}
-\caption[原始图像的ROI提取]{原始图像的ROI提取。}
-\label{fig:aorta_roi}
-\end{figure}
-\begin{figure}[t]
-\centering
-\input{FigureSrc/gac/data_flow}
-% \includegraphics[width=3.2in]{Figures/gac/DataFlow.eps}
-\caption[主动脉内腔分割流程]{主动脉内腔分割流程。}
-\label{fig:aorta_data_flow}
-\end{figure}
 为了验证本章所提出的方法对于从CTA中分割主动脉内腔的有效性，并在此基础上获得尽可能满意的结果，我们应用不同的参数进行了实验。
 首先，以DICOM格式存储的原始CTA序列要转换成XML格式。
 然后，被转换后的数据被同时传输至生成特征图像和输入水平集的两个分支当中。
@@ -29,24 +16,38 @@
 该数据序列中含有病人的完整主动脉以及冠状动脉树状结构信息。
 为了叙述方便，本章选取了其中的一帧来说明实验的主要过程。
 在实验中，为了缩短计算时间，我们从原始序列中特意截取了含有主动脉及其主要分支的区域（见图\ref{fig:aorta_roi}）。
-\begin{figure*}[t]
+\begin{figure}[t]
 \centering
-\subfloat[]{\includegraphics[width=1.2in]{Figures/gac/dcm_smoothing.eps}%
-\label{fig:aorta_smoothing}}
-\hfil
-\subfloat[]{\includegraphics[width=1.2in]{Figures/gac/dcm_gradient.eps}%
-\label{fig:aorta_gradient}}
-\hfil
-\subfloat[]{\includegraphics[width=1.2in]{Figures/gac/dcm_sigmoid.eps}%
-\label{fig:aorta_sigmoid}}
-\caption[特征图像的生成步骤]{特征图像的生成步骤：(a) 保护物体边缘的平滑处理（$\text{传导参数} = 9.0$）；(b) 基于Gaussian核的梯度幅值的计算（$\sigma = 0.9$）；(c) 利用S型函数进行非线性映射（$m = -3$, $n = 20$）。}
-\label{fig:aorta_potential_image_generation}
-\end{figure*}
+\includegraphics[width=2.7in]{Figures/gac/ROI.eps}
+\caption[原始图像的ROI提取]{原始图像的ROI提取。}
+\label{fig:aorta_roi}
+\end{figure}
+
+% \begin{figure*}[t]
+% \centering
+% \subfloat[]{\includegraphics[width=1.2in]{Figures/gac/dcm_smoothing.eps}%
+% \label{fig:aorta_smoothing}}
+% \hfil
+% \subfloat[]{\includegraphics[width=1.2in]{Figures/gac/dcm_gradient.eps}%
+% \label{fig:aorta_gradient}}
+% \hfil
+% \subfloat[]{\includegraphics[width=1.2in]{Figures/gac/dcm_sigmoid.eps}%
+% \label{fig:aorta_sigmoid}}
+% \caption[特征图像的生成步骤]{特征图像的生成步骤：(a) 保护物体边缘的平滑处理（$\text{传导参数} = 9.0$）；(b) 基于Gaussian核的梯度幅值的计算（$\sigma = 0.9$）；(c) 利用S型函数进行非线性映射（$m = -3$, $n = 20$）。}
+% \label{fig:aorta_potential_image_generation}
+% \end{figure*}
 
 分割主动脉内腔的完整处理流程的设计如图\ref{fig:aorta_data_flow}所示。
 原始医学图像进行数据格式的转换之后，将作为同时开始的两项不同计算任务的输入：一项用于计算并生成边缘势场（即：特征图像），另一项用于生成距离图（即：初始水平集）。
 这两项计算完成后，其结果即作为主动脉内腔分割的核心环节的输入数据，为该环节提供演进计算的参考。
 最后，分割所得结果（即：主动脉内腔的边缘）经过亮度的反转变换，再利用行进立方体方法提取其等值面，最终通过表面渲染技术获得主动脉内腔模型的立体可视效果。
+\begin{figure}[t]
+\centering
+\input{FigureSrc/gac/data_flow}
+% \includegraphics[width=3.2in]{Figures/gac/DataFlow.eps}
+\caption[主动脉内腔分割流程]{主动脉内腔分割流程。}
+\label{fig:aorta_data_flow}
+\end{figure}
 
 \subsection{预处理}
 \label{subsec:aorta_preprocessing}
@@ -79,20 +80,34 @@
 这使得随后进行的由式(\ref{eqn:aorta_geodesic_3})所驱动的水平集演进在“平坦区域”（具有均一的高亮度）内速度较快，而在“峡谷”（具有急剧减低的亮度）附近速度极慢（接近于零）。
 \begin{figure*}[t]
 \centering
-\subfloat[]{\includegraphics[width=1.2in]{Figures/gac/dcm_threshold.eps}%
-\label{fig:aorta_threholding}}
+\subfloat[]{\includegraphics[width=1.2in]{Figures/gac/dcm_smoothing.eps}%
+\label{fig:aorta_smoothing}}
 \hfil
-\subfloat[]{\includegraphics[width=1.2in]{Figures/gac/dcm_fastMarching.eps}%
-\label{fig:aorta_Fast_Marching}}
+\subfloat[]{\includegraphics[width=1.2in]{Figures/gac/dcm_gradient.eps}%
+\label{fig:aorta_gradient}}
 \hfil
-\subfloat[]{\includegraphics[width=1.2in]{Figures/gac/dcm_geodesic.eps}%
-\label{fig:aorta_geodesic_active_contours}}
-\hfil
-\subfloat[]{\includegraphics[width=1.2in]{Figures/gac/dcm_out.eps}%
-\label{fig:aorta_binary_thresholding}}
-\caption[水平集演进过程]{水平集演进过程：(a) 阈值滤波（$\text{TH}_{\text{lower}} = 300\text{HU}$, $\text{TH}_{\text{upper}} = 2000\text{HU}$）；(b) 从某一种子点开始，利用快速步进法进行的初始水平集演进；(c) 利用测地活动轮廓进行边缘检测（迭代次数: $100$）；(d) 利用二值阈值滤波完成像素亮度的反转（明亮区域的亮度值: $255$, 黑暗区域的亮度值: $0$）。}%
-\label{fig:aorta_level_set_evolution}
+\subfloat[]{\includegraphics[width=1.2in]{Figures/gac/dcm_sigmoid.eps}%
+\label{fig:aorta_sigmoid}}
+\caption[特征图像的生成步骤]{特征图像的生成步骤：(a) 保护物体边缘的平滑处理（$\text{传导参数} = 9.0$）；(b) 基于Gaussian核的梯度幅值的计算（$\sigma = 0.9$）；(c) 利用S型函数进行非线性映射（$m = -3$, $n = 20$）。}
+\label{fig:aorta_potential_image_generation}
 \end{figure*}
+
+% \begin{figure*}[t]
+% \centering
+% \subfloat[]{\includegraphics[width=1.2in]{Figures/gac/dcm_threshold.eps}%
+% \label{fig:aorta_threholding}}
+% \hfil
+% \subfloat[]{\includegraphics[width=1.2in]{Figures/gac/dcm_fastMarching.eps}%
+% \label{fig:aorta_Fast_Marching}}
+% \hfil
+% \subfloat[]{\includegraphics[width=1.2in]{Figures/gac/dcm_geodesic.eps}%
+% \label{fig:aorta_geodesic_active_contours}}
+% \hfil
+% \subfloat[]{\includegraphics[width=1.2in]{Figures/gac/dcm_out.eps}%
+% \label{fig:aorta_binary_thresholding}}
+% \caption[水平集演进过程]{水平集演进过程：(a) 阈值滤波（$\text{TH}_{\text{lower}} = 300\text{HU}$, $\text{TH}_{\text{upper}} = 2000\text{HU}$）；(b) 从某一种子点开始，利用快速步进法进行的初始水平集演进；(c) 利用测地活动轮廓进行边缘检测（迭代次数: $100$）；(d) 利用二值阈值滤波完成像素亮度的反转（明亮区域的亮度值: $255$, 黑暗区域的亮度值: $0$）。}%
+% \label{fig:aorta_level_set_evolution}
+% \end{figure*}
 
 \subsubsection{初始水平集演进}
 \label{subsec:aorta_level_set}
@@ -113,6 +128,22 @@
 由图\ref{fig:aorta_geodesic_active_contours}可以看到，这一演进过程一直进行，直到轮廓到达目标物体的边缘。
 随后，我们引入二值阈值滤波（式(\ref{eqn:imaging_binary})），将最终轮廓的“内部”转换为高亮度区域，而轮廓的“外部”则转换为低亮度区域，以便随后的等值面提取（见图\ref{fig:aorta_binary_thresholding}）。
 这里，所有通过本实验手动选定的各个参数均可以直接应用于三维（即完整序列）的情形。
+\begin{figure*}[t]
+\centering
+\subfloat[]{\includegraphics[width=1.2in]{Figures/gac/dcm_threshold.eps}%
+\label{fig:aorta_threholding}}
+\hfil
+\subfloat[]{\includegraphics[width=1.2in]{Figures/gac/dcm_fastMarching.eps}%
+\label{fig:aorta_Fast_Marching}}
+\hfil
+\subfloat[]{\includegraphics[width=1.2in]{Figures/gac/dcm_geodesic.eps}%
+\label{fig:aorta_geodesic_active_contours}}
+\hfil
+\subfloat[]{\includegraphics[width=1.2in]{Figures/gac/dcm_out.eps}%
+\label{fig:aorta_binary_thresholding}}
+\caption[水平集演进过程]{水平集演进过程：(a) 阈值滤波（$\text{TH}_{\text{lower}} = 300\text{HU}$, $\text{TH}_{\text{upper}} = 2000\text{HU}$）；(b) 从某一种子点开始，利用快速步进法进行的初始水平集演进；(c) 利用测地活动轮廓进行边缘检测（迭代次数: $100$）；(d) 利用二值阈值滤波完成像素亮度的反转（明亮区域的亮度值: $255$, 黑暗区域的亮度值: $0$）。}%
+\label{fig:aorta_level_set_evolution}
+\end{figure*}
 
 \subsection{分割结果评估}
 \label{subsec:aorta_evaluation}

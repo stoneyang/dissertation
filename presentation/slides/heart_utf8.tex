@@ -2,17 +2,77 @@
 \subsection[心脏分割]{基于测地学活动轮廓的心脏近似区域的分割}
 
 \begin{frame}
-
+\begin{itemize}
+  \item \textbf{心脏区域前面观}：
+\end{itemize}
+\begin{figure}[t]
+\centering
+\includegraphics[height=1.5in]{../../Figures/gac/heart/original.eps}
+\end{figure}
 \end{frame}
 
 \begin{frame}
-
+\begin{itemize}
+  \item \textbf{心脏区域分割流程}：
+\end{itemize}
+\begin{figure}[t]
+\centering
+\input{../../FigureSrc/gac/heart/data_flow_utf8}
+% \includegraphics[height=2.0in]{figures/heart/DataFlow.eps}
+% \caption[心脏区域分割流程]{心脏区域分割流程。}
+% \label{fig:heart_data_flow}
+\end{figure}
 \end{frame}
 
 \begin{frame}
-
+\begin{itemize}
+  \item \textbf{二值阈值后心脏区域前面观}：
+  \begin{itemize}
+    \item $\text{TH}_{\text{lower}} = 0$，$\text{TH}_{\text{upper}} = 200$
+    \item 注意其中的心包，以及大部分血管等都已被除去
+  \end{itemize}
+\end{itemize}
+\begin{figure}[t]
+\centering
+\includegraphics[height=1.5in]{../../Figures/gac/heart/binary_threshold.eps}
+% \caption[二值阈值后心脏区域前面观]{二值阈值后心脏区域前面观（$\text{TH}_{\text{lower}} = 0$，$\text{TH}_{\text{upper}} = 200$）。注意其中的心包，以及大部分血管等都已被除去。}%
+% \label{fig:heart_binary_threshold_experiments}
+\end{figure}
 \end{frame}
+
+\begin{frame}
+\begin{itemize}
+  \item \textbf{心脏表面模型前面观}：
+  % \begin{itemize}
+    % \item $\text{TH}_{\text{lower}} = 0$，$\text{TH}_{\text{upper}} = 200$
+    % \item 注意其中的心包，以及大部分血管等都已被除去
+  % \end{itemize}
+\end{itemize}
+\begin{figure}[t]
+\centering
+\includegraphics[height=1.5in]{../../Figures/gac/heart/heart.eps}
+% \caption[二值阈值后心脏区域前面观]{二值阈值后心脏区域前面观（$\text{TH}_{\text{lower}} = 0$，$\text{TH}_{\text{upper}} = 200$）。注意其中的心包，以及大部分血管等都已被除去。}%
+% \label{fig:heart_binary_threshold_experiments}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+  \item \textbf{叠加冠状动脉（红色）的心脏模型前面观}：
+  % \begin{itemize}
+    % \item $\text{TH}_{\text{lower}} = 0$，$\text{TH}_{\text{upper}} = 200$
+    % \item 注意其中的心包，以及大部分血管等都已被除去
+  % \end{itemize}
+\end{itemize}
+\begin{figure}[t]
+\centering
+\includegraphics[height=1.5in]{../../Figures/gac/heart/heart_with_ca.eps}
+% \caption[二值阈值后心脏区域前面观]{二值阈值后心脏区域前面观（$\text{TH}_{\text{lower}} = 0$，$\text{TH}_{\text{upper}} = 200$）。注意其中的心包，以及大部分血管等都已被除去。}%
+% \label{fig:heart_binary_threshold_experiments}
+\end{figure}
+\end{frame} 
 
 \begin{frame}
 
 \end{frame} 
+ 
