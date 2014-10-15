@@ -90,7 +90,7 @@
 \hfil
 \subfloat[]{\includegraphics[width=1.2in]{Figures/gac/dcm_out.eps}%
 \label{fig:aorta_binary_thresholding}}
-\caption[水平集演进过程]{水平集演进过程：(a) 阈值滤波（$\text{阈值下限} = 300\text{HU}$, $\text{阈值上限} = 2000\text{HU}$）；(b) 从某一种子点开始、利用快速步进法进行的初始水平集演进；(c) 利用测地活动轮廓进行边缘检测（迭代次数: $100$）；(d)利用二值阈值滤波完成像素亮度的反转（明亮区域的亮度值: $255$, 黑暗区域的亮度值: $0$）。}%
+\caption[水平集演进过程]{水平集演进过程：(a) 阈值滤波（$\text{TH}_{\text{lower}} = 300\text{HU}$, $\text{TH}_{\text{upper}} = 2000\text{HU}$）；(b) 从某一种子点开始，利用快速步进法进行的初始水平集演进；(c) 利用测地活动轮廓进行边缘检测（迭代次数: $100$）；(d) 利用二值阈值滤波完成像素亮度的反转（明亮区域的亮度值: $255$, 黑暗区域的亮度值: $0$）。}%
 \label{fig:aorta_level_set_evolution}
 \end{figure*}
 
@@ -98,7 +98,7 @@
 \label{subsec:aorta_level_set}
 
 生成初始水平集的计算与上述计算同时进行，其目的是为测地活动轮廓的演进提供每一步的形状提示。
-在这一过程当中，我们首先引入了阈值计算来滤去输入图像（原始图像）当中的与本步骤无关的内容细节，例如：肝脏，双肾，肠道，胃，等等（见图\ref{fig:aorta_threholding}）。
+在这一过程当中，我们首先引入了阈值计算（式(\ref{eqn:imaging_threshold})）来滤去输入图像（原始图像）当中的与本步骤无关的内容细节，例如：肝脏，双肾，肠道，胃，等等（见图\ref{fig:aorta_threholding}）。
 这里，阈值的上下界分别设置为$300\text{HU}$\footnote{HU，即Hounsfield unit，CT等影像模态的亮度单位，详见\url{en.wikipedia.org/wiki/Hounsfield_scale}}和$2000\text{HU}$。
 这个处理能够进一步降低计算任务对内存的占用，同时能够明显地缩短计算时间。
 随后，我们引入了快速行进法来生成初始的传播界面。
@@ -111,7 +111,7 @@
 
 测地活动轮廓的演进以特征图像和输入水平集为初始信息，由式(\ref{eqn:aorta_geodesic_3})所驱动。
 由图\ref{fig:aorta_geodesic_active_contours}可以看到，这一演进过程一直进行，直到轮廓到达目标物体的边缘。
-随后，我们引入二值阈值滤波，将最终轮廓的“内部”转换为高亮度区域，而轮廓的“外部”则转换为低亮度区域，以便随后的等值面提取（见图\ref{fig:aorta_binary_thresholding}）。
+随后，我们引入二值阈值滤波（式(\ref{eqn:imaging_binary})），将最终轮廓的“内部”转换为高亮度区域，而轮廓的“外部”则转换为低亮度区域，以便随后的等值面提取（见图\ref{fig:aorta_binary_thresholding}）。
 这里，所有通过本实验手动选定的各个参数均可以直接应用于三维（即完整序列）的情形。
 
 \subsection{分割结果评估}
