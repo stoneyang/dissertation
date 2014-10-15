@@ -37,7 +37,7 @@
 \subsection{预处理}
 
 ROI提取完成后，我们利用第\ref{subsec:imaging_edge_potential}节所介绍的方法对图像进行平滑处理，目的是为了去除原始图像中的噪声。
-在本节的实验中，该滤波器能够在最大限度地保持图像内容中物体几何特征的完整的前提下，降低图像中的噪声，图\ref{fig:coronary_smoothing}显示去除噪声的结果。
+在本节的实验中，该滤波器能够在最大限度地保持图像内容中物体几何特征完整的前提下，降低图像中的噪声，图\ref{fig:coronary_smoothing}显示去除噪声的结果。
 然后，我们继续引入第\ref{subsec:imaging_thresholding}节中的阈值滤波器来去除该区域内不属于血管系统的图像内容，图\ref{fig:coronary_threshold}显示去除无关内容的结果。
 \begin{figure}[!tb]
 \centering
@@ -46,7 +46,7 @@ ROI提取完成后，我们利用第\ref{subsec:imaging_edge_potential}节所介绍的方法对图像
 \hfil
 \subfloat[]{\includegraphics[height=2.1in]{Figures/coronary/threshold}%
 \label{fig:coronary_threshold}}
-\caption[预处理结果]{预处理结果：(a) 边缘保护前提下的平滑（$\text{传导参数} = 0.9$）；(b) 阈值滤波（$\text{TH}_{\text{lower}} = 160$, $\text{TH}_{\text{upper}} = 600$）。}%
+\caption[预处理结果]{预处理结果：(a) 保护物体边缘的平滑处理（$\text{传导参数} = 0.9$）；(b) 阈值滤波（$\text{TH}_{\text{lower}} = 160$, $\text{TH}_{\text{upper}} = 600$）。}%
 \label{fig:coronary_preprocessing}
 \end{figure}
 \begin{figure}[!htb]
@@ -113,7 +113,7 @@ Gaussian核的标准差$\sigma$是这一计算步骤中唯一的可调整参数。
 \label{fig:Evolution}
 \end{figure}
 
-在特征图像和初始水平集的计算之后，我们即可引入CURVES进行分割提取。
+特征图像和初始水平集计算之后，我们即应用CURVES进行分割提取。
 作为改进的GAC算法，它所驱动的演进过程由式(\ref{eqn:coronary_application})来提供。
 在这一过程中，特征图像为演进提供“向导”，而初始水平集则提供初始位置和每一时刻的演进形状（通过“时刻”限制）。
 这一过程直至在CURVES算法驱动下不断演进的围线遇到目标物体的边缘方才停止（见图\ref{fig:coronary_CURVES}）。
