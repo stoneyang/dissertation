@@ -2,9 +2,49 @@
 \section{研究背景}
 
 \begin{frame}
-\frametitle{冠心病病理}
 \begin{itemize}
-  \item 冠心病病理: 
+\item \textbf{问题背景}
+\begin{itemize}
+\item 设计并实现计算机辅助的冠状动脉介入术仿真训练系统
+\end{itemize}
+\end{itemize}
+\begin{itemize}
+\item \textbf{研究目的}
+\begin{itemize}
+\item 研究创建上述训练系统所需的虚拟人体解剖环境
+\end{itemize}
+\end{itemize}
+\begin{itemize}
+\item \textbf{研究内容}
+\begin{itemize}
+\item 研究基于真实病例数据创建人心血管系统模型的方法
+\item 研究面向交互仿真的模型优化方法
+\item 研究面向虚拟训练的模型几何信息提取方法
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item \textbf{冠心病的严重性}：
+\begin{itemize}
+\item 冠心病是全世界人口的首要死因
+\item $2008$年，死于冠心病的总人数达$1730$万
+\item 超过$80 \%$的冠心病病例居住在发展中国家
+\item 到$2030$年，全世界将有近$2330$万人死于冠心病
+\end{itemize}
+\end{itemize}
+\begin{itemize}
+\item \textbf{冠心病的主要成因}：
+\begin{itemize}
+\item 吸烟，缺乏体育运动，不健康的饮食习惯，以及超重和肥胖等
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+  \item \textbf{冠心病病理}: 
   \begin{enumerate}[A]
     \item 由于冠状动脉中的血流受阻，导致自受阻位置以下心肌长期缺氧，最终使其坏死
     \item 受阻的冠状动脉内部情况，斑块固着于血管内壁，致使血管横截面积明显缩小，血流受阻
@@ -12,14 +52,13 @@
 \end{itemize}
 \begin{figure}[t]
 \centering
-\includegraphics[height=130pt]{../../Figures/background/heart_attack_large.eps}
+\includegraphics[height=120pt]{../../Figures/background/heart_attack_large.eps}
 \caption[冠心病病理]{图片来自：\url{http://www.nhlbi.nih.gov/index.html}}
 % \label{fig:heart_attack}
 \end{figure}
 \end{frame}
 
 \begin{frame}
-\frametitle{冠状动脉介入术}
 \begin{columns}[onlytextwidth]
 \begin{column}{0.4\textwidth}
 \begin{figure}[t]
@@ -57,7 +96,7 @@
 
 \begin{frame}
 \begin{itemize}
-  \item “师傅-学徒”模式的技艺传承: 
+  \item \textbf{“师傅-学徒”模式的技艺传承}: 
   \begin{enumerate}[A]
     \item 手工艺的传承
     \item 医学技术的传承
@@ -84,7 +123,7 @@
 
 \begin{frame}
 \begin{itemize}
-  \item 微创血管介入手术机器人系统: 
+  \item \textbf{微创血管介入手术机器人系统}: 
   \begin{enumerate}
     \item 机器人系统外观
     \item 机器人控制系统
@@ -108,7 +147,7 @@
 
 \begin{frame}
 \begin{itemize}
-  \item 微创血管介入手术仿真系统: 
+  \item \textbf{微创血管介入手术仿真系统}: 
   % \begin{enumerate}
     % \item 机器人外观
     % \item 机器人控制系统
@@ -132,7 +171,7 @@
 
 \begin{frame}
 \begin{itemize}
-  \item 微创血管介入手术机器人系统的主要功能: 
+  \item \textbf{微创血管介入手术机器人系统的主要功能}: 
   \begin{enumerate}
     \item 虚拟解剖环境
     \item 虚拟手术工具
@@ -166,3 +205,23 @@
 \end{column}
 \end{columns}
 \end{frame}
+
+\begin{frame}
+\begin{itemize}
+  \item \textbf{本文贡献}
+  \begin{itemize}
+    \item \textbf{基于真实病例数据的人心血管模型的创建}
+    \begin{itemize}
+      \item 提出创建主动脉内腔模型的方法
+      \item 提出创建冠状动脉主要分支模型的方法
+      \item 提出创建冠状动脉次级分支模型的方法
+      \item 提出创建心脏近似模型的方法
+    \end{itemize}
+    \item \textbf{面向交互仿真的人心血管模型的后处理}
+    \begin{itemize}
+      \item 提出面向交互仿真的模型优化方法
+      \item 提出面向虚拟训练的模型几何信息提取方法
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+\end{frame} 
