@@ -2,11 +2,13 @@
 \section{引言}
 \label{sec:aorta_intro}
 
-与真实解剖结构几乎完全一致的血管模型是仿真系统的虚拟环境中的重要组成部分。
-由于主动脉与脊椎在某些位置有接触，因此“干净”、完整的分割主动脉而不涉及相邻的椎骨成为一项具有挑战性的工作\cite{Kurugol2012}。
-主动脉分割与可视化的应用范围包括：腹主动脉瘤的辅助诊断与测量\cite{Almuntashri2012,Kauffmann2011}，动脉钙化情况检测\cite{Kurugol2012,Kurkure2008}，冠状动脉辅助诊断\cite{Wang2009}，结缔组织疾病的检查\cite{Zhao2009}，血流分析\cite{Agamy2010}，脉搏波速度的测量\cite{Giri2007}等。
-此外，主动脉模型的应用还包括新近出现的经导管主动脉瓣植入术\footnote{该名词对应两种英文名称：transcatheter aortic valve implantation，简称TAVI；或者transcatheter aortic valve replacement，简称TAVR}\cite{Luo2013,Zheng2012,Waechter2010}。
-在医学仿真领域，主动脉模型的典型应用有：支架安放的仿真\cite{Egger2009}，虚拟内窥镜\cite{Kirchberg2006MICCAI}，血液动力学仿真\cite{Sheidaei2011,Reymond2012,Suito2013}，以及冠状动脉介入术的仿真\cite{Dawson1996DK,Anderson1996daVinci,Wang1997ICard,Wang1998ICard,Cotin2000ICTS,Luboz2005EVE,Wu2011EVE}等。
+对于血管介入手术的仿真，与真实解剖结构几乎完全一致的血管模型是虚拟环境中的重要组成部分。
+其主要原因是：
+首先，血管是血管疾病的病灶（如：斑块，夹层等）所在；
+其次，血管是血管介入过程中介入工具进出的主要通道。
+由于主动脉与脊椎在某些位置有接触，使得“干净”、完整的分割主动脉而不涉及相邻的椎骨成为一项具有挑战性的工作\cite{Kurugol2012}。
+在医学仿真领域，主动脉模型的典型应用有：支架安放的仿真\cite{Egger2009}，虚拟内窥镜\cite{Kirchberg2006MICCAI}，血液动力学仿真\cite{Sheidaei2011,Reymond2012,Suito2013}，以及血管介入仿真\cite{Dawson1996DK,Anderson1996daVinci,Wang1997ICard,Wang1998ICard,Cotin2000ICTS,Luboz2005EVE,Wu2011EVE}等。
+此外，主动脉分割与可视化的应用范围包括：腹主动脉瘤的辅助诊断与测量\cite{Almuntashri2012,Kauffmann2011}，动脉钙化情况检测\cite{Kurugol2012,Kurkure2008}，冠状动脉辅助诊断\cite{Wang2009}，结缔组织疾病的检查\cite{Zhao2009}，血流分析\cite{Agamy2010}，脉搏波速度的测量\cite{Giri2007}，以及新近出现的经导管主动脉瓣植入术\footnote{该名词对应两种英文名称：transcatheter aortic valve implantation，简称TAVI；或者transcatheter aortic valve replacement，简称TAVR}\cite{Luo2013,Zheng2012,Waechter2010}。
 关于对血管分割方法的详细综述，可参考文献\cite{Lesage2009Review,Kirbas2004Review,Suri2002Review,Suri2002Review2}。
 
 此外，在构建虚拟解剖环境的过程中，我们的目的是为受训者提供直观的虚拟效果，这一目的通过创建与人体真实器官外观非常相似的器官模型来实现。
