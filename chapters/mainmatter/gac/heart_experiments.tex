@@ -5,12 +5,12 @@
 \subsection{实验场景与数据}
 \label{subsec:heart_setup_data}
 
-\begin{figure}[t]
-\centering
-\includegraphics[height=2.6in]{Figures/gac/heart/original.eps}
-\caption[心脏区域前面观]{心脏区域前面观。}
-\label{fig:heart_original}
-\end{figure}
+% \begin{figure}[t]
+% \centering
+% \includegraphics[height=2.6in]{Figures/gac/heart/original.eps}
+% \caption[心脏区域前面观]{心脏区域前面观。}
+% \label{fig:heart_original}
+% \end{figure}
 由于本节的全部工作都针对心脏区域，因此，我们将包含完整心脏区域的部分从整个原始数据剥离出来（见图\ref{fig:heart_original}）。
 本节所述的基于CT的心脏分割方法由第\ref{sec:aorta_experiments}节工作的基础上改进而来，主要是针对分割CTA中的心脏区域做了一些方法上的调整，该方法完整的流程如图\ref{fig:heart_data_flow}所示。
 首先，我们从原始影像数据中选取心脏所在区域，然后进行对该区域平滑处理。
@@ -24,6 +24,19 @@
 % \includegraphics[height=2.0in]{figures/heart/DataFlow.eps}
 \caption[心脏区域分割流程]{心脏区域分割流程。}
 \label{fig:heart_data_flow}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\subfloat[]{\includegraphics[height=2.6in]{Figures/gac/heart/original.eps}
+\label{fig:heart_original}
+}
+\hfil
+\subfloat[]{\includegraphics[height=2.6in]{Figures/gac/heart/binary_threshold.eps}
+\label{fig:heart_binary_threshold_experiments}
+}
+\caption[心脏区域体数据的预处理]{心脏区域体数据的预处理：(a) 心脏区域前面观；(b) 二值阈值后心脏区域前面观（$\text{TH}_{\text{lower}} = 0$，$\text{TH}_{\text{upper}} = 200$）。对比左右两图，可以看出其中的心包，以及大部分血管等都已被除去。}
+\label{fig:heart_preprocessing}
 \end{figure}
 
 \subsection{预处理}
@@ -41,13 +54,14 @@
 依据式(\ref{eqn:imaging_MCDE})，在平滑处理的过程中，图像中各个物体的边缘得以完好保持。
 
 然后，为除去图像中不感兴趣的内容（即：除心脏以外的物体），我们引入第\ref{subsec:imaging_binary}节介绍的二值阈值滤波器。
+图\ref{fig:heart_preprocessing}展示了输入的心脏区域体数据在二值阈值滤波前后的对比。
 在图\ref{fig:heart_binary_threshold_experiments}中，我们可以观察到，所有“有用的”内容都以高亮度来显示（本实验中设置亮度为$255$），而所有“没用的”内容都以低亮度来显示（本实验中设置亮度为零）。
-\begin{figure}[t]
-\centering
-\includegraphics[height=2.6in]{Figures/gac/heart/binary_threshold.eps}
-\caption[二值阈值后心脏区域前面观]{二值阈值后心脏区域前面观（$\text{TH}_{\text{lower}} = 0$，$\text{TH}_{\text{upper}} = 200$）。注意其中的心包，以及大部分血管等都已被除去。}%
-\label{fig:heart_binary_threshold_experiments}
-\end{figure}
+% \begin{figure}[t]
+% \centering
+% \includegraphics[height=2.6in]{Figures/gac/heart/binary_threshold.eps}
+% \caption[二值阈值后心脏区域前面观]{二值阈值后心脏区域前面观（$\text{TH}_{\text{lower}} = 0$，$\text{TH}_{\text{upper}} = 200$）。注意其中的心包，以及大部分血管等都已被除去。}%
+% \label{fig:heart_binary_threshold_experiments}
+% \end{figure}
 
 \subsubsection{特征图像计算}
 
