@@ -23,7 +23,7 @@
 血管表面模型来自真实病例的CTA数据（见第\ref{chap:aorta}章）。
 在本节实验中，计算机程序均由C++实现，并运行于一台搭载Intel 2.83GHz CPU以及4GB内存的台式计算机上。
 为节省计算资源并缩短计算时间，我们选取了原始血管模型中的一段用于验证方法的有效性和参数设置的合理性（见图\ref{fig:centerlins_VOI}）。
-所提出的方法被直接用于计算整个主动脉三维模型的中心线的任务。
+所提出的方法被直接用于计算整个主动脉三维模型的中心线。
 \begin{figure}[t]
 \centering
 \subfloat[]{\includegraphics[height=2.0in]{Figures/postprocessing/centerlines/VOI.eps}
@@ -36,7 +36,7 @@
 \subfloat[]{\includegraphics[height=2.0in]{Figures/postprocessing/centerlines/connectivity_local.eps}
 % \caption[血管表面模型的连接性验证结果]{血管表面模型的连接性验证结果（包含的多边形面片的数量：$70,625$）。}
 \label{fig:centerlins_connectivity_local}}
-\caption[区段模型及其顶点连接性验证]{区段模型及其顶点连接性验证：(a) 主动脉下半段表面模型（由$205,590$个多边形构成）与VOI提取的模型局部（红色方框内）；(b) 所提取区段血管表面模型的连接性验证结果（多边形面片数量：$70,625$）。}
+\caption[区段模型及其顶点连接性验证]{区段模型及其顶点连接性验证：(a) 主动脉下半段表面模型（多边形数量：$205,590$）与VOI提取的模型局部（红色方框内）；(b) 所提取区段血管表面模型的连接性验证结果（多边形数量：$70,625$）。}
 \end{figure}
 
 \subsection{顶点连接性检验}
@@ -101,8 +101,8 @@
 \label{subsec:centerlines_smoothing_experiments}
 
 本章中所采用的中心线提取方法对输入表面的噪声是很敏感的。
-由于原始图像在获取过程中某些程度的细节上的失真，后续的分割工作就不可避免的向可视化结果中引入了噪声。
-直观上，就是有些局部区域中，表面不平整的现象。
+由于原始图像在获取过程中有某些程度的细节上的失真，后续的分割工作就不可避免的向可视化结果中引入了噪声。
+其直观表现就是某些局部区域中表面的不平整。
 这些瑕疵可能会在血管模型与虚拟手术工具的交互过程中影响工具在血管模型内腔中的顺利行进。
 为了抑制模型表面的噪声，我们采用了基于低通滤波原理的表面平滑算法。
 在我们的实现中，这个算法具有两个可调参数。
@@ -124,7 +124,7 @@
 \begin{figure}[t]
 \centering
 \includegraphics[width=3.5in]{Figures/postprocessing/centerlines/subdivision.eps}
-\caption[对平整后表面进行细分]{对平整后表面进行细分。左：表面细分的局部。右上：表面细分之前的多边形表面。右下：表面细分之后的多边形表面。}%
+\caption[对平整后表面进行细分]{对平整后表面进行细分。左：表面细分的结果。右上：红色方框内表面细分之前的多边形表面。右下：红色方框内表面细分之后的多边形表面。}%
 \label{fig:centerlins_subdivision_local}
 \end{figure}
 \begin{table}[t]
