@@ -79,7 +79,7 @@ Gaussian核的标准差$\sigma$是这一计算步骤中唯一的可调整参数。
 \label{subsec:coronary_experiments_propagation}
 
 初始的水平集围线自手工选取的起始点（亦称“种子点”）演进而生成。
-这一演进过程由快速步进算法驱动。
+这一演进过程由快速行进算法驱动。
 演进运算开始前，通过人工方式在目标物体内部（或者外部）选取算法的起始点。
 在计算过程中，围线不断“向外”（或者“向内”）“膨胀”（或者“收缩”），直到围线到达目标的边缘停止。
 至此，在围线演进的沿途各点，其亮度则变成了围线途经此处的“时刻”。
@@ -109,7 +109,7 @@ Gaussian核的标准差$\sigma$是这一计算步骤中唯一的可调整参数。
 \fbox{\includegraphics[height=2.1in]{Figures/coronary/final}}%
 % \includegraphics[height=2in]{Figures/coronary/final}
 \label{fig:coronary_final}}
-\caption[水平集演进过程]{水平集演进过程：(a) 通过快速步进算法生成的初始水平集围线；(b) 由CURVES驱动的围线演进结果；(c) 对演进结果进行二值阈值滤波处理后的结果。}%
+\caption[水平集演进过程]{水平集演进过程：(a) 通过快速行进算法生成的初始水平集围线；(b) 由CURVES驱动的围线演进结果；(c) 对演进结果进行二值阈值滤波处理后的结果。}%
 \label{fig:Evolution}
 \end{figure}
 
