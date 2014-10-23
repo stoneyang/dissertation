@@ -114,7 +114,7 @@
 
 生成初始水平集的计算与上述计算同时进行，其目的是为测地活动轮廓的演进提供每一步的形状提示。
 在这一过程当中，我们首先引入了阈值计算（式(\ref{eqn:imaging_threshold})）来滤去输入图像（原始图像）当中的与本步骤无关的内容细节，例如：肝脏，双肾，肠道，胃，等等（见图\ref{fig:aorta_threholding}）。
-这里，阈值的上下界分别设置为$300\text{HU}$\footnote{HU，即Hounsfield unit，CT等影像模态的亮度单位，详见\url{en.wikipedia.org/wiki/Hounsfield_scale}}和$2000\text{HU}$。
+这里，阈值的上下界分别设置为$300\text{HU}$\footnote{HU，即Hounsfield unit，为CT等影像模态的亮度单位，详见：\url{http://en.wikipedia.org/wiki/Hounsfield_scale}}和$2000\text{HU}$。
 这个处理能够进一步降低计算任务对内存的占用，同时能够明显地缩短计算时间。
 随后，我们引入了快速行进法来生成初始的传播界面。
 我们制定了位于主动脉内部的一点作为种子点。
@@ -201,6 +201,13 @@ J = \frac{\sum_i | S_i \bigcap T_i |}{\sum_i | S_i \bigcup T_i |},
 \noindent 其中， $S_i$表示源图像$S$中的第$i$个标签，$T_i$表示源图像$T$中的第$i$个标签，$| \cdot |$ 则表示以体素（或像素）来计算所得到的体积。
 Jaccard指数又称为“并集重叠”，指目标图像与源图像的交集除以它们的并集。
 
+\begin{figure}[t]
+\centering
+\includegraphics[height=3.5in]{Figures/gac/model.eps}
+\caption[主动脉内腔三维模型]{主动脉内腔三维模型。}
+\label{fig:aorta_visualization}
+\end{figure}
+
 Dice指数$D$可表示为：
 \begin{equation}
 \label{eqn:aorta_Dice}
@@ -209,6 +216,7 @@ D = 2 \frac{\sum_i | S_i \bigcap T_i |}{\sum_i ( | S_i | + | T_i |)}.
 它又称为“均值叠加”，指两区域相交部分除以此两区域的平均体积。
 表\ref{tbl:aorta_evaluation}记录本章实验中的十一组数据集两项指数的评估结果。
 图\ref{fig:aorta_evaluation}显示指数评估结果的柱状图。
+其中，Jaccard指数的平均值为$0.933$，标准差为$0.0240$；Dice指数的平均值为$0.965$，标准差为$0.0128$。
 
 \subsection{表面重建}
 \label{subsec:aorta_experiments_isosurface}
@@ -218,9 +226,3 @@ D = 2 \frac{\sum_i | S_i \bigcap T_i |}{\sum_i ( | S_i | + | T_i |)}.
 这里，之前的二值阈值滤波中的阈值上限被选为等值面的值。
 这确保了随后所渲染的表面模型表示主动脉的内腔表面。
 最终的可视化模型如图\ref{fig:aorta_visualization}所示。
-\begin{figure}[t]
-\centering
-\includegraphics[height=3.5in]{Figures/gac/model.eps}
-\caption[主动脉内腔三维模型]{主动脉内腔三维模型。}
-\label{fig:aorta_visualization}
-\end{figure} 
