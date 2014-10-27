@@ -1,8 +1,8 @@
 %# -*- coding:utf-8 -*-
-\begin{tikzpicture}[scale=.2]
+\begin{tikzpicture}[scale=.3]
 
 \draw [black,thick,rounded corners] (-3,0) rectangle (3,2);            % binary threshold
-\draw [fill=gray,black,thick,rounded corners] (-3,3) rectangle (3,5);  % CURVES
+\draw [black,thick,rounded corners] (-3,3) rectangle (3,5);  % CURVES
 
 \draw [black,thick,rounded corners] (-8,7) rectangle (-2,9);   % initial contours
 
@@ -13,17 +13,17 @@
 \draw [black,thick,rounded corners] (-3,17) rectangle (3,19);  % ROI extraction
 \draw [black,thick,rounded corners] (-3,20) rectangle (3,22);  % raw input
 
-\node [above right] at (-2.1,0.5) {\small 二值阈值滤波};
-\node [above right] at (-1.5,3.5) {\small CURVES};
+\node [above right] at (-2.1,0.25) {\tiny \fs \bf 二值阈值滤波};
+\node [above right] at (-1.5,3.25) {\tiny \fs \bf CURVES};
 
-\node [above right] at (-7.5,7.5) {\small 初始水平集演进};
+\node [above right] at (-7.5,7.25) {\tiny \fs \bf 初始水平集演进};
 
-\node [above right] at (2.9,7.5) {\small 特征图像计算};
+\node [above right] at (2.9,7.25) {\tiny \fs \bf 特征图像计算};
 
-\node [above right] at (-2.1,11.5) {\small 二值阈值滤波};
-\node [above right] at (-2.1,14.5) {\small 管状物体增强};
-\node [above right] at (-2.1,17.5) {\small 二值阈值滤波};
-\node [above right] at (-1.8,20.5) {\small ROI体数据};
+\node [above right] at (-2.1,11.25) {\tiny \fs \bf 二值阈值滤波};
+\node [above right] at (-2.1,14.25) {\tiny \fs \bf 管状物体增强};
+\node [above right] at (-2.1,17.25) {\tiny \fs \bf 二值阈值滤波};
+\node [above right] at (-1.8,20.25) {\tiny \fs \bf ROI体数据};
 
 \draw [<-,thick] (0,2) -- (0,3);
 
