@@ -130,16 +130,28 @@
 这里，所有通过本实验手动选定的各个参数均可以直接应用于三维（即完整序列）的情形。
 \begin{figure*}[t]
 \centering
-\subfloat[]{\includegraphics[width=1.2in]{Figures/gac/dcm_threshold.eps}%
+\subfloat[]{
+\setlength{\fboxrule}{0.5pt}
+\setlength{\fboxsep}{0cm}
+\fbox{\includegraphics[width=1.2in]{Figures/gac/dcm_threshold.eps}}%
 \label{fig:aorta_threholding}}
 \hfil
-\subfloat[]{\includegraphics[width=1.2in]{Figures/gac/dcm_fastMarching.eps}%
+\subfloat[]{
+\setlength{\fboxrule}{0.5pt}
+\setlength{\fboxsep}{0cm}
+\fbox{\includegraphics[width=1.2in]{Figures/gac/dcm_fastMarching.eps}}%
 \label{fig:aorta_Fast_Marching}}
 \hfil
-\subfloat[]{\includegraphics[width=1.2in]{Figures/gac/dcm_geodesic.eps}%
+\subfloat[]{
+\setlength{\fboxrule}{0.5pt}
+\setlength{\fboxsep}{0cm}
+\fbox{\includegraphics[width=1.2in]{Figures/gac/dcm_geodesic.eps}}%
 \label{fig:aorta_geodesic_active_contours}}
 \hfil
-\subfloat[]{\includegraphics[width=1.2in]{Figures/gac/dcm_out.eps}%
+\subfloat[]{
+\setlength{\fboxrule}{0.5pt}
+\setlength{\fboxsep}{0cm}
+\fbox{\includegraphics[width=1.2in]{Figures/gac/dcm_out.eps}}%
 \label{fig:aorta_binary_thresholding}}
 \caption[水平集演进过程]{水平集演进过程：(a) 阈值滤波（$\text{TH}_{\text{lower}} = 300\text{HU}$, $\text{TH}_{\text{upper}} = 2000\text{HU}$）；(b) 从某一种子点开始，利用快速行进法进行的初始水平集演进；(c) 利用测地活动轮廓进行边缘检测（迭代次数: $100$）；(d) 利用二值阈值滤波完成像素亮度的反转（明亮区域的亮度值: $255$, 黑暗区域的亮度值: $0$）。}%
 \label{fig:aorta_level_set_evolution}
@@ -171,13 +183,13 @@ J = \frac{\sum_i | S_i \bigcap T_i |}{\sum_i | S_i \bigcup T_i |},
 \midrule
 \hspace{2mm} \small{3}           & \hspace{2mm} \small{$0.911307$} & \hspace{2mm} \small{$0.953595$} \\
 \midrule
-\hspace{2mm} \small{4}           & \hspace{2mm} \small{$0.918612$} & \hspace{2mm} \small{$0.95758$} \\
+\hspace{2mm} \small{4}           & \hspace{2mm} \small{$0.918612$} & \hspace{2mm} \small{$0.957580$} \\
 \midrule
 \hspace{2mm} \small{5}           & \hspace{2mm} \small{$0.893099$} & \hspace{2mm} \small{$0.943531$} \\
 \midrule
 \hspace{2mm} \small{6}           & \hspace{2mm} \small{$0.953753$} & \hspace{2mm} \small{$0.976329$} \\
 \midrule
-\hspace{2mm} \small{7}           & \hspace{2mm} \small{$0.983812$} & \hspace{2mm} \small{$0.99184$} \\
+\hspace{2mm} \small{7}           & \hspace{2mm} \small{$0.983812$} & \hspace{2mm} \small{$0.991840$} \\
 \midrule
 \hspace{2mm} \small{8}           & \hspace{2mm} \small{$0.922035$} & \hspace{2mm} \small{$0.959436$} \\
 \midrule
