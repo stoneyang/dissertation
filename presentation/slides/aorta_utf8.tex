@@ -3,6 +3,44 @@
 
 \begin{frame}
 \begin{itemize}
+\item \textbf{测地活动轮廓（GAC）}
+\begin{itemize}
+\item 根植于“蛇”模型
+\begin{itemize}
+\item 基于图像内容呈现的物理性质，通过演进一个轮廓（或“围线”），探测物体边缘
+\item 演进通过使一个能量泛函最小化来实现，取得（局部）最小值的位置恰好是目标物体的边缘
+\item \textbf{缺点}：轮廓无法控制自身拓扑；无法同时探测多个目标
+\end{itemize}
+\item 对“蛇”模型的改进
+\begin{itemize}
+\item 引入测地学计算和水平集演进
+\item 允许围线同时探测图像中多个目标的内部边缘和外部边缘
+\end{itemize}
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item \textbf{GAC的数学模型}
+% \end{itemize}
+\begin{equation*}
+% \label{eqn:aorta_particular_snakes}
+E(\mathcal{C}) = \alpha \int_0^1 | \mathcal{C}'(q) |^2 dq - \lambda \int_0^1 | \nabla I_{s} ( \mathcal{C}(q) ) |dq
+\end{equation*}
+% \quad\quad其中：
+\begin{itemize}
+\item $E(\cdot)$：能量泛函
+\item $\mathcal{C}(\cdot)$：参数化平面内曲线
+\item $I_{s}(\cdot)$：含有待探测目标的图像
+\item $\alpha$：传导常数
+\item $\lambda$：扩散常数
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
 \item 主动脉内腔分割流程
 \end{itemize}
 \begin{figure}[t]
