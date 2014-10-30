@@ -22,6 +22,11 @@
 
 \begin{frame}
 \begin{itemize}
+\item \textbf{经典“蛇”模型}
+\begin{equation*}
+% \label{eqn:aorta_particular_snakes}
+E(\mathcal{C}) = \alpha \int_0^1 | \mathcal{C}'(q) |^2 dq + \beta \int_0^1 | \mathcal{C}''(q) |^2 dq - \lambda \int_0^1 | \nabla I_{s} ( \mathcal{C}(q) ) |dq
+\end{equation*}
 \item \textbf{GAC的数学模型}
 % \end{itemize}
 \begin{equation*}
@@ -34,14 +39,15 @@ E(\mathcal{C}) = \alpha \int_0^1 | \mathcal{C}'(q) |^2 dq - \lambda \int_0^1 | \
 \item $\mathcal{C}(\cdot)$：参数化平面内曲线
 \item $I_{s}(\cdot)$：含有待探测目标的图像
 \item $\alpha$：传导常数
-\item $\lambda$：扩散常数
+\item $\beta$：扩散常数
+\item $\lambda$：曲率常数
 \end{itemize}
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \begin{itemize}
-\item 主动脉内腔分割流程
+\item \textbf{主动脉内腔分割流程}
 \end{itemize}
 \begin{figure}[t]
 \centering
@@ -54,7 +60,7 @@ E(\mathcal{C}) = \alpha \int_0^1 | \mathcal{C}'(q) |^2 dq - \lambda \int_0^1 | \
 
 \begin{frame}
 \begin{itemize}
-\item 原始图像的ROI提取
+\item \textbf{原始图像的ROI提取}
 \end{itemize}
 \begin{figure}[t]
 \centering
