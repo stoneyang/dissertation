@@ -116,11 +116,11 @@
 
 为进一步抑制噪声对中心线提取计算的影响，并提高中心线提取的准确性，我们又需要增加表达同一块表面的多边形的数量。
 为了完成这一工作，我们需要在不引入更多扰动的前提下，对已经平滑过的表面进行细分。
-图\ref{fig:centerlins_subdivision_local}给出了基于改进的butterfly策略的表面细分的计算结果。
+图\ref{fig:centerlins_subdivision_local}给出了基于改进的Butterfly策略的表面细分的计算结果。
 同时，由表\ref{tbl:centerlins_subdivision}可以得出，在完成表面细分的计算之后，构成表面模型的多边形面片的数量得到了显著的增加。
 通过比较细分处理前后的多边形面片的数量可知，细分后的多边形的数量是细分之前的多边形的数量的四倍。
 其中，本章实验数据细分后的多边形数量是细分前的$3.98$倍，而完整的血管模型，细分后的多边形数量则是细分前的$4$倍。
-这一结果符合预期，而这也正是本文所采用的细分策略的名称中“butterfly”的由来\cite{Dyn1990}。
+这一结果符合预期，而这也正是本文所采用的细分策略的名称中“Butterfly”的由来\cite{Dyn1990}。
 \begin{figure}[t]
 \centering
 \includegraphics[width=3.5in]{Figures/postprocessing/centerlines/subdivision.eps}
