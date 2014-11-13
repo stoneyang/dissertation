@@ -160,7 +160,10 @@
 \subsection{分割结果评估}
 \label{subsec:aorta_evaluation}
 
-在本章中，我们所提出的方法的准确性将通过Jaccard指数\cite{Jaccard1912}和Dice指数\cite{Zijdenbos1994}进行评估。
+对分割结果准确性的评估一直是医学影像领域的一个难题，到目前为止还没有一个在领域内获得公认的标准方法\cite{Nie2010}。
+目前，分割结果准确性评估的方式有很多\cite{Zijdenbos1994}。
+而在本章中，我们所提出的方法的准确性将通过Jaccard指数\cite{Jaccard1912}和Dice指数\cite{Zijdenbos1994}进行评估。
+这两个指数分别通过不同方式表征分割结果与原始图像中的目标之间的相似度，而该相似度的大小则表示分割结果的准确性。
 现假设评估目标图像$T$对于源图像$S$的准确性，记$i$为两图像中各个标签（即：欲分割或探测的目标）。
 那么Jaccard指数$J$则可以表示为：
 \begin{equation}
@@ -229,6 +232,7 @@ D = 2 \frac{\sum_i | S_i \bigcap T_i |}{\sum_i ( | S_i | + | T_i |)}.
 表\ref{tbl:aorta_evaluation}记录本章实验中的十一组数据集两项指数的评估结果。
 图\ref{fig:aorta_evaluation}显示指数评估结果的柱状图。
 其中，Jaccard指数的平均值为$0.933$，标准差为$0.0240$；Dice指数的平均值为$0.965$，标准差为$0.0128$。
+而根据这两个指数的定义，本章围绕GAC算法所设计的处理流程表现出了较高的准确性。
 
 \subsection{表面重建}
 \label{subsec:aorta_experiments_isosurface}
