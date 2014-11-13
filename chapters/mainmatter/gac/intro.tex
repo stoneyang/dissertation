@@ -8,7 +8,7 @@
 其次，血管是血管介入过程中介入工具进出的主要通道。
 由于主动脉与脊椎在某些位置有接触，使得“干净”、完整的分割主动脉而不涉及相邻的椎骨成为一项具有挑战性的工作\cite{Kurugol2012}。
 在医学仿真领域，主动脉模型的典型应用有：支架安放的仿真\cite{Egger2009}，虚拟内窥镜\cite{Kirchberg2006MICCAI}，血液动力学仿真\cite{Sheidaei2011,Reymond2012,Suito2013}，以及血管介入仿真\cite{Dawson1996DK,Anderson1996daVinci,Wang1997ICard,Wang1998ICard,Cotin2000ICTS,Luboz2005EVE,Wu2011EVE}等。
-此外，主动脉分割与可视化的应用范围包括：腹主动脉瘤的辅助诊断与测量\cite{Almuntashri2012,Kauffmann2011}，动脉钙化情况检测\cite{Kurugol2012,Kurkure2008}，冠状动脉辅助诊断\cite{Wang2009}，结缔组织疾病的检查\cite{Zhao2009}，血流分析\cite{Agamy2010}，脉搏波速度的测量\cite{Giri2007}，以及新近出现的经导管主动脉瓣植入术\footnote{该名词对应两种英文名称：transcatheter aortic valve implantation，简称TAVI；或者transcatheter aortic valve replacement，简称TAVR}\cite{Luo2013,Zheng2012,Waechter2010}。
+此外，主动脉分割与可视化的应用范围包括：腹主动脉瘤的辅助诊断与测量\cite{Almuntashri2012,Kauffmann2011}，动脉钙化情况检测\cite{Kurugol2012,Kurkure2008}，冠状动脉辅助诊断\cite{Wang2009}，结缔组织疾病的检查\cite{Zhao2009}，血流分析\cite{Agamy2010}，脉搏波速度的测量\cite{Giri2007}，以及新近出现的经导管主动脉瓣植入术\footnote{该名词对应两种英文名称：transcatheter aortic valve implantation，简称TAVI；或者transcatheter aortic valve replacement，简称TAVR。}\cite{Luo2013,Zheng2012,Waechter2010}。
 关于对血管分割方法的详细综述，可参考文献\cite{Lesage2009Review,Kirbas2004Review,Suri2002Review,Suri2002Review2}。
 
 此外，在构建虚拟解剖环境的过程中，我们的目的是为受训者提供直观的虚拟效果，这一目的通过创建与人体真实器官外观非常相似的器官模型来实现。
@@ -17,10 +17,10 @@
 其原因在于影像中心脏的边缘因其正常的跳动而变得模糊不清。
 在本章中，考虑到研究工作的实际需要，我们并不需要严格要求心脏的精确分割与可视化。
 我们的目标是基于真实病例的体数据构建足以提供观感的心脏模型，从而为仿真系统的使用者提供更加完整的虚拟解剖结构。
-在本章中，我们在已有分割和可视化工作经验的基础上，提出了一种基于GAC的分割方法来完成这项任务。
-实验结果证实了所提方法的有效性。
+% 在本章中，我们在已有分割和可视化工作经验的基础上，提出了一种基于GAC的分割方法来完成这项任务。
+% 实验结果证实了所提方法的有效性。
 
-在本章中，我们研究并开发了两种基于GAC算法的半自动分割方法，分别用于分割主动脉内腔以及心脏。
+在本章中，我们研究并开发了两种基于GAC算法的半自动处理方法，分别用于人体主动脉内腔以及心脏的分割与可视化。
 这两种方法均以经典的测地活动轮廓算法（GAC）\cite{Caselles1997}为核心。
 由于其计算需要我们提供原始图像的边缘势场以及距离图，我们构建了一个分支型的管线来完成上述任务。
 在计算原始图像的边缘势场时，首先对原始图像进行平滑处理，然后计算其梯度幅值，最后利用S型函数将梯度图像映射为所需的边缘势场；
