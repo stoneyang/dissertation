@@ -5,13 +5,13 @@
 为了顺利地将血管模型应用于虚拟交互的环境中，考虑到计算机图形硬件性能的限制，模型的数据量势必需要精简。
 在这里，精简模型的数据量等同于在保持血管模型的原始几何特征不发生明显改变的前提下，尽可能地削减构成血管表面模型的多边形的数量。
 
-\begin{figure}[t]
-\centering
-\input{FigureSrc/postprocessing/mesh/data_flow}
-% \includegraphics[width=3.2in]{Figures/postprocessing/mesh/DataFlow.eps}
-\caption[血管表面模型优化流程]{血管表面模型优化流程。}
-\label{fig:mesh_data_flow}
-\end{figure}
+% \begin{figure}[t]
+% \centering
+% \input{FigureSrc/postprocessing/mesh/data_flow}
+%% \includegraphics[width=3.2in]{Figures/postprocessing/mesh/DataFlow.eps}
+% \caption[血管表面模型优化流程]{血管表面模型优化流程。}
+% \label{fig:mesh_data_flow}
+% \end{figure}
 
 \subsection{实验场景与数据}
 \label{subsec:mesh_setup_data}
@@ -20,6 +20,13 @@
 首先，需要对基于CTA的血管模型中的顶点的连接性进行检验，以确保要处理的表面是一体的，并且其中所有的顶点都是连通的。
 其次，引入平滑算法以处理模型表面的“毛刺”和“凹陷”等不平整的区域。
 最后，对表面模型的多边形面片进行削减，同时，血管模型的几何特征得到最大限度的保护。
+\begin{figure}[ht]
+\centering
+\input{FigureSrc/postprocessing/mesh/data_flow}
+% \includegraphics[width=3.2in]{Figures/postprocessing/mesh/DataFlow.eps}
+\caption[血管表面模型优化流程]{血管表面模型优化流程。}
+\label{fig:mesh_data_flow}
+\end{figure}
 
 本章中用到的血管表面模型来自基于真实病例的CTA影像数据，该工作的具体细节参见本文第\ref{chap:aorta}章。
 为便于叙述和节省空间，我们在这里只对原先的血管模型的一段应用本章的方法，图\ref{fig:mesh_connectivity}说明了本章所用数据的来历。
@@ -69,7 +76,42 @@
 \subsection{表面模型的平整}
 \label{subsec:mesh_smooth_experiments}
 
-\begin{figure}[t]
+% \begin{figure}[t]
+%% \begin{table}[t]
+% \renewcommand{\arraystretch}{0.5}
+%% \caption[为平滑算法设置不同的参数所获得的结果]{为平滑算法设置不同的参数所获得的结果（$N$：迭代次数；$\delta$：带宽）}
+%% \label{tbl:mesh_smooth}
+% \centering
+% \begin{tabular}{|l|c|c|c|}
+% \hline
+% \bigstrut ~                                   & \raisebox{-1mm}{$N = 30$}                                     & \raisebox{-1mm}{$N = 60$}                                     & \raisebox{-1mm}{$N = 100$}                                     \\
+% \hline
+% \bigstrut[t] \raisebox{0mm}{$\delta = 0.1$}  & \Includegraphics[height=2.0in]{Figures/postprocessing/mesh/smooth_30_1.eps}  & \Includegraphics[height=2.0in]{Figures/postprocessing/mesh/smooth_60_1.eps}  & \Includegraphics[height=2.0in]{Figures/postprocessing/mesh/smooth_100_1.eps}  \\
+% \hline
+% \bigstrut[b] \raisebox{0mm}{$\delta = 0.01$} & \Includegraphics[height=2.0in]{Figures/postprocessing/mesh/smooth_30_01.eps} & \Includegraphics[height=2.0in]{Figures/postprocessing/mesh/smooth_60_01.eps} & \Includegraphics[height=2.0in]{Figures/postprocessing/mesh/smooth_100_01.eps} \\
+% \hline
+% \end{tabular}
+% \caption[设置不同参数获得的平滑结果（优化）]{设置不同参数获得的平滑结果。（$N$：迭代次数；$\delta$：带宽）}
+% \label{fig:mesh_smooth}
+%% \end{table}
+% \end{figure}
+
+鉴于噪声在图像获取与处理过程中不可避免，基于原始医学体数据的血管表面模型上存在大量不平整片段。
+这些衍生物和“尖刺”可能会导致将来虚拟工具（主要是虚拟导管，虚拟导丝等）的推送过程不平顺。
+为了避免这种情况的出现，我们需要对血管模型的表面进行彻底的平整处理。
+
+正如第\ref{sec:visualization_smoothing}节所述，本环节采用的算法基于低通滤波器原理，它具有两个可调参数$N$和$\delta$来控制该算法的平整效果。
+$N$用于控制算法的迭代次数，它等价于式(\ref{eqn:visualization_approximation})给出的windowed sinc函数估计多项式的阶数；
+而$\delta$则用于设置这个低通滤波器的带宽。
+
+在本章中，我们应用了若干组不同的参数来进行实验，以期获得最好的处理结果。
+这里，我们以带宽参数$\delta = 0.1$和$\delta = 0.01$将实验分为两组，在这两组中，我们再分别将迭代次数$N$设置为$30$，$60$，和$100$。
+
+从图\ref{fig:mesh_smooth}中所得到的结果中，我们可以观察得出：
+与下面一排（$\delta = 0.01$）相比，上面一排（$\delta = 0.1$）的曲面仍显得较为粗糙。
+在同一排的结果中，随着迭代次数的增加，平整的效果也逐渐明显。
+处理至这一步，我们选择生成右下角结果的参数（即：$N = 100$，$\delta = 0.01$）来作为平整处理的参数。
+\begin{figure}[ht]
 % \begin{table}[t]
 \renewcommand{\arraystretch}{0.5}
 % \caption[为平滑算法设置不同的参数所获得的结果]{为平滑算法设置不同的参数所获得的结果（$N$：迭代次数；$\delta$：带宽）}
@@ -89,26 +131,63 @@
 % \end{table}
 \end{figure}
 
-鉴于噪声在图像获取与处理过程中不可避免，基于原始医学体数据的血管表面模型上存在大量不平整片段。
-这些衍生物和“尖刺”可能会导致将来虚拟工具（主要是虚拟导管，虚拟导丝等）的推送过程不平顺。
-为了避免这种情况的出现，我们需要对血管模型的表面进行彻底的平整处理。
-
-正如第\ref{sec:visualization_smoothing}节所述，本环节采用的算法基于低通滤波器原理，它具有两个可调参数$N$和$\delta$来控制该算法的平整效果。
-$N$用于控制算法的迭代次数，它等价于式(\ref{eqn:visualization_approximation})给出的windowed sinc函数估计多项式的阶数；
-而$\delta$则用于设置这个低通滤波器的带宽。
-
-在本章中，我们应用了若干组不同的参数来进行实验，以期获得最好的处理结果。
-这里，我们以带宽参数$\delta = 0.1$和$\delta = 0.01$将实验分为两组，在这两组中，我们再分别将迭代次数$N$设置为$30$，$60$，和$100$。
-
-从图\ref{fig:mesh_smooth}中所得到的结果中，我们可以观察得出：
-与下面一排（$\delta = 0.01$）相比，上面一排（$\delta = 0.1$）的曲面仍显得较为粗糙。
-在同一排的结果中，随着迭代次数的增加，平整的效果也逐渐明显。
-处理至这一步，我们选择生成右下角结果的参数（即：$N = 100$，$\delta = 0.01$）来作为平整处理的参数。
-
 \subsection{多边形精简}
 \label{subsec:decimate_experiments}
 
-\begin{figure}[t]
+% \begin{figure}[t]
+%% \begin{table}[t]
+% \renewcommand{\arraystretch}{0.5}
+%% \caption[为削减算法设置不同参数所获得的结果]{为平滑算法设置不同的参数所获得的结果（$N$：迭代次数；$\delta$：带宽）}
+%% \label{tbl:mesh_decimate}
+% \centering
+% \begin{tabular}{|l|c|c|c|}
+% \hline
+% \bigstrut ~                                    & \raisebox{-1mm}{$10\%$}                                                                 & \raisebox{-1mm}{$90\%$}                                                               & \raisebox{-1mm}{$99\%$}                                     \\
+% \hline
+% \bigstrut[t] \raisebox{0mm}{\small{表面模型}} & \Includegraphics[height=2.0in]{Figures/postprocessing/mesh/smooth_100_01_d10.eps}     & \Includegraphics[height=2.0in]{Figures/postprocessing/mesh/smooth_100_01_d90.eps}   & \Includegraphics[height=2.0in]{Figures/postprocessing/mesh/smooth_100_01_d99.eps}   \\
+% \hline
+% \bigstrut[b] \raisebox{0mm}{\small{线框模型}} & \Includegraphics[height=2.0in]{Figures/postprocessing/mesh/smooth_100_01_d10_w.eps}   & \Includegraphics[height=2.0in]{Figures/postprocessing/mesh/smooth_100_01_d90_w.eps} & \Includegraphics[height=2.0in]{Figures/postprocessing/mesh/smooth_100_01_d99_w.eps} \\
+% \hline
+% \end{tabular}
+% \caption[设置不同参数获得的精简]{设置不同参数获得的精简：上排展示了削减率分别为$10\%$，$90\%$，$99\%$时的结果；下排展示了上排相应削减结果所对应的线框表示。}
+% \label{fig:mesh_decimate}
+%% \end{table}
+% \end{figure}
+
+我们在完成对模型表面的平整处理之后，进行对模型表面的多边形元素的精简。
+对于输入的模型表面，共有超过$74$k个多边形用于张成这段血管表面模型。
+渲染如此大量的数据会导致主流配置的机器内存的耗尽，这样，就没有足够的空间来满足交互仿真的需要了。
+为改善这种情况，我们采用第\ref{sec:mesh_decimation}节所介绍的多边形精简方法来简化表面模型的数据。
+与上一节类似，我们也引入若干组不同的参数进行实验，来筛选尽可能好的配置。
+
+% \begin{table}[H]
+% \renewcommand{\arraystretch}{0.5}
+% \caption[削减率与削减后的多边形数量]{削减率与削减后的多边形数量}
+% \label{tbl:mesh_decimate}
+% \centering
+% \begin{tabular*}{100mm}{c r r r r r}
+% \toprule
+%%\bfseries      & \bfseries Quantity of polygonal surfaces \\
+% \hspace{2mm} \small{削减率 （$\%$）}  &     \small{$10$} &     \small{$50$} &     \small{$75$} &    \small{$90$} &  \small{$99$} \\
+% \midrule
+% \hspace{2mm} \small{多边形数量}     & \small{$66,875$} & \small{$37,153$} & \small{$18,576$} & \small{$7,430$} & \small{$743$} \\
+% \bottomrule
+% \end{tabular*}
+% \end{table}
+
+在本章中，精简算法的停止条件是算法的精简率$R$，即：被算法除去的多边形元素的数量$Q_r$与输入表面的所包含的多边形元素的总数$Q$之比：
+\begin{equation}
+\label{eqn:mesh_reduction_rate}
+R = \frac{Q_r}{Q}.
+\end{equation}
+在分组实验中，我们分别设精简率为$10\%$，$50\%$，$75\%$，$90\%$，和$99\%$。
+
+表\ref{tbl:mesh_decimate}显示精简算法的效果。
+图\ref{fig:mesh_decimate}展示了应用上述参数所得精简后的表面模型。
+观察上述结果，我们发现，精简率为$90\%$和$99\%$的结果包含满足可接受数量的多边形。
+然而，进一步观察精简率为$99\%$的结果表面，可以发现这一精简已经对模型原有的几何特性产生了明显的影响。
+因此，我们选定精简率$90\%$为本章的工作参数。
+\begin{figure}[ht]
 % \begin{table}[t]
 \renewcommand{\arraystretch}{0.5}
 % \caption[为削减算法设置不同参数所获得的结果]{为平滑算法设置不同的参数所获得的结果（$N$：迭代次数；$\delta$：带宽）}
@@ -127,13 +206,6 @@ $N$用于控制算法的迭代次数，它等价于式(\ref{eqn:visualization_approximation})给出
 \label{fig:mesh_decimate}
 % \end{table}
 \end{figure}
-
-我们在完成对模型表面的平整处理之后，进行对模型表面的多边形元素的精简。
-对于输入的模型表面，共有超过$74$k个多边形用于张成这段血管表面模型。
-渲染如此大量的数据会导致主流配置的机器内存的耗尽，这样，就没有足够的空间来满足交互仿真的需要了。
-为改善这种情况，我们采用第\ref{sec:mesh_decimation}节所介绍的多边形精简方法来简化表面模型的数据。
-与上一节类似，我们也引入若干组不同的参数进行实验，来筛选尽可能好的配置。
-
 \begin{table}[H]
 \renewcommand{\arraystretch}{0.5}
 \caption[削减率与削减后的多边形数量]{削减率与削减后的多边形数量}
@@ -149,19 +221,6 @@ $N$用于控制算法的迭代次数，它等价于式(\ref{eqn:visualization_approximation})给出
 \end{tabular*}
 \end{table}
 
-在本章中，精简算法的停止条件是算法的精简率$R$，即：被算法除去的多边形元素的数量$Q_r$与输入表面的所包含的多边形元素的总数$Q$之比：
-\begin{equation}
-\label{eqn:mesh_reduction_rate}
-R = \frac{Q_r}{Q}.
-\end{equation}
-在分组实验中，我们分别设精简率为$10\%$，$50\%$，$75\%$，$90\%$，和$99\%$。
-
-表\ref{tbl:mesh_decimate}显示精简算法的效果。
-图\ref{fig:mesh_decimate}展示了应用上述参数所得精简后的表面模型。
-观察上述结果，我们发现，精简率为$90\%$和$99\%$的结果包含满足可接受数量的多边形。
-然而，进一步观察精简率为$99\%$的结果表面，可以发现这一精简已经对模型原有的几何特性产生了明显的影响。
-因此，我们选定精简率$90\%$为本章的工作参数。
-
 \subsection{交互性能的验证}
 \label{subsec:mesh_validation}
 
@@ -173,7 +232,7 @@ R = \frac{Q_r}{Q}.
 “仿真平均fps”是指虚拟导丝在进给至冠状动脉中给定位置的过程中途径五个不同位置时的fps值的平均值。
 “是否完成仿真”是指虚拟导丝是否顺利进给至冠状动脉中的给定位置。
 从这些结果可以得出，我们采用了精简率为$99\%$的完整血管模型用于后续的交互仿真研究。
-\begin{table}[t]
+\begin{table}[ht]
 \renewcommand{\arraystretch}{0.5}
 \caption[精简率与fps——情形I]{精简率与fps——情形I}
 \label{tbl:mesh_FPS1}
@@ -190,7 +249,7 @@ R = \frac{Q_r}{Q}.
 \bottomrule
 \end{tabular*}
 \end{table}
-\begin{table}[t]
+\begin{table}[ht]
 \renewcommand{\arraystretch}{0.5}
 \caption[精简率与fps——情形II]{精简率与fps——情形II}
 \label{tbl:mesh_FPS2}
