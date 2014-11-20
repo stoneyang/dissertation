@@ -1,0 +1,142 @@
+\section{可视化部分用到的方法}
+\label{sec:method_visualization}
+
+\subsection{行进立方体算法}
+\label{sec:imaging_marchingcubes}
+
+要实现表面模型的可视化，就必须提取目标物体的表面信息（即已经获得的目标物体的边缘信息）。
+这里，我们采用了行进立方体算法\cite{Lorensen1987MC}。
+作为表面提取的初始步骤，该方法基于输入信息创建了立方体群。
+其中，对于每个立方体的八个顶点，四个位于某一帧图像，另外四个则位于与之相邻的另外一帧图像。
+然后，该方法通过比较八个顶点的亮度与指定的目标物体的等值面的值，来计算每个立方体的索引值。
+通过引用这些索引值所对应的三角形相交关系，目标物体与立方体群的相交关系就能够粗略地确定。
+之后，精确的边缘相交关系则通过计算各立方体中的各个顶点处的亮度的线性插值来获得。
+随后，该方法利用中心差分方法来计算表面模型位于这些立方体的各个顶点位置的法向量。
+所得到的三角形面片则传输至计算机的图形处理系统，并通过标准的渲染技术显示。
+
+\subsection{顶点连接性检测}
+\label{sec:visualization_connectivity}
+
+为了获得更为准确的血管系统中心线，我们需要确保血管模型在任何区域都是“单层的”，“无游离碎片的”。
+也就是说，我们需要寻找血管表面模型中的最大连接区域，这就需要对模型上所有的顶点逐一进行检验\footnote{详见：\url{http://tinyurl.com/5ezvta}}。
+这一步骤的工作机制是提取那些共享顶点的组成表面模型的多边形面片。
+
+\subsection{多边形表面的平整}
+\label{sec:visualization_smoothing}
+
+在计算机图形学和图像处理领域，二维或三维的曲线和表面（两者都可看作是“形状”）的可视化是普遍的，尤其对于医学领域的体数据而言。
+这类计算实际上是利用分段的曲线或者多边形表面来近似地估计原始的形状。
+典型的实例是图\ref{fig:visualization_artifact}所展示的表面上某种程度的衍生物（artifact），它在可视化过程中产生，能够在保持表面模型整体几何特性不发生改变的前提下被“打磨”平整（见图\ref{fig:visualization_artifact_removed}）。
+在本文中，我们在医学数据可视化方面工作的目标之一便是对由原始医学体数据处理而得到的模型的表面进行平整处理。
+\begin{figure}[t]
+\centering
+\subfloat[]{\includegraphics[height=1.3in]{figures/methodologies/artifact.eps}%
+\label{fig:visualization_artifact}}
+\hfil
+\subfloat[]{\includegraphics[height=1.3in]{figures/methodologies/artifact_removed.eps}%
+\label{fig:visualization_artifact_removed}}
+\caption[曲面平整处理]{曲面平整处理。(a) 不平整区域（血管模型表面上水平方向的“台阶”）；(b) 平滑处理后的该区域。}%
+\label{fig:visualization_artifact_comparison}
+\end{figure}
+为实现这一目标，我们引入一种基于windowed sinc函数\footnote{详见：\url{http://www.cg.tuwien.ac.at/~theussl/DA/node34.html}}的信号处理方法，该方法实际上是一种线性低通滤波器\cite{Taubin1995ICCV}，属于数字信号处理领域中的一种低层处理技术。
+它能够应用于对几何上任意维度和复杂程度的曲线或者曲面进行平整处理，并且在此计算过程并不会引起模型的收缩。
+该方法建立在“离散图信号”概念，及其三维的情形“离散表面信号”的基础之上\cite{Taubin1995SIG}。
+
+所谓“离散图信号”，指的是某定义在离散图（有些文献中简称“digraph”）上的函数。
+与我们所考虑的多边形曲面所对应的是，离散图$G$可以记为：$G: \left\{ V_g, E\right\}$，其中，$V_g = \left\{ 1, \ldots, n \right\}$是顶点的集合，它包含图中的所有顶点，记号从$1$到$n$；而$E$是边的集合，它包含顶点集合$V_g$中任意一对顶点之间边。
+所谓的“离散图信号”是一个$n$维向量$x = \left[ x_1, \ldots, x_n \right]^T$，该向量的各分量$x_i$，$i = 1, \ldots, n$表示顶点$i \in V_g$处的信号强度。
+
+所谓“离散表面信号”，指的是某定义在多边形曲面上的函数。
+多边形曲面$S$可表示为$S: \left\{ V_s, F\right\}$，其中，$V_s = \left\{ 1, \ldots, n \right\}$是顶点的集合，它包含多边形曲面中的所有顶点，记号从$1$到$n$；而$F$是面的集合，它包含顶点集合$V_s$中任意顶点以及它们之间的边所围成的面。
+离散表面信号也是一个$n$维向量$y = \left[ y_1, \ldots, y_n \right]^T$，该向量的各分量$y_j$，$j = 1, \ldots, n$表示顶点$j \in V_s$处的信号强度。
+
+对平面内分段式曲线的平整，我们可应用经典的Fourier分析将原始曲线根据不同的频率分解到正交子空间中去。
+然后，将高频分量看做噪声而除去，并将低频分量保留。
+这个想法可以推广至具有任意拓扑的多边形曲面的情形。
+
+对于离散表面信号$y$，$V_s$中的顶点处的加权Laplacian算子定义如下：
+\begin{equation}
+\label{eqn:visualization_laplacian}
+\Delta y_i = \sum_{j \in i^{\ast}} w_{ij} \left( y_j - y_i \right),
+\end{equation}
+其中，$w_{ij}$是$y_j - y_i$的正的加权值，而对任意$i$，其加权值之和为$1$，即：$\sum_{j \in i^{\ast}} w_{ij} = 1$。
+式(\ref{eqn:visualization_laplacian})写成矩阵形式如下：
+\begin{equation}
+\label{eqn:visualization_laplacian_matrix}
+\Delta y = - K y,
+\end{equation}
+其中，$K = I - W$，$W$是加权阵，$I$是单位阵。
+这里，我们定义$0 \leq \lambda_1 \leq \ldots \leq \lambda_n \leq 2$为$K$阵的实特征值，它们对应的右特征向量则是$e_1, \ldots, e_n$。
+
+至此，低通滤波就被转化为矩阵函数$f(K)$与输入信号$y$的乘积：
+\begin{equation}
+\label{eqn:visualization_low_pass_equivalent}
+y' = f(K) y.
+\end{equation}
+对任意多项式传递函数，式(\ref{eqn:visualization_low_pass_equivalent})中的输出函数可以重写为：
+\begin{equation}
+\label{eqn:visualization_low_pass_polynomial}
+y' = \sum_{i=1}^{n} \rho_i f(k_i) e_i,
+\end{equation}
+其中，$\rho_i$是输入信号$y$的单位右特征向量的线性组合的系数，即：$y = \sum_{i} \rho_i e_i$。
+为实现此低通滤波器，$f(k_i)$需要满足两个条件：对低频情况，$k_i \in [0,2]$，$f(k_i) \approx 1$；对高频情况：$f(k_i) \approx 0$。
+
+低通滤波的机制可通过调整如下多项式估计中的权值来实现\cite{Taubin1996}：
+\begin{equation}
+\label{eqn:visualization_approximation}
+f_{N}(k) = w_0 \frac{\theta}{\pi} T_0 (1 - k / 2) + w_n \sum_{n} \frac{2 \sin (n \theta)}{n \pi} T_n(1 - k / 2),
+\end{equation}
+其中，$\theta$是$k = 2 (1 - \cos \theta)$在$[0, \pi / 2]$上的唯一解，而$T_0(\cdot)$和$T_n(\cdot)$则是Chebyshev多项式。
+在本章中，我们通过调整式(\ref{eqn:visualization_approximation})中的权值来形成Hamming窗\cite{Taubin1996}：
+\begin{equation}
+\label{eqn:visualization_hamming}
+w_n = 0.54 + 0.46 \cos (n \pi / (N + 1) ).
+\end{equation}
+
+在完成曲面的平整处理之后，我们需要为各个多边形网格计算法向量，以便标注表面的“内部”和“外部”。
+
+\subsection{多边形曲面细分算法}
+\label{sec:visualization_subdivision}
+
+为生成平整且在视觉上满意的表面模型，我们采用一种改进的Butterfly策略\cite{Zorin1996}用于表面的细分处理。
+该策略事实上是一种插值方法，业已被证明是一种对复杂——尤其是非规则——表面的细分处理问题行之有效的方法。
+在这一环节中，我们的原则是改善输入表面的可视化效果，而不影响其原始的形状，同时也为了避免中心线提取运算的不稳定现象（见第\ref{subsec:centerlines_subdivision_experiments}节）。
+与二维三角化后的新顶点关联的标量值通过利用这里的插值策略来计算相邻顶点的权值之和而生成。
+这些顶点位于构成细分蜡纸（stencil）的邻域中，该蜡纸决定了策略的特征。
+通过分析这些蜡纸，计算策略可以迅速辨别新顶点与其邻域的拓扑之间的关系。
+表面上各顶点的正常位置和异常位置是两个最为重要的情形。
+一旦完成初始的细分循环步骤，具有非$6$价的顶点（即共享该顶点的边数非$6$）的最大数目就不会多于一个。
+三角化的各边的重点的新标量值通过下述细分策略来计算：
+\begin{itemize}
+\item \textbf{连接两个正常顶点的边（均为$6$价）} 其权值可由下式确定：
+\begin{equation}
+\label{eqn:methodologies_subdivision_case1}
+a = \frac{1}{2} - w, \quad b = \frac{1}{8} + 2w, \quad c = -\frac{1}{16} - w, \quad d = w,
+\end{equation}
+其中，$w$可以取任意小的非负值，在该方法中取$w = 0$；
+\item \textbf{连接一个正常顶点（$6$价）和一个$K-$顶点的边（$K \neq 6$）} 
+对于$K \geq 5$，其权值如下：
+\begin{equation}
+\label{eqn:methodologies_subdivision_case2_a}
+s_j = \frac{1}{K}\left( \frac{1}{4} + \cos \left( \frac{2 \pi j}{K} \right) + \frac{1}{2} \cos \left( \frac{4 \pi j}{K} \right) \right),
+\end{equation}
+其中，$j = 0, \dots, K - 1$。
+当$K = 3$时，我们选定：
+\begin{equation}
+\label{eqn:methodologies_subdivision_case2_b}
+s_0 = \frac{5}{12}, \quad s_{1,2} = - \frac{1}{12}, 
+\end{equation}
+而当$K = 4$时，我们选定：
+\begin{equation}
+\label{eqn:methodologies_subdivision_case2_c}
+s_0 = \frac{3}{8}, \quad s_{2} = - \frac{1}{8}, \quad s_{1,3} = 0.
+\end{equation}
+\item \textbf{连接两个异常顶点的边} 此时，两顶点均为非$6$价顶点，其权值的确定方法依据上一种情形中的相应价数的计算公式来确定；
+\item \textbf{边缘处的边} 我们利用$1$维$4$点策略来细分这些边：
+\begin{equation}
+\label{eqn:methodologies_subdivision_case4}
+s_{-1} = s_{2} = -\frac{1}{16}, \quad s_{0} = s_{1} = \frac{9}{16}.
+\end{equation}
+\end{itemize}
+在上述情形中，只有第一种情形输入正常情况，而其余均属异常情况。
+这里需要特别指出的是，改进的Butterfly策略对于输入表面是否平整很敏感，该策略对充分平整的表面才能生成满意的细分结果。

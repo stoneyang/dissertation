@@ -1,0 +1,175 @@
+\section{医学影像处理部分用到的方法}
+\label{sec:method_image_processing}
+
+\subsection{曲率各向异性扩散滤波}
+\label{subsec:imaging_edge_potential}
+
+图像的平滑处理是预处理中的重要环节，其目的在于除去在医学模态获取原始图像序列的过程中所引入的噪声像素——这一现象是不可避免的。
+在平滑处理过程中，目标（此处指主动脉等需要分割的解剖结构）的原始边缘信息应当得到尽可能完整地保护。
+基于这些考虑，我们选择使用一种具有可变传导性的水平集曲率方法\cite{Whitaker2001}来完成这一环节的处理工作。
+该方法长于在图像平滑的过程中增强和保护边缘信息，且对边缘对比度变化具有很好的鲁棒性。
+该方法可以通过所谓的“改进型曲率扩散方程”（Modified Curvature Diffusion Equation，简称MCDE）来表达：
+\begin{equation}
+\label{eqn:imaging_MCDE}
+I_t = |\nabla I| \nabla \cdot c(|\nabla I|) \frac{\nabla I}{|\nabla I|},
+\end{equation}
+其中，$I = I(x, y, 0)$表示输入图像，
+$I_t = I(x, y, t)$表示图像像素关于时间$t$的偏导数，
+$c$是传导函数（conductance function）：$c(|\nabla I|) = k^2/(k^2 + |\nabla I|^2)$，它是单调递减函数，这样可以保证梯度方向上的扩散为负，从而减小目标边缘附近平滑作用的幅度；
+边界的对比度会对图像的平滑有显著的影响，它由该函数中的自由参数$k$所决定。
+与典型的非线性扩散算法相比，MCDE在增强（即之前所说的“保护”）边缘方面更优，而在对图像对比度的反应方面则更为迟钝。
+
+\subsection{梯度幅值滤波}
+
+由于即将生成的特征图像是随后进行的活动轮廓演进的必须信息。
+而特征图像的本质是图像中各个目标的边缘信息。
+为探测目标的边缘，我们选择计算图像的梯度。
+在本文中，我们引入基于Gaussian核的递归式梯度幅值计算方法。
+在计算机视觉和图像处理领域，基本的Gaussian滤波是一种有力的计算处理工具。
+它被广泛地应用于图像降噪，像素亮度的梯度计算，以及图像各方向的二阶运算\cite{Derich1993}。
+对于平面图像，该方法首先对各像素的亮度$I$与既定标准差$\sigma$的Gaussian核$G$进行卷积即得各像素的梯度$\nabla I$：
+\begin{equation}
+\label{eqn:imaging_convolution}
+\nabla I = I \ast G = \int_{-\infty}^{\infty} I(s, t) G(s-x, t-y) ds dt
+\end{equation}
+其中，Gaussian核可表示为$G(x, y) = \frac{ 1 }{ \sigma \sqrt{ 2 \pi } } \exp{ \left( - \frac{x^2 + y^2}{ 2 \sigma^2 } \right) }$。
+在此基础上，可求得梯度的幅值：
+\begin{equation}
+\label{eqn:imaging_magnitude}
+\| \nabla I \| = \sqrt{I \ast G}
+\end{equation}
+最后，将对应像素的亮度替换为此幅值，即得到输入图像的梯度幅值图像。
+这里所采用的递归式实现旨在解决Gaussian滤波在面对多解析度图像时出现的计算开支过大的难题。
+该实现实质上是一种IIR滤波器，它能够独立地减少并固定各输出所需运算次数\cite{Derich1993}。
+
+\subsection{像素亮度非线性映射}
+\label{subsec:imaging_sigmoid}
+
+在本文中，我们通过对梯度幅值图像进行非线性映射来生成特征图像。
+为此，我们引入S型函数，该函数是一种广泛用于数据分析，人工智能，神经科学等领域的基本数学工具\footnote{详见：\url{http://en.wikipedia.org/wiki/Sigmoid_function}}（见图\ref{fig:imaging_sigmoid}）。
+在计算机视觉和图像处理领域中，它的一般表示形式如下：
+\begin{equation}
+\label{eqn:imaging_sigmoid}
+I_{\sigma} = (I_{max} - I_{min}) \cdot \frac{1}{1 + \exp\left(-\frac{I - n}{m}\right)} + I_{min},
+\end{equation}
+其中，$I_{\sigma}$表示输出图像的像素亮度，
+$I_{max}$与$I_{min}$分别代表输出像素亮度的最大值和最小值，
+$m$是一个常量，它控制输入图像中参与映射的像素亮度的区间，
+$n$则是一个确定该区间中心点的位置的常量。
+此映射的结果取决于上述参数的选择。
+\begin{figure}[t]
+\centering
+\input{FigureSrc/methodologies/sigmoid}
+\caption[用于非线性映射的S函数]{用于非线性映射的S函数。}
+\label{fig:imaging_sigmoid}
+\end{figure}
+
+由式(\ref{eqn:imaging_sigmoid})定义的S型函数具有四个参数：用于控制窗宽的$m$，控制窗中心位置的$n$，以及确定输出图像中像素亮度极值的$\alpha$（极小值）和$\beta$（极大值）。
+图\ref{fig:imaging_sigmoid_width}显示参数$m$如何控制S型函数的窗宽。
+参数$m$的值越大，窗宽越宽；反之，则窗宽越窄。
+而负的$m$则意味着由其确定的S型函数对输入图像中的像素强度值具有取反作用。
+图\ref{fig:imaging_sigmoid_center}显示参数$n$如何控制S型函数几何中心相对于坐标原点的横向距离。
+参数$n$的绝对值越大，则由其确定的S型函数的几何中心相对于坐标原点的横线距离就越大（即：几何中心离坐标原点越远）。
+正的$n$说明S型函数向右平移；反之，则说明S型函数向左平移。
+在对梯度图像进行转换以生成特征图像的时候，参数$m$和$n$的选取是十分重要的。
+它们的取值取决于梯度图像中像素亮度的极值。
+在本文的实验中，我们的经验是：$m < 0$，$n > 0$，$n > |m|$。
+而鉴于我们的应用需要，通常把$\alpha$设定为$0$，而把$\beta$设定为$255$。
+\begin{figure}[t]
+\centering
+\input{FigureSrc/methodologies/sigmoid_window_width}
+\caption[S函数的参数$m$与窗宽的关系]{S函数的参数$m$与窗宽的关系：$m = 4$的曲线（青色）具有比$m = -2$的曲线（红色）以及$m = 2$的曲线（绿色）更宽的映射区间。参数$m$的负号表明该S型函数引入了取反作用。}%
+\label{fig:imaging_sigmoid_width}
+\end{figure}
+\begin{figure}[!ht]
+\centering
+\input{FigureSrc/methodologies/sigmoid_center_location}
+\caption[S函数的参数$n$与窗中心位置的关系]{S函数的参数$n$与窗中心位置的关系：当$n < 0$时，曲线左移（如：绿色的曲线）；而当$n > 0$时，曲线右移（如：青色的曲线）。$n$的绝对值决定S型函数几何中心与原点的横向距离。}%
+\label{fig:imaging_sigmoid_center}
+\end{figure}
+
+\subsection{阈值滤波}
+\label{subsec:imaging_thresholding}
+
+在平滑处理后，我们通常利用设置恰当的阈值滤波\footnote{阈值滤波与二值阈值滤波简介：\url{http://docs.opencv.org/doc/tutorials/imgproc/threshold/threshold.html}}来去除图像中非血管部分。
+阈值滤波的函数可表示如下：
+\begin{equation}
+\label{eqn:imaging_threshold}
+I_{\text{output}} =
+\begin{cases}
+I_{\text{input}}, & \text{TH}_{\text{lower}} \le I_{\text{input}} \le \text{TH}_{\text{upper}}, \\%
+0,   & \text{otherwise}.
+\end{cases}
+\end{equation}
+其中， $\text{TH}_{\text{lower}}$与$\text{TH}_{\text{upper}}$分别表示阈值的上下限，而$I_{\text{input}}$与$I_{\text{output}}$则分别表示输入和输出的像素强度。
+
+\subsection{二值阈值滤波}
+\label{subsec:imaging_binary}
+
+在平滑处理后，我们在某些特殊情形中利用设置恰当的二值阈值滤波来去除图像中非血管部分。
+二值阈值滤波的函数可表示如下：
+\begin{equation}
+\label{eqn:imaging_binary}
+I_{\text{output}} =
+\begin{cases}
+255, & \text{TH}_{\text{lower}} \le I_{\text{input}} \le \text{TH}_{\text{upper}}, \\%
+0,   & \text{otherwise}.
+\end{cases}
+\end{equation}
+其中， $\text{TH}_{\text{lower}}$与$\text{TH}_{\text{upper}}$分别表示阈值的上下限，而$I_{\text{input}}$与$I_{\text{output}}$则分别表示输入和输出的像素强度。
+上述函数可表示为图\ref{fig:imaging_threshold_function}。
+\begin{figure}[t]
+\centering
+\input{FigureSrc/methodologies/binary_threshold}
+\caption[二值阈值函数]{二值阈值函数。}
+\label{fig:imaging_threshold_function}
+\end{figure}
+
+\subsection{快速行进算法}
+
+在本文中，我们引入快速行进算法的目的在于生成活动轮廓演进所需的输入水平集。
+典型的处理流程是：
+先利用阈值滤波（第\ref{subsec:imaging_thresholding}节）将图像中与水平集演进无关的内容细节（如：内脏，骨骼，等）滤去；
+再引入快速行进法\cite{Sethian1999}进行初始水平集（或到达时间图）的演进。
+这时，由于无关细节已经从图像中除去，因此该方法能够得以高效地进行。
+需要指出的是，在快速行进法开始时，我们需要手工输入该运算在图像中的起始位置（即种子点的坐标）。
+
+对于曲线演化问题的求解，主要的方法有三类：质点标注法，水平集方法，以及到达时间法等\cite{Wang2008}。
+考虑到本文处理目标的几何特征，曲线演进过程具有单向性，因此，我们选择了到达时间法。
+作为到达时间法的一种数值实现，快速行进法一方面借助堆排序来组织输入图像中试探像素集合，另一方面由于每次都从该试探像素集合中寻找具有最小值$T_{min}$的$(i_{min},j_{min})$点，故只需对该点邻接点的$T$值进行更新，无需多次迭代。
+从而使其计算到达时间的复杂度由利用传统的Hamilton-Jacobi方程的数值解法求解时的$\mathcal{O}(N^3)$下降到$\mathcal{O}(N^2 \log N)$。
+
+在曲线演化问题中，我们考虑如下关于时间参数$t$演化的曲线：
+\begin{equation}
+\label{eqn:imaging_curves}
+\mathcal{C}(t) = \{(x,y) : T(x,y) = t\},
+\end{equation}
+其中，$(x,y)$表示图像中某点的二维坐标，
+$T(x,y)$表示该曲线到达该点的时刻。
+对式(\ref{eqn:imaging_curves})求全导数：
+\begin{equation}
+\label{eqn:imaging_derivative}
+1 = \frac{dT}{dt}
+\end{equation}
+上式等号右侧可写为：
+\begin{equation}
+\label{eqn:imaging_derivative2}
+\frac{dT}{dt} = \frac{\partial T}{\partial x} \frac{dx}{dt} + \frac{\partial T}{\partial y} \frac{dy}{dt} = \nabla T \cdot \mathbf{F} = | \nabla T | F_{N}
+\end{equation}
+观察式(\ref{eqn:imaging_curves})和式(\ref{eqn:imaging_derivative2})可得如下Eikonal方程（即稳态的Hamilton-Jacobi方程）：
+\begin{equation}
+1 = | \nabla T | F_{N},
+\end{equation}
+其中，$F_{N}$表示图像内某点$(x,y)$处，该曲线沿着其法线方向演进的速度。
+当$F_{N} < 0$时，$\mathcal{C}$向“内”演进；反之，则向“外”演进。
+而快速行进法实际上就是求解该方程的一种改进的数值实现。
+计算的结果是一幅到达时间图，图中的各点所对应的函数值是曲线$\mathcal{C}$演进过程中到达该点的时刻。
+因此，此结果事实上记录了整个演进过程，这也是初始水平集又称为到达时间图的缘故。
+
+\subsection{波面碰撞算法}
+\label{subsec:imaging_colliding_fronts}
+
+波面碰撞（colliding fronts）——一种改进的快速行进法，其目的是在更为快速地为后续的分割工作生成输入水平集\cite{Antiga2008}。
+这种方法的实现建立在经典的快速行进法\cite{Sethian1999}的基础上。
+与经典方法不同的是，在同一轮计算中，我们可以同时为其提供两个种子点，两个种子点就意味着两个波面同时传播，该传播过程进行至它们相互“碰撞”为止。
+这种设计的优点是，对于选取恰当的两个种子点，我们可以较快地获得水平集结果，比经典的快速行进法更进一步节省计算时间。
