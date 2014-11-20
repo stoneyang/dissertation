@@ -3,7 +3,7 @@
 \section{小结与讨论}
 \label{sec:centerlines_conclusions}
 
-% \subsection{小结}
+\subsection{小结}
 
 本章中，我们对之前获得的血管表面模型进行了两方面的预处理工作——数据优化与中心线提取。
 这两项工作相互独立，前者用于改善交互实验的性能，后者则主要为下一步的手术过程建模工作提供基础的血管几何信息。
@@ -43,11 +43,7 @@
 在本章的实验中，我们测试了一系列设置不同精简率的情况，并且成功地确定了生成的结果可接受的精简率参数。
 面片削减的输出是progressive网格\cite{Hoppe1996}。
 除了前述对输入网格数量的削减，结果中的网格还很好地保持了模型的几何特征以及整体外观（法线，颜色等）。
-
-在验证交互性能的过程中，我们通过大量实际测试发现，大于$10$的fps才足以保证本样机显示的流畅性。
-在本章中，用于验证的主动脉区段表面模型（图\ref{fig:mesh_connectivity}）的多边形数量被削减了$90\%$（见第\ref{subsec:mesh_validation}节），在交互实验中达到了$18$fps（$> 10$）。
-而由于完整血管表面模型中，张成表面的多边形数量巨大（图\ref{fig:centerlins_surface}），因此用于手术仿真研究的主动脉和冠状动脉的表面模型的多边形数量被削减$99\%$，才使得屏幕刷新率在交互实验中达到了$11$fps（$> 10$）。
-\begin{figure}[ht]
+\begin{figure}[H]
 \centering
 \subfloat[]{\includegraphics[height=3.2in]{Figures/postprocessing/centerlines/surface.eps}%
 \label{fig:centerlins_surface}}
@@ -58,6 +54,10 @@
 \label{fig:centerlins_visualization}
 \end{figure} 
 
+在验证交互性能的过程中，我们通过大量实际测试发现，大于$10$的fps才足以保证本样机显示的流畅性。
+在本章中，用于验证的主动脉区段表面模型（图\ref{fig:mesh_connectivity}）的多边形数量被削减了$90\%$（见第\ref{subsec:mesh_validation}节），在交互实验中达到了$18$fps（$> 10$）。
+而由于完整血管表面模型中，张成表面的多边形数量巨大（图\ref{fig:centerlins_surface}），因此用于手术仿真研究的主动脉和冠状动脉的表面模型的多边形数量被削减$99\%$，才使得屏幕刷新率在交互实验中达到了$11$fps（$> 10$）。
+
 \subsubsection{面向交互实验的多边形精简}
 
 为抑制由非结构化的多边形表面，以及图像获取和处理过程中所引入的噪声所带来的不利影响，我们在提取血管模型的中心线之前进行了一系列的预处理工作。
@@ -65,4 +65,4 @@
 为保证中心线计算过程的稳定性和提高中心线提取的准确性，又对平整后的模型表面进行了细分。
 所有的处理都是在尽可能不破坏原始几何特征的前提下进行的。
 需要特别指出的是，中心线提取的计算任务是一项极其占用计算机资源（时间和空间）的工作。
-例如，为完成如图\ref{fig:centerlins_visualization}所示的计算工作，在专门对程序进行优化改进之后，我们仍然耗费了大约八个小时。
+例如，为完成如图\ref{fig:centerlins_centerlines_model}所示的计算工作，在专门对程序进行优化改进之后，我们仍然耗费了大约八个小时。
