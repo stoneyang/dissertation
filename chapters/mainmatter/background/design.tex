@@ -6,17 +6,11 @@
 而我们目前所研究的训练系统样机（见图\ref{fig:casia_simulator}）系统提供医学影像处理功能，当需要在某新病例（通常由教学者指定）上进行学习和训练时，使用者可以直接对新病例数据进行分割及可视化处理，以获得其中的血管系统模型，从而使训练系统具备了较高的灵活性。
 此外，系统还提供开放的数据输入功能，使所有基于真实的临床数据血管系统模型都能够即时读入。
 正如第\ref{subsec:robotic_simulation}节所述，目前尚无专门面向血管介入手术机器人的训练系统，而这也将是该样机的一个重要研究方向。
-\begin{figure}[t]
+\begin{figure}[ht]
 \centering
 \includegraphics[height=150pt]{Figures/background/simulator.eps}
 \caption[虚拟训练系统样机]{冠状动脉介入术虚拟训练系统样机。}
 \label{fig:casia_simulator}
-\end{figure}
-\begin{figure}[t]
-\centering
-\input{FigureSrc/background/architecture}
-\caption[样机结构]{冠状动脉介入术虚拟训练系统样机的结构。}
-\label{fig:casia_simulator_arch}
 \end{figure}
 
 如第\ref{subsec:statement}节所述，样机由软件系统和机电一体化的硬件系统组成。
@@ -26,25 +20,21 @@
 它主要由提供模拟进给操作功能的机械部分，以及产生阻力的电机控制系统组成。
 前者主要为使用者提供模拟手术中对手术工具执行推送操作的对象；
 后者则主要根据自计算机系统中传来的手术工具与解剖环境发生碰撞的信号来产生相应的阻力。
+\begin{figure}[ht]
+\centering
+\input{FigureSrc/background/architecture}
+\caption[样机结构]{冠状动脉介入术虚拟训练系统样机的结构。}
+\label{fig:casia_simulator_arch}
+\end{figure}
 
 图\ref{fig:casia_simulator_components}展示我们设计系统样机时用到的基本软件工具和硬件装置。
 本文用到的主要工具有ITK\footnote{详见：\url{http://www.itk.org}}，VTK\footnote{详见：\url{http://www.vtk.org}}，VMTK\footnote{详见：\url{http://www.vmtk.org}}，IGSTK\footnote{详见：\url{http://www.igstk.org}}等；而在虚拟手术工具的建模和外观渲染方面的工作中，我们主要利用了Bullet\footnote{详见：\url{http://www.bulletphysics.org}}和OpenSceneGraph\footnote{详见：\url{http://www.openscenegraph.org}}。
 目前，我们的训练系统样机运行于Windows操作系统上\footnote{由于在研究与开发的过程中，我们所采用的软件工具和开发方式，该系统样机也可以方便地移植到Linux操作系统上运行。}。
-\begin{figure}[t]
+\begin{figure}[ht]
 \centering
 \input{FigureSrc/background/components}
 \caption[样机组成]{冠状动脉介入术虚拟训练系统样机的组成。}
 \label{fig:casia_simulator_components}
-\end{figure}
-\begin{figure}[t]
-\centering
-\subfloat[]{\includegraphics[height=1.75in]{Figures/background/simulation2.eps}}
-\hfil
-\subfloat[]{\includegraphics[height=1.75in]{Figures/background/simulation.eps}}
-\hfil
-\subfloat[]{\includegraphics[height=1.75in]{Figures/background/interface.eps}}
-\caption[样机基本功能]{冠状动脉介入术虚拟训练系统样机的基本功能：(a)和(b)展示虚拟导丝在基于真实病例的血管系统中推送；(c) 展示具备触力反馈的操作接口。}
-\label{fig:casia_simulator_function}
 \end{figure}
 
 我们的研究计划分为如下五个阶段：
@@ -57,6 +47,16 @@
 \end{enumerate}
 我们已经完成工作主要有：基于真实病例的解剖结构重建，手术工具的建模，具备触觉反馈功能的操作接口的设计与制造，以及手工手术中工具与解剖结构的交互（见图\ref{fig:casia_simulator_function}）。
 其中，本文主要讲述基于真实病例的解剖结构重建方面的工作，内容主要包含：
+\begin{figure}[ht]
+\centering
+\subfloat[]{\includegraphics[height=1.75in]{Figures/background/simulation2.eps}}
+\hfil
+\subfloat[]{\includegraphics[height=1.75in]{Figures/background/simulation.eps}}
+\hfil
+\subfloat[]{\includegraphics[height=1.75in]{Figures/background/interface.eps}}
+\caption[样机基本功能]{冠状动脉介入术虚拟训练系统样机的基本功能：(a)和(b)展示虚拟导丝在基于真实病例的血管系统中推送；(c) 展示具备触力反馈的操作接口。}
+\label{fig:casia_simulator_function}
+\end{figure}
 \begin{itemize}
 \item 人体心血管系统模型
 \begin{itemize}
