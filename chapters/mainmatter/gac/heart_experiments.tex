@@ -18,15 +18,7 @@
 µÚÈı£¬Í¬Ê±¼ÆËã¶şÖµÍ¼ÏñµÄÌØÕ÷Í¼ÏñºÍÊäÈëË®Æ½¼¯¡£
 µÚËÄ£¬ÀûÓÃ»î¶¯ÂÖÀª·½·¨»ñµÃĞÄÔàÇøÓòµÄ±ß½ç¡£
 ×îºó£¬ÔÚÉÏÒ»²½¹¤×÷µÄ»ù´¡ÉÏ£¬¶ÔĞÄÔà±íÃæÄ£ĞÍ½øĞĞ¿ÉÊÓ»¯¡£
-\begin{figure}[t]
-\centering
-\input{FigureSrc/gac/heart/data_flow}
-% \includegraphics[height=2.0in]{figures/heart/DataFlow.eps}
-\caption[ĞÄÔàÇøÓò·Ö¸îÁ÷³Ì]{ĞÄÔàÇøÓò·Ö¸îÁ÷³Ì¡£}
-\label{fig:heart_data_flow}
-\end{figure}
-
-\begin{figure}[t]
+\begin{figure}[ht]
 \centering
 \subfloat[]{\includegraphics[height=2.6in]{Figures/gac/heart/original.eps}
 \label{fig:heart_original}
@@ -37,6 +29,14 @@
 }
 \caption[ĞÄÔàÇøÓòÌåÊı¾İµÄÔ¤´¦Àí]{ĞÄÔàÇøÓòÌåÊı¾İµÄÔ¤´¦Àí£º(a) ĞÄÔàÇøÓòÇ°Ãæ¹Û£»(b) ¶şÖµãĞÖµºóĞÄÔàÇøÓòÇ°Ãæ¹Û£¨$\text{TH}_{\text{lower}} = 0$£¬$\text{TH}_{\text{upper}} = 200$£©¡£¶Ô±È×óÓÒÁ½Í¼£¬¿ÉÒÔ¿´³öÆäÖĞµÄĞÄ°ü£¬ÒÔ¼°´ó²¿·ÖÑª¹ÜµÈ¶¼ÒÑ±»³ıÈ¥¡£}
 \label{fig:heart_preprocessing}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\input{FigureSrc/gac/heart/data_flow}
+% \includegraphics[height=2.0in]{figures/heart/DataFlow.eps}
+\caption[ĞÄÔàÇøÓò·Ö¸îÁ÷³Ì]{ĞÄÔàÇøÓò·Ö¸îÁ÷³Ì¡£}
+\label{fig:heart_data_flow}
 \end{figure}
 
 \subsection{Ô¤´¦Àí}
@@ -89,7 +89,7 @@ GACµÄÑİ½ø¹ı³ÌÆğÊ¼ÓÚÎÒÃÇÎª¿ìËÙĞĞ½øËã·¨Ñ¡È¡µÄÆğÊ¼µã£¬ÔÚÌØÕ÷Í¼ÏñµÄ²Î¿¼×÷ÓÃÏÂ£¬½øĞĞÎ
 
 ×îºó£¬¶ÔÓÚGACµÄÑİ½ø½á¹û£¬ÎÒÃÇÍ¬ÑùÒıÈë¶şÖµãĞÖµÂË²¨Æ÷½øĞĞ·´×ª£¬²¢Ó¦ÓÃĞĞ½øÁ¢·½Ìå·½·¨\cite{Lorensen1987MC}ÊµÏÖµÈÖµÃæµÄÌáÈ¡¡£
 Í¼\ref{fig:heart_Heart}Õ¹Ê¾ÁËÓ¦ÓÃ±¾ÕÂ·½·¨Ëù»ñµÃĞÄÔàÇøÓòµÄ½üËÆ±íÃæÄ£ĞÍ¡£
-\begin{figure}[t]
+\begin{figure}[ht]
 \centering
 \includegraphics[height=2.4in]{Figures/gac/heart/heart.eps}
 \caption[ĞÄÔà±íÃæÄ£ĞÍÇ°Ãæ¹Û]{ĞÄÔà±íÃæÄ£ĞÍÇ°Ãæ¹Û¡£}
@@ -103,6 +103,13 @@ GACµÄÑİ½ø¹ı³ÌÆğÊ¼ÓÚÎÒÃÇÎª¿ìËÙĞĞ½øËã·¨Ñ¡È¡µÄÆğÊ¼µã£¬ÔÚÌØÕ÷Í¼ÏñµÄ²Î¿¼×÷ÓÃÏÂ£¬½øĞĞÎ
 ÔÚÎ§ÏßÑİ½øµÄ¹ı³ÌÖĞ£¬ÆğÊ¼µãÎ»ÖÃµÄÑ¡È¡ÖÁ¹ØÖØÒª£¬ÓÈÆäÊÇÄÇĞ©ĞÄÔà±ßÔµÓëÆäÖÜÎ§×éÖ¯½á¹¹±ß½çÖØµşµÄÇøÓò¡£
 ¿¼ÂÇµ½±¾ÎÄ¹¤×÷µÄÊµ¼ÊĞèÒª£¬±¾½ÚµÄ¹¤×÷·½·¨½öÓÃÓÚÉú³ÉĞÄÔàµÄ½üËÆÂÖÀªµÄ±íÃæÄ£ĞÍ¡£
 ¶øÕâÒ»Ä£ĞÍ×ãÒÔÎª·ÂÕæÏµÍ³µÄÊ¹ÓÃÕßÌá¹©×ã¹»µÄÖ±¹ÛĞÔ£¬Í¼\ref{fig:heart_overlay}Õ¹Ê¾ÁË±¾½Ú½á¹ûÓëµÚ\ref{chap:coronary}ÕÂËùµÃ¹Ú×´¶¯ÂöÍøÂçµş¼ÓÓÚÍ¬Ò»³¡¾°ÖĞµÄĞ§¹û¡£
+\begin{figure}[ht]
+\centering
+\includegraphics[height=2.4in]{Figures/gac/heart/heart_with_ca.eps}
+%\caption{The overlayed three-dimensional models of the heart and the coronary arteries acquired in the previous work \cite{Yang2013ROBIO} are rendered in the same scene.}
+\caption[µş¼Ó¹ÚÂöµÄĞÄÔàÄ£ĞÍÇ°Ãæ¹Û]{µş¼Ó¹Ú×´¶¯Âö£¨ºìÉ«£©µÄĞÄÔàÄ£ĞÍÇ°Ãæ¹Û¡£}
+\label{fig:heart_overlay}
+\end{figure} 
 
 ÔÚ±¾½ÚÖĞ£¬ÎÒÃÇ²¢Î´¾ÍĞÄÔà½üËÆÇøÓòµÄ·Ö¸î½á¹ûµÄ½øĞĞ·ÖÎö¡£ÆäÔ­ÒòÊÇ£º
 µÚÒ»£¬ÔÚ±¾ÎÄÖĞ£¬½áºÏ±¾ÎÄµÄ±³¾°¡ª¡ª¹Ú×´¶¯Âö½éÈë·ÂÕæ£¬ÎÒÃÇ´´½¨ĞÄÔàÄ£ĞÍµÄÒâÒåÔÚÓÚÔö½ø·ÂÕæ²Ù×÷ÖĞÊÓ¾õÉÏµÄÕæÊµĞÔ¡£
@@ -114,10 +121,3 @@ GACµÄÑİ½ø¹ı³ÌÆğÊ¼ÓÚÎÒÃÇÎª¿ìËÙĞĞ½øËã·¨Ñ¡È¡µÄÆğÊ¼µã£¬ÔÚÌØÕ÷Í¼ÏñµÄ²Î¿¼×÷ÓÃÏÂ£¬½øĞĞÎ
 ¶ÔĞÄÔàµÄ½ÏÎª×¼È·µÄ·Ö¸îÍùÍùĞèÒª¶ÔÍ¬Ò»²¡Àı½øĞĞÈô¸É´ÎÉ¨Ãè£¬ÔÙ¶Ô¸÷´Î½á¹ûÌåÊı¾İÖĞ¸÷¶ÔÓ¦²ãµÄÉ¨Ãè½á¹ûÖĞĞÄÔàµÄ¿ÉÄÜÇøÓòµÄÌØÕ÷½øĞĞÌáÈ¡£¬ÔÚ´Ë»ù´¡ÉÏÒıÈë»úÆ÷Ñ§Ï°ÁìÓòµÄ·½·¨¶ÔËùÌáÈ¡µÄÌØÕ÷½øĞĞÑ§Ï°·ÖÀà£¬×îºó²ÅÄÜ¹»»ñµÃÏà¶Ô×¼È·µÄ½á¹û¡£
 ¶øÕâÒ»·½ÃæµÄ¹¤×÷ÒÑ¾­³¬³ö±¾ÎÄµÄÑĞ¾¿·¶Î§¡£
 ¹ØÓÚÍêÕûĞÄÔàµÄ·Ö¸îÓë¿ÉÊÓ»¯µÄÏê¾¡½éÉÜ£¬¿É½øÒ»²½²ÎÔÄ×ÛÊöÎÄÏ×\cite{Zhuang2013Review}¡£
-\begin{figure}[t]
-\centering
-\includegraphics[height=2.4in]{Figures/gac/heart/heart_with_ca.eps}
-%\caption{The overlayed three-dimensional models of the heart and the coronary arteries acquired in the previous work \cite{Yang2013ROBIO} are rendered in the same scene.}
-\caption[µş¼Ó¹ÚÂöµÄĞÄÔàÄ£ĞÍÇ°Ãæ¹Û]{µş¼Ó¹Ú×´¶¯Âö£¨ºìÉ«£©µÄĞÄÔàÄ£ĞÍÇ°Ãæ¹Û¡£}
-\label{fig:heart_overlay}
-\end{figure} 
