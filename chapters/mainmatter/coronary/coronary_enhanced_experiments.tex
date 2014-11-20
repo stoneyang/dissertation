@@ -5,12 +5,12 @@
 \subsection{实验场景与数据}
 \label{subsec:coronary_enhanced_setup_data}
 
-\begin{figure}[t]
-\centering
-\includegraphics[height=2.3in]{Figures/coronary/coronary_enhanced/original.eps}
-\caption[心脏区域的VOI提取]{心脏区域的VOI提取。}
-\label{fig:coronary_enhanced_original}
-\end{figure}
+% \begin{figure}[t]
+% \centering
+% \includegraphics[height=2.3in]{Figures/coronary/coronary_enhanced/original.eps}
+% \caption[心脏区域的VOI提取]{心脏区域的VOI提取。}
+% \label{fig:coronary_enhanced_original}
+% \end{figure}
 由于本节的全部工作都针对冠状动脉，因此，与第\ref{subsec:coronary_setup_data}节类似，我们将包含完整心脏区域的部分从整个原始数据剥离出来（见图\ref{fig:coronary_enhanced_original}）。
 为了获得较好的分割结果，我们进行了一系列实验，以获得更合适的参数。
 首先，在这些实验中，我们仍然对剥离出来的体数据的存储格式和像素的数据类型进行转换，以便于随后进行的计算。
@@ -20,6 +20,12 @@
 特征图像的生成过程与第\ref{subsec:coronary_feature_image}节相同，此处不再赘述。
 最后，分割结果通过行进立方体方法进行等值面的提取，再由计算机图形系统显示提取结果。
 本章中的全部实验均在一部搭载Intel 2.83GHz Core 2 Quad CPU和4GB内存的台式计算机上完成。
+\begin{figure}[ht]
+\centering
+\includegraphics[height=2.3in]{Figures/coronary/coronary_enhanced/original.eps}
+\caption[心脏区域的VOI提取]{心脏区域的VOI提取。}
+\label{fig:coronary_enhanced_original}
+\end{figure}
 
 图\ref{fig:coronary_enhanced_data_flow}宏观地展示了处理流程。
 首先，原始数据中像素的数据类型被转换，以便进行后续的增强计算。

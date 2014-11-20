@@ -4,18 +4,24 @@
 \subsection{实验场景与数据}
 \label{subsec:coronary_setup_data}
 
-\begin{figure}[t]
-\centering
-\includegraphics[width=2.1in]{Figures/coronary/ROI_Extraction}
-\caption[心脏区域的ROI提取]{心脏区域的ROI提取。}
-\label{fig:coronary_ROI}
-\end{figure}
+% \begin{figure}[h]
+% \centering
+% \includegraphics[width=2.1in]{Figures/coronary/ROI_Extraction}
+% \caption[心脏区域的ROI提取]{心脏区域的ROI提取。}
+% \label{fig:coronary_ROI}
+% \end{figure}
 
 本章中，我们使用的原始体数据与第\ref{subsec:aorta_setup_data}节所述的数据完全一致。
 不过，我们对该数据进行了区域提取，即：把心脏的立方体区域提取出来，这样做是为集中处理冠状动脉，从而节约计算时间和计算资源。
 为简化叙述，我们在本节以分割体数据其中一帧中的冠状动脉右降支\footnote{冠状动脉的一条主要分支，详见：\url{http://en.wikipedia.org/wiki/Coronary_circulation}}为目标，展示本章所提方法的有效性。
 提取感兴趣的区域（Region of interest，ROI）时，我们需要指定取景矩形的起始顶点及其在水平和垂直两个方向上的尺寸，该过程如图\ref{fig:coronary_ROI}所示。
 该方法可以直接用于体数据中冠状动脉树状结构的主要分支的分割。
+\begin{figure}[h]
+\centering
+\includegraphics[width=2.1in]{Figures/coronary/ROI_Extraction}
+\caption[心脏区域的ROI提取]{心脏区域的ROI提取。}
+\label{fig:coronary_ROI}
+\end{figure}
 
 \begin{figure}[tb]
 \centering
@@ -127,7 +133,7 @@ Gaussian核的标准差$\sigma$是这一计算步骤中唯一的可调整参数。
 这里，我们同样应用行进立方体方法\cite{Lorensen1987MC}来完成等值面的提取。
 如图\ref{fig:coronary_CURVES_model}，冠状动脉主要分支内腔的表面被比较完整的分离出来。
 我们也分割出主动脉的根部，以保持足够的视觉直观性。
-\begin{figure}[tb]
+\begin{figure}[htb]
 \centering
 \includegraphics[height=2.3in]{Figures/coronary/model}
 \caption[冠状动脉表面模型]{冠状动脉表面模型。}%
