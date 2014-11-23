@@ -12,12 +12,12 @@
 % \label{fig:heart_original}
 % \end{figure}
 由于本节的全部工作都针对心脏区域，因此，我们将包含完整心脏区域的部分从整个原始数据剥离出来（见图\ref{fig:heart_original}）。
-本节所述的基于CT的心脏分割方法由第\ref{sec:aorta_experiments}节工作的基础上改进而来，主要是针对分割CTA中的心脏区域做了一些方法上的调整，该方法完整的流程如图\ref{fig:heart_data_flow}所示。
-首先，我们从原始影像数据中选取心脏所在区域，然后进行对该区域平滑处理。
-随后，将平滑处理后的影像数据通过阈值滤波转换为边缘保持较完整的二值图像。
-第三，同时计算二值图像的特征图像和输入水平集。
-第四，利用活动轮廓方法获得心脏区域的边界。
-最后，在上一步工作的基础上，对心脏表面模型进行可视化。
+% 本节所述的基于CT的心脏分割方法由第\ref{sec:aorta_experiments}节工作的基础上改进而来，主要是针对分割CTA中的心脏区域做了一些方法上的调整，该方法完整的流程如图\ref{fig:heart_data_flow}所示。
+% 首先，我们从原始影像数据中选取心脏所在区域，然后进行对该区域平滑处理。
+% 随后，将平滑处理后的影像数据通过阈值滤波转换为边缘保持较完整的二值图像。
+% 第三，同时计算二值图像的特征图像和输入水平集。
+% 第四，利用活动轮廓方法获得心脏区域的边界。
+% 最后，在上一步工作的基础上，对心脏表面模型进行可视化。
 \begin{figure}[ht]
 \centering
 \subfloat[]{\includegraphics[height=2.6in]{Figures/gac/heart/original.eps}
@@ -31,13 +31,13 @@
 \label{fig:heart_preprocessing}
 \end{figure}
 
-\begin{figure}[ht]
-\centering
-\input{FigureSrc/gac/heart/data_flow}
-% \includegraphics[height=2.0in]{figures/heart/DataFlow.eps}
-\caption[心脏区域分割流程]{心脏区域分割流程。}
-\label{fig:heart_data_flow}
-\end{figure}
+% \begin{figure}[ht]
+% \centering
+% \input{FigureSrc/gac/heart/data_flow}
+%%\includegraphics[height=2.0in]{figures/heart/DataFlow.eps}
+% \caption[心脏区域分割流程]{心脏区域分割流程。}
+% \label{fig:heart_data_flow}
+% \end{figure}
 
 \subsection{预处理}
 \label{subsec:heart_preprocessing_experiments}

@@ -1,5 +1,39 @@
 
-\section{测地活动轮廓}
+\section{基于GAC的分割处理流程设计}
+\label{sec:gac_pipeline}
+
+\subsection{分割管线的设计}
+
+正如上节所述，本章工作的目的在于设计图像分割的处理流程。
+使之能够很好地利用GAC的特性，从而获得相应解剖结构的表面模型。
+
+分割主动脉内腔的完整处理流程的设计如图\ref{fig:aorta_data_flow}所示。
+原始医学图像进行数据格式的转换之后，将作为同时开始的两项不同计算任务的输入：一项用于计算并生成边缘势场（即：特征图像），另一项用于生成距离图（即：初始水平集）。
+这两项计算完成后，其结果即作为主动脉内腔分割的核心环节的输入数据，为该环节提供演进计算的参考。
+最后，分割所得结果（即：主动脉内腔的边缘）经过亮度的反转变换，再利用行进立方体方法提取其等值面，最终通过表面渲染技术获得主动脉内腔模型的立体可视效果。
+\begin{figure}[t]
+\centering
+\input{FigureSrc/gac/data_flow}
+% \includegraphics[width=3.2in]{Figures/gac/DataFlow.eps}
+\caption[主动脉内腔分割流程]{主动脉内腔分割流程。}
+\label{fig:aorta_data_flow}
+\end{figure}
+
+心脏近似区域的分割流程由上述工作改进而来，主要是针对分割流程中预处理环节进行了调整，该方法完整的流程如图\ref{fig:heart_data_flow}所示。
+首先，我们从原始影像数据中选取心脏所在区域，然后进行对该区域平滑处理。
+随后，将平滑处理后的影像数据通过阈值滤波转换为边缘保持较完整的二值图像。
+第三，同时计算二值图像的特征图像和输入水平集。
+第四，利用活动轮廓方法获得心脏区域的边界。
+最后，对心脏表面模型进行可视化。
+\begin{figure}[ht]
+\centering
+\input{FigureSrc/gac/heart/data_flow}
+% \includegraphics[height=2.0in]{figures/heart/DataFlow.eps}
+\caption[心脏近似区域分割流程]{心脏近似区域分割流程。}
+\label{fig:heart_data_flow}
+\end{figure}
+
+\subsection{测地活动轮廓}
 \label{sec:aorta_gac}
 
 测地活动轮廓方法是一种用于物体边缘探测的图像处理方法，它根植于“蛇”模型，是一种对该模型的改进。
