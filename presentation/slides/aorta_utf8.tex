@@ -3,6 +3,29 @@
 
 \begin{frame}
 \begin{itemize}
+\pause \item \textbf{血管介入仿真中主动脉模型的作用}
+\begin{itemize}
+\item 可视化环境的组成部分
+\item 虚拟手术工具运动的必经路径
+\item 虚拟手术工具相互的硬约束
+\end{itemize}
+\pause \item \textbf{血管介入仿真中主动脉模型的获取}
+\begin{itemize}
+\item 几何形状近似的规则空间中空管道
+\item 逐帧手动提取主动脉区域
+\item 医学影像处理方式
+\end{itemize}
+\pause \item \textbf{主动脉内腔的分割与可视化}
+\begin{itemize}
+\item 仍是医学影像领域中一项具有挑战性的工作
+\item 主动脉形态特点：走向稳定，截面大小变化均匀
+\item 分割时的主要困难：与骨骼以及腹腔脏器有交叠，影响分割
+\end{itemize}
+\end{itemize}
+\end{frame} 
+
+\begin{frame}
+\begin{itemize}
 \item \textbf{测地活动轮廓（GAC）}
 \begin{itemize}
 \item 根植于“蛇”模型
@@ -190,21 +213,21 @@ E(\mathcal{C}) = \alpha \int_0^1 | \mathcal{C}'(q) |^2 dq - \lambda \int_0^1 | \
 \begin{itemize}
   \item \textbf{主动脉内腔分割结果评估}：
   \begin{enumerate}
-    \item 基于Jaccard系数
-    \item 基于Dice系数
+    \item 基于Jaccard系数：均值为$0.933$，标准差为$0.0240$
+    \item 基于Dice系数：均值为$0.965$，标准差为$0.0128$
   \end{enumerate}
 \end{itemize}
 \begin{columns}[b,onlytextwidth]
 \begin{column}{.5\textwidth}
 \begin{figure}[t]
 \centering
-\includegraphics[width=1.5in,height=1.0in]{../../Figures/gac/Jaccard.eps}
+\includegraphics[width=1.8in,height=1.3in]{../../Figures/gac/Jaccard.eps}
 \end{figure}
 \end{column}
 \begin{column}{.5\textwidth}
 \begin{figure}[t]
 \centering
-\includegraphics[width=1.5in,height=1.0in]{../../Figures/gac/Dice.eps}
+\includegraphics[width=1.8in,height=1.3in]{../../Figures/gac/Dice.eps}
 \end{figure}
 \end{column}
 \end{columns}
@@ -220,8 +243,4 @@ E(\mathcal{C}) = \alpha \int_0^1 | \mathcal{C}'(q) |^2 dq - \lambda \int_0^1 | \
 % \caption[主动脉内腔三维模型]{主动脉内腔三维模型。}
 % \label{fig:aorta_visualization}
 \end{figure} 
-\end{frame} 
-
-\begin{frame}
-
 \end{frame} 
