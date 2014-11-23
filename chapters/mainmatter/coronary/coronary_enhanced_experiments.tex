@@ -27,20 +27,20 @@
 \label{fig:coronary_enhanced_original}
 \end{figure}
 
-图\ref{fig:coronary_enhanced_data_flow}宏观地展示了处理流程。
-首先，原始数据中像素的数据类型被转换，以便进行后续的增强计算。
-然后，我们利用设定恰当的阈值的阈值滤波器滤去了大部分与本章工作无关的图像内容。
-随后，我们引入了图像增强环节对图像中的目标管状物体进行增强。
-接着，对增强后的图像进行两个并列进行的计算，以生成特征图像和输入水平集。
-此后，我们利用改进的测地活动轮廓模型进行演进，从而获得图像中微小而复杂的冠状动脉的边缘信息。
-最后，血管的边缘被提取并通过面渲染的方式显示。
-\begin{figure}[t]
-\centering
-\input{FigureSrc/coronary/coronary_enhanced/data_flow}
-% \includegraphics[height=3.2in,width=3.2in]{Figures/coronary/coronary_enhanced/DataFlow.eps}
-\caption[改进的冠状动脉分割流程]{改进的冠状动脉分割流程。}
-\label{fig:coronary_enhanced_data_flow}
-\end{figure}
+% 图\ref{fig:coronary_enhanced_data_flow}宏观地展示了处理流程。
+% 首先，原始数据中像素的数据类型被转换，以便进行后续的增强计算。
+% 然后，我们利用设定恰当的阈值的阈值滤波器滤去了大部分与本章工作无关的图像内容。
+% 随后，我们引入了图像增强环节对图像中的目标管状物体进行增强。
+% 接着，对增强后的图像进行两个并列进行的计算，以生成特征图像和输入水平集。
+% 此后，我们利用改进的测地活动轮廓模型进行演进，从而获得图像中微小而复杂的冠状动脉的边缘信息。
+% 最后，血管的边缘被提取并通过面渲染的方式显示。
+% \begin{figure}[t]
+% \centering
+% \input{FigureSrc/coronary/coronary_enhanced/data_flow}
+%%\includegraphics[height=3.2in,width=3.2in]{Figures/coronary/coronary_enhanced/DataFlow.eps}
+% \caption[改进的冠状动脉分割流程]{改进的冠状动脉分割流程。}
+% \label{fig:coronary_enhanced_data_flow}
+% \end{figure}
 
 \subsection{管状物增强及后处理}
 \label{subsec:coronary_enhanced_tubular_processing}
@@ -53,7 +53,15 @@
 在这些参数中，$\sigma$控制要增强的管状目标物体的横截面的直径，$\gamma_{12}$是管状相似性测度，$\gamma_{23}$则被用于恢复非齐对比度或者亮度损失的血管区域的情形。
 正如图\ref{fig:coronary_enhanced_vesselness}，包括冠状动脉和位于肺部区域内的血管在内的具有较小的$\sigma$值的细微血管都获得增强，而具有较大$\sigma$值（即：较大的横截面直径）的管状结构并没有被增强。
 
-\begin{figure}[t]
+增强后的管状目标物体的像素亮度相对较暗，且亮度值的分布较为分散。
+这给后续工作环节中即将遇到的像素选择带来不便。
+为了解决这种问题，从而使后续处理易于进行，我们有必要在实验中引入像素亮度的变换。
+在本章中，我们圈定非线性亮度映射（第\ref{subsec:imaging_sigmoid}节）和二值阈值滤波（第\ref{subsec:imaging_binary}节）作为完成这一工作的候选方法。
+式(\ref{eqn:imaging_sigmoid})表明非线性亮度映射将输入图像变换为某一亮度范围内的像素获得增强，而其余像素的亮度被明显削弱的图像。
+只要提供恰当的参数，在目前已经获得增强的影像中，对应于目标物体的亮度将得以增强，而剩余部分的亮度将被降低。
+在另外一组采用二值阈值阈值滤波器的测试中，正如上文所述，亮度落在特定阈值上下限之间的像素重新赋予新的高亮度，而为亮度落在特定阈值上下限之外的像素统一设置为零（见图\ref{fig:coronary_enhanced_binary_2}）。
+对比这两种方法的效果，我们选择二值阈值滤波器来改善之前管状物体增强所得到的结果（见图\ref{fig:coronary_enhanced_data_flow}）。
+\begin{figure}[h]
 \centering
 \subfloat[]{\includegraphics[height=2.1in]{Figures/coronary/coronary_enhanced/binary1.eps}%
 \label{fig:coronary_enhanced_binary_1}}
@@ -63,19 +71,7 @@
 \caption[基于vesselness的预处理]{基于vesselness的预处理：(a) 二值阈值滤波（$\text{TH}_{\text{lower}} = 300$, $\text{TH}_{\text{upper}} = 600$）；(b) 管状物体增强（$\sigma = 0.9$, $\gamma_{12} = 0.1$, $\gamma_{23} = 2.0$）。}%
 \label{fig:coronary_enhanced_preprocessing}
 \end{figure}
-增强后的管状目标物体的像素亮度相对较暗，且亮度值的分布较为分散。
-这给后续工作环节中即将遇到的像素选择带来不便。
-为了解决这种问题，从而使后续处理易于进行，我们有必要在实验中引入像素亮度的变换。
-在本章中，我们圈定非线性亮度映射（第\ref{subsec:imaging_sigmoid}节）和二值阈值滤波（第\ref{subsec:imaging_binary}节）作为完成这一工作的候选方法。
-式(\ref{eqn:imaging_sigmoid})表明非线性亮度映射将输入图像变换为某一亮度范围内的像素获得增强，而其余像素的亮度被明显削弱的图像。
-只要提供恰当的参数，在目前已经获得增强的影像中，对应于目标物体的亮度将得以增强，而剩余部分的亮度将被降低。
-在另外一组采用二值阈值阈值滤波器的测试中，正如上文所述，亮度落在特定阈值上下限之间的像素重新赋予新的高亮度，而为亮度落在特定阈值上下限之外的像素统一设置为零（见图\ref{fig:coronary_enhanced_binary_2}）。
-对比这两种方法的效果，我们选择二值阈值滤波器来改善之前管状物体增强所得到的结果（见图\ref{fig:coronary_enhanced_data_flow}）。
-
-\subsection{水平集演进}
-\label{subsec:coronary_enhanced_propagation}
-
-\begin{figure}[t]
+\begin{figure}[H]
 \centering
 \subfloat[]{\includegraphics[height=2.1in]{Figures/coronary/coronary_enhanced/sigmoid.eps}%
 \label{fig:coronary_enhanced_sigmoid}}
@@ -86,6 +82,9 @@
 \label{fig:coronary_enhanced_intensity_conditioning}
 \end{figure}
 
+\subsection{水平集演进}
+\label{subsec:coronary_enhanced_propagation}
+
 本节在生成初始的水平集围线的时候应用了一种改进的快速行进算法。
 正如第\ref{subsec:imaging_colliding_fronts}节所述，这种算法需要在计算开始时提供成对的起始点。
 而当以这两个起始点演进的围线一旦相遇，演进过程即终止。
@@ -95,7 +94,7 @@
 在手工指定的迭代步数内，围线演进至冠状动脉内壁附近时停止计算，即可得到冠状动脉内壁的表面信息。
 图\ref{fig:coronary_enhanced_CURVES}展示CURVES演进的结果。
 随后，我们同样需要利用二值阈值滤波来处理这一结果，以便进行等值面的提取等工作。
-\begin{figure}[t]
+\begin{figure}[ht]
 \centering
 \includegraphics[height=2.1in]{Figures/coronary/coronary_enhanced/curves.eps}
 \caption[增强处理后的CURVES演进]{增强处理后的CURVES演进。}%
@@ -108,7 +107,7 @@
 与第\ref{subsec:coronary_experiments_isosurface}节所述类似，我们需要显示的表面正是应用本章所述方法所得分割结果的边缘（即冠状动脉的内腔边缘）。
 这里，我们同样应用行进立方体方法\cite{Lorensen1987MC}来完成等值面的提取，图\ref{fig:coronary_enhanced_CURVES_visualization}展示了对本章分割结果的表面渲染。
 通过对比图\ref{fig:coronary_enhanced_normal_CURVES}，我们可以观察到，不仅冠状动脉主要分支内腔的表面被比较完整地分离出来，而且还进一步提取出了更为细小的分支。
-\begin{figure}[t]
+\begin{figure}[ht]
 \centering
 \subfloat[]{\includegraphics[height=2.1in]{Figures/coronary/coronary_enhanced/model_conventional.eps}%
 \label{fig:coronary_enhanced_normal_CURVES}}

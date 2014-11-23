@@ -4,6 +4,18 @@
 \subsection{实验场景与数据}
 \label{subsec:coronary_setup_data}
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=2.0in]{Figures/coronary/ROI_Extraction}
+\caption[心脏区域的ROI提取]{心脏区域的ROI提取。}
+\label{fig:coronary_ROI}
+\end{figure}
+
+本章中，我们使用的原始体数据与第\ref{subsec:aorta_setup_data}节所述的数据完全一致。
+不过，我们对该数据进行了区域提取，即：把心脏的立方体区域提取出来，这样做是为集中处理冠状动脉，从而节约计算时间和计算资源。
+为简化叙述，我们在本节以分割体数据其中一帧中的冠状动脉右降支\footnote{冠状动脉的一条主要分支，详见：\url{http://en.wikipedia.org/wiki/Coronary_circulation}}为目标，展示本章所提方法的有效性。
+提取感兴趣的区域（Region of interest，ROI）时，我们需要指定取景矩形的起始顶点及其在水平和垂直两个方向上的尺寸，该过程如图\ref{fig:coronary_ROI}所示。
+该方法可以直接用于体数据中冠状动脉树状结构的主要分支的分割。
 % \begin{figure}[h]
 % \centering
 % \includegraphics[width=2.1in]{Figures/coronary/ROI_Extraction}
@@ -11,59 +23,37 @@
 % \label{fig:coronary_ROI}
 % \end{figure}
 
-本章中，我们使用的原始体数据与第\ref{subsec:aorta_setup_data}节所述的数据完全一致。
-不过，我们对该数据进行了区域提取，即：把心脏的立方体区域提取出来，这样做是为集中处理冠状动脉，从而节约计算时间和计算资源。
-为简化叙述，我们在本节以分割体数据其中一帧中的冠状动脉右降支\footnote{冠状动脉的一条主要分支，详见：\url{http://en.wikipedia.org/wiki/Coronary_circulation}}为目标，展示本章所提方法的有效性。
-提取感兴趣的区域（Region of interest，ROI）时，我们需要指定取景矩形的起始顶点及其在水平和垂直两个方向上的尺寸，该过程如图\ref{fig:coronary_ROI}所示。
-该方法可以直接用于体数据中冠状动脉树状结构的主要分支的分割。
-\begin{figure}[h]
-\centering
-\includegraphics[width=2.1in]{Figures/coronary/ROI_Extraction}
-\caption[心脏区域的ROI提取]{心脏区域的ROI提取。}
-\label{fig:coronary_ROI}
-\end{figure}
+% \begin{figure}[tb]
+% \centering
+% \input{FigureSrc/coronary/data_flow}
+%%\includegraphics[width=3.2in]{Figures/coronary/DataFlow}
+% \caption[基于CURVES的冠脉分割流程]{基于CURVES的冠状动脉分割流程。}
+% \label{fig:coronary_data_flow}
+% \end{figure}
 
-\begin{figure}[tb]
-\centering
-\input{FigureSrc/coronary/data_flow}
-% \includegraphics[width=3.2in]{Figures/coronary/DataFlow}
-\caption[基于CURVES的冠脉分割流程]{基于CURVES的冠状动脉分割流程。}
-\label{fig:coronary_data_flow}
-\end{figure}
-
-图\ref{fig:coronary_data_flow}是展示处理流程的方框图。
-由于我们的目的是分割冠状动脉，因此，我们首先将原始数据中的心脏区域提取出来，以便节约计算时间和计算资源。
-然后，我们利用平滑滤波器滤去图像中的噪声，在利用阈值滤波器除去非血管内容，以便准确计算图像梯度和顺利演进水平集。
-随后，图像进入类似第\ref{chap:aorta}章所述的分支管线。
-一个分支用于计算图像的梯度，并通过非线性映射生成特征图像；
-另一个分支则用于生成图像的初始水平集，该水平集将用作距离图。
-随后，我们利用改进的测地活动轮廓模型进行演进，从而获得图像中微小而复杂的冠状动脉的边缘信息。
-最后，我们对整个分割结果进行二值阈值滤波处理，以达到像素亮度的反转，以便血管的边缘被提取并进行面绘制。
+% 图\ref{fig:coronary_data_flow}是展示处理流程的方框图。
+% 由于我们的目的是分割冠状动脉，因此，我们首先将原始数据中的心脏区域提取出来，以便节约计算时间和计算资源。
+% 然后，我们利用平滑滤波器滤去图像中的噪声，在利用阈值滤波器除去非血管内容，以便准确计算图像梯度和顺利演进水平集。
+% 随后，图像进入类似第\ref{chap:aorta}章所述的分支管线。
+% 一个分支用于计算图像的梯度，并通过非线性映射生成特征图像；
+% 另一个分支则用于生成图像的初始水平集，该水平集将用作距离图。
+% 随后，我们利用改进的测地活动轮廓模型进行演进，从而获得图像中微小而复杂的冠状动脉的边缘信息。
+% 最后，我们对整个分割结果进行二值阈值滤波处理，以达到像素亮度的反转，以便血管的边缘被提取并进行面绘制。
 
 \subsection{预处理}
 
 ROI提取完成后，我们利用第\ref{subsec:imaging_edge_potential}节所介绍的方法对图像进行平滑处理，目的是为了去除原始图像中的噪声。
 在本节的实验中，该滤波器能够在最大限度地保持图像内容中物体几何特征完整的前提下，降低图像中的噪声，图\ref{fig:coronary_smoothing}显示去除噪声的结果。
 然后，我们继续引入第\ref{subsec:imaging_thresholding}节中的阈值滤波器来去除该区域内不属于血管系统的图像内容，图\ref{fig:coronary_threshold}显示去除无关内容的结果。
-\begin{figure}[!tb]
+\begin{figure}[htb]
 \centering
-\subfloat[]{\includegraphics[height=2.1in]{Figures/coronary/smooth}%
+\subfloat[]{\includegraphics[height=2.0in]{Figures/coronary/smooth}%
 \label{fig:coronary_smoothing}}
 \hfil
-\subfloat[]{\includegraphics[height=2.1in]{Figures/coronary/threshold}%
+\subfloat[]{\includegraphics[height=2.0in]{Figures/coronary/threshold}%
 \label{fig:coronary_threshold}}
 \caption[预处理结果]{预处理结果：(a) 保护物体边缘的平滑处理（$\text{传导参数} = 0.9$）；(b) 阈值滤波（$\text{TH}_{\text{lower}} = 160$, $\text{TH}_{\text{upper}} = 600$）。}%
 \label{fig:coronary_preprocessing}
-\end{figure}
-\begin{figure}[!htb]
-\centering
-\subfloat[]{\includegraphics[height=2.1in]{Figures/coronary/gradient}%
-\label{fig:coronary_gradient}}
-\hfil
-\subfloat[]{\includegraphics[height=2.1in]{Figures/coronary/sigmoid}%
-\label{fig:coronary_sigmoid}}
-\caption[特征图像计算]{特征图像计算：(a) 基于Gaussian核运算所得到的梯度图像（$\sigma = 0.9$）；(b) 通过S函数实现的像素亮度非线性映射（$m = -80$, $n = 120$），其中$m$的负号表示该运算对输入图像中的像素亮度进行反相的映射。}%
-\label{fig:coronary_image_features}
 \end{figure}
 
 \subsubsection{特征图像计算}
@@ -80,6 +70,16 @@ Gaussian核的标准差$\sigma$是这一计算步骤中唯一的可调整参数。
 为实现物体边缘与图像其他区域的亮度的翻转，这里为参数$m$选取了负值，而为参数$n$选取了一个正值，它满足：$n > |m|$。
 如图\ref{fig:coronary_sigmoid}所示，所得图像中的血管，以及骨骼的边缘亮度变得很暗，而其它区域则变得很明亮。
 这一像素亮度的翻转，对后续由式(\ref{eqn:coronary_application})所驱动的波面演进过程起“向导”作用，即：波面在高亮度（较明亮）的区域演进速度较快，而在低亮度（较暗）的区域演进的速度极慢（近乎为零）。
+\begin{figure}[htb]
+\centering
+\subfloat[]{\includegraphics[height=2.0in]{Figures/coronary/gradient}%
+\label{fig:coronary_gradient}}
+\hfil
+\subfloat[]{\includegraphics[height=2.0in]{Figures/coronary/sigmoid}%
+\label{fig:coronary_sigmoid}}
+\caption[特征图像计算]{特征图像计算：(a) 基于Gaussian核运算所得到的梯度图像（$\sigma = 0.9$）；(b) 通过S函数实现的像素亮度非线性映射（$m = -80$, $n = 120$），其中$m$的负号表示该运算对输入图像中的像素亮度进行反相的映射。}%
+\label{fig:coronary_image_features}
+\end{figure}
 
 \subsection{水平集演进}
 \label{subsec:coronary_experiments_propagation}
@@ -93,6 +93,13 @@ Gaussian核的标准差$\sigma$是这一计算步骤中唯一的可调整参数。
 而对于完整的心脏区域的体数据来讲，在进行这一步骤时，可以在冠状动脉内部选取一系列的起始点，以便节约计算时间。
 图\ref{fig:coronary_Fast_Marching}显示，这帧图像中RCA周围的初始水平集围线已经成功生成。
 
+特征图像和初始水平集计算之后，我们即应用CURVES进行分割提取。
+作为改进的GAC算法，它所驱动的演进过程由式(\ref{eqn:coronary_application})来提供。
+在这一过程中，特征图像为演进提供“向导”，而初始水平集则提供初始位置和每一时刻的演进形状（通过“时刻”限制）。
+这一过程直至在CURVES算法驱动下不断演进的围线遇到目标物体的边缘方才停止（见图\ref{fig:coronary_CURVES}）。
+待演进过程完成，我们引入二值阈值滤波对演进的结果图像的亮度进行翻转。
+图\ref{fig:coronary_final}显示这一翻转的结果，我们可以看出目标RCA所对应区域呈高亮度显示，而图像内的其余区域均为黑暗（即亮度为~$0$）。
+\newpage{
 \begin{figure}[H]
 \centering
 \subfloat[]{
@@ -118,13 +125,7 @@ Gaussian核的标准差$\sigma$是这一计算步骤中唯一的可调整参数。
 \caption[水平集演进过程]{水平集演进过程：(a) 通过快速行进算法生成的初始水平集围线；(b) 由CURVES驱动的围线演进结果；(c) 对演进结果进行二值阈值滤波处理后的结果。}%
 \label{fig:Evolution}
 \end{figure}
-
-特征图像和初始水平集计算之后，我们即应用CURVES进行分割提取。
-作为改进的GAC算法，它所驱动的演进过程由式(\ref{eqn:coronary_application})来提供。
-在这一过程中，特征图像为演进提供“向导”，而初始水平集则提供初始位置和每一时刻的演进形状（通过“时刻”限制）。
-这一过程直至在CURVES算法驱动下不断演进的围线遇到目标物体的边缘方才停止（见图\ref{fig:coronary_CURVES}）。
-待演进过程完成，我们引入二值阈值滤波对演进的结果图像的亮度进行翻转。
-图\ref{fig:coronary_final}显示这一翻转的结果，我们可以看出目标RCA所对应区域呈高亮度显示，而图像内的其余区域均为黑暗（即亮度为~$0$）。
+}
 
 \subsection{分割结果可视化}
 \label{subsec:coronary_experiments_isosurface}
@@ -133,7 +134,7 @@ Gaussian核的标准差$\sigma$是这一计算步骤中唯一的可调整参数。
 这里，我们同样应用行进立方体方法\cite{Lorensen1987MC}来完成等值面的提取。
 如图\ref{fig:coronary_CURVES_model}，冠状动脉主要分支内腔的表面被比较完整的分离出来。
 我们也分割出主动脉的根部，以保持足够的视觉直观性。
-\begin{figure}[htb]
+\begin{figure}[ht]
 \centering
 \includegraphics[height=2.3in]{Figures/coronary/model}
 \caption[冠状动脉表面模型]{冠状动脉表面模型。}%
