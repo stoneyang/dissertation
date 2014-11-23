@@ -2,20 +2,20 @@
 \section{类水平集演进中心线提取}
 \label{sec:centerlines_experiments}
 
-本节讨论血管表面模型中心线提取的处理流程，以及各个环节的原理。
-在进行实际的中心线提取之前，我们需要对之前基于CTA的可视化模型进行降噪和平滑，以确保输入表面数据的质量。
-这些对基于CTA的血管表面模型的预处理流程如图\ref{fig:centerlines_data_flow}所示。
-首先，检验表面模型中各个顶点的连接性，从而除去双层以及悬浮面片，以获得表面的最大连接区域。
-第二，对检验后的表面进行平滑处理，以除去表面模型上的“毛刺”和“台阶”等噪声，确保中心线提取运算的准确性。
-第三，计算所得表面模型的法向量，以表明表面的“内部”和“外部”。
-最后，对表面模型进行细分，保证中心线提取数值计算的稳定性。
-\begin{figure}[ht]
-\centering
-\input{FigureSrc/postprocessing/centerlines/data_flow}
-% \includegraphics[width=3.2in]{Figures/postprocessing/centerlines/DataFlow.eps}
-\caption[表面模型中心线提取流程]{表面模型中心线提取流程。}
-\label{fig:centerlines_data_flow}
-\end{figure}
+% 本节讨论血管表面模型中心线提取的处理流程，以及各个环节的原理。
+% 在进行实际的中心线提取之前，我们需要对之前基于CTA的可视化模型进行降噪和平滑，以确保输入表面数据的质量。
+% 这些对基于CTA的血管表面模型的预处理流程如图\ref{fig:centerlines_data_flow}所示。
+% 首先，检验表面模型中各个顶点的连接性，从而除去双层以及悬浮面片，以获得表面的最大连接区域。
+% 第二，对检验后的表面进行平滑处理，以除去表面模型上的“毛刺”和“台阶”等噪声，确保中心线提取运算的准确性。
+% 第三，计算所得表面模型的法向量，以表明表面的“内部”和“外部”。
+% 最后，对表面模型进行细分，保证中心线提取数值计算的稳定性。
+% \begin{figure}[ht]
+% \centering
+% \input{FigureSrc/postprocessing/centerlines/data_flow}
+%%\includegraphics[width=3.2in]{Figures/postprocessing/centerlines/DataFlow.eps}
+% \caption[表面模型中心线提取流程]{表面模型中心线提取流程。}
+% \label{fig:centerlines_data_flow}
+% \end{figure}
 
 \subsection{实验场景与数据}
 \label{subsec:centerlines_setup_data}
@@ -166,15 +166,16 @@
 图\ref{fig:centerlins_subdivision_local}给出了基于改进的Butterfly策略的表面细分的计算结果。
 同时，由表\ref{tbl:centerlins_subdivision}可以得出，在完成表面细分的计算之后，构成表面模型的多边形面片的数量得到了显著的增加。
 通过比较细分处理前后的多边形面片的数量可知，细分后的多边形的数量是细分之前的多边形的数量的四倍。
-其中，本章实验数据细分后的多边形数量是细分前的$3.98$倍，而完整的血管模型，细分后的多边形数量则是细分前的$4$倍。
-这一结果符合预期，而这也正是本文所采用的细分策略的名称中“Butterfly”的由来\cite{Dyn1990}。
-\begin{figure}[ht]
+其中，本章实验数据细分后的多边
+\begin{figure}[H]
 \centering
 \includegraphics[width=3.5in]{Figures/postprocessing/centerlines/subdivision.eps}
 \caption[对平整后表面进行细分]{对平整后表面进行细分。左：表面细分的结果。右上：红色方框内表面细分之前的多边形表面。右下：红色方框内表面细分之后的多边形表面。}%
 \label{fig:centerlins_subdivision_local}
 \end{figure}
-\begin{table}[t]
+\noindent 形数量是细分前的$3.98$倍，而完整的血管模型，细分后的多边形数量则是细分前的$4$倍。
+这一结果符合预期，而这也正是本文所采用的细分策略的名称中“Butterfly”的由来\cite{Dyn1990}。
+\begin{table}[ht]
 \renewcommand{\arraystretch}{0.5}
 \caption[表面细分前后多边形数量对比]{表面细分前后多边形数量对比。(a) 本章实验数据；(b) 完整的血管模型。}
 \label{tbl:centerlins_subdivision}

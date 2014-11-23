@@ -1,5 +1,36 @@
 
-\section{多边形精简算法}
+\section{血管表面模型后处理流程设计}
+\label{sec:postprocessing_pipeline}
+
+\subsection{后处理管线的设计}
+
+图\ref{fig:mesh_data_flow}给出了在实际削减模型的多边形之前所必需完成的预处理工作的流程。
+首先，需要对基于CTA的血管模型中的顶点的连接性进行检验，以确保要处理的表面是一体的，并且其中所有的顶点都是连通的。
+其次，引入平滑算法以处理模型表面的“毛刺”和“凹陷”等不平整的区域。
+最后，对表面模型的多边形面片进行削减，同时，血管模型的几何特征得到最大限度的保护。
+\begin{figure}[ht]
+\centering
+\input{FigureSrc/postprocessing/mesh/data_flow}
+% \includegraphics[width=3.2in]{Figures/postprocessing/mesh/DataFlow.eps}
+\caption[血管表面模型优化流程]{血管表面模型优化流程。}
+\label{fig:mesh_data_flow}
+\end{figure}
+
+在进行实际的中心线提取之前，我们需要对之前基于CTA的可视化模型进行降噪和平滑，以确保输入表面数据的质量。
+这些对基于CTA的血管表面模型的预处理流程如图\ref{fig:centerlines_data_flow}所示。
+首先，检验表面模型中各个顶点的连接性，从而除去双层以及悬浮面片，以获得表面的最大连接区域。
+第二，对检验后的表面进行平滑处理，以除去表面模型上的“毛刺”和“台阶”等噪声，确保中心线提取运算的准确性。
+第三，计算所得表面模型的法向量，以表明表面的“内部”和“外部”。
+最后，对表面模型进行细分，保证中心线提取数值计算的稳定性。
+\begin{figure}[ht]
+\centering
+\input{FigureSrc/postprocessing/centerlines/data_flow}
+% \includegraphics[width=3.2in]{Figures/postprocessing/centerlines/DataFlow.eps}
+\caption[表面模型中心线提取流程]{表面模型中心线提取流程。}
+\label{fig:centerlines_data_flow}
+\end{figure}
+
+\subsection{多边形精简算法}
 \label{sec:mesh_decimation}
 
 为了削减构成表面模型的多边形总数，我们采用了一种削减三角形网格的算法\cite{Schroeder1992}。

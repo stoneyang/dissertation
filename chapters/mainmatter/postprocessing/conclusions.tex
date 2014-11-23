@@ -43,6 +43,10 @@
 在本章的实验中，我们测试了一系列设置不同精简率的情况，并且成功地确定了生成的结果可接受的精简率参数。
 面片削减的输出是progressive网格\cite{Hoppe1996}。
 除了前述对输入网格数量的削减，结果中的网格还很好地保持了模型的几何特征以及整体外观（法线，颜色等）。
+
+在验证交互性能的过程中，我们通过大量实际测试发现，大于$10$的fps才足以保证本样机显示的流畅性。
+在本章中，用于验证的主动脉区段表面模型（图\ref{fig:mesh_connectivity}）的多边形数量被削减了$90\%$（见第\ref{subsec:mesh_validation}节），在交互实验中达到了$18$fps（$> 10$）。
+而由于完整血管表面模型中，张成表面的多边形数量巨大（图\ref{fig:centerlins_surface}），因此用于手术仿真研究的主动脉和冠状动脉的表面模型的多边形数量被削减$99\%$，才使得屏幕刷新率在交互实验中达到了$11$fps（$> 10$）。
 \begin{figure}[H]
 \centering
 \subfloat[]{\includegraphics[height=3.2in]{Figures/postprocessing/centerlines/surface.eps}%
@@ -53,10 +57,6 @@
 \caption[完整主动脉模型及其中心线]{完整主动脉表面模型及其中心线：(a) 基于CTA的表面模型（多边形数量：$757,538$）；(b) 表面模型的中心线。}%
 \label{fig:centerlins_visualization}
 \end{figure} 
-
-在验证交互性能的过程中，我们通过大量实际测试发现，大于$10$的fps才足以保证本样机显示的流畅性。
-在本章中，用于验证的主动脉区段表面模型（图\ref{fig:mesh_connectivity}）的多边形数量被削减了$90\%$（见第\ref{subsec:mesh_validation}节），在交互实验中达到了$18$fps（$> 10$）。
-而由于完整血管表面模型中，张成表面的多边形数量巨大（图\ref{fig:centerlins_surface}），因此用于手术仿真研究的主动脉和冠状动脉的表面模型的多边形数量被削减$99\%$，才使得屏幕刷新率在交互实验中达到了$11$fps（$> 10$）。
 
 \subsubsection{面向交互实验的多边形精简}
 

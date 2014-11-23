@@ -16,17 +16,17 @@
 \subsection{实验场景与数据}
 \label{subsec:mesh_setup_data}
 
-图\ref{fig:mesh_data_flow}给出了在实际削减模型的多边形之前所必需完成的预处理工作的流程。
-首先，需要对基于CTA的血管模型中的顶点的连接性进行检验，以确保要处理的表面是一体的，并且其中所有的顶点都是连通的。
-其次，引入平滑算法以处理模型表面的“毛刺”和“凹陷”等不平整的区域。
-最后，对表面模型的多边形面片进行削减，同时，血管模型的几何特征得到最大限度的保护。
-\begin{figure}[ht]
-\centering
-\input{FigureSrc/postprocessing/mesh/data_flow}
-% \includegraphics[width=3.2in]{Figures/postprocessing/mesh/DataFlow.eps}
-\caption[血管表面模型优化流程]{血管表面模型优化流程。}
-\label{fig:mesh_data_flow}
-\end{figure}
+% 图\ref{fig:mesh_data_flow}给出了在实际削减模型的多边形之前所必需完成的预处理工作的流程。
+% 首先，需要对基于CTA的血管模型中的顶点的连接性进行检验，以确保要处理的表面是一体的，并且其中所有的顶点都是连通的。
+% 其次，引入平滑算法以处理模型表面的“毛刺”和“凹陷”等不平整的区域。
+% 最后，对表面模型的多边形面片进行削减，同时，血管模型的几何特征得到最大限度的保护。
+% \begin{figure}[ht]
+% \centering
+% \input{FigureSrc/postprocessing/mesh/data_flow}
+%%\includegraphics[width=3.2in]{Figures/postprocessing/mesh/DataFlow.eps}
+% \caption[血管表面模型优化流程]{血管表面模型优化流程。}
+% \label{fig:mesh_data_flow}
+% \end{figure}
 
 本章中用到的血管表面模型来自基于真实病例的CTA影像数据，该工作的具体细节参见本文第\ref{chap:aorta}章。
 为便于叙述和节省空间，我们在这里只对原先的血管模型的一段应用本章的方法，图\ref{fig:mesh_connectivity}说明了本章所用数据的来历。
@@ -186,7 +186,7 @@ R = \frac{Q_r}{Q}.
 图\ref{fig:mesh_decimate}展示了应用上述参数所得精简后的表面模型。
 观察上述结果，我们发现，精简率为$90\%$和$99\%$的结果包含满足可接受数量的多边形。
 然而，进一步观察精简率为$99\%$的结果表面，可以发现这一精简已经对模型原有的几何特性产生了明显的影响。
-因此，我们选定精简率$90\%$为本章的工作参数。
+因此，我们选定精简率$90\%$为处理这段血管模型的工作参数。
 \begin{figure}[ht]
 % \begin{table}[t]
 \renewcommand{\arraystretch}{0.5}
@@ -220,19 +220,7 @@ R = \frac{Q_r}{Q}.
 \bottomrule
 \end{tabular*}
 \end{table}
-
-\subsection{交互性能的验证}
-\label{subsec:mesh_validation}
-
-我们进行了若干组测试来验证通过不同精简率所得血管模型与虚拟导丝\cite{Mi2013ROBIO}在仿真环境中的交互性能。
-表\ref{tbl:mesh_FPS1}列出了本章中所选取的血管模型片段在经过不同精简率处理的结果模型与显示刷新率（fps）之间的关系。
-表\ref{tbl:mesh_FPS2}则列出了完整的血管模型（包含主动脉与冠状动脉）不同精简率处理的结果模型在与fps之间的关系。
-上述两个表格中，
-“仿真初始fps”是指虚拟导丝刚送入血管模型时的fps值。
-“仿真平均fps”是指虚拟导丝在进给至冠状动脉中给定位置的过程中途径五个不同位置时的fps值的平均值。
-“是否完成仿真”是指虚拟导丝是否顺利进给至冠状动脉中的给定位置。
-从这些结果可以得出，我们采用了精简率为$99\%$的完整血管模型用于后续的交互仿真研究。
-\begin{table}[ht]
+\begin{table}[H]
 \renewcommand{\arraystretch}{0.5}
 \caption[精简率与fps——情形I]{精简率与fps——情形I}
 \label{tbl:mesh_FPS1}
@@ -249,7 +237,14 @@ R = \frac{Q_r}{Q}.
 \bottomrule
 \end{tabular*}
 \end{table}
-\begin{table}[ht]
+
+\subsection{交互性能的验证}
+\label{subsec:mesh_validation}
+
+我们进行了若干组测试来验证通过不同精简率所得血管模型与虚拟导丝\cite{Mi2013ROBIO}在仿真环境中的交互性能。
+表\ref{tbl:mesh_FPS1}列出了本章中所选取的血管模型片段在经过不同精简率处理的结果模型与显示刷新率（fps）之间的关系。
+表\ref{tbl:mesh_FPS2}则列出了完整的血管模型（包含主动脉与冠状动脉）不同精简率处理的结果模型在与fps之间的关系。
+\begin{table}[H]
 \renewcommand{\arraystretch}{0.5}
 \caption[精简率与fps——情形II]{精简率与fps——情形II}
 \label{tbl:mesh_FPS2}
@@ -266,3 +261,11 @@ R = \frac{Q_r}{Q}.
 \bottomrule
 \end{tabular*}
 \end{table}
+
+上述两个表格中，
+“仿真初始fps”是指虚拟导丝刚送入血管模型时的fps值。
+“仿真平均fps”是指虚拟导丝在进给至冠状动脉中给定位置的过程中途径五个不同位置时的fps值的平均值。
+“是否完成仿真”是指虚拟导丝是否顺利进给至冠状动脉中的给定位置。
+从这些结果可以得出，我们采用了精简率为$99\%$的完整血管模型用于后续的交互仿真研究。
+
+
