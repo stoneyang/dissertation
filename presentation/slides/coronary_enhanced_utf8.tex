@@ -3,7 +3,76 @@
 
 \begin{frame}
 \begin{itemize}
+\item \textbf{多尺度管状物增强~[Sato(1998)]}
+\begin{itemize}
+\pause \item \textbf{三维线滤波}：等价为三维图像$I(\cdot)$的Hessian阵的计算[Sato(1998)]:
+\begin{gather*}
+\mathcal{H} = \nabla^2 I =
+\begin{bmatrix}
+I_{xx} & I_{xy} & I_{xz} \\ I_{yx} & I_{yy} & I_{yz} \\ I_{zx} & I_{zy} & I_{zz}
+\end{bmatrix}
+\end{gather*}
+\begin{itemize}
+\item \textbf{特征值}: $\lambda_1$，$\lambda_2$，和$\lambda_3$，降序排列
+\item \textbf{相应的特征向量}: $e_1$，$e_2$，和$e_3$
+\end{itemize}
+\pause \item \textbf{滤波响应的多尺度整合}：求各尺度响应的最大值
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item \textbf{增强不同形状所需的特征值}
+\end{itemize}
+\begin{table}[h]
+\renewcommand{\arraystretch}{0.5}
+\centering
+\begin{tabular*}{80mm}{cc}
+\toprule
+\hspace{5mm} \bfseries \small{物体形状}  & \hspace{15mm}                    \bfseries \small{特征值}                       \\
+\midrule
+\hspace{5mm} \small{明亮的管状}          & \hspace{15mm}  \small{$\lambda_1 \approx 0, \lambda_2 \approx \lambda_3 \ll 0$} \\
+\hspace{5mm} \small{暗淡的管状}          & \hspace{15mm}  \small{$\lambda_1 \approx 0, \lambda_2 \approx \lambda_3 \gg 0$} \\
+\hspace{5mm} \small{明亮的盘状}          & \hspace{15mm}  \small{$\lambda_1 \approx \lambda_2 \approx 0, \lambda_3 \ll 0$} \\
+\hspace{5mm} \small{暗淡的盘状}          & \hspace{15mm}  \small{$\lambda_1 \approx \lambda_2 \approx 0, \lambda_3 \gg 0$} \\
+\hspace{5mm} \small{明亮的球状}          & \hspace{15mm}  \small{$\lambda_1 \approx \lambda_2 \approx \lambda_3 \ll 0$}    \\
+\hspace{5mm} \small{暗淡的球状}          & \hspace{15mm}  \small{$\lambda_1 \approx \lambda_2 \approx \lambda_3 \gg 0$}    \\
+\bottomrule
+\end{tabular*}
+\end{table}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item \textbf{线形测度} (\alert{$\lambda_1 \approx 0$ and $\lambda_2 \approx \lambda_3 \ll 0$})
+\pause \begin{equation*}
+\lambda_{123} =
+\begin{cases}
+\left| \lambda_3 \right| \left( \frac{\lambda_2}{\lambda_3} \right)^{\gamma_{23}} \left( 1 + \frac{\lambda_1}{\left| \lambda_2 \right|} \right)^{\gamma_{12}},        & \lambda_1 \le 0 \\%
+\left| \lambda_3 \right| \left( \frac{\lambda_2}{\lambda_3} \right)^{\gamma_{23}} \left( 1 - \alpha \frac{\lambda_1}{\left| \lambda_2 \right|} \right)^{\gamma_{12}}, & \frac{\left| \lambda_2 \right|}{\alpha} > \lambda_1 > 0 \\%
+0,                                                                                                                                                                    & \text{其它} %
+\end{cases}
+\end{equation*}
+% \end{itemize}
+\begin{itemize}
+\pause \item \textbf{附加参数}：$\gamma_{12}$，$\gamma_{23}$，和$\alpha$，全部为正
+\begin{itemize}
+\item $\gamma_{12} \in [0, \infty)$：辨别出分支结构与噪音以及伪分支结构
+\item $\gamma_{23} \in [0, \infty)$：控制图像锐度
+\item $\alpha \in (0, 1.0]$：对于任意$\lambda_1$，保持函数最后一项的对称性
+\end{itemize}
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
   \item \textbf{心脏区域的VOI提取}：
+  \begin{itemize}
+  \pause \item 设定长方体区域的起点和尺寸
+  \pause \item 缩小处理区域，减轻运算负担
+  \end{itemize}
 \end{itemize}
 \begin{figure}[t]
 \centering
@@ -30,43 +99,44 @@
 \begin{itemize}
   \item \textbf{基于vesselness的预处理}：
   \begin{enumerate}
-    \item 二值阈值滤波（$\text{lower threshold} = 300$, $\text{upper threshold} = 600$）
-    \item 管状物体增强（$\sigma = 0.9$, $\gamma_{12} = 0.1$, $\gamma_{23} = 2.0$）
+    \pause \item 二值阈值滤波（$\text{TH}_{\text{lower}} = 300$, $\text{TH}_{\text{upper}} = 600$）
+    \pause \item 管状物体增强（$\sigma = 0.9$, $\gamma_{12} = 0.1$, $\gamma_{23} = 2.0$）
   \end{enumerate}
 \end{itemize}
 \begin{columns}[b,onlytextwidth]
 \begin{column}{.5\textwidth}
-\begin{figure}[t]
+\pause \begin{figure}[t]
 \centering
 \includegraphics[height=1.5in]{../../Figures/coronary/coronary_enhanced/binary1.eps}
 \end{figure}
 \end{column}
 \begin{column}{.5\textwidth}
-\begin{figure}[t]
+\pause \begin{figure}[t]
 \centering
 \includegraphics[height=1.5in]{../../Figures/coronary/coronary_enhanced/hessian.eps}
 \end{figure}
 \end{column}
 \end{columns}
+% \centering{\textbf{\alert 增强后的管状物亮度值过低，且不均匀}}
 \end{frame}
 
 \begin{frame}
 \begin{itemize}
   \item \textbf{两种像素亮度处理结果对比}：
   \begin{enumerate}
-    \item 非线性亮度映射（$m = 80$, $n = 120$）
-    \item 二值阈值滤波（$\text{TH}_{\text{lower}} = 40$, $\text{TH}_{\text{upper}} = 200$）
+    \pause \item 非线性亮度映射（$m = 80$, $n = 120$）
+    \pause \item 二值阈值滤波（$\text{TH}_{\text{lower}} = 40$, $\text{TH}_{\text{upper}} = 200$）
   \end{enumerate}
 \end{itemize}
 \begin{columns}[b,onlytextwidth]
 \begin{column}{.5\textwidth}
-\begin{figure}[t]
+\pause \begin{figure}[t]
 \centering
 \includegraphics[height=1.5in]{../../Figures/coronary/coronary_enhanced/sigmoid.eps}
 \end{figure}
 \end{column}
 \begin{column}{.5\textwidth}
-\begin{figure}[t]
+\pause \begin{figure}[t]
 \centering
 \includegraphics[height=1.5in]{../../Figures/coronary/coronary_enhanced/binary2.eps}
 \end{figure}
@@ -90,19 +160,19 @@
 \begin{itemize}
   \item \textbf{冠状动脉模型对比}：
   \begin{enumerate}
-    \item 传统CURVES演进
-    \item 管状物增强后的CURVES演进
+    \pause \item 传统CURVES演进
+    \pause \item 管状物增强后的CURVES演进
   \end{enumerate}
 \end{itemize}
 \begin{columns}[b,onlytextwidth]
 \begin{column}{.5\textwidth}
-\begin{figure}[t]
+\pause \begin{figure}[t]
 \centering
 \includegraphics[height=1.2in]{../../Figures/coronary/coronary_enhanced/model_conventional.eps}
 \end{figure}
 \end{column}
 \begin{column}{.5\textwidth}
-\begin{figure}[t]
+\pause \begin{figure}[t]
 \centering
 \includegraphics[height=1.2in]{../../Figures/coronary/coronary_enhanced/model_enhanced.eps}
 \end{figure}
@@ -110,10 +180,10 @@
 \end{columns}
 \end{frame}
 
-\begin{frame}
+% \begin{frame}
 
-\end{frame}
+% \end{frame}
 
-\begin{frame}
+% \begin{frame}
 
-\end{frame} 
+% \end{frame} 

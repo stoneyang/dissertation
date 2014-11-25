@@ -3,12 +3,27 @@
 
 \begin{frame}
 \begin{itemize}
-  \item \textbf{心脏区域前面观}：
+\item \textbf{血管介入仿真中心脏表面模型的作用}
+\begin{itemize}
+\item 增强虚拟解剖环境的视觉效果
+\item 为辨认冠状动脉模型的不同分支提供空间参照物
 \end{itemize}
-\begin{figure}[t]
-\centering
-\includegraphics[height=1.5in]{../../Figures/gac/heart/original.eps}
-\end{figure}
+\pause \item \textbf{血管介入仿真中心脏表面模型的获取}
+\begin{itemize}
+\item 几何形状近似的椭球或者不规则的几何体
+\item 未考虑心脏表面模型
+\item 医学影像处理方法
+\end{itemize}
+\pause \item \textbf{心脏近似区域的分割与可视化}
+\begin{itemize}
+\item 是医学影像领域中的一项极具挑战性的工作
+\item 形态特征：不规则的空间形体，可近似看作椭球
+\item 分割时的主要困难：搏动致心脏边缘模糊不清，且帧间变化大
+\begin{itemize}
+\item 只分割心脏的近似区域，得到近似模型，满足仿真需要
+\end{itemize}
+\end{itemize}
+\end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -24,20 +39,44 @@
 \end{figure}
 \end{frame}
 
+% \begin{frame}
+% \begin{itemize}
+  % \item \textbf{心脏区域前面观}：
+% \end{itemize}
+% \begin{figure}[t]
+% \centering
+% \includegraphics[height=1.5in]{../../Figures/gac/heart/original.eps}
+% \end{figure}
+% \end{frame}
+
 \begin{frame}
 \begin{itemize}
   \item \textbf{二值阈值后心脏区域前面观}：
   \begin{itemize}
-    \item $\text{TH}_{\text{lower}} = 0$，$\text{TH}_{\text{upper}} = 200$
-    \item 注意其中的心包，以及大部分血管等都已被除去
+    \pause \item 阈值滤波（$\text{TH}_{\text{lower}} = 0$，$\text{TH}_{\text{upper}} = 200$）
+    \pause \item 注意其中的心脏组织以及大部分血管等都已被除去
   \end{itemize}
 \end{itemize}
-\begin{figure}[t]
-\centering
-\includegraphics[height=1.5in]{../../Figures/gac/heart/binary_threshold.eps}
+% \begin{figure}[t]
+% \centering
+% \includegraphics[height=1.5in]{../../Figures/gac/heart/binary_threshold.eps}
 % \caption[二值阈值后心脏区域前面观]{二值阈值后心脏区域前面观（$\text{TH}_{\text{lower}} = 0$，$\text{TH}_{\text{upper}} = 200$）。注意其中的心包，以及大部分血管等都已被除去。}%
 % \label{fig:heart_binary_threshold_experiments}
+% \end{figure}
+\begin{columns}[b,onlytextwidth]
+\begin{column}{.5\textwidth}
+\pause \begin{figure}
+\centering
+\includegraphics[height=1.5in]{../../Figures/gac/heart/original.eps}
 \end{figure}
+\end{column}
+\begin{column}{.5\textwidth}
+\pause \begin{figure}
+\centering
+\includegraphics[height=1.5in]{../../Figures/gac/heart/binary_threshold.eps}
+\end{figure}
+\end{column}
+\end{columns}
 \end{frame}
 
 \begin{frame}
@@ -72,7 +111,7 @@
 \end{figure}
 \end{frame} 
 
-\begin{frame}
+% \begin{frame}
 
-\end{frame} 
+% \end{frame} 
  

@@ -1,5 +1,5 @@
 %# -*- coding:utf-8 -*-
-\begin{tikzpicture}[scale=.3]
+\begin{tikzpicture}[scale=.32]
 
 \draw [black,thick,rounded corners] (-3,0) rectangle (3,2);            % binary threshold
 \draw [black,thick,rounded corners] (-3,3) rectangle (3,5);  % CURVES
@@ -13,17 +13,17 @@
 \draw [black,thick,rounded corners] (-3,17) rectangle (3,19);  % ROI extraction
 \draw [black,thick,rounded corners] (-3,20) rectangle (3,22);  % raw input
 
-\node [above right] at (-2.1,0.25) {\tiny \fs \bf 二值阈值滤波};
-\node [above right] at (-1.5,3.25) {\tiny \fs \bf CURVES};
+\node [above right] at (-2.6,0.25) {\scriptsize \fs \bf 二值阈值滤波};
+\node [above right] at (-1.9,3.25) {\scriptsize \fs \bf CURVES};
 
-\node [above right] at (-7.5,7.25) {\tiny \fs \bf 初始水平集演进};
+\node [above right] at (-8.05,7.25) {\scriptsize \fs \bf 初始水平集演进};
 
-\node [above right] at (2.9,7.25) {\tiny \fs \bf 特征图像计算};
+\node [above right] at (2.35,7.25) {\scriptsize \fs \bf 特征图像计算};
 
-\node [above right] at (-1.6,11.25) {\tiny \fs \bf 阈值滤波};
-\node [above right] at (-2.7,14.25) {\tiny \fs \bf 曲率各向异性扩散};
-\node [above right] at (-1.5,17.25) {\tiny \fs \bf ROI提取};
-\node [above right] at (-1.8,20.25) {\tiny \fs \bf 原始体数据};
+\node [above right] at (-1.9,11.25) {\scriptsize \fs \bf 阈值滤波};
+\node [above right] at (-2.78,14.25) {\scriptsize \fs \bf 各向异性扩散};
+\node [above right] at (-1.7,17.25) {\scriptsize \fs \bf ROI提取};
+\node [above right] at (-2.35,20.25) {\scriptsize \fs \bf 原始体数据};
 
 \draw [<-,thick] (0,2) -- (0,3);
 

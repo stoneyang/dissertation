@@ -3,6 +3,38 @@
 
 \begin{frame}
 \begin{itemize}
+\item \textbf{血管介入仿真中血管模型中心线的作用}
+\begin{itemize}
+\pause \item 提供虚拟解剖环境中的血管的几何信息
+\begin{itemize}
+\pause \item 走向，半径，分岔位置
+\end{itemize}
+\pause \item 为虚拟导管行进状态的探测提供基准
+\begin{itemize}
+\pause \item 状态探测：沿中心线均匀分布的空心球（半径小于血管内径）
+\end{itemize}
+\end{itemize}
+\pause \item \textbf{血管介入仿真中血管模型中心线的提取}
+\begin{itemize}
+\pause \item 顶点连接性检验
+\pause \item 无损的表面平整和修补
+\pause \item 表面细分
+\pause \item 中心线提取
+\end{itemize}
+% \item \textbf{心脏近似区域的分割与可视化}
+% \begin{itemize}
+% \item 是医学影像领域中的一项极具挑战性的工作
+% \item 形态特征：不规则的空间管状物，走向和半径变化复杂
+% \item 分割时的主要困难：亮度过低不易观察，细节丢失严重
+% \begin{itemize}
+% \item 只分割心脏的近似区域，得到近似模型，满足仿真需要
+% \end{itemize}
+% \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
   \item \textbf{表面模型中心线提取流程}：
 \end{itemize}
 \begin{figure}[t]
@@ -18,19 +50,19 @@
 \begin{itemize}
   \item \textbf{区段模型及其顶点连接性验证}：
   \begin{itemize}
-    \item 主动脉下半段表面模型（由$205,590$个多边形构成）与VOI提取的模型局部（红色方框内）
-    \item 所提取区段血管表面模型的连接性验证结果（多边形面片数量：$70,625$）
+    \pause \item 主动脉下半段表面模型（由$205,590$个多边形构成）与VOI提取的模型局部（红色方框内）
+    \pause \item 所提取区段血管表面模型的连接性验证结果（多边形面片数量：$70,625$）
   \end{itemize}
 \end{itemize}
 \begin{columns}[b,onlytextwidth]
 \begin{column}{.5\textwidth}
-\begin{figure}[t]
+\pause \begin{figure}[t]
 \centering
 \includegraphics[height=1.5in]{../../Figures/postprocessing/centerlines/VOI.eps}
 \end{figure}
 \end{column}
 \begin{column}{.5\textwidth}
-\begin{figure}[t]
+\pause \begin{figure}[t]
 \centering
 \includegraphics[height=1.5in]{../../Figures/postprocessing/centerlines/connectivity_local.eps}
 \end{figure}
@@ -53,7 +85,8 @@
 \centering
 \begin{columns}[b,onlytextwidth]
 \begin{column}{.5\textwidth}
-\begin{tabular*}{40mm}{lc}
+\centering
+\begin{tabular*}{35mm}{lc}
 \toprule
 ~                                & \small{多边形数量} \\
 \midrule
@@ -64,7 +97,8 @@
 \end{tabular*}
 \end{column}
 \begin{column}{.5\textwidth}
-\begin{tabular*}{40mm}{lc}
+\centering
+\begin{tabular*}{35mm}{lc}
 \toprule
 ~                                & \small{多边形数量} \\
 \midrule
@@ -135,7 +169,8 @@
 \centering
 \begin{columns}[b,onlytextwidth]
 \begin{column}{.5\textwidth}
-\begin{tabular*}{40mm}{lr}
+\centering
+\begin{tabular*}{35mm}{lr}
 \toprule
 ~              & \small{多边形数量} \\
 \midrule
@@ -146,7 +181,8 @@
 \end{tabular*}
 \end{column}
 \begin{column}{.5\textwidth}
-\begin{tabular*}{40mm}{lr}
+\centering
+\begin{tabular*}{35mm}{lr}
 \toprule
 ~              & \small{多边形数量} \\
 \midrule
@@ -197,7 +233,7 @@
 % \caption[中心线计算时间]{中心线计算时间}
 % \label{tbl:centerlins_computation_time}
 \centering
-\begin{tabular*}{55mm}{lr}
+\begin{tabular*}{50mm}{lr}
 \toprule
 ~                                & \small{耗费时间（s）} \\
 \midrule
@@ -213,19 +249,19 @@
 \begin{itemize}
   \item \textbf{完整主动脉模型的中心线}：
   \begin{itemize}
-    \item 基于CTA的表面模型（多边形的数量：$757,538$）
-    \item 表面模型的中心线
+    \pause \item 基于CTA的表面模型（多边形的数量：$757,538$）
+    \pause \item 表面模型的中心线
   \end{itemize}
 \end{itemize}
 \begin{columns}[b,onlytextwidth]
 \begin{column}{.5\textwidth}
-\begin{figure}[t]
+\pause \begin{figure}[t]
 \centering
 \includegraphics[height=1.5in]{../../Figures/postprocessing/centerlines/surface.eps}
 \end{figure}
 \end{column}
 \begin{column}{.5\textwidth}
-\begin{figure}[t]
+\pause \begin{figure}[t]
 \centering
 \includegraphics[height=1.5in]{../../Figures/postprocessing/centerlines/centerlines.eps}
 \end{figure}

@@ -3,6 +3,37 @@
 
 \begin{frame}
 \begin{itemize}
+\item \textbf{血管介入仿真中血管表面模型的要求}
+\begin{itemize}
+\pause \item 提供虚拟解剖环境的可视化
+\begin{itemize}
+\item 外观平整，圆滑，无破损，无层叠
+\end{itemize}
+\pause \item 满足与虚拟导管的交互仿真需求
+\begin{itemize}
+\item 数据量：多边形面片数量（多边形的顶点）
+\end{itemize}
+\end{itemize}
+\pause \item \textbf{血管介入仿真中血管表面模型的优化处理}
+\begin{itemize}
+\pause \item 顶点连接性检验
+\pause \item 无损的表面平整和修补
+\pause \item 多边形精简（基于“平均表面”准则）
+\end{itemize}
+% \item \textbf{心脏近似区域的分割与可视化}
+% \begin{itemize}
+% \item 是医学影像领域中的一项极具挑战性的工作
+% \item 形态特征：不规则的空间管状物，走向和半径变化复杂
+% \item 分割时的主要困难：亮度过低不易观察，细节丢失严重
+% \begin{itemize}
+% \item 只分割心脏的近似区域，得到近似模型，满足仿真需要
+% \end{itemize}
+% \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
   \item \textbf{血管表面模型优化流程}：
 \end{itemize}
 \begin{figure}[t]
@@ -16,13 +47,13 @@
 
 \begin{frame}
 \begin{itemize}
-  \item \textbf{表面中顶点位置的五种情形}
+  \item \textbf{表面中顶点位置的五种情形~[Schroeder(1992)]}
   \begin{itemize}
-    \item 简单情形
-    \item 复杂情形
-    \item 边缘情形
-    \item 边缘内部情形
-    \item 拐角情形
+    \pause \item 简单情形
+    \pause \item 复杂情形
+    \pause \item 边缘情形
+    \pause \item 边缘内部情形
+    \pause \item 拐角情形
   \end{itemize}
 \end{itemize}
 \begin{figure}
@@ -48,10 +79,10 @@
 
 \begin{frame}
 \begin{itemize}
-  \item \textbf{削减顶点引起的多边形减少}
+  \item \textbf{削减顶点引起的多边形减少~[Schroeder(1992)]}
   \begin{itemize}
-    \item 简单情形：削减前的多边形数量：$6$，削减后的多边形数量：$4$
-    \item 边缘情形：削减前的多边形数量：$5$，削减后的多边形数量：$4$
+    \pause \item 简单情形：削减前的多边形数量：$6$，削减后的多边形数量：$4$
+    \pause \item 边缘情形：削减前的多边形数量：$5$，削减后的多边形数量：$4$
   \end{itemize}
 \end{itemize}
 \begin{figure}
@@ -152,7 +183,7 @@
 % \caption[削减率与削减后的多边形数量]{削减率与削减后的多边形数量}
 % \label{tbl:mesh_decimate}
 \centering
-\begin{tabular*}{100mm}{c r r r r r}
+\begin{tabular*}{90mm}{c r r r r r}
 \toprule
 % \bfseries      & \bfseries Quantity of polygonal surfaces \\
 \hspace{2mm} \small{削减率 （$\%$）}  &     \small{$10$} &     \small{$50$} &     \small{$75$} &    \small{$90$} &  \small{$99$} \\
@@ -172,7 +203,7 @@
 % \caption[精简率与fps——情形I]{精简率与fps——情形I}
 % \label{tbl:mesh_FPS1}
 \centering
-\begin{tabular*}{100mm}{c r r r r r}
+\begin{tabular*}{90mm}{c r r r r r}
 \toprule
 \hspace{5mm} \small{精简率（$\%$）}           & \small{$10$} & \small{$50$} & \small{$75$} & \small{$90$} & \small{$99$} \\
 \midrule
@@ -209,6 +240,6 @@
 \end{table}
 \end{frame}
 
-\begin{frame}
+% \begin{frame}
 
-\end{frame} 
+% \end{frame} 

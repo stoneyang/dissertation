@@ -3,11 +3,11 @@
 
 \begin{frame}
 \begin{itemize}
-\pause \item \textbf{血管介入仿真中主动脉模型的作用}
+\item \textbf{血管介入仿真中主动脉模型的作用}
 \begin{itemize}
 \item 可视化环境的组成部分
-\item 虚拟手术工具运动的必经路径
-\item 虚拟手术工具相互的硬约束
+\item 虚拟导管运动的必经路径
+\item 虚拟导管交互的硬约束
 \end{itemize}
 \pause \item \textbf{血管介入仿真中主动脉模型的获取}
 \begin{itemize}
@@ -26,15 +26,15 @@
 
 \begin{frame}
 \begin{itemize}
-\item \textbf{测地活动轮廓（GAC）}
+\item \textbf{测地活动轮廓（GAC）~[Caselles(1997)]}
 \begin{itemize}
-\item 根植于“蛇”模型
+\pause \item 根植于“蛇”模型
 \begin{itemize}
 \item 基于图像内容呈现的物理性质，通过演进一个轮廓（或“围线”），探测物体边缘
 \item 演进通过使一个能量泛函最小化来实现，取得（局部）最小值的位置恰好是目标物体的边缘
-\item \textbf{缺点}：轮廓无法控制自身拓扑；无法同时探测多个目标
+\item \textbf{“蛇”的缺点}：轮廓无法控制自身拓扑；无法同时探测多个目标
 \end{itemize}
-\item 对“蛇”模型的改进
+\pause \item 对“蛇”模型的改进
 \begin{itemize}
 \item 引入测地学计算和水平集演进
 \item 允许围线同时探测图像中多个目标的内部边缘和外部边缘
@@ -50,7 +50,7 @@
 % \label{eqn:aorta_particular_snakes}
 E(\mathcal{C}) = \alpha \int_0^1 | \mathcal{C}'(q) |^2 dq + \beta \int_0^1 | \mathcal{C}''(q) |^2 dq - \lambda \int_0^1 | \nabla I_{s} ( \mathcal{C}(q) ) |dq
 \end{equation*}
-\item \textbf{GAC的数学模型}
+\pause \item \textbf{GAC的数学模型}
 % \end{itemize}
 \begin{equation*}
 % \label{eqn:aorta_particular_snakes}
@@ -84,6 +84,10 @@ E(\mathcal{C}) = \alpha \int_0^1 | \mathcal{C}'(q) |^2 dq - \lambda \int_0^1 | \
 \begin{frame}
 \begin{itemize}
 \item \textbf{原始图像的ROI提取}
+\begin{itemize}
+\pause \item 设定矩形区域的起点和尺寸
+\pause \item 缩小处理区域，减轻运算负担
+\end{itemize}
 \end{itemize}
 \begin{figure}[t]
 \centering
@@ -97,26 +101,26 @@ E(\mathcal{C}) = \alpha \int_0^1 | \mathcal{C}'(q) |^2 dq - \lambda \int_0^1 | \
 \begin{itemize}
   \item \textbf{特征图像的生成步骤}：
   \begin{enumerate}
-    \item 保护物体边缘的平滑处理（$\text{传导参数} = 9.0$）
-    \item 基于Gaussian核的梯度幅值计算（$\sigma = 0.9$）
-    \item 利用S型函数进行非线性映射（$m = -3$, $n = 20$）
+    \pause \item 保护物体边缘的平滑处理（曲率各向异性扩散，$\text{传导参数} = 9.0$）
+    \pause \item 梯度幅值计算（基于Gaussian核，$\sigma = 0.9$）
+    \pause \item 像素亮度非线性映射（S型函数，$m = -3$, $n = 20$）
   \end{enumerate}
 \end{itemize}
 \begin{columns}[b,onlytextwidth]
 \begin{column}{.3\textwidth}
-\begin{figure}[t]
+\pause \begin{figure}[t]
 \centering
 \includegraphics[height=1.5in]{../../Figures/gac/dcm_smoothing.eps}
 \end{figure}
 \end{column}
 \begin{column}{.3\textwidth}
-\begin{figure}[t]
+\pause \begin{figure}[t]
 \centering
 \includegraphics[height=1.5in]{../../Figures/gac/dcm_gradient.eps}
 \end{figure}
 \end{column}
 \begin{column}{.3\textwidth}
-\begin{figure}[t]
+\pause \begin{figure}[t]
 \centering
 \includegraphics[height=1.5in]{../../Figures/gac/dcm_sigmoid.eps}
 \end{figure}
@@ -128,21 +132,21 @@ E(\mathcal{C}) = \alpha \int_0^1 | \mathcal{C}'(q) |^2 dq - \lambda \int_0^1 | \
 \begin{itemize}
   \item \textbf{水平集演进过程}：
   \begin{enumerate}
-    \item 阈值滤波（$\text{TH}_{\text{lower}} = 300\text{HU}$, $\text{TH}_{\text{upper}} = 2000\text{HU}$）
-    \item 从某一种子点开始，利用快速步进法进行的初始水平集演进
-    \item 利用测地活动轮廓进行边缘检测（迭代次数: $100$）
-    \item 利用二值阈值滤波完成像素亮度的反转（明亮区域的亮度值: $255$, 黑暗区域的亮度值: $0$）
+    \pause \item 阈值滤波（$\text{TH}_{\text{lower}} = 300\text{HU}$, $\text{TH}_{\text{upper}} = 2000\text{HU}$）
+    \pause \item 从某一种子点开始，利用快速步进法进行的初始水平集演进
+    \pause \item 利用测地活动轮廓进行边缘检测（迭代次数: $100$）
+    \pause \item 利用二值阈值滤波完成像素亮度的反转（明亮区域的亮度值: $255$, 黑暗区域的亮度值: $0$）
   \end{enumerate}
 \end{itemize}
 \begin{columns}[b,onlytextwidth]
 \begin{column}{.25\textwidth}
-\begin{figure}[t]
+\pause \begin{figure}[t]
 \centering
 \includegraphics[height=1.5in]{../../Figures/gac/dcm_threshold.eps}
 \end{figure}
 \end{column}
 \begin{column}{.25\textwidth}
-\begin{figure}[t]
+\pause \begin{figure}[t]
 \centering
 \setlength{\fboxrule}{0.1pt}
 \setlength{\fboxsep}{0cm}
@@ -150,7 +154,7 @@ E(\mathcal{C}) = \alpha \int_0^1 | \mathcal{C}'(q) |^2 dq - \lambda \int_0^1 | \
 \end{figure}
 \end{column}
 \begin{column}{.25\textwidth}
-\begin{figure}[t]
+\pause \begin{figure}[t]
 \centering
 \setlength{\fboxrule}{0.1pt}
 \setlength{\fboxsep}{0cm}
@@ -158,7 +162,7 @@ E(\mathcal{C}) = \alpha \int_0^1 | \mathcal{C}'(q) |^2 dq - \lambda \int_0^1 | \
 \end{figure}
 \end{column}
 \begin{column}{.25\textwidth}
-\begin{figure}[t]
+\pause \begin{figure}[t]
 \centering
 \includegraphics[height=1.5in]{../../Figures/gac/dcm_out.eps}
 \end{figure}
@@ -168,7 +172,7 @@ E(\mathcal{C}) = \alpha \int_0^1 | \mathcal{C}'(q) |^2 dq - \lambda \int_0^1 | \
 
 \begin{frame}
 \begin{itemize}
-  \item \textbf{主动脉内腔分割结果评估}：
+  \item \textbf{主动脉内腔分割结果评估（11组体数据）}：
   % \begin{enumerate}
     % \item 基于Jaccard系数
     % \item 基于Dice系数
@@ -209,23 +213,43 @@ E(\mathcal{C}) = \alpha \int_0^1 | \mathcal{C}'(q) |^2 dq - \lambda \int_0^1 | \
 \end{table}
 \end{frame} 
 
+% \begin{frame}
+% \begin{itemize}
+  % \item \textbf{主动脉内腔分割结果评估}：
+  % \begin{enumerate}
+    % \pause \item Jaccard系数
+    % \pause \item Dice系数
+  % \end{enumerate}
+% \begin{figure}[t]
+% \centering
+% \input{../../FigureSrc/gac/index_utf8}
+% \end{figure}
+% \end{itemize}
+% \end{frame}
+
 \begin{frame}
 \begin{itemize}
   \item \textbf{主动脉内腔分割结果评估}：
   \begin{enumerate}
-    \item 基于Jaccard系数：均值为$0.933$，标准差为$0.0240$
-    \item 基于Dice系数：均值为$0.965$，标准差为$0.0128$
+    \pause \item 基于Jaccard系数（均值为$0.933$，标准差为$0.0240$）
+	\begin{itemize}
+	\item 交集占并集的比重
+	\end{itemize}
+    \pause \item 基于Dice系数（均值为$0.965$，标准差为$0.0128$）
+	\begin{itemize}
+	\item 交集占和平均的比重
+	\end{itemize}
   \end{enumerate}
 \end{itemize}
 \begin{columns}[b,onlytextwidth]
 \begin{column}{.5\textwidth}
-\begin{figure}[t]
+\pause \begin{figure}[t]
 \centering
 \includegraphics[width=1.8in,height=1.3in]{../../Figures/gac/Jaccard.eps}
 \end{figure}
 \end{column}
 \begin{column}{.5\textwidth}
-\begin{figure}[t]
+\pause \begin{figure}[t]
 \centering
 \includegraphics[width=1.8in,height=1.3in]{../../Figures/gac/Dice.eps}
 \end{figure}
