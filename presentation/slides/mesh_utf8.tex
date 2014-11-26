@@ -49,11 +49,11 @@
 \begin{itemize}
   \item \textbf{表面中顶点位置的五种情形~[Schroeder(1992)]}
   \begin{itemize}
-    \pause \item 简单情形
-    \pause \item 复杂情形
-    \pause \item 边缘情形
-    \pause \item 边缘内部情形
-    \pause \item 拐角情形
+    \onslide<1-5> \item 简单情形
+    \onslide<2-5> \item 复杂情形
+    \onslide<3-5> \item 边缘情形
+    \onslide<4-5> \item 边缘内部情形
+    \onslide<5> \item 拐角情形
   \end{itemize}
 \end{itemize}
 \begin{figure}
@@ -61,17 +61,17 @@
 \centering
 % top
 \subfigure{
-\input{../../FigureSrc/postprocessing/mesh/GeneralSimple}
+\onslide<1-5> \input{../../FigureSrc/postprocessing/mesh/GeneralSimple}
 \quad
-\input{../../FigureSrc/postprocessing/mesh/Complex}
+\onslide<2-5> \input{../../FigureSrc/postprocessing/mesh/Complex}
 \quad
-\input{../../FigureSrc/postprocessing/mesh/Boundary}
+\onslide<3-5> \input{../../FigureSrc/postprocessing/mesh/Boundary}
 }
 % bottom
 \subfigure{
-\input{../../FigureSrc/postprocessing/mesh/InteriorEdge}
+\onslide<4-5> \input{../../FigureSrc/postprocessing/mesh/InteriorEdge}
 \quad
-\input{../../FigureSrc/postprocessing/mesh/Corner}
+\onslide<5> \input{../../FigureSrc/postprocessing/mesh/Corner}
 }	
 \end{minipage}
 \end{figure}
@@ -81,8 +81,8 @@
 \begin{itemize}
   \item \textbf{削减顶点引起的多边形减少~[Schroeder(1992)]}
   \begin{itemize}
-    \pause \item 简单情形：削减前的多边形数量：$6$，削减后的多边形数量：$4$
-    \pause \item 边缘情形：削减前的多边形数量：$5$，削减后的多边形数量：$4$
+    \onslide<1-2> \item 简单情形：削减前的多边形数量：$6$，削减后的多边形数量：$4$
+    \onslide<2> \item 边缘情形：削减前的多边形数量：$5$，削减后的多边形数量：$4$
   \end{itemize}
 \end{itemize}
 \begin{figure}
@@ -90,11 +90,11 @@
 \centering
 % top
 \subfigure{
-\input{../../FigureSrc/postprocessing/mesh/SimpleReduction}
+\onslide<1-2> \input{../../FigureSrc/postprocessing/mesh/SimpleReduction}
 }
 % bottom
 \subfigure{
-\input{../../FigureSrc/postprocessing/mesh/BoundaryReduction}
+\onslide<2> \input{../../FigureSrc/postprocessing/mesh/BoundaryReduction}
 }	
 \end{minipage}
 \end{figure}
