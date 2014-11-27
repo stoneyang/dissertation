@@ -97,53 +97,66 @@
 \begin{frame}
 \begin{itemize}
   \item \textbf{“师傅-学徒”模式的技艺传承}: 
-  \begin{enumerate}[A]
-    \item 手工技艺的传承
-    \item 医学技术的传承
-  \end{enumerate}
+  % \begin{enumerate}[A]
+    % \item 手工技艺的传承
+    % \item 医学技术的传承
+  % \end{enumerate}
 \end{itemize}
+\onslide<1-5>
 \begin{figure}
-\begin{minipage}[t]{0.8\linewidth}
+% \begin{minipage}[t]{0.8\linewidth}
 \centering
 % top
-\subfigure[]{
-\includegraphics[height=60pt]{../../Figures/background/220px-Apprenticeship.eps}
-\quad
-\includegraphics[height=60pt]{../../Figures/background/220px-Medieval_baker.eps}
-}
+% \subfigure[]{
+% \includegraphics[height=60pt]{../../Figures/background/220px-Apprenticeship.eps}
+% \quad
+% \includegraphics[height=60pt]{../../Figures/background/220px-Medieval_baker.eps}
+% }
 % bottom
-\subfigure[]{
+% \subfigure[]{
 \includegraphics[height=70pt]{../../Figures/background/clinical_training_center.eps}
 \quad
 \includegraphics[height=70pt]{../../Figures/background/cath_lab.eps}
-}	
-\end{minipage}
+% }	
+% \end{minipage}
 \end{figure}
-\end{frame}
+% \end{frame}
 
-\begin{frame}
+% \begin{frame}
 \begin{itemize}
-  \item \textbf{微创血管介入手术机器人系统~[Ji(2011)]}: 
+  \item \textbf{传统手术训练的缺点}：
   \begin{enumerate}
-    \onslide<1-2> \item 机器人系统外观
-    \onslide<2>\item 机器人控制系统
+    \onslide<2-5> \item 不熟练的操作的风险
+    \onslide<3-5> \item 不必要放射性危害
+    \onslide<4-5> \item 机会宝贵，切无法复现
+    \onslide<5> \item 严格受限于时间和地点
   \end{enumerate}
 \end{itemize}
-\begin{columns}[b,onlytextwidth]
-\begin{column}{.5\textwidth}
-\onslide<1-2>\begin{figure}[t]
-\centering
-\includegraphics[height=100pt]{../../Figures/background/robot.eps}
-\end{figure}
-\end{column}
-\begin{column}{.5\textwidth}
-\onslide<2> \begin{figure}[t]
-\centering
-\includegraphics[height=100pt]{../../Figures/background/robot_arch.eps}
-\end{figure}
-\end{column}
-\end{columns}
 \end{frame}
+
+% \begin{frame}
+% \begin{itemize}
+  % \item \textbf{微创血管介入手术机器人系统~[Ji(2011)]}: 
+  % \begin{enumerate}
+    % \onslide<1-2> \item 机器人系统外观
+    % \onslide<2>\item 机器人控制系统
+  % \end{enumerate}
+% \end{itemize}
+% \begin{columns}[b,onlytextwidth]
+% \begin{column}{.5\textwidth}
+% \onslide<1-2>\begin{figure}[t]
+% \centering
+% \includegraphics[height=100pt]{../../Figures/background/robot.eps}
+% \end{figure}
+% \end{column}
+% \begin{column}{.5\textwidth}
+% \onslide<2> \begin{figure}[t]
+% \centering
+% \includegraphics[height=100pt]{../../Figures/background/robot_arch.eps}
+% \end{figure}
+% \end{column}
+% \end{columns}
+% \end{frame}
 
 \begin{frame}
 \begin{itemize}
@@ -208,12 +221,28 @@
 
 \begin{frame}
 \begin{itemize}
+  \item \textbf{计算机仿真手术训练的优点}：
+  \begin{enumerate}
+    \onslide<1-5> \item 无不熟练操作风险
+    \onslide<2-5> \item 无放射性危害
+    \onslide<3-5> \item 可回放或重复操作过程
+    \onslide<4-5> \item 无时间和地点的限制，可随时展开训练
+    \onslide<5> \item 节省医疗资源
+	\begin{itemize}
+	\item 资深医生工时，手术器械，消毒间，等
+	\end{itemize}
+  \end{enumerate}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
 \item \textbf{技术难点}
 \begin{itemize}
 \pause \item 影像中主动脉与脊椎间隙过小甚至接触
 \pause \item 影像中冠状动脉的亮度较暗，且走向多变，直径较小
 \pause \item 心脏搏动导致心脏区域成像效果较差，无法准确提取完整模型
-\pause \item 重建的表面模型数据量大，影响交互仿真
+\pause \item 重建的表面模型数据量大，影响交互仿真的流畅程度
 \pause \item 重建的表面模型数据量大，难以进行几何信息提取运算
 \end{itemize}
 \end{itemize}

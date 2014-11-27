@@ -33,6 +33,86 @@
 \end{itemize}
 \end{frame}
 
+% \begin{frame}
+% \begin{itemize}
+% \item Butterfly scheme vs. Improved butterfly scheme
+% \begin{itemize}
+% \item Butterfly scheme
+% \begin{itemize}
+% \item can produce refined surface over regular triangular surface (all vertices have valence 6)
+% \item can produce undesirable artifacts at vertices with valence other than 6
+% \end{itemize}
+% \end{itemize}
+% \begin{itemize}
+% \item Improved butterfly scheme
+% \begin{itemize}
+% \item can produce refined surface over both regular and irregular (not all vertices have valence 6) triangular surface
+% \end{itemize}
+% \end{itemize}
+% \end{itemize}
+% \end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item \textbf{中心线（中心轴）} ： 
+\begin{itemize}
+\item 物体的最大内切圆（2D）或最大内切球（3D）形心的轨迹~[Amenta(2001)]
+\item 为仿真中的过程建模提供有效形状描述
+\end{itemize}
+\onslide<1-5> \item 中心线提取的四类方法：
+\begin{itemize}
+\onslide<2-5> \item 拓扑薄化
+\onslide<3-5> \item 距离变换
+\onslide<4-5> \item 草原之火（"prairie fire"）
+\onslide<5> \item \alert{Voronoi图（VD）}
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item \textbf{Voronoi图}：
+\begin{itemize}
+\item $\mathbf{R}^2$或$\mathbf{R}^3$形体中心线的离散化估计
+\end{itemize}
+\item \textbf{中心线}
+\begin{itemize}
+\item 模型表面内部VD的最短作用路径~[Antiga(2003)]
+\begin{itemize}
+% \item \alert{中心点}：到表面边界最短距离局部最大
+\item \alert{作用路径}：连接VD上两个顶点的连线
+\end{itemize}
+\item 中心点通过求取作用路径线积分的最小值获得
+\begin{itemize}
+\item \alert{中心点}：到表面边界最短距离局部最大
+% \item \alert{作用路径}：连接VD上两个顶点的连线
+\end{itemize}
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item 从VD上某给定起始点开始计算Eikonal方程
+\begin{equation*}
+\left| \nabla T \right| = \frac{1}{R(u)}
+\end{equation*}
+\begin{itemize}
+\item $T$：到达时刻
+\item $R$：$T$时刻最大内切球的半径
+\item $u$：VD的参数空间
+\end{itemize}
+\item 中心线则利用最速下降法求得
+\begin{equation*}
+\frac{d}{ds} c = - \nabla T
+\end{equation*}
+\begin{itemize}
+\item $c$：中心线
+\item $s$：$c$的参数空间
+\end{itemize}
+\end{itemize}
+\end{frame}
+
 \begin{frame}
 \begin{itemize}
   \item \textbf{表面模型中心线提取流程}：
@@ -74,8 +154,8 @@
 \begin{itemize}
   \item \textbf{连接性检验前后的多边形数量}：
   \begin{enumerate}[(a)]
-    \onslide<1-4> \item 本章实验模型
-    \onslide<3-4> \item 主动脉下半段
+    \onslide<1-3> \item 本章实验模型
+    \onslide<3> \item 主动脉下半段
   \end{enumerate}
 \end{itemize}
 \begin{table}
@@ -83,7 +163,7 @@
 \centering
 \begin{columns}[b,onlytextwidth]
 \begin{column}{.5\textwidth}
-\onslide<2-4> 
+\onslide<2-3> 
 \centering
 \begin{tabular*}{35mm}{lc}
 \toprule
@@ -96,7 +176,7 @@
 \end{tabular*}
 \end{column}
 \begin{column}{.5\textwidth}
-\onslide<4>
+\onslide<3>
 \centering
 \begin{tabular*}{35mm}{lc}
 \toprule
@@ -114,7 +194,10 @@
 
 \begin{frame}
 \begin{itemize}
-  \item \textbf{设置不同参数获得的平滑结果（中心线）}：
+  \item \textbf{设置不同参数获得的平滑结果}：（$N$：迭代次数；$\delta$：带宽）
+  \begin{itemize}
+  \item \textbf{目的}：中心线提取运算对噪声较敏感
+  \end{itemize}
 \end{itemize}
 \begin{figure}[t]
 % \begin{table}[t]
@@ -139,11 +222,13 @@
 
 \begin{frame}
 \begin{itemize}
-  \item \textbf{对平整后表面进行细分}：
+  \item \textbf{对平整后表面进行细分}：生成光滑且视觉满意的表面~[Zorin(1996)]
   \begin{itemize}
-    \item 左：表面细分的局部
-    \item 右上：表面细分之前的多边形表面
-    \item 右下：表面细分之后的多边形表面
+    \item 进一步平抑噪声，提高中心线计算准确性
+    \item 使表面的表达更加精确，确保中心线计算的稳定性
+    % \item 左：表面细分的局部
+    % \item 右上：表面细分之前的多边形表面
+    % \item 右下：表面细分之后的多边形表面
   \end{itemize}
 \end{itemize}
 \begin{figure}[t]
@@ -158,8 +243,8 @@
 \begin{itemize}
   \item \textbf{表面细分前后多边形数量对比}：
   \begin{enumerate}[(a)]
-    \item 本章实验模型
-    \item 主动脉下半段
+    \onslide<1-3> \item 本章实验模型
+    \onslide<3> \item 主动脉下半段
   \end{enumerate}
 \end{itemize}
 \begin{table}[t]
@@ -169,6 +254,7 @@
 \centering
 \begin{columns}[b,onlytextwidth]
 \begin{column}{.5\textwidth}
+\onslide<2-3> 
 \centering
 \begin{tabular*}{35mm}{lr}
 \toprule
@@ -181,6 +267,7 @@
 \end{tabular*}
 \end{column}
 \begin{column}{.5\textwidth}
+\onslide<3> 
 \centering
 \begin{tabular*}{35mm}{lr}
 \toprule

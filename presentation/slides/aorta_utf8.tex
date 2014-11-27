@@ -70,6 +70,59 @@ E(\mathcal{C}) = \alpha \int_0^1 | \mathcal{C}'(q) |^2 dq - \lambda \int_0^1 | \
 
 \begin{frame}
 \begin{itemize}
+\onslide<1-3> \item \textbf{围线演进的光学比拟}：光学中的Fermat原理
+\begin{equation*}
+L_{R} = \int_{A}^{B} n(s) ds
+\end{equation*}
+\begin{itemize}
+\item $L_{R}$：光线在介质中的传播路径的弧长
+\item $A$，$B$：传播路径的起点和终点
+\item $n(\cdot)$：介值的折射率
+\end{itemize}
+\onslide<2-3> \item \textbf{Fermat原理的结论：在传播过程中，路径不是直线，而是按最短光程的方式来确定}
+\onslide<3> \item \textbf{GAC模型：在界面演进过程中，使能量$E$达到局部最小}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\onslide<1-2> \item \textbf{围线演进目标}
+\begin{equation*}
+\min \int_0^1 g(|\nabla I_{s} ( \mathcal{C} (q) )|) |\mathcal{C}' (q)| dq
+\end{equation*}
+\begin{itemize}
+\item $g(\cdot)$等同于曲线演进速度，依赖细节几何性质，独立于测地计算
+\end{itemize}
+\onslide<2> \item \textbf{基于特征图像的演进目标}
+\begin{equation*}
+\min \int_0^1 g(\nabla I_{\sigma}) |\mathcal{C}' (q)| dq
+\end{equation*}
+\begin{itemize}
+\item $I_{\sigma}$：源图像的特征图像
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\onslide<1-2> \item \textbf{围线演进方程}：当下式右边为零时，围线演进至目标的边缘处
+\begin{equation*}
+\label{eqn:EvolutionModel}
+\frac{\partial \mathcal{C}(t)}{\partial t} = g(I_{\sigma}) \kappa \mathcal{N} - (\nabla g(I_{\sigma}) \cdot \mathcal{N}) \mathcal{N}
+\end{equation*}
+\begin{itemize}
+\item $\kappa$：曲线$\mathcal{C}$的曲率
+\item $\mathcal{N}$：指向曲线$\mathcal{C}$“内部”的单位法向量
+\end{itemize}
+\onslide<2> \item \textbf{围线更新方程}：围线的演进等同于其嵌入水平集$u$的更新
+\begin{equation*}
+\frac{\partial u}{\partial t} = g(I_{\sigma}) |\nabla u| \kappa + \nabla g(I_{\sigma}) \cdot \nabla u
+\end{equation*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
 \item \textbf{主动脉内腔分割流程}
 \end{itemize}
 \begin{figure}[t]

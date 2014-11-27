@@ -128,7 +128,10 @@
 
 \begin{frame}
 \begin{itemize}
-  \item \textbf{设置不同参数获得的平滑结果（优化）}：
+  \item \textbf{设置不同参数获得的平滑结果}：（$N$：迭代次数；$\delta$：带宽）
+  \begin{itemize}
+  \item \textbf{目的}：除去噪声，填补漏洞
+  \end{itemize}
 \end{itemize}
 \begin{figure}[t]
 \renewcommand{\arraystretch}{0.5}
@@ -151,7 +154,7 @@
 
 \begin{frame}
 \begin{itemize}
-  \item \textbf{设置不同参数获得的精简}：
+  \item \textbf{设置不同参数获得的精简}：（精简率公式：$R = \frac{Q_r}{Q}$）
 \end{itemize}
 \begin{figure}[t]
 \begin{table}[t]
@@ -196,7 +199,18 @@
 
 \begin{frame}
 \begin{itemize}
-  \item \textbf{精简率与fps——情形I}：
+\item \textbf{交互仿真的指标} (fps $=$ frames per second)
+\begin{itemize}
+\item \textbf{初始fps}：当虚拟导管进入血管模型时的fps
+\item \textbf{平均fps}：模型中心线上五个给定位置处fps的平均值
+\item \textbf{成功}: 将虚拟导管推送至血管模型内部某个位置
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+  \item \textbf{精简率与fps——情形I}：本章实验模型
 \end{itemize}
 \begin{table}[t]
 \renewcommand{\arraystretch}{0.5}
@@ -219,7 +233,7 @@
 
 \begin{frame}
 \begin{itemize}
-  \item \textbf{精简率与fps——情形II}：
+  \item \textbf{精简率与fps——情形II}：完整血管模型
 \end{itemize}
 \begin{table}[t]
 \renewcommand{\arraystretch}{0.5}

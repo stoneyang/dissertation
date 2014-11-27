@@ -49,7 +49,7 @@
 \item \textbf{CURVES模型}：使如下的能量泛函最小化
 \begin{equation*}
 % \label{eqn:coronary_CURVES}
-E(\mathcal C) = \oint_0^1 g\left( \left| \nabla I \left( \mathcal{C} \left(  s \right) \right) \right| \right) \left| \mathcal{C}'\left( s \right) \right| ds,
+E(\mathcal C) = \oint_0^1 g\left( \left| \nabla I \left( \mathcal{C} \left(  s \right) \right) \right| \right) \left| \mathcal{C}'\left( s \right) \right| ds
 \end{equation*}
 \begin{itemize}
 \item $E(\cdot)$：能量泛函
@@ -64,7 +64,7 @@ E(\mathcal C) = \oint_0^1 g\left( \left| \nabla I \left( \mathcal{C} \left(  s \
 \begin{itemize}
 \item \textbf{演进方程}：Euler-Lagrange方程，最速下降法求解
 \begin{equation*}
-\mathcal{C}_t = \frac{\partial \mathcal{C}}{\partial t} = k \mathcal{N} - \frac{g'}{g} \varPi \left( \mathcal{H} \frac{\nabla I}{\left| \nabla I \right|} \right)
+\frac{\partial \mathcal{C}}{\partial t} = k \mathcal{N} - \frac{g'}{g} \varPi \left( \mathcal{H} \frac{\nabla I}{\left| \nabla I \right|} \right)
 \end{equation*}
 \begin{itemize}
 \item $\varPi(\cdot)$：$\mathcal{C}$在其法平面上的投影
@@ -78,7 +78,7 @@ E(\mathcal C) = \oint_0^1 g\left( \left| \nabla I \left( \mathcal{C} \left(  s \
 \begin{itemize}
 \item \textbf{更新方程}：嵌入水平集空间
 \begin{equation*}
-v_t = \frac{\partial v}{\partial t} = \lambda \left( \nabla v, \nabla^2 v \right) + \frac{g'}{g} \nabla v \cdot \mathcal{H} \frac{\nabla I}{ \left| \nabla I \right| }
+\frac{\partial v}{\partial t} = \lambda \left( \nabla v, \nabla^2 v \right) + \frac{g'}{g} \nabla v \cdot \mathcal{H} \frac{\nabla I}{ \left| \nabla I \right| }
 \end{equation*}
 \begin{itemize}
 \item $v(\cdot): \mathrm{R}^3 \rightarrow [0, \infty)$：辅助函数，$\mathcal{C}$的零水平集
