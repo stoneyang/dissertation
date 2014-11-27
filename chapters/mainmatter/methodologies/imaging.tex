@@ -63,6 +63,12 @@ $n$则是一个确定该区间中心点的位置的常量。
 \caption[用于非线性映射的S函数]{用于非线性映射的S函数。}
 \label{fig:imaging_sigmoid}
 \end{figure}
+\begin{figure}[ht]
+\centering
+\input{FigureSrc/methodologies/sigmoid_window_width}
+\caption[S函数的参数$m$与窗宽的关系]{S函数的参数$m$与窗宽的关系：$m = 4$的曲线（青色）具有比$m = -2$的曲线（红色）以及$m = 2$的曲线（绿色）更宽的映射区间。参数$m$的负号表明该S型函数引入了取反作用。}%
+\label{fig:imaging_sigmoid_width}
+\end{figure}
 
 由式(\ref{eqn:imaging_sigmoid})定义的S型函数具有四个参数：用于控制窗宽的$m$，控制窗中心位置的$n$，以及确定输出图像中像素亮度极值的$\alpha$（极小值）和$\beta$（极大值）。
 图\ref{fig:imaging_sigmoid_width}显示参数$m$如何控制S型函数的窗宽。
@@ -75,12 +81,6 @@ $n$则是一个确定该区间中心点的位置的常量。
 它们的取值取决于梯度图像中像素亮度的极值。
 在本文的实验中，我们的经验是：$m < 0$，$n > 0$，$n > |m|$。
 而鉴于我们的应用需要，通常把$\alpha$设定为$0$，而把$\beta$设定为$255$。
-\begin{figure}[ht]
-\centering
-\input{FigureSrc/methodologies/sigmoid_window_width}
-\caption[S函数的参数$m$与窗宽的关系]{S函数的参数$m$与窗宽的关系：$m = 4$的曲线（青色）具有比$m = -2$的曲线（红色）以及$m = 2$的曲线（绿色）更宽的映射区间。参数$m$的负号表明该S型函数引入了取反作用。}%
-\label{fig:imaging_sigmoid_width}
-\end{figure}
 \begin{figure}[ht]
 \centering
 \input{FigureSrc/methodologies/sigmoid_center_location}
