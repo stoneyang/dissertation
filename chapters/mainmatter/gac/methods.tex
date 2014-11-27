@@ -62,7 +62,20 @@ $\lambda$是曲率常数。
 \label{eqn:aorta_general_energy}
 E(\mathcal{C}) = \alpha \int_0^1 | \mathcal{C}'(q) |^2 dq + \lambda \int_0^1 g( | \nabla I_{s} ( \mathcal{C}(q) ) | )^2 dq.
 \end{equation}
-演进的目的是为了获得
+
+光在某不均与介值中的传播必然不会保持“直线”，其传播路径的弧长可由下式计算得出：
+\begin{equation}
+\label{eqn:Fermat}
+L_{R} = \int_{A}^{B} n(s) ds,
+\end{equation}
+其中，
+$L_{R}$表示光线在介质中的传播路径的弧长，
+$A$，$B$表示传播路径的起点和终点，
+$n(\cdot)$表示介值的折射率。
+由光学中的Fermat原理可知，路径$L_{R}$通过的路径将由最短光程所确定。
+也就是说，所确定的路径将使式(\ref{eqn:Fermat})达到最小。
+而该思路与GAC模型的演进目的相类似。
+于是，仿照Fermat原理，上述围线演进的目的就是为了获得
 \begin{equation}
 \label{eqn:aorta_min_model}
 \min \int_0^1 g(|\nabla I_{s} ( \mathcal{C} (q) )|) |\mathcal{C}' (q)| dq.
