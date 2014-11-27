@@ -68,6 +68,19 @@ I_{xx} & I_{xy} & I_{xz} \\ I_{yx} & I_{yy} & I_{yz} \\ I_{zx} & I_{zy} & I_{zz}
 
 \begin{frame}
 \begin{itemize}
+  \item \textbf{改进的冠状动脉分割流程}：
+\end{itemize}
+\begin{figure}[t]
+\centering
+\input{../../FigureSrc/coronary/coronary_enhanced/data_flow_utf8}
+% \includegraphics[width=3.2in]{Figures/coronary/DataFlow}
+% \caption[心脏区域的ROI提取]{心脏区域的ROI提取。}
+% \label{fig:coronary_ROI}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
   \item \textbf{心脏区域的VOI提取}：
   \begin{itemize}
   \pause \item 设定长方体区域的起点和尺寸
@@ -84,20 +97,7 @@ I_{xx} & I_{xy} & I_{xz} \\ I_{yx} & I_{yy} & I_{yz} \\ I_{zx} & I_{zy} & I_{zz}
 
 \begin{frame}
 \begin{itemize}
-  \item \textbf{改进的冠状动脉分割流程}：
-\end{itemize}
-\begin{figure}[t]
-\centering
-\input{../../FigureSrc/coronary/coronary_enhanced/data_flow_utf8}
-% \includegraphics[width=3.2in]{Figures/coronary/DataFlow}
-% \caption[心脏区域的ROI提取]{心脏区域的ROI提取。}
-% \label{fig:coronary_ROI}
-\end{figure}
-\end{frame}
-
-\begin{frame}
-\begin{itemize}
-  \item \textbf{基于vesselness的预处理}：
+  \item \textbf{管状物体增强}：
   \begin{enumerate}
     \onslide<1-3> \item 二值阈值滤波（$\text{TH}_{\text{lower}} = 300$, $\text{TH}_{\text{upper}} = 600$）
     \onslide<3> \item 管状物体增强（$\sigma = 0.9$, $\gamma_{12} = 0.1$, $\gamma_{23} = 2.0$）
@@ -160,8 +160,8 @@ I_{xx} & I_{xy} & I_{xz} \\ I_{yx} & I_{yy} & I_{yz} \\ I_{zx} & I_{zy} & I_{zz}
 \begin{itemize}
   \item \textbf{冠状动脉模型对比}：
   \begin{enumerate}
-    \onslide<1-3> \item 传统CURVES演进
-    \onslide<3> \item 管状物增强后的CURVES演进
+    \onslide<1-3> \item 传统CURVES演进结果
+    \onslide<3> \item 管状物增强后的CURVES演进结果
   \end{enumerate}
 \end{itemize}
 \begin{columns}[b,onlytextwidth]

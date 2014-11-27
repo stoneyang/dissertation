@@ -11,7 +11,7 @@
 \end{itemize}
 \pause \item \textbf{血管介入仿真中主动脉模型的获取}
 \begin{itemize}
-\item 几何形状近似的规则空间中空管道
+\item 几何形状近似的中空管道
 \item 逐帧手动提取主动脉区域
 \item 医学影像处理方式
 \end{itemize}
@@ -19,7 +19,7 @@
 \begin{itemize}
 \item 仍是医学影像领域中一项具有挑战性的工作
 \item 主动脉形态特点：走向稳定，截面大小变化均匀
-\item 分割时的主要困难：与骨骼以及腹腔脏器有交叠，影响分割
+\item 分割时的主要困难：与骨骼以及腹腔内脏器有交叠，影响分割
 \end{itemize}
 \end{itemize}
 \end{frame} 
@@ -45,19 +45,19 @@
 
 \begin{frame}
 \begin{itemize}
-\item \textbf{经典“蛇”模型}
+\onslide<1-2> \item \textbf{经典“蛇”模型}
 \begin{equation*}
 % \label{eqn:aorta_particular_snakes}
 E(\mathcal{C}) = \alpha \int_0^1 | \mathcal{C}'(q) |^2 dq + \beta \int_0^1 | \mathcal{C}''(q) |^2 dq - \lambda \int_0^1 | \nabla I_{s} ( \mathcal{C}(q) ) |dq
 \end{equation*}
-\pause \item \textbf{GAC的数学模型}
+\onslide<2>  \item \textbf{GAC的数学模型}
 % \end{itemize}
 \begin{equation*}
 % \label{eqn:aorta_particular_snakes}
 E(\mathcal{C}) = \alpha \int_0^1 | \mathcal{C}'(q) |^2 dq - \lambda \int_0^1 | \nabla I_{s} ( \mathcal{C}(q) ) |dq
 \end{equation*}
 % \quad\quad其中：
-\begin{itemize}
+\onslide<1-2> \begin{itemize}
 \item $E(\cdot)$：能量泛函
 \item $\mathcal{C}(\cdot)$：参数化平面内曲线
 \item $I_{s}(\cdot)$：含有待探测目标的图像
@@ -236,7 +236,7 @@ L_{R} = \int_{A}^{B} n(s) ds
 % \caption[主动脉内腔分割结果评估]{主动脉内腔表面模型分割结果评估}
 % \label{tbl:aorta_evaluation}
 \centering
-\begin{tabular*}{75mm}{c c c}
+\begin{tabular*}{70mm}{c c c}
 \toprule
 \hspace{2mm} \small{数据集序号}  & \hspace{2mm} \small{Jaccard}    & \hspace{2mm} \small{Dice}       \\
 \midrule

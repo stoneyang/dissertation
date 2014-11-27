@@ -3,19 +3,19 @@
 
 \begin{frame}
 \begin{itemize}
-\item \textbf{血管介入仿真中冠脉表面模型的作用}
+\item \textbf{血管介入仿真中冠状动脉表面模型的作用}
 \begin{itemize}
 \item 虚拟解剖环境的核心组成部分
 \item 血管介入术中病灶所在
 \item 虚拟导管交互的硬约束
 \end{itemize}
-\pause \item \textbf{血管介入仿真中心脏表面模型的获取}
+\pause \item \textbf{血管介入仿真中冠状动脉表面模型的获取}
 \begin{itemize}
 \item 几何形状近似的细管
 \item 扫描高精度物理模具
 \item 医学影像处理方法
 \end{itemize}
-\pause \item \textbf{心脏近似区域的分割与可视化}
+\pause \item \textbf{冠状动脉的分割与可视化}
 \begin{itemize}
 \item 是医学影像领域中的一项极具挑战性的工作
 \item 形态特征：不规则的空间管状物，走向和半径变化复杂
@@ -34,7 +34,7 @@
 \item 是GAC的一项扩展，仍属水平集方法
 \item 计算准则考虑了目标边缘的平滑性
 \item 专门用于探测医学体数据中细微复杂的空间线形结构
-\item 将线形结构的边界抽象为空间流形
+% \item 将线形结构的边界抽象为空间流形
 \end{itemize}
 \pause \item \textbf{CURVES方法的使用}
 \begin{itemize}
@@ -90,6 +90,19 @@ E(\mathcal C) = \oint_0^1 g\left( \left| \nabla I \left( \mathcal{C} \left(  s \
 
 \begin{frame}
 \begin{itemize}
+  \item \textbf{基于CURVES的冠状动脉分割流程}：
+\end{itemize}
+\begin{figure}[t]
+\centering
+\input{../../FigureSrc/coronary/data_flow_utf8}
+% \includegraphics[width=3.2in]{Figures/coronary/DataFlow}
+% \caption[心脏区域的ROI提取]{心脏区域的ROI提取。}
+% \label{fig:coronary_ROI}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
   \item \textbf{心脏区域的ROI提取}：
   \begin{itemize}
   \pause \item 设定矩形区域的起点和尺寸
@@ -99,19 +112,6 @@ E(\mathcal C) = \oint_0^1 g\left( \left| \nabla I \left( \mathcal{C} \left(  s \
 \begin{figure}[t]
 \centering
 \includegraphics[width=1.5in]{../../Figures/coronary/ROI_Extraction}
-% \caption[心脏区域的ROI提取]{心脏区域的ROI提取。}
-% \label{fig:coronary_ROI}
-\end{figure}
-\end{frame}
-
-\begin{frame}
-\begin{itemize}
-  \item \textbf{基于CURVES的冠状动脉分割流程}：
-\end{itemize}
-\begin{figure}[t]
-\centering
-\input{../../FigureSrc/coronary/data_flow_utf8}
-% \includegraphics[width=3.2in]{Figures/coronary/DataFlow}
 % \caption[心脏区域的ROI提取]{心脏区域的ROI提取。}
 % \label{fig:coronary_ROI}
 \end{figure}

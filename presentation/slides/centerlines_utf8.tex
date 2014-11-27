@@ -73,7 +73,7 @@
 \begin{itemize}
 \item \textbf{Voronoi图}：
 \begin{itemize}
-\item $\mathbf{R}^2$或$\mathbf{R}^3$形体中心线的离散化估计
+\item 平面或三维形体中心线的离散化估计
 \end{itemize}
 \item \textbf{中心线}
 \begin{itemize}
@@ -113,18 +113,15 @@
 \end{itemize}
 \end{frame}
 
-\begin{frame}
-\begin{itemize}
-  \item \textbf{表面模型中心线提取流程}：
-\end{itemize}
-\begin{figure}[t]
-\centering
-\input{../../FigureSrc/postprocessing/centerlines/data_flow_utf8}
-% \includegraphics[width=3.2in]{Figures/gac/DataFlow.eps}
-% \caption[主动脉内腔分割流程]{主动脉内腔分割流程。}
-% \label{fig:aorta_data_flow}
-\end{figure}
-\end{frame}
+% \begin{frame}
+% \begin{itemize}
+  % \item \textbf{表面模型中心线提取流程}：
+% \end{itemize}
+% \begin{figure}[t]
+% \centering
+% \input{../../FigureSrc/postprocessing/centerlines/data_flow_utf8}
+% \end{figure}
+% \end{frame}
 
 \begin{frame}
 \begin{itemize}
@@ -222,7 +219,7 @@
 
 \begin{frame}
 \begin{itemize}
-  \item \textbf{对平整后表面进行细分}：生成光滑且视觉满意的表面~[Zorin(1996)]
+  \item \textbf{表面细分}：生成光滑且视觉满意的表面~[Zorin(1996)]
   \begin{itemize}
     \item 进一步平抑噪声，提高中心线计算准确性
     \item 使表面的表达更加精确，确保中心线计算的稳定性

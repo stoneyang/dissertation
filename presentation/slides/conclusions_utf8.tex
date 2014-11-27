@@ -4,17 +4,17 @@
 \subsection{总结}
 \begin{frame}
 \begin{enumerate}
-\item \textbf{人体心血管系统表面模型数据的提取}
+\item \textbf{基于医学体数据人体心血管系统表面模型的创建}
 \begin{itemize}
-\pause \item 提出了基于GAC的处理流程，得到主动脉内腔表面模型
-\pause \item 提出了基于CURVES的处理流程，得到冠状动脉树状结构模型
-\pause \item 通过引入管状物增强技术改进上述流程，得到更完整的冠状动脉树状结构模型
-\pause \item 提出了基于GAC的改进流程，得到心脏的粗略表面模型，便于判断冠脉分支
+\pause \item 提出了基于GAC的处理流程，得到了主动脉内腔表面模型，分析了分割结果的准确性
+\pause \item 提出了基于CURVES的处理流程，得到了冠状动脉主要分支的表面模型
+\pause \item 通过引入管状物增强技术改进上述流程，得到了冠状动脉次级分支的表面模型
+\pause \item 提出了基于GAC的改进流程，得到了心脏的近似表面模型，便于判断冠脉分支
 \end{itemize}
 \pause \item \textbf{面向交互仿真的人体心血管模型的数据可视化处理}
 \begin{itemize}
 \pause \item 提出了精简表面模型的多边形面片的流程，所得模型提高了手术仿真的交互效率
-\pause \item 提出了基于Voronoi图的类水平集演进流程的中心线提取流程，得到血管表面模型的中心线
+\pause \item 提出了基于Voronoi图的类水平集演进的中心线提取流程，得到血管表面模型的中心线
 \end{itemize}
 \end{enumerate}
 \end{frame}
@@ -24,14 +24,14 @@
 \begin{enumerate}
 \item \textbf{手术仿真可视化效果的增强}
 \begin{itemize}
-\item 真实术中的C型臂X光成像效果
+% \item 真实术中的C型臂X光成像效果
 \item 血管模型具备与真实血管相近的形变特性
-\item 具有跳动效果的心脏区域模型
-\item 虚拟的造影剂注入效果
+% \item 具有跳动效果的心脏区域模型
+% \item 虚拟的造影剂注入效果
 \item 虚拟支架-气囊结构
 \item 虚拟正常生理运动，如呼吸等
 \end{itemize}
-\pause \item \textbf{手术过程的状态化建模}
+\pause \item \textbf{手术过程的状态化建模} \pause ——已获得血管模型的中心线
 \pause \item \textbf{手术仿真训练的教学功能}
 \begin{itemize}
 \item 虚拟训练过程的记录

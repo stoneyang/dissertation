@@ -5,21 +5,21 @@
 \begin{itemize}
 \item \textbf{问题背景}
 \begin{itemize}
-\item 设计并实现计算机辅助的冠状动脉介入术仿真训练系统
+\item 设计并实现计算机辅助冠状动脉介入术仿真训练系统
 \end{itemize}
 \end{itemize}
 \begin{itemize}
 \pause \item \textbf{研究目的}
 \begin{itemize}
-\item 研究创建上述训练系统所需的虚拟人体解剖环境
+\item 研究创建上述系统中虚拟人体解剖环境的技术方法
 \end{itemize}
 \end{itemize}
 \begin{itemize}
 \pause \item \textbf{研究内容}
 \begin{itemize}
-\item 研究基于真实病例数据创建人心血管系统模型的方法
-\item 研究面向交互仿真的模型优化方法
-\item 研究面向虚拟训练的模型几何信息提取方法
+\item 基于真实病例体数据创建人体心血管系统模型的方法
+\item 面向交互仿真的血管模型优化方法
+\item 面向仿真训练的血管模型几何信息提取方法
 \end{itemize}
 \end{itemize}
 \end{frame}
@@ -46,7 +46,7 @@
 \begin{itemize}
   \item \textbf{冠心病病理}: 
   \begin{enumerate}[A]
-    \item 由于冠状动脉中血流受阻，导致自受阻位置以下心肌长期缺氧，最终使其坏死
+    \item 由于冠状动脉中血流受阻，导致自受阻位置以下的心肌长期缺氧，最终使其坏死
     \item 受阻冠状动脉的内部情况，斑块固着于血管内壁，致使血管横截面积明显缩小，血流受阻
   \end{enumerate}
 \end{itemize}
@@ -76,7 +76,7 @@
 \begin{enumerate}[A]
 \item \footnotesize{将载有气囊的导管沿主动脉送至病灶位置}
 \item \footnotesize{向气囊注入空气使其膨胀，迫使气囊外的支架扩张}
-\item \footnotesize{通过导管抽出气囊内的空气使其收缩后撤出}
+\item \footnotesize{通过导管抽出气囊内的空气使其收缩后撤出人体}
 \end{enumerate}
 \end{itemize}
 \begin{itemize}
@@ -86,7 +86,7 @@
 \item 创口微小
 \item 痛苦减轻
 \item 较短的手术时间
-\item 并发症发生率低
+\item 并发症发生率降低
 \item 术后恢复快
 \end{itemize}
 \end{itemize}
@@ -96,7 +96,7 @@
 
 \begin{frame}
 \begin{itemize}
-  \item \textbf{“师傅-学徒”模式的技艺传承}: 
+  \item \textbf{“师傅-学徒”模式的医疗教学}: 
   % \begin{enumerate}[A]
     % \item 手工技艺的传承
     % \item 医学技术的传承
@@ -126,9 +126,9 @@
 \begin{itemize}
   \item \textbf{传统手术训练的缺点}：
   \begin{enumerate}
-    \onslide<2-5> \item 不熟练的操作的风险
-    \onslide<3-5> \item 不必要放射性危害
-    \onslide<4-5> \item 机会宝贵，切无法复现
+    \onslide<2-5> \item 不熟练的操作给病患带来的风险
+    \onslide<3-5> \item 现场学习带来的不必要放射性危害
+    \onslide<4-5> \item 机会宝贵，且无法复现
     \onslide<5> \item 严格受限于时间和地点
   \end{enumerate}
 \end{itemize}
@@ -160,7 +160,7 @@
 
 \begin{frame}
 \begin{itemize}
-  \item \textbf{微创血管介入手术仿真系统}: 
+  \item \textbf{微创血管介入术仿真系统的基本配置}: 
   % \begin{enumerate}
     % \item 机器人外观
     % \item 机器人控制系统
@@ -184,7 +184,7 @@
 
 \begin{frame}
 \begin{itemize}
-  \item \textbf{微创血管介入手术机器人系统的主要功能}: 
+  \item \textbf{微创血管介入术仿真系统的主要功能}: 
   \begin{enumerate}
     \onslide<1-5> \item 虚拟解剖环境
     \onslide<2-5> \item 虚拟手术工具
@@ -242,8 +242,8 @@
 \pause \item 影像中主动脉与脊椎间隙过小甚至接触
 \pause \item 影像中冠状动脉的亮度较暗，且走向多变，直径较小
 \pause \item 心脏搏动导致心脏区域成像效果较差，无法准确提取完整模型
-\pause \item 重建的表面模型数据量大，影响交互仿真的流畅程度
-\pause \item 重建的表面模型数据量大，难以进行几何信息提取运算
+\pause \item 重建的表面模型数据量大，影响交互仿真的流畅度
+\pause \item 重建的表面模型难以进行几何信息提取运算
 \end{itemize}
 \end{itemize}
 \end{frame}
@@ -254,15 +254,15 @@
   \begin{itemize}
     \onslide<1-3> \item \textbf{基于真实病例数据的人心血管模型的创建}
     \begin{itemize}
-      \onslide<2-3> \item 提出创建主动脉内腔模型的方法
-      \onslide<2-3> \item 提出创建冠状动脉主要分支模型的方法
-      \onslide<2-3> \item 提出创建冠状动脉次级分支模型的方法
-      \onslide<2-3> \item 提出创建心脏近似模型的方法
+      \onslide<2-3> \item 提出创建主动脉内腔模型的处理流程
+      \onslide<2-3> \item 提出创建冠状动脉主要分支模型的处理流程
+      \onslide<2-3> \item 提出创建冠状动脉次级分支模型的处理流程
+      \onslide<2-3> \item 提出创建心脏近似模型的处理流程
     \end{itemize}
     \onslide<1-3> \item \textbf{面向交互仿真的人心血管模型的后处理}
     \begin{itemize}
-      \onslide<3> \item 提出面向交互仿真的模型优化方法
-      \onslide<3> \item 提出面向虚拟训练的模型几何信息提取方法
+      \onslide<3> \item 提出面向交互仿真的模型优化处理流程
+      \onslide<3> \item 提出面向虚拟训练的模型几何信息提取处理流程
     \end{itemize}
   \end{itemize}
 \end{itemize}
