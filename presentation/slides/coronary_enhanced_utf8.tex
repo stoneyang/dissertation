@@ -24,6 +24,28 @@ I_{xx} & I_{xy} & I_{xz} \\ I_{yx} & I_{yy} & I_{yz} \\ I_{zx} & I_{zy} & I_{zz}
 
 \begin{frame}
 \begin{itemize}
+\item \textbf{增强不同形状所需的特征值}
+\end{itemize}
+\begin{table}[h]
+\renewcommand{\arraystretch}{0.5}
+\centering
+\begin{tabular*}{80mm}{cc}
+\toprule
+\hspace{5mm} \bfseries \small{物体形状}  & \hspace{15mm}                    \bfseries \small{特征值}                       \\
+\midrule
+\hspace{5mm} \small{明亮的管状}          & \hspace{15mm}  \small{$\lambda_1 \approx 0, \lambda_2 \approx \lambda_3 \ll 0$} \\
+\hspace{5mm} \small{暗淡的管状}          & \hspace{15mm}  \small{$\lambda_1 \approx 0, \lambda_2 \approx \lambda_3 \gg 0$} \\
+\hspace{5mm} \small{明亮的盘状}          & \hspace{15mm}  \small{$\lambda_1 \approx \lambda_2 \approx 0, \lambda_3 \ll 0$} \\
+\hspace{5mm} \small{暗淡的盘状}          & \hspace{15mm}  \small{$\lambda_1 \approx \lambda_2 \approx 0, \lambda_3 \gg 0$} \\
+\hspace{5mm} \small{明亮的球状}          & \hspace{15mm}  \small{$\lambda_1 \approx \lambda_2 \approx \lambda_3 \ll 0$}    \\
+\hspace{5mm} \small{暗淡的球状}          & \hspace{15mm}  \small{$\lambda_1 \approx \lambda_2 \approx \lambda_3 \gg 0$}    \\
+\bottomrule
+\end{tabular*}
+\end{table}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
 \item \textbf{推广的线形相似性测度} (\alert{$\lambda_1 \approx 0$ and $\lambda_2 \approx \lambda_3 \ll 0$})
 \pause \begin{equation*}
 \lambda_{123} =
@@ -43,28 +65,6 @@ I_{xx} & I_{xy} & I_{xz} \\ I_{yx} & I_{yy} & I_{yz} \\ I_{zx} & I_{zy} & I_{zz}
 \end{itemize}
 \end{itemize}
 \end{itemize}
-\end{frame}
-
-\begin{frame}
-\begin{itemize}
-\item \textbf{增强不同形状所需的特征值}
-\end{itemize}
-\begin{table}[h]
-\renewcommand{\arraystretch}{0.5}
-\centering
-\begin{tabular*}{80mm}{cc}
-\toprule
-\hspace{5mm} \bfseries \small{物体形状}  & \hspace{15mm}                    \bfseries \small{特征值}                       \\
-\midrule
-\hspace{5mm} \small{明亮的管状}          & \hspace{15mm}  \small{$\lambda_1 \approx 0, \lambda_2 \approx \lambda_3 \ll 0$} \\
-\hspace{5mm} \small{暗淡的管状}          & \hspace{15mm}  \small{$\lambda_1 \approx 0, \lambda_2 \approx \lambda_3 \gg 0$} \\
-\hspace{5mm} \small{明亮的盘状}          & \hspace{15mm}  \small{$\lambda_1 \approx \lambda_2 \approx 0, \lambda_3 \ll 0$} \\
-\hspace{5mm} \small{暗淡的盘状}          & \hspace{15mm}  \small{$\lambda_1 \approx \lambda_2 \approx 0, \lambda_3 \gg 0$} \\
-\hspace{5mm} \small{明亮的球状}          & \hspace{15mm}  \small{$\lambda_1 \approx \lambda_2 \approx \lambda_3 \ll 0$}    \\
-\hspace{5mm} \small{暗淡的球状}          & \hspace{15mm}  \small{$\lambda_1 \approx \lambda_2 \approx \lambda_3 \gg 0$}    \\
-\bottomrule
-\end{tabular*}
-\end{table}
 \end{frame}
 
 \begin{frame}
