@@ -3,6 +3,19 @@
 
 \begin{frame}
 \begin{itemize}
+  \item \textbf{改进的冠状动脉分割流程}：
+\end{itemize}
+\begin{figure}[t]
+\centering
+\input{../../FigureSrc/coronary/coronary_enhanced/data_flow_utf8}
+% \includegraphics[width=3.2in]{Figures/coronary/DataFlow}
+% \caption[心脏区域的ROI提取]{心脏区域的ROI提取。}
+% \label{fig:coronary_ROI}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
 \item \textbf{多尺度管状物增强~[Sato(1998)]}
 \begin{itemize}
 \pause \item \textbf{三维线滤波}：等价为三维图像$I(\cdot)$的Hessian阵的计算:
@@ -65,19 +78,6 @@ I_{xx} & I_{xy} & I_{xz} \\ I_{yx} & I_{yy} & I_{yz} \\ I_{zx} & I_{zy} & I_{zz}
 \end{itemize}
 \end{itemize}
 \end{itemize}
-\end{frame}
-
-\begin{frame}
-\begin{itemize}
-  \item \textbf{改进的冠状动脉分割流程}：
-\end{itemize}
-\begin{figure}[t]
-\centering
-\input{../../FigureSrc/coronary/coronary_enhanced/data_flow_utf8}
-% \includegraphics[width=3.2in]{Figures/coronary/DataFlow}
-% \caption[心脏区域的ROI提取]{心脏区域的ROI提取。}
-% \label{fig:coronary_ROI}
-\end{figure}
 \end{frame}
 
 \begin{frame}

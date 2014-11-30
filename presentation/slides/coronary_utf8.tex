@@ -29,6 +29,19 @@
 
 \begin{frame}
 \begin{itemize}
+  \item \textbf{基于CURVES的冠状动脉分割流程}：
+\end{itemize}
+\begin{figure}[t]
+\centering
+\input{../../FigureSrc/coronary/data_flow_utf8}
+% \includegraphics[width=3.2in]{Figures/coronary/DataFlow}
+% \caption[心脏区域的ROI提取]{心脏区域的ROI提取。}
+% \label{fig:coronary_ROI}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
 \item \textbf{CURVES方法~[Lorigo(2001)]}
 \begin{itemize}
 \item 是GAC的一项扩展，仍属水平集方法
@@ -86,19 +99,6 @@ E(\mathcal C) = \oint_0^1 g\left( \left| \nabla I \left( \mathcal{C} \left(  s \
 \item $P_{\nabla v} = I - \frac{\nabla v \nabla v^{T}}{\left| \nabla v \right|^{2}}$：在$\nabla v$法平面上的投影, $I$是像素亮度阵
 \end{itemize}
 \end{itemize}
-\end{frame}
-
-\begin{frame}
-\begin{itemize}
-  \item \textbf{基于CURVES的冠状动脉分割流程}：
-\end{itemize}
-\begin{figure}[t]
-\centering
-\input{../../FigureSrc/coronary/data_flow_utf8}
-% \includegraphics[width=3.2in]{Figures/coronary/DataFlow}
-% \caption[心脏区域的ROI提取]{心脏区域的ROI提取。}
-% \label{fig:coronary_ROI}
-\end{figure}
 \end{frame}
 
 \begin{frame}
